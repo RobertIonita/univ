@@ -13,6 +13,8 @@ void citire(student * st, int * nr) {
     ( * nr) ++;
     printf("Dati numele studentului: ");
     fflush(stdin);
+    while (getchar() != '\n')
+    ;
     gets((st + * nr) -> nume);
     printf("Dati facultatea: ");
     gets((st + * nr) -> facultate);

@@ -13,14 +13,15 @@ typedef struct {
         count;
 } stock;
 
-void addValues(stock*Darwin, int * counter) {
-    (*counter)++;
-    fflush(stdin);
-    fflush(stdin);
-
+void addValues(stock *Darwin, int *counter) {
+    ( *counter)++;
     printf("Insert product make: ");
-    gets( (Darwin + *counter) -> make);
+	fflush(stdin);
+	while (getchar() != '\n')
+    ;
 
+    gets( (Darwin + *counter) -> make);
+    
     printf("Insert product model: ");
     gets( (Darwin + *counter) -> model);
 
@@ -67,8 +68,8 @@ void sortProducts(stock * Darwin, int * counter) {
 	stock temp;
 	do {
 		k = 1;
-		for (i = 0; i < (*counter); i++) {
-			if (strcmp((Darwin + 1) -> color, (Darwin + 1+i) -> color) > 0 ) {
+		for (i = 0; i <= (*counter - 1); i++) {
+			if (strcmp((Darwin + i) -> color, (Darwin + i+1) -> color) > 0 ) {
 				temp = *(Darwin + i);
 				*(Darwin + i) = * (Darwin + i+1);
 				*(Darwin + i+1) = temp;
@@ -86,7 +87,7 @@ void deleteProduct(stock * Darwin, int *counter, char _make[20]) {
 		if(strcmp((Darwin + i) -> make, _make) == 0) {
 			k++;
 			for (j = i; j <= (*counter - k); j++) {
-				*(Darwin + j) = Darwin[j+1];
+				Darwin[j] = Darwin[j+1];
 			}
 			i--;
 		}
@@ -96,7 +97,7 @@ void deleteProduct(stock * Darwin, int *counter, char _make[20]) {
 void quitExecution() {
     printf("quiting .. \n");
 }
-int learn() {
+int main() {
     stock Darwin[20];
     int option, n=-1, i, j, _price, _weight, _count;
     char _make[30], _model[30], _categ[30], _network[30], _color[30];
@@ -137,7 +138,7 @@ int learn() {
                 compareAndDisplay(5);
                 break;
             case 6:
-				printf("Insert product make that you want to delete");
+				printf("Insert product make that you want to delete: ");
 				scanf("%s", _make);
                 deleteProduct(& Darwin[0], & n, _make);
                 break;
