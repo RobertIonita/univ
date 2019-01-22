@@ -1,2 +1,0 @@
-# univ
-Repo for university
