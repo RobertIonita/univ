@@ -13,15 +13,19 @@
 				<div class="toggler" data-toggle='bases'></div>
 			</div>
 			<div class="item d_fl a_c j_c">
-				<span>Number formats</span>
-				<div class="toggler actst" data-toggle='number'></div>
+				<span>Binary encodings</span>
+				<div class="toggler" data-toggle='formats'></div>
+			</div>
+			<div class="item d_fl a_c j_c">
+				<span>Floating point</span>
+				<div class="toggler actst" data-toggle='floating'></div>
 			</div>
 		</div>
 		<div class="contents bases">
 			<input type="number" class="base_input" placeholder="Insert number" autofocus>
 			<p></p>
 		</div>
-		<div class="contents number actst">
+		<div class="contents formats">
 			<h4>Representation</h4>
 			<div class="switcher d_fl a_c j_c">
 				<span>BCD</span>
@@ -42,9 +46,11 @@
 					<p></p>
 				</div>
 			</div>
+		</div>
+		<div class="contents floating actst">
 			<div class="ieee754">
-				<h4>IEEE754</h4>
-				<input type="number" placeholder="Insert a number">
+				<h4>IEEE754 single precision</h4>
+				<input type="number" placeholder="Insert a decimal number">
 				<div class="d_fl j_c mantisse">
 					<div class="Xs">
 						<div class="d_fl a_c j_c">0</div>
