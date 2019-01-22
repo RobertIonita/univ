@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bases</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" href="catto.png" type="image/x-icon"/>
+	</head>
+	<body>
+		<div class="container d_fl a_c j_sb">
+			<div class="item d_fl a_c j_c">
+				<span>Base convertor</span>
+				<div class="toggler" data-toggle='bases'></div>
+			</div>
+			<div class="item d_fl a_c j_c">
+				<span>Number formats</span>
+				<div class="toggler actst" data-toggle='number'></div>
+			</div>
+		</div>
+		<div class="contents bases">
+			<input type="number" class="base_input" placeholder="Insert number" autofocus>
+			<p></p>
+		</div>
+		<div class="contents number actst">
+			<h4>Representation</h4>
+			<div class="switcher d_fl a_c j_c">
+				<span>BCD</span>
+				<div></div>
+				<span>E3</span>
+			</div>
+			<div class="d_fl">
+				<div class="inserts">
+					<input type="number" data-order="0" placeholder="First decimal">
+					<span>+</span>
+					<input type="number" data-order="1" placeholder="Second decimal">
+					<p></p>
+				</div>
+				<div class="outputs d_fl j_sb">
+					<span></span>
+					<span></span>
+					<span>+</span>
+					<p></p>
+				</div>
+			</div>
+			<div class="ieee754">
+				<h4>IEEE754</h4>
+				<input type="number" placeholder="Insert a number">
+				<div class="d_fl j_c mantisse">
+					<div class="Xs">
+						<div class="d_fl a_c j_c">0</div>
+					</div>
+					<div class="Xe d_fl"></div>
+					<div class="Xm d_fl"></div>
+				</div>
+			</div>
+		</div>
+		<script src="index.js" type="text/javascript"></script>
+	</body>
+</html>
