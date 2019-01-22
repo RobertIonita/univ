@@ -72,7 +72,7 @@ void sort(stock * Darwin, int * counter) {
 void delete(stock * Darwin, int * counter, char _model[20]) {
     int i, j, deleted;
     for (i = 0; i <= ( * counter - deleted); i++) {
-        if (strcmp(Darwin[j].make, _model) == 0) {
+        if (strcmp(Darwin[i].make, _model) == 0) {
             deleted++;
             for (j = i; j <= ( * counter - deleted); j++) {
                 Darwin[j] = Darwin[j + 1];
