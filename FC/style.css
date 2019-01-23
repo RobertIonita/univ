@@ -2,12 +2,12 @@ body,
 html {
     margin: 0;
     padding: 0;
-    background: rebeccapurple;
+    background: #18318a;
     text-align: center;
 }
 
 body {
-    min-width: 525px;
+    min-width: 600px;
 }
 
 .d_fl {
@@ -172,11 +172,15 @@ input.base_input {
 }
 
 .outputs span:first-of-type {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
     order: -1;
 }
 
 .outputs span:last-of-type {
     font-size: 20px;
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
     order: -1;
 }
 
@@ -205,16 +209,21 @@ h4 {
     display: block;
     width: 20px;
     height: 20px;
-    background: rebeccapurple;
+    background: #18318a;
     border-radius: 50%;
     position: absolute;
     left: 2px;
     top: 2px;
+    -webkit-transform: translateX(0px);
     transform: translateX(0px);
+    -webkit-transition: -webkit-transform ease 0.5s;
+    transition: -webkit-transform ease 0.5s;
     transition: transform ease 0.5s;
+    transition: transform ease 0.5s, -webkit-transform ease 0.5s;
 }
 
 .switcher div.actst:before {
+    -webkit-transform: translateX(22px);
     transform: translateX(22px);
 }
 
@@ -248,6 +257,8 @@ h4 {
     margin: 30px auto;
     height: 32px;
     width: 100%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
 
 .Xs {
@@ -268,9 +279,28 @@ h4 {
     height: 32px;
     color: #fff;
     font: 100 normal 16px sans-serif;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .Xs div:last-of-type,
 .Xe div:last-of-type {
     border-right: solid 4px white;
+}
+
+.custom label {
+    color: white;
+    white-space: nowrap;
+    margin-right: 10px;
+    font: 400 normal 16px sans-serif;
+}
+
+.custom input {
+    max-width: 100px;
+}
+
+@media screen and (max-width: 1023px) {
+    .mantisse>div {
+        min-width: 100%;
+    }
 }

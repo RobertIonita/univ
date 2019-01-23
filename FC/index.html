@@ -49,8 +49,32 @@
 		</div>
 		<div class="contents floating actst">
 			<div class="ieee754">
-				<h4>IEEE754 single precision</h4>
-				<input type="number" placeholder="Insert a decimal number">
+				<h4>IEEE754</h4>
+				<div class="container d_fl a_c j_sb">
+					<div class="item d_fl a_c j_c">
+						<span>Single precison</span>
+						<div data-mantisse="8-23" data-toggle='single' class=" actst"></div>
+					</div>
+					<div class="item d_fl a_c j_c">
+						<span>Double precison</span>
+						<div data-mantisse="11-52" data-toggle='double'></div>
+					</div>
+					<div class="item d_fl a_c j_c">
+						<span>Custom</span>
+						<div data-mantisse="8-23" data-toggle='costum'></div>
+					</div>
+				</div>
+				<div class="custom d_fl a_c j_sb">
+					<div class="d_fl a_c j_sb">
+						<label>Exponent size (bits)</label>
+						<input type="number" class="mant">
+					</div>
+					<div class="d_fl a_c j_sb">
+						<label>Mantisse size (bits)</label>
+						<input type="number" class="mant">
+					</div>
+				</div>
+				<input type="number" class="main" placeholder="Insert a decimal number">
 				<div class="d_fl j_c mantisse">
 					<div class="Xs">
 						<div class="d_fl a_c j_c">0</div>
@@ -60,6 +84,7 @@
 				</div>
 			</div>
 		</div>
-		<script src="index.js" type="text/javascript"></script>
+		<script src="TONU_lib.js" type="text/javascript" defer></script>
+		<script src="index.js" type="text/javascript" defer></script>
 	</body>
 </html>
