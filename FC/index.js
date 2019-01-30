@@ -80,6 +80,7 @@
         xs = q('.Xs', mantisse),
         xe = q('.Xe', mantisse),
         xm = q('.Xm', mantisse),
+        hexa = q('.hexa', mantisse),
         fulfillMAntise = (k, m)  => {
             xe.innerHTML = '';
             xm.innerHTML = '';
@@ -89,16 +90,35 @@
             for (var i = 0; i < m; i++) {
                 xm.innerHTML += `<div class="d_fl a_c j_c">0</div>`
             }
-            var total = Number(m)+Number(k)+1;
+            var total = Number(m)+Number(k)+1,
+                quarters = Math.floor(total/4),
+                diff = total/4 - quarters;
+            xs.style.width = 'calc(100%/'+total+')';
             xe.style.width = 'calc(100%*'+k+'/'+total+')';
             xm.style.width = 'calc(100%*'+m+'/'+total+')';
-            console.log(k, total)
+            hexa.innerHTML = '';
+            if(diff) {
+                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*'+4*diff+'/'+total+')">0</div>';
+            }
+            for (var i = 0; i < quarters; i++) {
+                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*'+4+'/'+total+')">0</div>';
+            }
         }
     var iee = q('.ieee754 input.main'),
         params = qA('.ieee754 [data-toggle]'),
         k = 8,
         mantisse_length = 23;
     fulfillMAntise(k, mantisse_length);
+    qA('.custom input').forEach(input => {
+        input.onchange = function() {
+            o = {
+                k : this.getAttribute('data-for'),
+                val : this.value
+            }
+            o.k? k = o.val : mantisse_length = o.val;
+            fulfillMAntise(k, mantisse_length);
+        }
+    });
     params.forEach(element => {
         element.onclick = function () {
             clearAll(params, ' actst');
@@ -107,14 +127,22 @@
             k = data[0],
             mantisse_length = data[1];
             fulfillMAntise(k, mantisse_length);
-            console.log(data);
+
+            custom = q('.custom');
+            if (element.getAttribute('data-toggle') == 'custom') {
+                if (custom.className.indexOf('actst') == -1) {
+                    custom.className += ' actst';
+                }
+            } else {
+                clearIt(custom, ' actst');
+            }
         }
     });
     iee.addEventListener('keyup', function () {
         var bias = 2 ** (k - 1) - 1,
             val = Number(this.value),
             b_val = val.toString(2).replace("-", ""),
-            parts = b_val.split('.'),
+            parts = b_val.split('.')[0].split(','),
             exponent = bias + parts[0].length - 1,
             xe_cell = qA('div', xe),
             xm_cell = qA('div', xm),
@@ -135,8 +163,8 @@
             sign.innerHTML = 1;
         }
 
-        for (var i = 0; i < b_exponent.length; i++) {
-            xe_cell[i].innerHTML = b_exponent[i];
+        for (var i = k-1; i >= 0; i--) {
+            xe_cell[i].innerHTML = b_exponent[b_exponent.length-k+i] || 0;
         }
         for (var i = 0; i < xm_cell.length; i++) {
             if (b_val[i + 1]) {
@@ -145,6 +173,13 @@
                 xm_cell[i].innerHTML = 0;
             }
         }
-        console.log(o);
+        q('#Xe').innerHTML = exponent + '<sub>10</sub> = '+b_exponent+'<sub>2</sub>';
+        q('#bias').innerHTML = bias;
+        i=0;
+        while (!b_val[i]) {
+            b_val[i]= '';
+        }
+        q('#Xm').innerHTML = b_val;
+        console.log(bias)
 
     });

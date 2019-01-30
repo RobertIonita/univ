@@ -237,7 +237,13 @@ h4 {
     width: 100%;
     text-align: center;
 }
-
+.values{
+    font: 300 normal 16px sans-serif;
+    color: white;
+}
+.values div{
+    width: 100%;
+}
 .ieee754 input {
     height: 28px;
     width: 100%;
@@ -257,8 +263,23 @@ h4 {
     margin: 30px auto;
     height: 32px;
     width: 100%;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    position: relative;
+}
+
+.mantisse .hexa {
+    position: absolute;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 32px;
+    left: 0;
+    top: 32px;
+}
+
+.hexa div {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .Xs {
@@ -288,6 +309,10 @@ h4 {
     border-right: solid 4px white;
 }
 
+.custom:not(.actst) {
+    display: none;
+}
+
 .custom label {
     color: white;
     white-space: nowrap;
@@ -302,5 +327,10 @@ h4 {
 @media screen and (max-width: 1023px) {
     .mantisse>div {
         min-width: 100%;
+    }
+
+    .mantisse {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
     }
 }

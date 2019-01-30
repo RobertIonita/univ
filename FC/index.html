@@ -34,9 +34,9 @@
 			</div>
 			<div class="d_fl">
 				<div class="inserts">
-					<input type="number" data-order="0" placeholder="First decimal">
+					<input type="number" data-order="0" min="0" max="50000" placeholder="First decimal">
 					<span>+</span>
-					<input type="number" data-order="1" placeholder="Second decimal">
+					<input type="number" data-order="1" min="0" max="49999" placeholder="Second decimal">
 					<p></p>
 				</div>
 				<div class="outputs d_fl j_sb">
@@ -61,26 +61,32 @@
 					</div>
 					<div class="item d_fl a_c j_c">
 						<span>Custom</span>
-						<div data-mantisse="8-23" data-toggle='costum'></div>
+						<div data-mantisse="8-23" data-toggle='custom'></div>
 					</div>
 				</div>
 				<div class="custom d_fl a_c j_sb">
 					<div class="d_fl a_c j_sb">
 						<label>Exponent size (bits)</label>
-						<input type="number" class="mant">
+						<input type="number" min="1" max="15" value="8" data-for="k">
 					</div>
 					<div class="d_fl a_c j_sb">
 						<label>Mantisse size (bits)</label>
-						<input type="number" class="mant">
+						<input type="number" min="1" max="64" value="23">
 					</div>
 				</div>
 				<input type="number" class="main" placeholder="Insert a decimal number">
+				<div class="d_fl a_c j_sb values">
+					<div>Exponent: <span id="Xe">0</span></div>
+					<div>Normalised: <span id="Xm">0</span></div>
+					<div>Bias: <span id="bias">0</span></div>
+				</div>
 				<div class="d_fl j_c mantisse">
 					<div class="Xs">
 						<div class="d_fl a_c j_c">0</div>
 					</div>
 					<div class="Xe d_fl"></div>
 					<div class="Xm d_fl"></div>
+					<div class="hexa d_fl a_c"></div>
 				</div>
 			</div>
 		</div>
