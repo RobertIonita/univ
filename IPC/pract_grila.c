@@ -6,7 +6,7 @@
 
 int main()
 {
-	int op, i, start = 23, cate, corect = 0, var, total = 149;
+	int op, i, start = 45, cate, corect = 0, var, total = 149;
 
 	for( cate = start; cate <= total; cate++)
 	{
@@ -23,7 +23,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, cate);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 2:
 			printf("\nCe valoare are variabila x din int x = 7^2?\n1)49\n2)3\n3)5.\n");
@@ -35,7 +35,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 3:
 			printf("\nModulul grafic este utilizat\n1)pt afisarea desenelor si eventual a unui text\n2)pt afisarea caracterelor\n3)pt afisarea desenelor si caracterelor.\n");
@@ -47,7 +47,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 4:
 			printf("\nPt declaratia int tab[10] care este rezultatul atribuirii tab[55] = 100\n1)eroare de compilare\n2)se scrie 100 peste caracterul de la tab[54]\n3)niciunul.\n");
@@ -59,7 +59,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 5:
 			printf("\nCare este efectul secventei\nint n, i;\nprintf('Valoarea lui n:')\nscanf('o/o d', &n);\nfor(i = 0 ; i < n ; i++)\n\tprintf('o/o d', i);\n1)se afiseaza valori de la 1 la n\n2)se afiseaza valori de le 0 la n-1\n3)se afiseaza pe linie noua val n-1.\n");
@@ -71,7 +71,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 6:
 			printf("\nCe este gresit in urmatoarea secventa?\nchar *sir\nstrcpy(sir,<<Sesiune>>)\n1)secventa este corecta\n2)Pointerul sir nu este initializat\n3)Nu se poate copia un sir de caractere intr-un pointer.\n");
@@ -83,7 +83,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 7:
 			printf("\nValoarea zecimalei a constatei hexazecimale 0x88 este\n1)64\n2)16\n3)136.\n");
@@ -95,7 +95,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 8:
 			printf("\nApelul care implica functia standard qsort:\nqsort(t, i, sizeof(int), (cmPtr)cmp)?\n1)este corect\n2)este gresit pentru ca apare incorect sizeof(int)\n3)este gresit pt ca lipseste ceva intre (cmPtr) si cmp.\n");
@@ -107,7 +107,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 9:
 			printf("\nWorld Wide Web este:\n1)o infrastructura fizica\n2)o retea de informatii conectate\n3)un mediu suport pt comunicare.\n");
@@ -119,7 +119,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 10:
 			printf("\nCare din urmatoarele clase de memorare se specifica implicit?\n1)auto\n2)register\n3)extern\n");
@@ -131,7 +131,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 11:
 			printf("\nPentru\nint n = 12, m = 5;\nfloat x;\nvaloarea expresiei x = 1,5 + n/m este:\n1)3.9\n2)3.5\n3)de tip doble\n");
@@ -143,7 +143,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 12:
 			printf("\nSecventa char = 'c';\nconst char *ptr = &ch;\n*ptr = 'a';\neste\n1)corecta\n2)eronata pt ca se modifica un pointer constant\n3)eronata pt ca se modifica o valoare constanta\n");
@@ -155,7 +155,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 13:
 			printf("\nO functie modifica o variabile in functia care a apelat-o daca:\n1)in apelul fct se va preciza adresa variabilei a carei valoare va fi modificat si...\n2)in definitia functiei *same*...\n3)in declaratia functiei *same again*...\n");
@@ -167,7 +167,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 14:
 			printf("\nUn calculator de proces\n1)este folosit pt a controla un proces\n2)calculeaza un proces\n3)descrie procese technologice\n");
@@ -179,7 +179,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		
 		case 15:
@@ -195,7 +195,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 16:
 			printf("\nCe va afisa secventa:\nint tab[] = {1, 12, 0x61};\nint *p;\np = tab + 2\nprintf(<<o/o c>>, *p);");
@@ -210,7 +210,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 	case 17:
 			printf("\nInstructiunea DO...WHILE este:");
@@ -225,7 +225,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 	case 18:
 			printf("\nIn C, declararea unui tablou de fct");
@@ -240,7 +240,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 20:
 			printf("\nCare este rezultatul programului urmator:\n#include <stdio.h>\nint func(int, int)\nint main()\n{int result1, result2;\nint(*ptrFunc)(int, int);\nptrFunc = func;\nresult1 = (*ptrFunc)(10, 20);\nresult2 = ptrFunc(10, 20);\nprintf(<<Rezultat1 = o/o d Rezultat 2 = o/o d>>, result1, result2)\nreturn 0;\n}\nint func(int x, int y){return x + y;}");
@@ -255,7 +255,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 21:
 			printf("\nCe facilitati ofera un mediu de programare?");
@@ -270,7 +270,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 22:
 			printf("\nCare este rezultatul corect pt secventa de program:\nint main()\n{int a = 425\nint b = ++a o/o 10;\nprintf(<<o/o d>>, b);");
@@ -285,7 +285,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 23:
 			printf("\nCe afiseaza urmatoarea secventa de program?\nint const x = 16;\nprintf(<<o/o d>>,++x);");
@@ -300,7 +300,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 24:
 			printf("\nTipurile statice sunt(structurate):");
@@ -315,7 +315,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 25:
 			printf("\nAlocarea dinamica a unui bloc de memorie cu instructiuni malloc() are loc in zona de memorie:");
@@ -330,7 +330,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 26:
 			printf("\nCe afiseaza secventa urmatoare:\nfor( i = 0 ; i <= n ; i++)\n\tfor( j = 0 ; j <= i ; j++)\n\t\tprintf(<<o/of>>, mat[i][j]);");
@@ -345,7 +345,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 27:
 			printf("\nCe rezultat are executia urmatorului program:\n#include<stdio.h>\nint main()\n{int a = 5;\nswitch(a)\n{\tcase 1: printf(<<UNU>>);\n\tcase 2:printf(<<DOI>>);\n\tcase 3+2:printf(<<TREI>>);\n\tcase 5: printf(<<STOP>>);\n}\nreturn 0;\n}");
@@ -360,7 +360,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 28:
 			printf("\nPt secventa int Tab[10]\nint *point_ex;\nint i;\npoint_ex = 8;\nCare este afirmatia incorecta e:");
@@ -375,7 +375,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 29:
 			printf("\nMetoda de proiectare ascendenta are ca dezavantaj:");
@@ -390,7 +390,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 30:
 			printf("\nDeclararea unei variabile in C inseamna");
@@ -405,7 +405,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 31:
 			printf("\nDeclaratia typedef struct\n{int re = 0;\nint im = 0;};\neste");
@@ -420,7 +420,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 32:
 			printf("\nCare este rezultatul instructiunii printf din secventa urmatoare:\nint x = 524;\nint y = x-- o/o 20;\nprintf(<<o/o d o/o d>>, x, y);");
@@ -435,7 +435,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 33:
 			printf("\nPt afisarea in baza 10 a unui nr real in notatia zecimala, vom folosi secventa de formatare:");
@@ -450,7 +450,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 
 			break;
 		case 34:
@@ -466,7 +466,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 35:
 			printf("\nCare este varianta corecta de alocare dinamica pt tabloul bidimensional din secventa de mai jos:\nint *mat[i][j]\nfor(i = 0; i <3; i++)\n{\n\tfor(j=0;j<4;j++);\n\t{\n\t\tmat[i*4+j]=1;\n\t\tprintf(<<o/o d>>, mat[i*4+j]);");
@@ -481,7 +481,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 36:
 			printf("\nCe se va afisa pe ecran in urma executarii urmatoarei secventa de instructiuni,\n stiind ca in variabila, stiind ca in variabila m au fost citite valorile 425,24,755\n...m\nint i, r;\nfor(i=1;i<4;i++)\n{\nscanf(<<o/o d>>, &n);\nif(i o/o 2 == 0)\n\tprintf(<<o/o d, m o/o 10);\nelse prinf(<< o/o d>>, (m/10)o/o 10);\n}");
@@ -496,7 +496,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 37:
 			printf("\nCe rezultat are programul?\nstruct Ptr\n{int x,y}\nint main()\n{\nstruct Ptrp1 = {1,2};\nstruct Ptr *p2 = &p1;\nprintf(<<o/o d o/o d>>, p2->x, p2->y);\nreturn 0;");
@@ -511,7 +511,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 38:
 			printf("\nFie secventa de cod:\nint main()\nchar s1[20] = <<aaa>>;\nchar s2[10] = <<bbb>>;\nint k = strlen(strcpy(strcat(s1,s2),s2));\nprintf(<<o/o d>>, k);\nreturn 0;\n}\nValoarea variabilei k la iesire va fi:");
@@ -526,7 +526,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 39:
 			printf("\nCare este rezultat afisarii din secventa urmatoare de program\nint i=1;\nwhile(i++<5)\nprintf(<<o/o d>>, i++);");
@@ -541,7 +541,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 40:
 			printf("\nCe afiseaza programul?\n...int main()\n{\nint x;\nfloat y;\ny=x=5.5;\nprintf(printf(<<x=o/o d y= o/o f>>, x,y);\nreturn 0;\n}");
@@ -556,7 +556,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 41:
 			printf("\nCare este codul corespondent adaugarii unui nod in fata listei?");
@@ -571,7 +571,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 42:
 			printf("\nCe va afisa urmatoarea secventa de cod:\n...int *v=20;\nprintf(<<o/o d>>, *v);");
@@ -586,7 +586,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 43:
 			printf("\nCare este rezultatul transformarii nr 243 din baza 10 in baza 16");
@@ -601,7 +601,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 44:
 			printf("\nCum se declara o variabila de tip vector de sir de caractere in limbajul C?");
@@ -616,7 +616,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 45:
 			printf("\nCare va fi rezultatul executiei urmatorului program pt x=10 si y=20?\nint expmat(int a, int b)\n{float c;\nc=(a+b)/2;\nreturn 0;\n}\nint main()\nint x,y;\nc=0;\nexpmat(x,y);\nprintf(<<Rezultatul este o/o f>>,c);\nreturn0;\n}");
@@ -631,7 +631,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 46:
 			printf("\nCe semnifica modul <<wt>> din urmatoarea secventa de program?\n...FILE *fisier;\nfisier=fopent(<<exemplu.txt>>;<<wt>>)");
@@ -646,7 +646,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 47:
 			printf("\nCe va afisa program?\n#include<stdio.h>\nint swap(char *sir1, char *sir2)\n{\nchar *temp=sir1;\nsir1=sir2;\nsir1=sir2;\nsir2=temp;\nreturn 0;\n}\nint main()\n{\nchar *s1=<<Vacanta>>;\nchar s2=<<sesiune>>\nswap(s1,s2);\nprintf(<<sirul 1 este o/o s, sirul 2 este o/o s>>, s1, s2);\nreturn 0;\n}");
@@ -661,7 +661,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 48:
 			printf("\nCare va fi noua valoare a variabilei z(in baza 10) dupa aplicarea operatorului\nde deplasare la stanga in urmatoarea secventa de cod:\nint z=255, z=z<<3;");
@@ -676,7 +676,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 49:
 			printf("\nCare dintre urmatorii operatori are cea mai mica prioritate?");
@@ -691,7 +691,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 50:
 			printf("\nCe tipareste secventa de cod:\nint a[s]={1,2,3};\nint *ptr=a;\nint **adr=&ptr;\nprintf(<<o/o p o/o p>>, *adrs, a);");
@@ -706,7 +706,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 51:
 			printf("\nCe valoare returneaza functia strcmp() cand cele doua stringuri care le opereaza sunt egale?");
@@ -721,7 +721,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 52:
 			printf("\nIn conformitate cu specificatiile ANSI cum se declara corect\nfct main cand primeste argumente in linie comanda");
@@ -736,7 +736,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 53:
 			printf("\nCe returneaza fct fopen() daca operatia de deschidere esueaza?");
@@ -751,7 +751,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 54:
 			printf("\nCe valoare va avea y in secventa de program\n...int y;\nint z[3]={2,1};\ny=z[z[1]];");
@@ -766,7 +766,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 55:
 			printf("\nSpatiu ocupat in memorie de o variabila de tip int");
@@ -781,7 +781,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 56:
 			printf("\nCare dintre urmatoarele variante este un apel corect de functii");
@@ -796,7 +796,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 57:
 			printf("\nCe va afisa urmatoare secventa de cod?\nint x,y;\nint x=7;\ny=x>>2;\nprintf(<<o/o d>>, y);");
@@ -811,7 +811,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 58:
 			printf("\nCe va afisa urmatorul program?\n#include <stdio.h>\nint main()\n{\nint c=1;\nwhile(c++<=10)\n\tprintf(<<o/o d>>, c++);\nreturn 0;\n}");
@@ -826,7 +826,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 59:
 			printf("\nSingura operatie permisa in c, asociata unei variabile de tip tablou, ca intreg:");
@@ -841,7 +841,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 60:
 			printf("\nCare este valoarea variabilei intregi i din instructiunea\nfor(i=0;i<15;i++){...}");
@@ -856,7 +856,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 61:
 			printf("\nIn secventa de cod\nFILE *fisier;\nfisier=fopen(<<exemplu.txt>>, <<at>>);");
@@ -871,10 +871,10 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 62:
-			printf("\nCe va afisa urmatoarea secventa de cod?\nint main()\n{\nint i;\nfor(i=1;i<=6;i++)\n{if(i%3==0)break;\nprintf(<<o/o d>>,i);\n}\nreturn0;\n}");
+			printf("\nCe va afisa urmatoarea secventa de cod?\nint main()\n{\nint i;\nfor(i=1;i<=6;i++)\n{if(i o/o 3==0)break;\nprintf(<<o/o d>>,i);\n}\nreturn0;\n}");
 			printf("\n1)1 2");
 			printf("\n2)1 2 4 5");
 			printf("\n3)1 2 3\n");
@@ -886,7 +886,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 63:
 			printf("\nCe este gresit in urmatoarea secventa?\nchar *sir;\nstrcpy(sir, <<vacanta>>);");
@@ -901,7 +901,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 64:
 			printf("\nValoarea zecimala a constantei 0xA5 este:");
@@ -916,7 +916,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 65:
 			printf("\nCe rol are campul de inlantuire intr-un nod al liste simplu inlatuite?");
@@ -931,7 +931,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 66:
 			printf("\nCe va afisa la rulare urmatorul program, pt n=5?\n#include<stdio.h>\nint main()\n{float i,n;\nscanf(<<o/o f>>, n);\nfor(i=1;i<=n;i++)\nztprintf(<<o/o f>>, i);\nreturn 0;\n}");
@@ -946,7 +946,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 67:
 			printf("\nCe va afisa programul urmator:\ntypedef stuct\n{int numar;\nchar num[50];}curs;\nint main()\n{\ncurs[]={{1,<<Limbajul c#>>}, {2, <<Limbajul c++>>}, {3,<<Limbajul c}};\nprintf(<<o/o d>>, c[1].numar);\nprintf(<<o/o s>>, ((*(c+1).nume);\nreturn 0;\n}");
@@ -961,7 +961,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 68:
 			printf("\nSecventa de program\nint func(int x){x=10;}\nint main()\n{int y=20;\nfunc(y);\nprintf(<<o/o d>>, y);\nreturn0;\n}\n va afisa:");
@@ -976,7 +976,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 69:
 			printf("\nPt situatia urmatoare\ntypedef enum{masa, casa, curte,caine,pom,pisica}domestic;\ndomestic d;\ncare este intregul asociat elementului <<caine>>?");
@@ -991,7 +991,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 70:
 			printf("\nCare dintre urmatoarele variante exprima corect definitia unei functii:");
@@ -1006,7 +1006,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 71:
 			printf("\nSecventa:\nchar s[]=<<Bubu>>;\n*s=<c>;\nprintf(<<o/o s, s);\nva afisa:");
@@ -1021,7 +1021,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 72:
 			printf("\nPrecizati ce va afisa secventa\nint multime[]={1,12,0x01};\nint *ptr;\nptr=multime+2;\nprintf(<<o/o c>>, *ptr);");
@@ -1036,7 +1036,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 73:
 			printf("\nCare va fi noua valoare a variabilei x(in baza 10) dupa aplicarea operatorului de deplasare la stanga in urmatoarea secventa de cod?\nint x=255;\nx=x<<2;");
@@ -1051,7 +1051,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 74:
 			printf("\nSpatiul de memorie alocat dinamic se afla");
@@ -1066,7 +1066,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 75:
 			printf("\nPentru\nint n=10,m=4;\nfloat x;\nvaloarea expresiei x=1.5 + n/m este:");
@@ -1081,7 +1081,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 76:
 			printf("\nSecventa\nstruct film{\nchar titlu[50];\nint an;}");
@@ -1096,10 +1096,10 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 77:
-			printf("\nCe va afisa urmatorul prograam\n#include <stdio.h>\nint main()\n{int rezultat, a=3;\nfloat b=6;\nrezultat=b%a;\nprintf(<<o/o d>>, rezultat);\nreturn 0;\n}");
+			printf("\nCe va afisa urmatorul prograam\n#include <stdio.h>\nint main()\n{int rezultat, a=3;\nfloat b=6;\nrezultat=b o/o a;\nprintf(<<o/o d>>, rezultat);\nreturn 0;\n}");
 			printf("\n1)1");
 			printf("\n2)0");
 			printf("\n3)eroare de compilare \n");
@@ -1111,7 +1111,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 78:
 			printf("\nCare din urmatorii operatori este operatorul logic NOT?");
@@ -1126,7 +1126,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 79:
 			printf("\nCe tip de variabile nu accepta instuctiunea switch?");
@@ -1141,7 +1141,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 80:
 			printf("\nCe va afisa urmatorul cod sursa?\n#include <stdio.h>\nint main()\n{int x=1;\ndo\n\tprintf(<<o/o d>>, x);\nwhile(x+1<=1);\nreturn 0;\n}");
@@ -1156,7 +1156,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 81:
 			printf("\nCare va fi valoarea variabilei a dupa atribuirile din urmatoarea secventa de cod:\nint a=3,b=5,*p;\np=&b;\na=*p;");
@@ -1171,7 +1171,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 82:
 			printf("\nSecventa de program\n...int i=0;\nswitch(i)\n{case <0>:printf(<<PC>>);\n\tbreak;\ncase <1>:printf(<<LSD>>);\n\tbreak;\ndefault:printf(<<vacanta>>);\n};\nare rezultatul");
@@ -1186,7 +1186,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 83:
 			printf("\nAlegeti secventa corecta de program in C care are ca rezultat suma\n elementelor unui tablou de numere intregi <tab> care contine 15 elemente\nsuma = 0;");
@@ -1201,7 +1201,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 84:
 			printf("\nCare este rezultatul secventei:\n...int a[]={18,28,38};\nprintf(<< o/o d>>, *a+1);");
@@ -1216,7 +1216,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 85:
 			printf("\nSecventa\nconst int a=5;\na++;\nprintf(<<o/o d>>, a);\nafiseaza:");
@@ -1231,7 +1231,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 86:
 			printf("\nCe este gresit in urmatoarea secventa:\nchar *sirp;\nstrcpy(sirp, <<Ianuarie>>);");
@@ -1246,7 +1246,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 87:
 			printf("\nCare este rezultatul secventei de mai jos:\nint main();\n{int i;\nfor(i=0;i<=255;i++)printf(<< o/o c o/o d>>, i, i);\nreturn 0;\n}");
@@ -1261,7 +1261,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 88:
 			printf("\nEste posibil ca o functie in c sa modifice o variabila in fct pe care a apelat-o?");
@@ -1276,7 +1276,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 89:
 			printf("\nLimbajul masina");
@@ -1291,7 +1291,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 90:
 			printf("\nConsiderand declaratia:\nchar sir[10];\natribuirea\nsir = <<exemplu>> este");
@@ -1306,7 +1306,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 91:
 			printf("\nInstructiunea WHILE este:");
@@ -1321,7 +1321,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 92:
 			printf("\nPt secventa\nint i, j;\nfloat(i/j);");
@@ -1336,7 +1336,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 93:
 			printf("\nUn calculator de proces");
@@ -1351,7 +1351,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 94:
 			printf("\nParametri efectivi sunt:");
@@ -1366,7 +1366,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 95:
 			printf("\nCorespondentul hexazecimalului al lui 109 zecimal este");
@@ -1381,7 +1381,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 96:
 			printf("\nTipul <unsigned char> se reprezinta pe:");
@@ -1396,7 +1396,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 97:
 			printf("\nPt a inmulti un nr cu 4 se poate folosi operatia de deplasare");
@@ -1411,7 +1411,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 98:
 			printf("\nFgetpos are ca efect");
@@ -1426,7 +1426,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 99:
 			printf("\nInternetul este");
@@ -1441,7 +1441,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 100:
 			printf("\nCompilatorul este");
@@ -1456,7 +1456,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 101:
 			printf("\nTipuri de memorie interna");
@@ -1471,7 +1471,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 102:
 			printf("\nCare dintre urmatorii operatori are cea mai mare prioritate");
@@ -1486,7 +1486,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 103:
 			printf("\nCare dintre urmatorii operatori are cea mai mica prioritate");
@@ -1501,7 +1501,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 104:
 			printf("\nPrecizati ce reprezinta int(*)(int a, float b)");
@@ -1516,7 +1516,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 105:
 			printf("\nPt a face interschimbarea a 2 var de acelasi tip fara a folosi o a treiea variabila, afisarea corecta este:");
@@ -1531,7 +1531,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 106:
 			printf("\nBIOS este");
@@ -1546,7 +1546,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 107:
 			printf("\nPt secventa de program\ntypdef struct\n{int r, im;}ax;\nax c;\ncare este variabila corecta pentru citire?");
@@ -1561,7 +1561,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 108:
 			printf("\nTipurile caracterizate prin intervalul <int> se reprez in memorie prin");
@@ -1576,7 +1576,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 109:
 			printf("\nProgramul:\nint main()\n{char string[10];\nchar *str1=<<abcdefghi>>;\ncrlscr();\nstrncpy(string, str1, 3);\nstring[3]=<*backslah*0>;\nprintf(<< o/o s>>, string);\nreturn 0;}\nafiseaza pe ecran");
@@ -1591,7 +1591,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 110:
 			printf("\nCare din urmatoarele structuri are sinteza corecta?");
@@ -1606,7 +1606,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 111:
 			printf("\n-0.00000021 se reprezinta ca");
@@ -1621,7 +1621,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 112:
 			printf("\nPt secventa de program ce efect se obtine?\nchar c[20]=<<>>;\nFILE *f;\nf = fopen(<<test.bin>>, <<rb>>);\nfseek(f, -2, SEEK_END);\nfread(c, 2, 1, f);\nfclose();");
@@ -1636,7 +1636,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 113:
 			printf("\nDezalocarea memoriei ocupate de variabilele alocate dinamic trebuie facuta, in limbajul C:");
@@ -1651,7 +1651,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 114:
 			printf("\nUn broswer este:");
@@ -1666,7 +1666,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 115:
 			printf("\nTipuri de memorie externa");
@@ -1681,7 +1681,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 116:
 			printf("\nLa retelele de tip stea comunicarea intre 2 noduri se fac");
@@ -1696,7 +1696,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 117:
 			printf("\n Ce valoare zecimala are 0x3D");
@@ -1711,7 +1711,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 118:
 			printf("\nTipul int este definit pe urmatorul domeniu de valori");
@@ -1726,7 +1726,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 119:
 			printf("\nTipului real i se pot aplica operatiile care au rezultat real");
@@ -1741,7 +1741,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 120:
 			printf("\nIn urma executiei programului urmator:\nint main()\n{char *str1=<<inginerie>>, *str2 = <<ner>>, *ptr;\nptr = strstr(str1, str2);\nprintf(<<rezultatul este o/o s>, ptr);\n}\nse va afisa");
@@ -1756,7 +1756,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 121:
 			printf("\nCe afiseaza urmatoarea secventa de program:\nint x=16;\nprintf(<<o/o x>>, x);");
@@ -1771,7 +1771,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 122:
 			printf("\nRezultatul operatiei a/(float)b cu a si b de tip intreg este:");
@@ -1786,7 +1786,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 123:
 			printf("\nPt a imparti un nr cu 2 se poate folosi operatia de deplasare");
@@ -1801,7 +1801,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 124:
 			printf("\nAlegeti varianta corecta relativ la secventa urmatoare\nchar c;\nchar *const cp = sc;");
@@ -1816,7 +1816,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 125:
 			printf("\nPrecizati ce va afisa secventa de mai jos:\nint (*fct)(int a, int b);\nint suma(int a, int b){return a+b;}\nint diferenta(int a, int b){return a-b;}\nint main()\n{int a=12, b=9;\nif(a&b)fct =suma;\nelse fct=diferenta;\nprintf(<<o/o d>>, (*fct)(a, b));\n return 0;\n}");
@@ -1831,7 +1831,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 126:
 			printf("\nModul test considera ecranul");
@@ -1846,7 +1846,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 127:
 			printf("\nUn tip in programare reprezinta");
@@ -1861,7 +1861,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 128:
 			printf("\nCorespondentul hexazecimal al lui 73 zecimal este");
@@ -1876,7 +1876,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 129:
 			printf("\nIndicati ce reprezinta expresia\nint *funct(int a, float b);");
@@ -1891,7 +1891,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 130:
 			printf("\nCare dintre urmatoarele instructiuni sunt iterative");
@@ -1906,7 +1906,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 131:
 			printf("\nIn urma executiei secventei de mai jos se vor afisa\nint main()\n{int tab[3][3]={1,2,3,4,5,6,7,8,9};\nint i, j;\nfor(i=0;i<3-1;i++)\n\tfor(j=0;j<3-1-i;j++)\n\t\tprintf(<<o/o d>>, tab[i][j]);\nreturn 0;\n}");
@@ -1921,7 +1921,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 132:
 			printf("\nIn urma executiei secventei de mai jos se vor afisa\nint main()\n{int tab[3][3]={1,2,3,4,5,6,7,8,9};\nint i, j;\nfor(i=0;i<3;i++)\n\tfor(j=0;j<=i;j++)\n\t\tprintf(<<o/o d>>, tab[i][j]);\nreturn 0;\n}");
@@ -1936,7 +1936,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 133:
 			printf("\nCe afiseaza uurmatoarea secventa pt variabila\n#include <stdio.h>\nint main()\n{int var=77;\nprintf(<<Variabila var este o/o c>>, var);\n}");
@@ -1951,10 +1951,10 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 134:
-			printf("\nCe va returna urmatorul program dupa executie?\nint main()\n{int i;\nfor(i=0;i<20,i++)\n{if(i%2==0)\n\tcontinue;\n\tprintf(<<o/o d>>, i);\n}\nreturn 0;\n}");
+			printf("\nCe va returna urmatorul program dupa executie?\nint main()\n{int i;\nfor(i=0;i<20,i++)\n{if(i o/o 2==0)\n\tcontinue;\n\tprintf(<<o/o d>>, i);\n}\nreturn 0;\n}");
 			printf("\n1)2 4 6 8 10 12 14 16 18 20");
 			printf("\n2)1 3 5 7 9 11 13 15 17 19");
 			printf("\n3)2 4 6 8 10 12 14 16 18\n");
@@ -1966,7 +1966,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 135:
 			printf("\nCe valoare are variabila n?\nint m=524;int n = m++ o/o 20;");
@@ -1981,7 +1981,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 136:
 			printf("\nCe valoare are variabila c?\nchar c = (3<<5)/32-2+<a>;");
@@ -1996,7 +1996,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 137:
 			printf("\nIn secventa int *const cpi=&i\ncpi este:");
@@ -2011,7 +2011,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 138:
 			printf("\nProgramul\n#include <stdio.h>\nint main()\n{\nchar **ptr=NULL;\nchar *p=NULL;\nchar c=<d>;\np=&c;\nptr=&p;\nprintf(<<c=[o/o c]>>, c);\nprintf(<<*p=[o/o c]>>, *p);\nprintf(<<**ptr[o/o c]>>, **ptr);\nreturn 0;}\nare ca efect");
@@ -2026,7 +2026,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 139:
 			printf("\nCe valoare va avea variabila p in urmatorul rand de cod\np = strstr(s1, s2);\ndaca s1 si s2 sunt 2 siruri citite de la tastatura");
@@ -2041,10 +2041,10 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 140:
-			printf("\nProgramul\nint main()\n{char string[10];\nchar *str1=<<marsupial>>;\nstrcpy(string, str1, 4);\nstring[4]=<\o>;\nprintf(<< o/o s>>, string);\nreturn 0;\n}\nafiseaza pe ecran");
+			printf("\nProgramul\nint main()\n{char string[10];\nchar *str1=<<marsupial>>;\nstrcpy(string, str1, 4);\nstring[4]=<o>;\nprintf(<< o/o s>>, string);\nreturn 0;\n}\nafiseaza pe ecran");
 			printf("\n1)marsupial");
 			printf("\n2)mar");
 			printf("\n3)mars\n");
@@ -2056,7 +2056,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 141:
 			printf("\nParametrii formali sunt:");
@@ -2071,7 +2071,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 142:
 			printf("\nCare este rezultatul urmatorului program?\ntest(char *x, char y)\n{*x=y; y=<1>; printf(<< o/o c o/o c>>, x, y);}\nint main()\n{char m = <2>;\nchar n = <3>;\ntest(&m, n);\nprintf(<<o/o c o/o c>>, m, n);}");
@@ -2086,7 +2086,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 143:
 			printf("\nCare este rezultatul programului urmator\nint main()\n{int rez1, rez2;\nint(*pFunc)(int, int);\npFunc = func;\nrez1=(*pFunc)(10, 20);\nrez2=pFunc(10, 20);\nprintf(<<Rezultat 1=o/o d Rezultat 2=o/o d>>, rez1, rez2);\nreturn 0;\n}\nint func(int x, int y){return x-y;}");
@@ -2101,7 +2101,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 144:
 			printf("\nCe valoare zecimala are 0xAF");
@@ -2116,7 +2116,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 145:
 			printf("\nSecventa:\nchar ch=<c>;\nconst char *ptr=&ch;*ptr=<a>;\neste:");
@@ -2131,7 +2131,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 146:
 			printf("\nIn urma executiei programului urmator:\nint main()\n{char *str1=<<calambur>>;\n*str2 = <<amb>>, *ptr;\nptr = strstr(str1, str2);\nprintf(<<Rezulatul este: o/o s>>, ptr);\nreturn 0;\n}\nse va afisa");
@@ -2146,7 +2146,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 147:
 			printf("\nCe afiseaza urmatoarea secventa de program?\nint m = 322;\nint n = m++ o/o 10;");
@@ -2161,7 +2161,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 		case 148:
 			printf("\nAlegeti varianta corecta relativ la declaratia urmatoare\nfloat(*q)[];");
 			printf("\n1)un tablou de pointeri catre variabile reale");
@@ -2175,7 +2175,7 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 		case 149:
 			printf("\nstruct individ\n{char *nume;\nint varsta;\nfloat inaltime;\n}\ndefineste:");
@@ -2190,9 +2190,9 @@ int main()
 			}
 			else
 				printf("\nIncorect");
-				printf("\n%d / %d \n", corect, total-start);
+				printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 			break;
 			}
 	}
-	printf("\n%d / %d \n", corect, total-start);
+	printf("\n%d : %d (%d) \n", corect, total-start-corect, total-start);
 }
