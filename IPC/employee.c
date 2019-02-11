@@ -28,15 +28,17 @@ void populate(employee * prey, int *count) {
     scanf("%d", &prey[*count].XP);
 }
 
-void showOff(employee * prey, int count) {
-    printf("\n%s \t %s \t %d",
-        prey[count].name,
-        prey[count].surname,
-        prey[count].XP
-    );
+void showOff(employee * prey, int count, int limit) {
+    if(!limit || prey[count].XP < limit) {
+        printf("\n%s \t %s \t %d",
+            prey[count].name,
+            prey[count].surname,
+            prey[count].XP
+        );
+    }
 }
 
-void sortInverted(employee * prey, int count) {
+void sortInverted(employee * prey, int count, int check) {
     int i, sorted = 0;
     employee clone;
     do {
@@ -51,7 +53,7 @@ void sortInverted(employee * prey, int count) {
         }
     } while (!sorted);
     for(i = 0; i <= count; i++) {
-        showOff(prey, i);
+        showOff(prey, i, check);
     }
     
 }
@@ -60,12 +62,26 @@ void search(employee * prey, int count, char prey_name[20], char prey_surname[20
     int i, found = 0;
     for(i = 0; i <= count; i++) {
         if(strcmp(prey[i].name, prey_name) == 0 && strcmp(prey[i].surname, prey_surname) == 0) {
-            showOff(prey, i);
+            showOff(prey, i, 0);
             found = 1;
         }
     }
     if(!found) {
         printf("\nNothing found");
+    }
+}
+
+void matrix(employee * prey, int count) {
+    int i, j;
+    for (i=0; i<=count; i++) {
+        for(j=0; j<=count; j++) {
+            if(i==j) {
+                printf("%d ", strlen(prey[i].surname));
+            } else{
+                printf("0 ");
+            }
+        }
+        printf("\n");
     }
 }
 
@@ -81,7 +97,7 @@ int main() {
         printf("\n0. Exit\n");
         printf("1. Add employee\n");
         printf("2. Show employees data alphabetically inversed\n");
-        printf("3. Search alphabetically inversed employees by name and surname\n");
+        printf("3. Search employees by name and surname\n");
         printf("4. Display alphabetically inversed employees which experience is < 10\n");
         printf("5. Create a matrix that contains on the main diagonal length of surmames\n   Remaining cells should be 0's\n");
         printf("Your choice is: ");
@@ -95,7 +111,7 @@ int main() {
                 populate(&guys[0], & n);
                 break;
             case 2:
-                sortInverted(guys, n);
+                sortInverted(guys, n, 0);
                 break;
             case 3:
                 while(getchar() != '\n'){
@@ -105,6 +121,12 @@ int main() {
                 printf("\nEmployee surname: ");
                 gets(guy_surname);
                 search(guys, n, guy_name, guy_surname);
+                break;
+            case 4: 
+                sortInverted(guys, n, 10);
+                break;
+            case 5:
+                matrix(guys, n);
                 break;
             default:
                 printf("\nPlease insert a valid option: \n\n");
