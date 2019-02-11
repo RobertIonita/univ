@@ -32,8 +32,6 @@ void populate(ship *lil_boat, int *index) {
             printf("\nPlease be careful at the spelling\n");
         }
         printf("Category is: ");
-        while(getchar() != '\n')
-        ;
         gets(categ);
     } while (strcmp(categ, "cargo") != 0 && strcmp(categ, "cruise") != 0);
     strcpy(lil_boat[*index].category, categ);
@@ -63,8 +61,8 @@ void showOff(ship *lil_boat, int index) {
 
 void search(ship *lil_boat, int index, int year) {
     int i;
-    for (i=0; i<index; i++){
-        if(lil_boat[index].year == year) {
+    for (i=0; i<=index; i++){
+        if(lil_boat[i].year == year) {
             showOff(lil_boat, i);
         }
     }
@@ -72,11 +70,43 @@ void search(ship *lil_boat, int index, int year) {
 
 void compare(ship *lil_boat, int index, int value) {
     int i;
-    for (i=0; i<index; i++){
-        if(strcmp(lil_boat[index].category, "cargo") == 0 && lil_boat[index].capacity == value) {
+    for (i=0; i<=index; i++){
+        if(strcmp(lil_boat[i].category, "cargo") == 0 && lil_boat[i].capacity == value) {
             showOff(lil_boat, i);
         }
     }
+}
+
+void sort (ship *lil_boat, int counter) {
+    int i, sorted;
+    ship clone;
+    do {
+        sorted = 1;
+        for (i=0; i<counter; i++) {
+            if( strcmp(lil_boat[i].name, lil_boat[i+1].name) > 0) {
+                clone = lil_boat[i];
+                lil_boat[i] = lil_boat[i+1];
+                lil_boat[i+1] = clone;
+                sorted = 0;
+            }
+        }
+    } while(!sorted);
+}
+
+void delete (ship *lil_boat, int *counter, char boat_name[20]) {
+    int i, j, deleted = 0;
+
+    for (i=0; i<=(*counter - deleted); i++) {
+        if( strcmp(lil_boat[i].name, boat_name) == 0) {
+            deleted++;
+            for(j=i; j<=(*counter - deleted); j++) {
+                lil_boat[j] = lil_boat[j+1];
+            }
+            i--;
+        }
+        *counter = *counter - deleted;
+    }
+    
 }
 
 int main(void) {
@@ -92,11 +122,11 @@ int main(void) {
         printf("\n0. quit");
         printf("\n1. add");
         printf("\n2. show");
-        printf("\n3. compare");
-        printf("\n4. search");
+        printf("\n3. search");
+        printf("\n4. compare");
+        printf("\n5. sort");
+        printf("\n6. delete");
         printf("\nUr choice:");
-        while(getchar() != '\n')
-        ;
         scanf("%d", &executing);
 
         switch(executing) {
@@ -114,17 +144,23 @@ int main(void) {
                 break;
             case 3:
                 printf("\nShip's transport capacity: ");
-                while(getchar() != '\n')
-                ;
-                scanf("&d", &_capacity);
+                scanf("%d", &_capacity);
                 compare(AC_INFO_YEAR_I, n, _capacity);
                 break;
             case 4:
                 printf("\nShip's year of manufacture: ");
+                scanf("%d", &_year);
+                search(AC_INFO_YEAR_I, n, _year);
+                break;
+            case 5:
+                sort(AC_INFO_YEAR_I, n);
+                break;
+            case 6:
+                printf("\nShip's names to delete: ");
                 while(getchar() != '\n')
                 ;
-                scanf("&d", &_year);
-                search(AC_INFO_YEAR_I, n, _year);
+                gets(_name);
+                delete(AC_INFO_YEAR_I, &n, _name);
                 break;
             default:
                 printf("\n Invalid option");

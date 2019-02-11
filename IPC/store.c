@@ -15,17 +15,17 @@ store;
 void quit() {
     printf("\nquiting");
 }
-void populate(store * Darwin, int * counter) {
-    ( * counter) ++;
+void populate(store * Darwin, int *counter) {
+    ( *counter) ++;
     printf("\nGive values\n");
     while (getchar() != '\n')
     ;
     printf("Make: ");
-    gets(Darwin[ * counter].make);
+    gets(Darwin[*counter].make);
     printf("Model: ");
-    gets(Darwin[ * counter].model);
+    gets(Darwin[*counter].model);
     printf("Price: ");
-    scanf("%d", & Darwin[ * counter].price);
+    scanf("%d", & Darwin[*counter].price);
 }
 void showOff(store * Darwin, int counter) {
     printf("\n%10s \t %10s \t %5d",
@@ -66,17 +66,17 @@ void sort(store * Darwin, int counter) {
     } while (!sorted);
 }
 
-void delete(store * Darwin, int * counter, char _model[20]) {
+void delete(store * Darwin, int *counter, char _model[20]) {
     int i, j, deleted = 0;
-    for (i = 0; i <= ( * counter - deleted); i++) {
+    for (i = 0; i <= ( *counter - deleted); i++) {
         if (strcmp(Darwin[i].model, _model) == 0) {
             deleted++;
-            for (j = i; j < ( * counter - deleted); j++) {
+            for (j = i; j < ( *counter - deleted); j++) {
                 Darwin[j] = Darwin[j + 1];
             }
             i--;
         }
-        * counter = * counter - deleted;
+        *counter = *counter - deleted;
     }
 }
 
