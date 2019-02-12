@@ -1,5 +1,9 @@
 #include <stdio.h>
+<<<<<<< HEAD
 #include <curses.h>
+=======
+#include <conio.h>
+>>>>>>> c_lang
 #include <string.h>
 
 typedef struct {
@@ -32,8 +36,11 @@ void populate(ship *lil_boat, int *index) {
             printf("\nPlease be careful at the spelling\n");
         }
         printf("Category is: ");
+<<<<<<< HEAD
         while(getchar() != '\n')
         ;
+=======
+>>>>>>> c_lang
         gets(categ);
     } while (strcmp(categ, "cargo") != 0 && strcmp(categ, "cruise") != 0);
     strcpy(lil_boat[*index].category, categ);
