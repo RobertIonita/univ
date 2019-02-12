@@ -1,5 +1,7 @@
 #include <stdio.h>
+
 #include <conio.h>
+
 #include <string.h>
 
 typedef struct {
@@ -32,6 +34,8 @@ void populate(ship *lil_boat, int *index) {
             printf("\nPlease be careful at the spelling\n");
         }
         printf("Category is: ");
+        while(getchar() != '\n')
+        ;
         gets(categ);
     } while (strcmp(categ, "cargo") != 0 && strcmp(categ, "cruise") != 0);
     strcpy(lil_boat[*index].category, categ);
