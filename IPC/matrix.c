@@ -69,22 +69,22 @@ void crossing() {
                 break;
             case 1:
                 for(i = 0; i<n; i++) {
-                    for(j = 0; j<=i; j++) {
-                        if (i==j) matrix[i][j] = 1;
+                    for(j = i; j<=i; j++) {
+                        matrix[i][j] = 1;
                     }
                 }
                 break;
             case 2:
                 for(i = 0; i<n; i++) {
-                    for(j = n-i-1; j<n; j++) {
+                    for(j = 0; j<=i; j++) {
                         matrix[i][j] = 1;
                     }
                 }
                 break;
             case 3:
                 for(i = 0; i<n; i++) {
-                    for(j = 0; j<n; j++) {
-                        if (j<n-i) matrix[i][j] = 1;
+                    for(j = i; j<n; j++) {
+                        matrix[i][j] = 1;
                     }
                 }
                 break;
@@ -130,7 +130,7 @@ int main(void) {
         printf("\n4. Summ");
         printf("\nUr choice: ");
         scanf("%d", &option);
-        
+
         switch(option) {
             case 0:
                 quit();
