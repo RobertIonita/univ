@@ -1,3 +1,4 @@
+window.onload = function () {
     var input = q('.base_input'),
         p = q('.base_input+p'),
         togglers = qA('.toggler');
@@ -27,11 +28,11 @@
         var val = Number(input.value);
 
         p.innerHTML = 'Base 2: \
-            ' + val.toString(2) + '\
-            <br/> Base 16: \
-            ' + val.toString(16) + '\
-            <br/> Base 8: \
-            ' + val.toString(8);
+        ' + val.toString(2) + '\
+        <br/> Base 16: \
+        ' + val.toString(16) + '\
+        <br/> Base 8: \
+        ' + val.toString(8);
     });
 
     var inserts = qA('.inserts input'),
@@ -81,7 +82,7 @@
         xe = q('.Xe', mantisse),
         xm = q('.Xm', mantisse),
         hexa = q('.hexa', mantisse),
-        fulfillMAntise = (k, m)  => {
+        fulfillMAntise = (k, m) => {
             xe.innerHTML = '';
             xm.innerHTML = '';
             for (var i = 0; i < k; i++) {
@@ -90,18 +91,18 @@
             for (var i = 0; i < m; i++) {
                 xm.innerHTML += `<div class="d_fl a_c j_c">0</div>`
             }
-            var total = Number(m)+Number(k)+1,
-                quarters = Math.floor(total/4),
-                diff = total/4 - quarters;
-            xs.style.width = 'calc(100%/'+total+')';
-            xe.style.width = 'calc(100%*'+k+'/'+total+')';
-            xm.style.width = 'calc(100%*'+m+'/'+total+')';
+            var total = Number(m) + Number(k) + 1,
+                quarters = Math.floor(total / 4),
+                diff = total / 4 - quarters;
+            xs.style.width = 'calc(100%/' + total + ')';
+            xe.style.width = 'calc(100%*' + k + '/' + total + ')';
+            xm.style.width = 'calc(100%*' + m + '/' + total + ')';
             hexa.innerHTML = '';
-            if(diff) {
-                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*'+4*diff+'/'+total+')">0</div>';
+            if (diff) {
+                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*' + 4 * diff + '/' + total + ')">0</div>';
             }
             for (var i = 0; i < quarters; i++) {
-                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*'+4+'/'+total+')">0</div>';
+                hexa.innerHTML += '<div class="d_fl a_c j_c" style="width:calc(100%*' + 4 + '/' + total + ')">0</div>';
             }
         }
     var iee = q('.ieee754 input.main'),
@@ -110,12 +111,12 @@
         mantisse_length = 23;
     fulfillMAntise(k, mantisse_length);
     qA('.custom input').forEach(input => {
-        input.onchange = function() {
+        input.onchange = function () {
             o = {
-                k : this.getAttribute('data-for'),
-                val : this.value
+                k: this.getAttribute('data-for'),
+                val: this.value
             }
-            o.k? k = o.val : mantisse_length = o.val;
+            o.k ? k = o.val : mantisse_length = o.val;
             fulfillMAntise(k, mantisse_length);
         }
     });
@@ -125,7 +126,7 @@
             toggleIt(element);
             var data = element.getAttribute('data-mantisse').split('-');
             k = data[0],
-            mantisse_length = data[1];
+                mantisse_length = data[1];
             fulfillMAntise(k, mantisse_length);
 
             custom = q('.custom');
@@ -138,6 +139,8 @@
             }
         }
     });
+    var hex_digits = qA('div', hexa),
+        bin_digits = qA('div:not(.hexa)>div.a_c.j_c', mantisse);
     iee.addEventListener('keyup', function () {
         var bias = 2 ** (k - 1) - 1,
             val = Number(this.value),
@@ -150,12 +153,12 @@
             sign = q('.Xs div'),
             b_val = b_val.replace('.', '');
         o = {
-            value : val,
-            binary : b_val,
-            parts : parts,
-            exponent : exponent,
-            bias : bias,
-            b_exp : b_exponent
+            value: val,
+            binary: b_val,
+            parts: parts,
+            exponent: exponent,
+            bias: bias,
+            b_exp: b_exponent
         }
         if (val >= 0) {
             sign.innerHTML = 0;
@@ -163,8 +166,8 @@
             sign.innerHTML = 1;
         }
 
-        for (var i = k-1; i >= 0; i--) {
-            xe_cell[i].innerHTML = b_exponent[b_exponent.length-k+i] || 0;
+        for (var i = k - 1; i >= 0; i--) {
+            xe_cell[i].innerHTML = b_exponent[b_exponent.length - k + i] || 0;
         }
         for (var i = 0; i < xm_cell.length; i++) {
             if (b_val[i + 1]) {
@@ -173,13 +176,34 @@
                 xm_cell[i].innerHTML = 0;
             }
         }
-        q('#Xe').innerHTML = exponent + '<sub>10</sub> = '+b_exponent+'<sub>2</sub>';
+        q('#Xe').innerHTML = exponent + '<sub>10</sub> = ' + b_exponent + '<sub>2</sub>';
         q('#bias').innerHTML = bias;
-        i=0;
-        while (!b_val[i]) {
-            b_val[i]= '';
+        var hidden,
+            mant;
+        if (b_val != 0 && (b_val != 1 || b_val.length != 1)) {
+            hidden = b_val[0] + ',';
+            mant = b_val.slice(1);
+        } else if (b_val == 1) {
+            hidden = '';
+            mant = 1;
+        } else {
+            hidden = '';
+            mant = 0;
         }
-        q('#Xm').innerHTML = b_val;
-        console.log(bias)
+        q('#Xm').innerHTML = hidden + '' + mant;
 
+        var h_val = 0;
+        for (var i = bin_digits.length - 1; i >= 0; i--) {
+
+            if ((i + 1) % 4 == 0) {
+                h_val = 0;
+                quart = 0;
+            }
+            if (Number(bin_digits[i].innerHTML)) {
+                h_val += 2 ** quart;
+            }
+            hex_digits[Math.floor(i / 4)].innerHTML = h_val.toString(16).toUpperCase();
+            quart++;
+        }
     });
+}

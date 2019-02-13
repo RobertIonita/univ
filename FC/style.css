@@ -6,8 +6,8 @@ html {
     text-align: center;
 }
 
-body {
-    min-width: 600px;
+body.actst {
+    min-width: 666px;
 }
 
 .d_fl {
@@ -293,7 +293,6 @@ h4 {
 .Xm {
     width: calc(100%*23/32);
 }
-
 .mantisse>div div {
     border: solid 1px #fff;
     width: 100%;
@@ -302,8 +301,11 @@ h4 {
     font: 100 normal 16px sans-serif;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    line-height: 0.6;
 }
-
+.mantisse>div div:not(:first-child){
+    border-left: 0px; 
+}
 .Xs div:last-of-type,
 .Xe div:last-of-type {
     border-right: solid 4px white;
@@ -325,7 +327,8 @@ h4 {
 }
 
 @media screen and (max-width: 1023px) {
-    .mantisse>div {
+    
+    /* .mantisse>div {
         min-width: 100%;
     }
 
@@ -333,4 +336,7 @@ h4 {
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     }
+    .mantisse .hexa {
+        top: 96px;
+    } */
 }
