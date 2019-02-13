@@ -5,6 +5,8 @@ window.onload = function () {
 
     for (var i = 0; i < togglers.length; i++) {
         togglers[i].onclick = (e, i) => {
+            clearIt(q('body'), ' actst');
+
             for (var i = 0; i < togglers.length; i++) {
                 clearIt(togglers[i], ' actst');
                 clearIt(qA('.contents')[i], ' actst');
@@ -13,6 +15,9 @@ window.onload = function () {
             var trigger = e.target.getAttribute('data-toggle');
             contents = q('.contents.' + trigger);
             toggleIt(contents);
+            if(trigger != 'bases') {
+                toggleIt(q('body'));
+            }
         }
     }
 
@@ -82,7 +87,7 @@ window.onload = function () {
         xe = q('.Xe', mantisse),
         xm = q('.Xm', mantisse),
         hexa = q('.hexa', mantisse),
-        fulfillMAntise = (k, m) => {
+        fulfilMantise = (k, m) => {
             xe.innerHTML = '';
             xm.innerHTML = '';
             for (var i = 0; i < k; i++) {
@@ -109,7 +114,7 @@ window.onload = function () {
         params = qA('.ieee754 [data-toggle]'),
         k = 8,
         mantisse_length = 23;
-    fulfillMAntise(k, mantisse_length);
+    fulfilMantise(k, mantisse_length);
     qA('.custom input').forEach(input => {
         input.onchange = function () {
             o = {
@@ -117,7 +122,7 @@ window.onload = function () {
                 val: this.value
             }
             o.k ? k = o.val : mantisse_length = o.val;
-            fulfillMAntise(k, mantisse_length);
+            fulfilMantise(k, mantisse_length);
         }
     });
     params.forEach(element => {
@@ -127,7 +132,7 @@ window.onload = function () {
             var data = element.getAttribute('data-mantisse').split('-');
             k = data[0],
                 mantisse_length = data[1];
-            fulfillMAntise(k, mantisse_length);
+            (k, mantisse_length);
 
             custom = q('.custom');
             if (element.getAttribute('data-toggle') == 'custom') {
@@ -139,8 +144,23 @@ window.onload = function () {
             }
         }
     });
-    var hex_digits = qA('div', hexa),
-        bin_digits = qA('div:not(.hexa)>div.a_c.j_c', mantisse);
+    var fulfilHexa = function() {
+        var h_val = 0,
+            hex_digits = qA('div', hexa),
+            bin_digits = qA('div:not(.hexa)>div.a_c.j_c', mantisse);
+        for (var i = bin_digits.length - 1; i >= 0; i--) {
+
+            if ((i + 1) % 4 == 0) {
+                h_val = 0;
+                quart = 0;
+            }
+            if (Number(bin_digits[i].innerHTML)) {
+                h_val += 2 ** quart;
+            }
+            hex_digits[Math.floor(i / 4)].innerHTML = h_val.toString(16).toUpperCase();
+            quart++;
+        }
+    }
     iee.addEventListener('keyup', function () {
         var bias = 2 ** (k - 1) - 1,
             val = Number(this.value),
@@ -191,19 +211,6 @@ window.onload = function () {
             mant = 0;
         }
         q('#Xm').innerHTML = hidden + '' + mant;
-
-        var h_val = 0;
-        for (var i = bin_digits.length - 1; i >= 0; i--) {
-
-            if ((i + 1) % 4 == 0) {
-                h_val = 0;
-                quart = 0;
-            }
-            if (Number(bin_digits[i].innerHTML)) {
-                h_val += 2 ** quart;
-            }
-            hex_digits[Math.floor(i / 4)].innerHTML = h_val.toString(16).toUpperCase();
-            quart++;
-        }
+        fulfilHexa();
     });
 }
