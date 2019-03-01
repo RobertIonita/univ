@@ -6,8 +6,8 @@ html {
     text-align: center;
 }
 
-body {
-    min-width: 600px;
+body.actst {
+    min-width: 666px;
 }
 
 .d_fl {
@@ -237,7 +237,13 @@ h4 {
     width: 100%;
     text-align: center;
 }
-
+.values{
+    font: 300 normal 16px sans-serif;
+    color: white;
+}
+.values div{
+    width: 100%;
+}
 .ieee754 input {
     height: 28px;
     width: 100%;
@@ -257,8 +263,23 @@ h4 {
     margin: 30px auto;
     height: 32px;
     width: 100%;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    position: relative;
+}
+
+.mantisse .hexa {
+    position: absolute;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 100%;
+    height: 32px;
+    left: 0;
+    top: 32px;
+}
+
+.hexa div {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .Xs {
@@ -272,7 +293,6 @@ h4 {
 .Xm {
     width: calc(100%*23/32);
 }
-
 .mantisse>div div {
     border: solid 1px #fff;
     width: 100%;
@@ -281,11 +301,18 @@ h4 {
     font: 100 normal 16px sans-serif;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
+    line-height: 0.6;
 }
-
+.mantisse>div div:not(:first-child){
+    border-left: 0px; 
+}
 .Xs div:last-of-type,
 .Xe div:last-of-type {
     border-right: solid 4px white;
+}
+
+.custom:not(.actst) {
+    display: none;
 }
 
 .custom label {
@@ -300,7 +327,16 @@ h4 {
 }
 
 @media screen and (max-width: 1023px) {
-    .mantisse>div {
+    
+    /* .mantisse>div {
         min-width: 100%;
     }
+
+    .mantisse {
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    .mantisse .hexa {
+        top: 96px;
+    } */
 }
