@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Bases</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="style.css">
+		<link rel="icon" href="catto.png" type="image/x-icon"/>
+	</head>
+	<body>
+		<div class="container d_fl a_c j_sb">
+			<div class="item d_fl a_c j_c">
+				<span>Base convertor</span>
+				<div class="toggler" data-toggle='bases'></div>
+			</div>
+			<div class="item d_fl a_c j_c">
+				<span>Binary encodings</span>
+				<div class="toggler" data-toggle='formats'></div>
+			</div>
+			<div class="item d_fl a_c j_c">
+				<span>Floating point</span>
+				<div class="toggler actst" data-toggle='floating'></div>
+			</div>
+		</div>
+		<div class="contents bases">
+			<input type="number" class="base_input" placeholder="Insert number" autofocus>
+			<p></p>
+		</div>
+		<div class="contents formats">
+			<h4>Representation</h4>
+			<div class="switcher d_fl a_c j_c">
+				<span>BCD</span>
+				<div></div>
+				<span>E3</span>
+			</div>
+			<div class="d_fl">
+				<div class="inserts">
+					<input type="number" data-order="0" min="0" max="50000" placeholder="First decimal">
+					<span>+</span>
+					<input type="number" data-order="1" min="0" max="49999" placeholder="Second decimal">
+					<p></p>
+				</div>
+				<div class="outputs d_fl j_sb">
+					<span></span>
+					<span></span>
+					<span>+</span>
+					<p></p>
+				</div>
+			</div>
+		</div>
+		<div class="contents floating actst">
+			<div class="ieee754">
+				<h4>IEEE754</h4>
+				<div class="container d_fl a_c j_sb">
+					<div class="item d_fl a_c j_c">
+						<span>Single precison</span>
+						<div data-mantisse="8-23" data-toggle='single' class=" actst"></div>
+					</div>
+					<div class="item d_fl a_c j_c">
+						<span>Double precison</span>
+						<div data-mantisse="11-52" data-toggle='double'></div>
+					</div>
+					<div class="item d_fl a_c j_c">
+						<span>Custom</span>
+						<div data-mantisse="8-23" data-toggle='custom'></div>
+					</div>
+				</div>
+				<div class="custom d_fl a_c j_sb">
+					<div class="d_fl a_c j_sb">
+						<label>Exponent size (bits)</label>
+						<input type="number" min="1" max="15" value="8" data-for="k">
+					</div>
+					<div class="d_fl a_c j_sb">
+						<label>Mantisse size (bits)</label>
+						<input type="number" min="1" max="64" value="23">
+					</div>
+				</div>
+				<input type="number" class="main" placeholder="Insert a decimal number">
+				<div class="d_fl a_c j_sb values">
+					<div>Exponent: <span id="Xe">0</span></div>
+					<div>Normalised: <span id="Xm">0</span></div>
+					<div>Bias: <span id="bias">0</span></div>
+				</div>
+				<div class="d_fl j_c mantisse">
+					<div class="Xs">
+						<div class="d_fl a_c j_c bit">0</div>
+					</div>
+					<div class="Xe d_fl"></div>
+					<div class="Xm d_fl"></div>
+					<div class="hexa d_fl a_c"></div>
+				</div>
+			</div>
+		</div>
+		<script src="TONU_lib.js" type="text/javascript" defer></script>
+		<script src="index.js" type="text/javascript" defer></script>
+	</body>
+</html>
