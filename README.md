@@ -3,7 +3,7 @@ Repo for university
 
 ---------------------------------------------------------------------------------------------------
 
-.vscode - pre-defined settings for gcc tasks.
+.vscode
     You have some useful commands that I wrote for you in .vscode folder. DO NOT TOUCH IT! :
         Alt+F9 will trigger task "Compiles C file"
         Ctrl+F9 will trigger task "Run C file"
@@ -11,7 +11,7 @@ Repo for university
         (exemple: now README.md is focused)
 ---------------------------------------------------------------------------------------------------
 
-FC - problem solver
+FC - problem solver (also avalilable at http://fc.tonu.rocks)
     You can use it to check answers on your homework
     For portability reasons, this project is build with plain JS/CSS/HTML
     DON'T U DARE to call it grandma's technology!
