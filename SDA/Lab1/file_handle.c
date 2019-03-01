@@ -13,7 +13,7 @@ typedef student tab[30];
 int citire(tab t) {
     FILE * f;
     int i = 0;
-    if ((f = fopen("SDA/file.txt", "rt")) == NULL) {
+    if ((f = fopen("SDA/Lab1/file.txt", "rt")) == NULL) {
         printf("error");
     } else {
         while (!feof(f)) {
@@ -28,13 +28,16 @@ int citire(tab t) {
 void salvare(tab t, int n, char a[3]) {
     FILE * f;
     int i;
-    f = fopen("SDA/file2.txt", "wt");
-    for (i = 0; i < n; i++) {
-        if (strcmp(t[i].achizitie, a) == 0) {
-            fprintf(f, "%s %s %s\n", t[i].nume, t[i].prenume, t[i].achizitie);
+    if ((f = fopen("SDA/Lab1/file2.txt", "wt")) == NULL) {
+        printf("error");
+    } else {
+        for (i = 0; i < n; i++) {
+            if (strcmp(t[i].achizitie, a) == 0) {
+                fprintf(f, "%s %s %s\n", t[i].nume, t[i].prenume, t[i].achizitie);
+            }
         }
+        fclose(f);
     }
-    fclose(f);
 }
 
 void afisare(tab t, int n) {
