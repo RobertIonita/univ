@@ -3,7 +3,7 @@ Repo for university
 
 ---------------------------------------------------------------------------------------------------
 
-IPC - prictice files with structs
+.vscode - pre-defined settings for gcc tasks.
     You have some useful commands that I wrote for you in .vscode folder. DO NOT TOUCH IT! :
         Alt+F9 will trigger task "Compiles C file"
         Ctrl+F9 will trigger task "Run C file"
@@ -25,7 +25,7 @@ TONU_lib.js
                 or even a custom attribute. It searches in your target by selector 'sel', if you
                 want to find node in this way.
                 'el_name' is tricky, be carefull 
-                'target' is not set, it would search in entire document.
+                if 'target' is not set, it would search in entire document.
 
         qA(sel, target) -
                 It is an extended use of q(sel, target), that returns instead of first match, all 
