@@ -1,31 +1,42 @@
 #include <stdio.h>
 
-int trans (int vect[20][30]) {
+#define rows 2
+#define cols 30
+
+void showOff (int vect[cols][rows]) {
+    int i, j;
+    for(i = 0; i < cols; i++) {
+        for (j = 0; j < rows; j++) {
+            printf("%3d ", vect[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void trans (int (*t)[cols][rows], int vect[rows][cols]) {
 
     int i, j;
-        for(i = 0; i < 20; i++) {
-            for (j = 0; j < 30; j++) {
-                printf("%d", vect[i][j]);
-            }
+    for(i = 0; i < cols; i++) {
+        for (j = 0; j < rows; j++) {
+            (*t)[i][j] = vect[j][i]; 
         }
-
-    return 0;
+    }
 };
 
 
 int main() {
 
-    int v[20][30], 
-        i, j, r;
-
-    for (i = 0; i < 20; i++) {
-        for (j = 0; j < 30; j++) {
-            v[i][j] = j;
+    int v[rows][cols],
+        t[cols][rows],
+        i, j, s=0;
+    for (i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++, s++) {
+            v[i][j] = s;
         }
-        
     }
 
-    trans(v);
+    trans(&t, v);
+    printf("\nResult matrix: \n"); showOff(t);
 
     return 0;
 }

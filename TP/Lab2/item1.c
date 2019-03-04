@@ -1,28 +1,46 @@
 #include <stdio.h>
 
-#define MAX 20
+#define N 8
 
-int sort (int vect[MAX]) {
+
+void showOff(int arr[N], int n){
+    int i;
+    for(i=0; i< n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+}
+
+int sort (int vect[N], int n) {
 
     int clone, i, sorted;
 
     do {
-        sorted = 1;
-
-        for(i = 0; i < 3; i++) {
-            printf("%d", vect[i]);
+        sorted = 1,
+        clone;
+        for(i = 0; i < n-1; i++) {
+            if (vect[i] > vect[i+1]) {
+                sorted = 0;
+                clone = vect[i+1];
+                vect[i+1] = vect[i];
+                vect[i] = clone;
+            }
         }
-    // sorted = 0;
         
     } while (!sorted);
-
-    return 0;
+    showOff(vect, n);
 };
 
 
 int main() {
 
-    int v[111];
-    printf("\nSorted vector is: %i", sort(v));
+    int v[N],
+        i, k;
+    for (i=N-1, k = 0; i>=0; i--, k++) {
+        v[i] = ++k;
+    }
+    printf("\nInitial vector is:"); showOff(v, N);
+    
+    printf("\nSorted vector is:"); sort(v, N);
 
 }
