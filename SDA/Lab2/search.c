@@ -4,7 +4,7 @@
 
 
 
-typedef struct{
+typedef struct {
     int key;
 }
 value;
@@ -19,55 +19,53 @@ int linear_search(tab a, int n, int x) {
     return i;
 }
 
-int binary_search (tab a, int n, int x) {
+int binary_search(tab a, int n, int x) {
     int s = 0,
-        d = n-1,
-        m = (s+d)/2;
+        d = n - 1,
+        m = (s + d) / 2;
 
     do {
-        m = (s+d)/2;
+        m = (s + d) / 2;
         if (a[m].key > x) {
-            d = m-1;
+            d = m - 1;
         } else {
-            s = m+1;
+            s = m + 1;
         }
 
-    } while (a[m].key != x && s<=d);
+    } while (a[m].key != x && s <= d);
     return m;
 }
-int binary_Psearch (tab a, int n, int x) {
+int binary_Psearch(tab a, int n, int x) {
     int s = 0,
-        d = n-1,
-        m = (s+d)/2;
-
+        d = n - 1,
+        m;
     do {
-        m = (s+d)/2;
-        if (a[m].key > x) {
-            d = m;
+        m = (s + d) / 2;
+        if (a[m].key < x) {
+            s = m + 1;
         } else {
-            s = m+1;
+            d = m;
         }
 
-    } while (a[m].key != x && s<d);
+    } while (s < d);
     return d;
 }
 
-int interpolar_search (tab a, int n, int x) {
+int interpolar_search(tab a, int n, int x) {
     int s = 0,
-        d = n-1,
+        d = n - 1,
         m;
 
-    do {
-        m = (s+d)/2;
-    m = (d-s)*(a[m].key - a[s].key) / (a[d].key - a[s].key);
+    if (x <= a[d].key && x >= a[s].key)
+        do {
+            m = s + (d - s) * (x - a[s].key) / (a[d].key - a[s].key);
+            if (a[m].key < x) {
+                d = m - 1;
+            } else {
+                s = m + 1;
+            }
 
-    if(a[m].key > x) {
-        d = m-1;
-    } else {
-        s = m+1;
-    }
-
-    } while (a[m].key !=x && s<=d && a[d].key-a[s].key != 0 && x<= a[d].key && x <= a[s].key);
+        } while (a[m].key != x && s < d && a[s].key <= a[d].key && x >= a[s].key && x <= a[d].key);
 
     return m;
 }
@@ -80,7 +78,7 @@ int read(tab t) {
         printf("error");
     } else {
         while (!feof(f)) {
-            fscanf(f, "%d", &t[i].key);
+            fscanf(f, "%d", & t[i].key);
             i++;
         }
         fclose(f);
@@ -99,19 +97,16 @@ int main() {
     value tab[30];
     nr = read(tab);
 
-    for (i = 0; i < nr; i++) {
-        showOf(tab, i);
-    }
-    printf("\nInsert desired nr: ");
-    scanf("%d", &x);
-
 
     do {
+        printf("\nInsert desired nr: ");
+        scanf("%d", & x);
+
         printf("\n0. exit");
         printf("\n1. linear");
         printf("\n2. binary");
         printf("\n3. binary performed");
-        printf("\n3. interpolar");
+        printf("\n4. interpolar");
         printf("\nUr choice: ");
         scanf("%d", & opt);
 
@@ -120,21 +115,21 @@ int main() {
                 printf("\nquiting..");
                 break;
             case 1:
-                printf("\nlinear search:  %d", linear_search(tab, nr, x) );
+                printf("\nlinear search:  %d", linear_search(tab, nr, x));
                 break;
             case 2:
-                printf("\nbinary search:  %d", binary_search(tab, nr, x) );
+                printf("\nbinary search:  %d", binary_search(tab, nr, x));
                 break;
             case 3:
-                printf("\nperformance search:  %d", binary_Psearch(tab, nr, x) );
+                printf("\nperformance search:  %d", binary_Psearch(tab, nr, x));
                 break;
             case 4:
-                printf("\ninterpolar search:  %d", interpolar_search(tab, nr, x) );
+                printf("\ninterpolar search:  %d", interpolar_search(tab, nr, x));
                 break;
             default:
                 printf("\ninvalid option");
                 break;
         }
 
-    } while (opt != 0);    
+    } while (opt != 0);
 }
