@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define N 25
+#define N 6
 
 void showOff(float arr[][N], int n){
     int i, j;

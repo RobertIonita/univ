@@ -3,22 +3,23 @@
 #define rows 5
 #define cols 7
 
-void showOff (int vect[cols][rows]) {
+void showOff (int vect[rows][cols]) {
     int i, j;
-    for(i = 0; i < cols; i++) {
-        for (j = 0; j < rows; j++) {
+    for(i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
             printf("%3d ", vect[i][j]);
         }
         printf("\n");
     }
 }
 
-void trans (int (*t)[cols][rows], int vect[rows][cols]) {
+void zeros (int (*vect)[rows][cols]) {
 
     int i, j;
-    for(i = 0; i < cols; i++) {
-        for (j = 0; j < rows; j++) {
-            (*t)[i][j] = vect[j][i]; 
+    for(i = 0; i < rows; i++) {
+        for (j = 0; j < cols; j++) {
+            if(i == 2)
+            (*vect)[i][j] = 0;
         }
     }
 };
@@ -27,7 +28,6 @@ void trans (int (*t)[cols][rows], int vect[rows][cols]) {
 int main() {
 
     int v[rows][cols],
-        t[cols][rows],
         i, j,
         s=0;
 
@@ -42,8 +42,8 @@ int main() {
         printf("\n");
     }
 
-    trans(&t, v);
-    printf("\nResult matrix: \n"); showOff(t);
+    zeros(&v);
+    printf("\nResult matrix: \n"); showOff(v);
 
     return 0;
 }
