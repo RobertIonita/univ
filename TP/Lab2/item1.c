@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-#define N 8
-
+#define N 21
 
 void showOff(int arr[N], int n){
     int i;
@@ -13,21 +12,29 @@ void showOff(int arr[N], int n){
 
 int sort (int vect[N], int n) {
 
-    int clone, i, sorted;
+    int clone,
+        i, j,
+        sorted;
 
     do {
         sorted = 1,
         clone;
         for(i = 0; i < n-1; i++) {
-            if (vect[i] > vect[i+1]) {
-                sorted = 0;
-                clone = vect[i+1];
-                vect[i+1] = vect[i];
-                vect[i] = clone;
+            if (vect[i] % 2 != 0) {
+                for(j = i+1; j <  n-1; j++) {
+                    if (vect[j] %2 != 0 && vect[i] > vect[j]) {
+                        sorted = 0;
+                        clone = vect[j];
+                        vect[j] = vect[i];
+                        vect[i] = clone;
+                        break;
+                    }
+                }
             }
         }
         
     } while (!sorted);
+
     showOff(vect, n);
 };
 
@@ -35,12 +42,12 @@ int sort (int vect[N], int n) {
 int main() {
 
     int v[N],
-        i, k;
-    for (i=N-1, k = 0; i>=0; i--, k++) {
-        v[i] = ++k;
+        i;
+    for (i=N-1; i>=0; i--) {
+        v[i] = N-i-1;
     }
     printf("\nInitial vector is:"); showOff(v, N);
     
-    printf("\nSorted vector is:"); sort(v, N);
+    printf("\nSorted  vector is:"); sort(v, N);
 
 }
