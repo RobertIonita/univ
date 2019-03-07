@@ -2,10 +2,6 @@
 
 #define MAX 10
 
-
-void quit() {
-    printf("\nquiting..");
-}
 void populate(float arr[MAX][MAX], int * x, int * y) {
     int i, j;
     for (i = 0; i < * x; i++) {
