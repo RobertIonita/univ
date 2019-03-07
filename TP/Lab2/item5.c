@@ -6,28 +6,28 @@
 void quit() {
     printf("\nquiting..");
 }
-void read(int arr[MAX][MAX], int * x, int * y) {
+void read(float arr[MAX][MAX], int * x, int * y) {
     int i, j;
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * y; j++) {
             printf("\narr[%d][%d]: ", i, j);
-            scanf("%d", & arr[i][j]);
+            scanf("%f", & arr[i][j]);
         }
     }
 }
-void show(int arr[][MAX], int * x, int * y) {
+void showOff(float arr[][MAX], int * x, int * y) {
     int i, j;
         printf("\n");
 
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * y; j++) {
-            printf(" %d", arr[i][j]);
+            printf("%5.2f ", arr[i][j]);
         }
         printf("\n");
     }
 
 }
-void multiplication(int( * mult)[][MAX], int arr1[][MAX], int arr2[][MAX], int x, int y) {
+void multiplication(float( * mult)[][MAX], float arr1[][MAX], float arr2[][MAX], int x, int y) {
     int i, j, k;
     for (i = 0; i < x; i++) {
         for (j = 0; j < x; j++) {
@@ -40,10 +40,11 @@ void multiplication(int( * mult)[][MAX], int arr1[][MAX], int arr2[][MAX], int x
 }
 
 int main(void) {
-    int m1[MAX][MAX],
+    float m1[MAX][MAX],
         m2[MAX][MAX],
-        m3[MAX][MAX],
-        n = 0, m = 0,
+        m3[MAX][MAX];
+
+    int n = 0, m = 0,
         N = 1, M = 1;
 
     do {
@@ -64,14 +65,14 @@ int main(void) {
     read(m2, & N, & M);
 
     printf("\nFirst matrix is: \n");
-    show(m1, & n, & m);
+    showOff(m1, & n, & m);
     printf("\nSecond matrix is: \n");
-    show(m2, & N, & M);
+    showOff(m2, & N, & M);
 
     if (n > N) N = n;
 
     multiplication( & m3, m1, m2, n, N);
 
     printf("\nResult matrix is: \n");
-    show(m3, & N, & N);
+    showOff(m3, & N, & N);
 }
