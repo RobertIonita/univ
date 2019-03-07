@@ -2,10 +2,11 @@
 
 #define rows 5
 #define cols 7
+#define line 2
 
 void showOff (int vect[rows][cols]) {
     int i, j;
-    for(i = 0; i < rows; i++) {
+    for(i = 0; i < rows+1; i++) {
         for (j = 0; j < cols; j++) {
             printf("%3d ", vect[i][j]);
         }
@@ -16,10 +17,14 @@ void showOff (int vect[rows][cols]) {
 void zeros (int (*vect)[rows][cols]) {
 
     int i, j;
-    for(i = 0; i < rows; i++) {
+    for(i = rows+1; i > 0; i--) {
         for (j = 0; j < cols; j++) {
-            if(i == 2)
-            (*vect)[i][j] = 0;
+            if(i > line) {
+                (*vect)[i+1][j] = (*vect)[i][j];
+            }
+            if(i == line+1) {
+                (*vect)[i][j] = 0;
+            }
         }
     }
 };
