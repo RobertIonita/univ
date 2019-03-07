@@ -6,21 +6,21 @@
 void quit() {
     printf("\nquiting..");
 }
-void populate(int arr[MAX][MAX], int * x) {
+void populate(int (*arr)[MAX][MAX], int * x) {
     int i, j, s = 0;
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * x; j++, s++) {
-            arr[i][j] = s*s;
+            (*arr)[i][j] = s*s;
         }
     }
 }
-void showOff(int arr[][MAX], int * x) {
+void showOff(int (*arr)[MAX][MAX], int * x) {
     int i, j;
         printf("\n");
 
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * x; j++) {
-            printf("%4d ", arr[i][j]);
+            printf("%4d ", (*arr)[i][j]);
         }
         printf("\n");
     }
@@ -34,9 +34,9 @@ int main(void) {
     printf("\nInsert nr of lines and columns: ");
     scanf("%d", & n);
 
-    populate(M, &n);
+    populate(&M, &n);
 
     printf("\nMatrix is: \n");
-    showOff(M, &n);
+    showOff(&M, &n);
 
 }
