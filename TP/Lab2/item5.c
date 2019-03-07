@@ -6,7 +6,7 @@
 void quit() {
     printf("\nquiting..");
 }
-void read(float arr[MAX][MAX], int * x, int * y) {
+void populate(float arr[MAX][MAX], int * x, int * y) {
     int i, j;
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * y; j++) {
@@ -60,9 +60,9 @@ int main(void) {
     } while (n != M || N != m);
 
     printf("\nPopulate first matrix: ");
-    read(m1, & n, & m);
+    populate(m1, & n, & m);
     printf("\nPopulate second matrix: ");
-    read(m2, & N, & M);
+    populate(m2, & N, & M);
 
     printf("\nFirst matrix is: \n");
     showOff(m1, & n, & m);
