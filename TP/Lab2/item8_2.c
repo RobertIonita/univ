@@ -1,6 +1,20 @@
 #include <stdio.h>
 
 #define MAX 5
+#define row 25
+#define col 25
+
+
+void split (int nr) {
+    int digit,
+        arr[10],
+        k = 0;
+    while (nr) {
+        digit = nr % 10;
+        arr[k++] = digit;
+        nr /= 10;
+    }
+}
 
 void populate(int (*arr)[MAX][MAX]) {
     int i, j,
