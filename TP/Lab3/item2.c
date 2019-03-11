@@ -4,13 +4,10 @@
 
 int matches(char (*str)[], char ch) {
 
-    int i, k,
-        a, b;
-        b = ch;
-    for(i = 0; (*str)[i] != '\0'; i++) {
+    int i, k;
 
-        a = (*str)[i];
-        if (a == b) k++;
+    for (i = 0;  (*str)[i] != '\0'; i++) {
+        if ( (*str)[i] == ch) k++;
     }
     return k;
 }
@@ -26,7 +23,7 @@ int main() {
     printf("Insert character: ");
     scanf(" %c", &ch);
 
-    printf("%d", matches(&str, ch));
+    printf("%d", matches( &str, ch));
 
     return 0;
 }

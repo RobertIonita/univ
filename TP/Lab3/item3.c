@@ -4,16 +4,12 @@
 
 int compare(char (*first)[], char (*second)[]) {
 
-    int i,
-        a, b;
-    for(i = 0; (*first)[i] != '\0' || (*second)[i] != '\0'; i++) {
+    int i;
+    for (i = 0; (*first)[i] != '\0' || (*second)[i] != '\0'; i++) {
 
-        a = (*first)[i];
-        b = (*second)[i];
-
-        if (a < b) {
+        if ( (*first)[i] < (*second)[i]) {
             return 1;
-        } else if (a > b) {
+        } else if ( (*first)[i] > (*second)[i]) {
             return -1;
         }
     }
@@ -31,7 +27,7 @@ int main() {
     printf("Insert second string: ");
     scanf("%s", str2);
 
-    printf("%d", compare(&str1, &str2));
+    printf("%d", compare( &str1, &str2));
 
     return 0;
 }
