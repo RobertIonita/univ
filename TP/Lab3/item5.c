@@ -4,6 +4,19 @@
 
 char vowels[] = "aeiou";
 
+int indexOf(int (*arr)[]) {
+    int i,
+        max = (*arr)[1],
+        k = 0;
+    for(i = 1; i < 6; i++) {
+        if ((*arr)[i] > max) {
+            max = (*arr)[i];
+            k = i - 1;
+        }
+    }
+    printf("\n max is: %d %d",max, k);
+    return k;
+}
 
 int isVowel(char ch) {
     int i;
@@ -44,9 +57,15 @@ int main() {
     incLetters( &t2, &vowels2);
     
     
+    printf("\n\nMost used vowels are: \n %c && %c",
+        vowels[indexOf(&vowels1)], vowels[indexOf(&vowels2)]
+    );
+
+
+    
     printf("\n\nVowels in first and second text:");
-    for(i = 1; i <= 5; i++) {
-        printf("\n %c: %d: %d", vowels[i-1], vowels1[i], vowels2[i]);
+    for(i = 1; i < 6; i++) {
+        printf("\n %c: %i: %i", vowels[i-1], vowels1[i], vowels2[i]);
     }
     
 
