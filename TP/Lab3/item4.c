@@ -14,8 +14,7 @@ int includes(char (*string)[], char (*substr)[]) {
     int i, j,
         k = 0,
         len1 = length(&(*string)),
-        len2 = length(&(*substr)),
-        span = len1-len2;
+        len2 = length(&(*substr));
 
 
     if (len1 < len2) {
