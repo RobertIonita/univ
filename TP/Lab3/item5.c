@@ -14,7 +14,6 @@ int indexOf(int (*arr)[]) {
             k = i - 1;
         }
     }
-    printf("\n max is: %d %d",max, k);
     return k;
 }
 
@@ -39,7 +38,6 @@ void incLetters(char (*text)[], int (*arr)[]) {
     }
 }
 
-
 int main() {
 
     char t1[MAX],
@@ -56,18 +54,13 @@ int main() {
     incLetters( &t1, &vowels1);
     incLetters( &t2, &vowels2);
     
-    
     printf("\n\nMost used vowels are: \n %c && %c",
         vowels[indexOf(&vowels1)], vowels[indexOf(&vowels2)]
     );
-
-
     
     printf("\n\nVowels in first and second text:");
     for(i = 1; i < 6; i++) {
         printf("\n %c: %i: %i", vowels[i-1], vowels1[i], vowels2[i]);
     }
-    
-
     return 0;
 }
