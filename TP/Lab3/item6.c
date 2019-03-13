@@ -1,8 +1,6 @@
 #include <stdio.h>
 
-#include <string.h>
-
-#define MAX 30
+#define MAX 100
 
 typedef struct {
     char row[MAX];
@@ -31,7 +29,6 @@ int read(text *t) {
 char separators[] = ",.;!";
 
 int matches(char str[4], char ch) {
-
     int i;
 
     for (i = 0;  i < 4; i++) {
@@ -63,7 +60,6 @@ int split(text *t, line *str, int n) {
 }
 
 int compare(char (*first)[], char (*second)[]) {
-
     int i;
     for (i = 0; (*first)[i] != '\0' || (*second)[i] != '\0'; i++) {
 
@@ -88,7 +84,7 @@ void sort(line *words, int counter) {
     do {
         sorted = 1;
         for (i = 0; i < counter; i++) {
-            if (strcmp(words[i].word, words[i + 1].word) > 0) {
+            if (compare(&words[i].word, &words[i + 1].word) < 0) {
                 sorted = 0;
                 clone = words[i];
                 words[i] = words[i + 1];
@@ -103,7 +99,7 @@ void delete(line *words, int *counter, char (*desired)[]) {
     for (i = 0; i <= *counter; i++) {
         if (compare(&words[i].word, desired) == 0) {
             (*counter)--;
-            for (j = i; j <= *counter; j++) {
+            for (j = i++; j <= *counter; j++) {
                 words[j] = words[j + 1];
             }
             i--;
@@ -112,11 +108,15 @@ void delete(line *words, int *counter, char (*desired)[]) {
 }
 
 
-void removeDublicated(line * words, int counter) {
-    int clean = 0;
-    do  {
-        
-    } while (!clean);
+void removeDublicated(line * words, int *counter) {
+    int clean = 0,
+        i;
+    for(i = 0; i < *counter; i++) {
+        if (compare(&words[i].word, &words[i+1].word) == 0) {
+            delete(words, counter, &words[i].word);
+        }
+    }
+    
 }
 
 
@@ -127,20 +127,12 @@ int main(void) {
 
     int nr, i,
         count;
-    char des[] = "do";
 
     nr = read(main_row);
     count = split(main_row, main_line, nr);
-    printf("\n c: %d", count);
 
     sort(main_line, count);
-
-    for (i = 0; i <= count; i++) {
-        showOff(main_line, i);
-    }
-    delete(main_line, &count, &des);
-
-    printf("\n c: %d\n", count);
+    removeDublicated(main_line, &count);
 
     for (i = 0; i <= count; i++) {
         showOff(main_line, i);
