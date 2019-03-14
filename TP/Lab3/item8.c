@@ -11,9 +11,9 @@ int main(void) {
         len;
     float root;
     printf("\nInsert string: ");
-    scanf("%s", string);
+    scanf("%[^.]s", string);
 
-    for (len = 0; string[len] != '\0' && string[len] != '.'; len++);
+    for (len = 0; string[len] != '\0'; len++);
     root = sqrt(len);
     rank = trunc(++root);
 
@@ -22,6 +22,9 @@ int main(void) {
 
     for(i = 0; i < rank; i++) {
         for(j = 0; j < rank && len-k; j++, k++) {
+            if (string[k] == ' ' || string[k] == '\n') {
+                while(string[k++] != ' ');
+            }
             matrix[i][j] = string[k];
             printf("%c ", matrix[i][j]);
         }
