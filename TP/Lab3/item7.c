@@ -2,17 +2,6 @@
 
 #define MAX 250
 
-char digits[] = "0123456789";
-
-int isDigit(char ch) {
-    int i;
-    for (i = 0; i < 10; i++) {
-        if ( ch == digits[i]) {
-            return 1;
-        }
-    };
-    return 0;
-}
 
 int Number(char str[10]) {
 	int number = 0, i;
@@ -65,7 +54,7 @@ void filter (char (*string)[], int (*arr)[]) {
     int i, nr;
     for(i = 0; (*string)[i] != '\0'; i++) {
         nr = (*string)[i]-48;
-        if ( isDigit((*string)[i]) == 0) {
+        if ( (*string)[i] < '0' || (*string)[i] > '9') {
             (*string)[i] = ' ';
         }
     }
