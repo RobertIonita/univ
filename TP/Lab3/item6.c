@@ -95,7 +95,6 @@ void sort(line *words, int counter) {
 }
 void delete(line *words, int *counter, char (*desired)[]) {
     int i, j;
-    line odds[*counter];
     for (i = 0; i <= *counter; i++) {
         if (compare(&words[i].word, desired) == 0) {
             (*counter)--;
