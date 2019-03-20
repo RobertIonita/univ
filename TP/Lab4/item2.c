@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <curses.h>
 #include <string.h>
 
 typedef struct {
@@ -60,17 +59,16 @@ void sort(product * grocery, int counter) {
     }
 }
 
-void delete(product * grocery, int *counter, char _name[20]) {
-    int i, j, deleted = 0;
-    for (i = 0; i <= ( *counter - deleted); i++) {
-        if (strcmp(grocery[i].name, _name) == 0) {
-            deleted++;
-            for (j = i; j < ( *counter - deleted); j++) {
+void delete(product *grocery, int *counter, char desired[]) {
+    int i, j;
+    for (i = 0; i <= *counter; i++) {
+        if (strcmp(grocery[i].name, desired) == 0) {
+            (*counter)--;
+            for (j = i++; j <= *counter; j++) {
                 grocery[j] = grocery[j + 1];
             }
             i--;
         }
-        *counter = *counter - deleted;
     }
 }
 
