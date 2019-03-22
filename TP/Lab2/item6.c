@@ -3,9 +3,6 @@
 #define MAX 10
 
 
-void quit() {
-    printf("\nquiting..");
-}
 void populate(int (*arr)[MAX][MAX], int * x) {
     int i, j, s = 0;
     for (i = 0; i < * x; i++) {
@@ -16,8 +13,6 @@ void populate(int (*arr)[MAX][MAX], int * x) {
 }
 void showOff(int (*arr)[MAX][MAX], int * x) {
     int i, j;
-        printf("\n");
-
     for (i = 0; i < * x; i++) {
         for (j = 0; j < * x; j++) {
             printf("%4d ", (*arr)[i][j]);
