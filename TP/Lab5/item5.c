@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <curses.h>
 #include <string.h>
 
 typedef struct {
@@ -33,20 +32,24 @@ void search(student * dumb, int counter) {
     char method,
         st_name[20];
     
-    printf("\nName: ");
-    while (getchar() != '\n');
-    gets(st_name);
-    printf("\nIDNP: ");
-    scanf("%d", &st_idnp);
-
     printf("\nInsert search method ('0' for idnp, 'whatever' for name): ");
     scanf(" %c", &method);
-    for (i = 0; i <= (counter); i++) {
-        if ( 
-            (method != '0' && strcmp(dumb[i].name,   st_name) == 0) ||
-            (method == '0' &&        dumb[i].idnp == st_idnp)
-        ){
-            showOff(dumb, i);
+    if (method == '0') {
+        printf("\nIDNP: ");
+        scanf("%d", &st_idnp);
+        for (i = 0; i <= (counter); i++) {
+            if (dumb[i].idnp == st_idnp) {
+                showOff(dumb, i);
+            }
+        }
+    } else {
+        printf("\nName: ");
+        while (getchar() != '\n');
+        gets(st_name);
+        for (i = 0; i <= (counter); i++) {
+            if ( strcmp(dumb[i].name, st_name) == 0) {
+                showOff(dumb, i);
+            }
         }
     }
 }
