@@ -48,9 +48,25 @@ void read() {
     }
 }
 
-int main() {
+void *delete (node *first, int x) {
+    node *q1, *q2;
+    for(q1=q2=first; q1!=NULL && q1->key !=x; q2 = q1, q1 = q1->next);
+    if(q1!=NULL && q1->key ==x) {
+        if(q1 == q2) {
+            first = first->next;
+        } else{
+            q2 -> next = q1 -> next;
+        }
+        free(q1);
+    }
+    return first;
+}
 
+int main() {
     read();
     show(root);
+    root = delete(root, 4);
+    show(root);
+
     return 0;
 }
