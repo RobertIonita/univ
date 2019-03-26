@@ -8,25 +8,25 @@ typedef struct {
         coloane[MAX],
         n;
     float nenul[];
-} matrix;
+}
+matrix;
 
 
-void populate(matrix *mat, int *count){
-    (*count)++;
+void populate(matrix *mat, int *count) {
+    (*count) ++;
     int i, j;
     float value = 0;
     mat[*count].n = 0;
 
     printf("\nInsert nr of lines: ");
-    scanf("%d", &mat[*count].l);
+    scanf("%d", & mat[*count].l);
     printf("\nInsert nr of columns: ");
-    scanf("%d", &mat[*count].c);
+    scanf("%d", & mat[*count].c);
 
-
-    for(i=0; i< mat[*count].l; i++) {
-        for(j=0; j< mat[*count].c; j++) {
-            printf("\nmatrix[%d][%d]: ", i,j);
-            scanf("%f", &value);
+    for (i = 0; i < mat[*count].l; i++) {
+        for (j = 0; j < mat[*count].c; j++) {
+            printf("\nmatrix[%d][%d]: ", i, j);
+            scanf("%f", & value);
             if (value) {
                 mat[*count].linii[mat[*count].n] = i;
                 mat[*count].coloane[mat[*count].n] = j;
@@ -37,30 +37,57 @@ void populate(matrix *mat, int *count){
 }
 
 
-void showOff(int n, int m, float arr[n][m]){
-    int i, j;
-    for(i=0; i<n; i++) {
-        for(j=0; j<n; j++) {
-            printf(" %4.2f", arr[i][j]);
+void showRecords(matrix *mat, int count) {
+    int i, j,
+    n;
+    for (i = 0; i <= count; i++) {
+        printf("\nRecord %d is:\nValue Line Column", i + 1);
+        n = mat[i].n;
+        for (j = 0; j < n; j++) {
+            printf("\n%4.2f %5d %5d",
+                mat[i].nenul[j],
+                mat[i].linii[j],
+                mat[i].coloane[j]
+            );
         }
         printf("\n");
     }
+}
 
+void showMatrices(matrix *mat, int count) {
+    int i, j, k,
+        non_null = 0;
+    for (k = 0; k <= count; k++) {
+        non_null = 0;
+        printf("\nMatrix %d is:\n", k + 1);
+        for (i = 0; i < mat[k].l; i++) {
+            for (j = 0; j < mat[k].c; j++) {
+                if (mat[k].linii[non_null] == i && mat[k].coloane[non_null] == j) {
+                    printf("%5.2f ",  mat[k].nenul[non_null]);
+                    non_null++;
+                } else{
+                    printf("%5d ", 0);
+                }
+            }
+            printf("\n");
+        }
+        printf("\n");
+    }
 }
 
 int main() {
     matrix zeros[10];
-    
+
     int option,
-        nr_of_matrices = -1,
+    nr_of_matrices = -1,
         lines, column;
 
     do {
         printf("\nAvailable options are:");
         printf("\n0. quit");
         printf("\n1. add");
-        printf("\n2. show");
-        printf("\n3. search");
+        printf("\n2. show records");
+        printf("\n3. show matrices");
         printf("\n4. sort");
         printf("\nYor choice: ");
         scanf("%d", & option);
@@ -68,12 +95,13 @@ int main() {
             case 0:
                 return 0;
             case 1:
-                populate(&zeros[0], &nr_of_matrices);
+                populate( & zeros[0], & nr_of_matrices);
                 break;
             case 2:
-                // showOff(l, c, mat);
+                showRecords(zeros, nr_of_matrices);
                 break;
             case 3:
+                showMatrices(zeros, nr_of_matrices);
                 break;
             default:
                 printf("\nInvalid option");
