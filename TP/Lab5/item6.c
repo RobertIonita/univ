@@ -4,16 +4,15 @@
 
 typedef struct {
     int l, c,
-    linii[MAX],
+        linii[MAX],
         coloane[MAX],
         n;
-    float nenul[];
+    float nenul[MAX];
 }
 matrix;
 
 
 void populate(matrix * mat, int * count) {
-    ( * count) ++;
     int i, j;
     float value = 0;
     mat[ * count].n = 0;
@@ -22,7 +21,6 @@ void populate(matrix * mat, int * count) {
     scanf("%d", & mat[ * count].l);
     printf("\nInsert nr of columns: ");
     scanf("%d", & mat[ * count].c);
-
     for (i = 0; i < mat[ * count].l; i++) {
         for (j = 0; j < mat[ * count].c; j++) {
             printf("\nmatrix[%d][%d]: ", i+1, j+1);
@@ -34,13 +32,14 @@ void populate(matrix * mat, int * count) {
             }
         }
     }
+    ( * count) ++;
 }
 
 
 void showRecords(matrix * mat, int count) {
     int i, j,
     n;
-    for (i = 0; i <= count; i++) {
+    for (i = 0; i < count; i++) {
         printf("\nRecord %d is:\nValue Line Column", i + 1);
         n = mat[i].n;
         for (j = 0; j < n; j++) {
@@ -57,7 +56,7 @@ void showRecords(matrix * mat, int count) {
 void showMatrices(matrix * mat, int count) {
     int i, j, k,
     non_null = 0;
-    for (k = 0; k <= count; k++) {
+    for (k = 0; k < count; k++) {
         non_null = 0;
         printf("\nMatrix %d is:\n", k + 1);
         for (i = 0; i < mat[k].l; i++) {
@@ -80,16 +79,15 @@ void summ(matrix * mat, int count) {
         first, second,
         summ, k = 0;
 
-    printf("\nInsert two matrices (order nr) that you want to summ up: ");
+    printf("\nInsert two matrices (order Nrs) that you want to summ up: ");
     scanf("%d %d", &first, &second); first--; second--;
-    if (mat[first].l != mat[second].l || mat[first].c != mat[second].c) {
-        do {
-            printf("Choosen matrices are not of the same size, please select another ones:");
-            scanf("%d %d", &first, &second); first--; second--;
-        } while (mat[first].l != mat[second].l || mat[first].c != mat[second].c);
-    }
-    printf("\nResult matrix\n");
 
+    while (mat[first].l != mat[second].l || mat[first].c != mat[second].c) {
+        printf("Choosen matrices are not of the same size, please select another ones:");
+        scanf("%d %d", &first, &second); first--; second--;
+    }
+
+    printf("\nResult matrix\n");
     for(i = 0; i < mat[first].l; i++) {
         for(j = 0; j < mat[first].c; j++){
             printf("%5.2f ",mat[first].nenul[k] + mat[second].nenul[k++]);
@@ -103,7 +101,7 @@ int main() {
     matrix zeros[10];
 
     int option,
-    nr_of_matrices = -1,
+        nr_of_matrices = 0,
         lines, column;
 
     do {
@@ -112,14 +110,14 @@ int main() {
         printf("\n1. add");
         printf("\n2. show records");
         printf("\n3. show matrices");
-        printf("\n4. sort");
+        printf("\n4. summ two matrices");
         printf("\nYor choice: ");
         scanf("%d", & option);
         switch (option) {
             case 0:
                 return 0;
             case 1:
-                populate( & zeros[0], & nr_of_matrices);
+                populate(zeros, &nr_of_matrices);
                 break;
             case 2:
                 showRecords(zeros, nr_of_matrices);
