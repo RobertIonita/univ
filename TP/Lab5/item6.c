@@ -4,7 +4,7 @@
 
 typedef struct {
     int l, c,
-        linii[MAX],
+    linii[MAX],
         coloane[MAX],
         n;
     float nenul[];
@@ -12,39 +12,39 @@ typedef struct {
 matrix;
 
 
-void populate(matrix *mat, int *count) {
-    (*count) ++;
+void populate(matrix * mat, int * count) {
+    ( * count) ++;
     int i, j;
     float value = 0;
-    mat[*count].n = 0;
+    mat[ * count].n = 0;
 
     printf("\nInsert nr of lines: ");
-    scanf("%d", & mat[*count].l);
+    scanf("%d", & mat[ * count].l);
     printf("\nInsert nr of columns: ");
-    scanf("%d", & mat[*count].c);
+    scanf("%d", & mat[ * count].c);
 
-    for (i = 0; i < mat[*count].l; i++) {
-        for (j = 0; j < mat[*count].c; j++) {
-            printf("\nmatrix[%d][%d]: ", i, j);
+    for (i = 0; i < mat[ * count].l; i++) {
+        for (j = 0; j < mat[ * count].c; j++) {
+            printf("\nmatrix[%d][%d]: ", i+1, j+1);
             scanf("%f", & value);
             if (value) {
-                mat[*count].linii[mat[*count].n] = i;
-                mat[*count].coloane[mat[*count].n] = j;
-                mat[*count].nenul[mat[*count].n++] = value;
+                mat[ * count].linii[mat[ * count].n] = i;
+                mat[ * count].coloane[mat[ * count].n] = j;
+                mat[ * count].nenul[mat[ * count].n++] = value;
             }
         }
     }
 }
 
 
-void showRecords(matrix *mat, int count) {
+void showRecords(matrix * mat, int count) {
     int i, j,
     n;
     for (i = 0; i <= count; i++) {
         printf("\nRecord %d is:\nValue Line Column", i + 1);
         n = mat[i].n;
         for (j = 0; j < n; j++) {
-            printf("\n%4.2f %5d %5d",
+            printf("\n%5.2f %5d %5d",
                 mat[i].nenul[j],
                 mat[i].linii[j],
                 mat[i].coloane[j]
@@ -54,25 +54,49 @@ void showRecords(matrix *mat, int count) {
     }
 }
 
-void showMatrices(matrix *mat, int count) {
+void showMatrices(matrix * mat, int count) {
     int i, j, k,
-        non_null = 0;
+    non_null = 0;
     for (k = 0; k <= count; k++) {
         non_null = 0;
         printf("\nMatrix %d is:\n", k + 1);
         for (i = 0; i < mat[k].l; i++) {
             for (j = 0; j < mat[k].c; j++) {
                 if (mat[k].linii[non_null] == i && mat[k].coloane[non_null] == j) {
-                    printf("%5.2f ",  mat[k].nenul[non_null]);
+                    printf("%5.2f ", mat[k].nenul[non_null]);
                     non_null++;
-                } else{
-                    printf("%5d ", 0);
+                } else {
+                    printf(" 0.00 ");
                 }
             }
             printf("\n");
         }
         printf("\n");
     }
+}
+
+void summ(matrix * mat, int count) {
+    int i, j,
+        first, second,
+        summ, k = 0;
+
+    printf("\nInsert two matrices (order nr) that you want to summ up: ");
+    scanf("%d %d", &first, &second); first--; second--;
+    if (mat[first].l != mat[second].l || mat[first].c != mat[second].c) {
+        do {
+            printf("Choosen matrices are not of the same size, please select another ones:");
+            scanf("%d %d", &first, &second); first--; second--;
+        } while (mat[first].l != mat[second].l || mat[first].c != mat[second].c);
+    }
+    printf("\nResult matrix\n");
+
+    for(i = 0; i < mat[first].l; i++) {
+        for(j = 0; j < mat[first].c; j++){
+            printf("%5.2f ",mat[first].nenul[k] + mat[second].nenul[k++]);
+        }
+        printf("\n");
+    }
+
 }
 
 int main() {
@@ -102,6 +126,9 @@ int main() {
                 break;
             case 3:
                 showMatrices(zeros, nr_of_matrices);
+                break;
+            case 4:
+                summ(zeros, nr_of_matrices);
                 break;
             default:
                 printf("\nInvalid option");
