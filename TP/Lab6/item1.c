@@ -2,8 +2,9 @@
 
 typedef struct {
     unsigned int 
-        period: 3,
-        kids: 3;
+        period: 4,
+        kids: 3,
+        lifetime: 11;
 }
 mammal;
 
@@ -16,22 +17,21 @@ typedef struct {
 bug;
 typedef struct {
     unsigned int
-        water: 1,
         depth: 9,
-        speed: 7;
+        speed: 7,
+        water: 1;
 }
 fish;
 typedef struct {
     unsigned int
-        wings: 9,
-        height: 8,
+        wingspan: 9,
+        altitude: 11,
         speed: 9;
 }
 bird;
 
 typedef struct {
     unsigned int
-        lifetime: 11,
         kind:3;
 }
 data;
@@ -41,45 +41,83 @@ typedef union {
     bug bugs;
     fish fishes;
     bird birds;
+    data records;
 }
 type;
 
-void read_mammal(type *animals, data *record, int *count) {
+void read(type *animals, data *record, int *count, unsigned int opt) {
     (*count)++;
-    record[*count].kind = 0;
+    record[*count].kind = opt;
     unsigned int value;
-    printf("\nPeriod: ");
-    scanf("%u", & value); animals[*count].mammals.period = value;
-    printf("\nPuppets: ");
-    scanf("%u", & value); animals[*count].mammals.kids = value;
-    printf("\nLifetime: ");
-    scanf("%u", & value); record[*count].lifetime = value;
-}
-void read_bug(type *animals, int *count) {
-    (*count)++;
-    unsigned int value;
-    printf("\nLegs: ");
-    scanf("%u", & value); animals[*count].bugs.legs = value;
-    printf("\nCan fly?: ");
-    scanf("%u", & value); animals[*count].bugs.flies = value;
-    printf("\nDangerous?: ");
-    scanf("%u", & value); animals[*count].bugs.dangerous = value;
+    switch (opt) {
+        case 0:
+            printf("\nPeriod (months): ");
+            scanf("%u", & value); animals[*count].mammals.period = value;
+            printf("\nPuppets: ");
+            scanf("%u", & value); animals[*count].mammals.kids = value;
+            printf("\nLifetime (ages): ");
+            scanf("%u", & value); animals[*count].mammals.lifetime = value;
+        break;
+        case 1:
+            printf("\nLegs: ");
+            scanf("%u", & value); animals[*count].bugs.legs = value;
+            printf("\nCan fly? ");
+            scanf("%u", & value); animals[*count].bugs.flies = value;
+            printf("\nDangerous? ");
+            scanf("%u", & value); animals[*count].bugs.dangerous = value;
+        break;
+        case 2:
+            printf("\nDepth (meters): ");
+            scanf("%u", & value); animals[*count].fishes.depth = value;
+            printf("\nSpeed (km/h): ");
+            scanf("%u", & value); animals[*count].fishes.speed = value;
+            printf("\nSalt water? ");
+            scanf("%u", & value); animals[*count].fishes.water = value;
+        break;
+        case 3:
+            printf("\nWingspan (cm): ");
+            scanf("%u", & value); animals[*count].birds.wingspan = value;
+            printf("\nAltitude (meters): ");
+            scanf("%u", & value); animals[*count].birds.altitude = value;
+            printf("\nSpeed (km/h): ");
+            scanf("%u", & value); animals[*count].birds.speed = value;
+        break;
+    }
 }
 
 void showOff(type *animals, data *record, int count) {
-    printf("\nRecord %d is a ", count+1);
+    printf("\n\nRecord %d is a ", count+1);
     switch (record[count].kind) {
         case 0:
-            printf("mammal\nperiod puppets lifetime");
-            break;
+            printf("mammal\nperiod: %3u\npuppets: %2u\nlifetime: %u",
+                animals[count].mammals.period,
+                animals[count].mammals.kids,
+                animals[count].mammals.lifetime
+            );
+        break;
+        case 1:
+            printf("bug\nlegs: %6u\nflies: %5u\ndangerous: %u",
+                animals[count].bugs.legs,
+                animals[count].bugs.flies,
+                animals[count].bugs.dangerous
+            );
+        break;
+        case 2:
+            printf("fish\ndepth: %0u\nspeed: %0u\nsalt: %2u",
+                animals[count].fishes.depth,
+                animals[count].fishes.speed,
+                animals[count].fishes.water
+            );
+        break;
+        case 3:
+            printf("bird\nwingspan: %u\naltitude: %u\nspeed: %5u",
+                animals[count].birds.wingspan,
+                animals[count].birds.altitude,
+                animals[count].birds.speed
+            );
+        break;
     }
-    printf("\n%5u %5u %5u",
-        animals[count].mammals.period,
-        animals[count].mammals.kids,
-        record[count].lifetime
-    );
 }
-
 
 int main() {
 
@@ -89,13 +127,13 @@ int main() {
         data record[10];
     
     while (1) {
-        printf("\nAvailable options:");
+        printf("\n\nAvailable options:");
         printf("\n0. exit");
-        printf("\n1. display records");
-        printf("\n2. mammal");
-        printf("\n3. bug");
-        printf("\n4. fish");
-        printf("\n5. bird");
+        printf("\n1. mammal");
+        printf("\n2. bug");
+        printf("\n3. fish");
+        printf("\n4. bird");
+        printf("\n5. display records");
         printf("\nYour choice: ");
         scanf("%d", & option);
 
@@ -104,30 +142,20 @@ int main() {
                 return 0;
                 break;
             case 1:
+            case 2:
+            case 3:
+            case 4:
+                read(animals, record, &count, option-1);
+                break;
+            case 5:
                 for(i = 0; i <= count; i++) {
                     showOff(animals, record, i);
                 }
                 break;
-            case 2:
-                read_mammal(animals, record, &count);
-                break;
-            // case 3:
-            //     read_bug(animals, &count);
-            //     break;
-            // case 4:
-            //     read_fish(animals, &count);
-            //     break;
-            // case 5:
-            //     read_bird(animals, &count);
-            //     break;
             default:
                 printf("\nInvalid oprion");
                 break;
         }
     }
-
-
-
-
     return 0;
 }
