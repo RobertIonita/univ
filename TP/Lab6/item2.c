@@ -1,26 +1,33 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #define MAX 30
 
-
+typedef struct {
+    char name[7];
+} types;
 typedef struct {
     char name[MAX],
         value[MAX];
+    types type;
 } string;
 
 typedef struct {
     char name[MAX],
         value;
+    types type;
 } ch;
 
 typedef struct {
     char name[MAX];
     float value;
+    types type;
 } real;
 
 typedef struct {
     char name[MAX];
     int value;
+    types type;
 } integer;
 
 typedef union {
@@ -28,8 +35,7 @@ typedef union {
     ch chars;
     real reals;
     integer ints;
-} type;
-
+} vars;
 
 int matches(char *str, char ch) {
 
@@ -61,10 +67,10 @@ void trim(char *str, char ch) {
     shift(str, i);
 }
 
-void typeOf(char *str) {
+void typeOf(char *str, char *type) {
     int i,
         string = 0, real = 0;
-    
+    strcpy(type, "integer");
     for(i = 0; str[i] != '\0'; i++) {
         if (str[i] == '.') {
             real++;
@@ -75,24 +81,19 @@ void typeOf(char *str) {
     }
     if(string) {
         if (strlen(str) == 1 || (str[0] == 39 && str[2] == 39) ) {
-            printf("char");
+            strcpy(type, "char");
         } else
-            printf("string");
-    } else if(real) {
-        printf("float");
-    } else
-        printf("integer");
+            strcpy(type, "string");
+    } else if(real)
+        strcpy(type, "float");
 }
-void extractValue(char *str) {
+void extractValue(char *str, char *type) {
     int i = strlen(str);
-    printf("\ntype is:"); 
-    typeOf(str);
-
+    typeOf(str, type);
     if( (str[0] == 34 && str[i-1] == 34) || (str[0] == 39 && str[i-1] == 39) ) {
         str[i-1] = '\0';
         shift(str, 1);
     }
-    printf("\nvalue is:%s", str);
 }
 
 int validateName(char *str) {
@@ -116,9 +117,7 @@ int validateName(char *str) {
     return 1;
 }
 
-void split(char *str) {
-    char name[MAX],
-        value[MAX];
+int split(char *str, char *name, char *value) {
     int i, k = 1;
     for(i = 0; str[i] != '='; i++, k++){
         name[i] = str[i];
@@ -127,48 +126,95 @@ void split(char *str) {
     trim(name, ' ');
     if(!validateName(name)) {
         printf("\nInvalid name!");
+        return 0;
     } else {
-        printf("\nname is:%s", name);
         for(i = 0; str[i] != '\0'; i++){
             value[i] = str[i+k];
         }
         trim(value, ' ');
-        extractValue(value);
+        extractValue(value, str);
     }
+    return 1;
 }
 
-void populate() {
+void read(vars *record, int *count) {
     char input[MAX],
         name[MAX],
         value[MAX];
     printf("\nEnter input:");
+    while(getchar() != '\n')
+    ;
     scanf("%[^\n]s", input);
     
-    if (matches(input, '=')) {
-        split(input);
-    } else {
+    if (!matches(input, '=')) {
         printf("\nInvalid input, assignemt operator is missing!");
+    } else if (split(input, name, value)) {
+        (*count)++;
+        switch (input[0]) {
+            case 's':
+                strcpy(record[*count].strings.name, name);
+                strcpy(record[*count].strings.value, value);
+                strcpy(record[*count].strings.type.name, input);
+                printf("\nRecord %d:\nname: %s\nvalue: %s\ntype: %s",
+                    (*count)+1,
+                    record[*count].strings.name,
+                    record[*count].strings.value,
+                    record[*count].strings.type.name
+                );
+                break;
+            case 'c':
+                strcpy(record[*count].chars.name, name);
+                record[*count].chars.value = value[0];
+                strcpy(record[*count].chars.type.name, input);
+                printf("\nRecord %d:\nname: %s\nvalue: %c\ntype: %s",
+                    (*count)+1,
+                    record[*count].chars.name,
+                    record[*count].chars.value,
+                    record[*count].chars.type.name
+                );
+                break;
+            case 'i':
+                strcpy(record[*count].ints.name, name);
+                record[*count].ints.value = atoi(value);
+                strcpy(record[*count].ints.type.name, input);
+                printf("\nRecord %d:\nname: %s\nvalue: %d\ntype: %s",
+                    (*count)+1,
+                    record[*count].ints.name,
+                    record[*count].ints.value,
+                    record[*count].ints.type.name
+                );
+                break;
+            case 'f':
+                strcpy(record[*count].reals.name, name);
+                record[*count].reals.value = atof(value);
+                strcpy(record[*count].reals.type.name, input);
+                printf("\nRecord %d:\nname: %s\nvalue: %f\ntype: %s",
+                    (*count)+1,
+                    record[*count].reals.name,
+                    record[*count].reals.value,
+                    record[*count].reals.type.name
+                );
+                break;
+        }
     }
+
 }
-
 int main() {
-    type records[10];
-    char input[MAX];
+    vars records[10];
     int option,
-        count = -1;
-
+        count = -1,
+        i;
     while(1) {
         printf("\n\n0. Exit");
-        printf("\n0. Read input");
-        printf("\n2. Display records");
+        printf("\n1. Read input");
         printf("\nYour choice: ");
         scanf("%d", &option);
-        switch (option)
-        {
+        switch (option) {
             case 0:
                 return 0;
             case 1:
-                populate(records, &count, option);
+                read(records, &count);
+                break;
             default:
                 printf("\nInvalid option");
                 break;
