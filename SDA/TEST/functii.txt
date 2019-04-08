@@ -1,0 +1,11 @@
+printf
+scanf
+fopen
+strcmp
+strstr
+strcpy
+strlen
+feof
+strchr
+pow
+sqrt
