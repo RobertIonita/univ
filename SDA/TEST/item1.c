@@ -57,30 +57,35 @@ void max(node * first) {
         j= 0,
         n = 1;
     char reg[MAX+1];
-        reg[0] = '0';
-        reg[1] = '0';
+    strcpy(reg, "");
     for (q = first; q != NULL; q = q-> next, j++) {
         k = 0;
         for(i = 0; (q -> str)[i] != '\0'; i++) {
             if ((q -> str)[i] == '1') {
                 k++;
             }
-            if (reg[0] < '0'+k){
-                n = 1;
-                reg[0] = '0'+k;
-                reg[1] = '0'+j;
-                reg[2] = '\0';
-            } else if( reg[0] == '0'+k) {
-                n++;
-                reg[n] = '0'+j;
-            }
         }
+        if (reg[0] < '0'+k){
+            n = 1;
+            reg[0] = '0'+k;
+            reg[1] = '0'+j;
+            reg[2] = '\0';
+        } else if( reg[0] == '0'+k) {
+            n++;
+            reg[n] = '0'+j;
+        }
+        reg[n+1] = '\0';
     }
     for(i = 1; reg[i] != '\0'; i++) {
-        printf("\nindices: %c", reg[i]);
+        n = 0;
+        q = first;
+        while(reg[i]-48 > n++ && q != NULL){
+            q = q->next;
+        }
+        
+        printf("\nindices: %c %s", reg[i], q->str);
     }
-    
-    printf("\n  max: %c", reg[0]);
+    printf("\nmax: %c", reg[0]);
 }
 
 void read() {
@@ -100,7 +105,7 @@ void read() {
 int main() {
     read();
     show(root);
-    complement(root);
+    // complement(root);
     max(root);
     return 0;
 }
