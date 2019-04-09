@@ -4,22 +4,22 @@
 
 #define MAX 30
 
-typedef struct list {
-    char fun_name[MAX];
-    struct list * next;
+typedef struct item {
+    char data[MAX];
+    struct item * next;
 } node;
 
-node * functii = NULL;
-node * cod = NULL;
+node * func = NULL;
+node * code = NULL;
 
-node * add (node * first, char * fun_name) {
+node * add (node * first, char * str) {
     node *q1, *q2,
         *clone;
     clone = (node *)malloc(sizeof(node));
-    strcpy(clone -> fun_name, fun_name);
+    strcpy(clone -> data, str);
     clone -> next = NULL;
 
-    for(q1 = q2 = first; q1 != NULL && (strcmp(q1 -> fun_name, clone -> fun_name) < 0); q2 = q1, q1 = q1 -> next);
+    for(q1 = q2 = first; q1 != NULL && (strcmp(q1 -> data, clone -> data) < 0); q2 = q1, q1 = q1 -> next);
     if (q1 == q2) {
         clone -> next = first;
         first = clone;
@@ -32,7 +32,7 @@ node * add (node * first, char * fun_name) {
 void showOff(node * first) {
     node * q;
     for (q = first; q != NULL; q = q -> next) {
-        printf("\n%s", q -> fun_name);
+        printf("\n%s", q -> data);
     }
 }
 
@@ -51,48 +51,46 @@ node * read(node * item, char * path) {
     return item;
 }
 
-void nr_aparitii () {
+void count () {
     int k = 0;
-    node * i,
+    node *i,
         *j;
-    for(i = functii; i !=NULL; i = i -> next) {
-        k=0;
-        for(j=cod; j!=NULL; j = j -> next) {
-            if( strcmp(i -> fun_name, j -> fun_name )==0 ) {
+    for (i = func; i != NULL; i = i -> next) {
+        k = 0;
+        for (j = code; j != NULL; j = j -> next) {
+            if( strcmp(i -> data, j -> data) == 0) {
                 k++;
             }
         }
         if (k > 0) 
-            printf("\n function name: %s,  %d times", i -> fun_name, k);
+            printf("\nfunction: %6s was used %d time(s)", i -> data, k);
     }
 }
 
-node * deleteNode(node * code, char * str) {
-    node * q1, * q2;
-    for (q1 = q2 = code; q1 != NULL && (strcmp(q1 -> fun_name, str)); q2 = q1, q1 = q1 -> next);
-    if (q1 != NULL && ((strcmp(q1 -> fun_name, str) == 0))) {
-        if (q1 == q2)
-            code = code -> next;
-        else
+node * deleteItem (node * item, char * desired) {
+    node *q1, *q2;
+    for (q1 = q2 = item; q1 != NULL && strcmp (q1 -> data, desired); q2 = q1, q1 = q1 -> next);
+
+    if (q1 != NULL && (strcmp (q1 -> data, desired) == 0) ) {
+        if (q1 == q2) {
+            item = item -> next;
+        } else {
             q2 -> next = q1 -> next;
-        free(q1);
+            free(q1);
+        }
     }
-    return code;
+    return item;
 }
-
 int main() {
     char desired[MAX];
-    functii = read(functii, "SDA/TEST/functii.txt");
-    printf("\nfunctions in library: \n"); showOff(functii);
-    cod = read(cod, "SDA/TEST/cod.txt");
-    printf("\nused functions: \n"); showOff(cod);
-
-    nr_aparitii();
-    printf("\nInsert desired node to be deleted: ");
+    func = read(func, "SDA/TEST/functii.txt");
+    printf("\nfunctions in library: \n"); showOff(func);
+    code = read(code, "SDA/TEST/cod.txt");
+    printf("\nused functions: \n"); showOff(code);
+    count();
+    printf("\nInsert function that you want to delete: ");
     scanf("%s", desired);
-    cod = deleteNode(cod, desired);
-
-    showOff(cod);
-
+    code = deleteItem(code, desired);
+    showOff(code);
     return 0;
 }
