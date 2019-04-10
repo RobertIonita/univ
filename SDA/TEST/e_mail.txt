@@ -1,0 +1,8 @@
+abc@xyz.com 0
+def@xyz.com 1
+ghi@xyz.com 2
+jkl@xyz.com 3
+mno@xyz.com 2
+pqr@xyz.com 1
+stu@xyz.com 0
+vwa@xyz.com 5
