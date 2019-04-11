@@ -3,18 +3,22 @@
 
 int main() {
 
-    int * x;
+    int * x, * z;
     x = (int * ) malloc(7 * sizeof(int));
-    if (x) {
+    if (!x) {
         printf("Eroare alocare 1.\n");
         exit(EXIT_FAILURE);
     }
 
-    x = (int * ) malloc(24 + sizeof(int));
-    if (x){
-        printf("Eroare alocare 2. \n");
+    z = (int * ) malloc(24 * sizeof(int));
+    if (!z) {
+        printf("Eroare alocare 2.\n");
+        free(x);
         exit(EXIT_FAILURE);
+
     }
+
     free(x);
+    free(z);
     return 0;
 }
