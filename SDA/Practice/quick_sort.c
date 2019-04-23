@@ -25,25 +25,11 @@ int partition(int arr[], int low, int high)
     return j;
 }
 
-int partition2(int *arr, int low, int high) {
-    int pivot = arr[low],
-        i = low,
-        j = high;
-    while (i < j) {
-        for (i = low; arr[i] <= pivot; i++);
-        for (j = high; arr[j] > pivot; j--);
-        if (i < j)
-            swap(&arr[i], &arr[j]);
-    }
-    swap(&arr[low], &arr[j]);
-
-    return j;
-}
 void quickSort(int arr[], int low, int high)
 {
     if (low < high)
     {
-        int pi = partition2(arr, low, high);
+        int pi = partition(arr, low, high);
         quickSort(arr, low, pi);
         quickSort(arr, pi + 1, high);
     }
