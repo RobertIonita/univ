@@ -28,31 +28,58 @@ void create(int heap[]) {
     }
 }
 
-int main() {
-    int heap[30], n, i, last, temp;
-    printf("Enter no. of elements:");
-    scanf("%d", & n);
-    printf("\nEnter elements:");
-    for (i = 1; i <= n; i++)
-        scanf("%d", & heap[i]);
-
-    heap[0] = n;
-    create(heap);
-
-    while (heap[0] > 1) {
-        last = heap[0];
-        temp = heap[1];
-        heap[1] = heap[last];
-        heap[last] = temp;
-        heap[0]--;
-        down_adjust(heap, 1);
-    }
-
-    printf("\nArray after sorting:\n");
-
-    for (i = 1; i <= n; i++) {
-        printf("%d ", heap[i]);
-    }
-
-    return 0;
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
 }
+void heapify(int arr[], int n, int i) 
+{ 
+    int largest = i;
+    int l = 2*i + 1;
+    int r = 2*i + 2;
+  
+    if (l < n && arr[l] > arr[largest]) 
+        largest = l; 
+  
+    if (r < n && arr[r] > arr[largest]) 
+        largest = r; 
+  
+    if (largest != i) 
+    { 
+        swap(&arr[i], &arr[largest]); 
+        heapify(&arr, n, largest); 
+    } 
+} 
+
+void heapSort2(int (*a)[], int n) {
+    for (size_t i = n/2-1; i >= 0; i--)
+    {
+        heapify(*a, n, i);
+        for (size_t i = n/2-1; i >= 0; i--)
+        {
+            swap(&(*a)[0], &(*a)[i]);
+            heapify(*a, n, 0);
+        }
+    }
+    
+}
+
+/* A utility function to print array of size n */
+void printArray(int arr[], int n) 
+{ 
+    for (int i=0; i<n; ++i) 
+        printf("%d", arr[i]);
+    printf("\n");
+} 
+  
+// Driver program 
+int main() 
+{ 
+    int arr[] = {12, 11, 13, 5, 6, 7}; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+  
+    heapSort2(arr, n); 
+    printArray(arr, n); 
+    return 0;
+} 
