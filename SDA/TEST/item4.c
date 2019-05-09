@@ -83,9 +83,9 @@ void max(node * first) {
             q = q->next;
         }
         
-        printf("\nindices: %c %s", reg[i], q->str);
+        printf("\nindices: %d %s", reg[i]-48, q->str);
     }
-    printf("\nmax: %c", reg[0]);
+    printf("\nmax: %d", reg[0]-48);
 }
 
 void read() {

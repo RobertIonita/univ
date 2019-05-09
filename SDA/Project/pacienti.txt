@@ -1,0 +1,6 @@
+1 Radici Dragos 2005044092180 19/09/1999 "Calea Sagului 1"
+2 Popescu Mihaelea-Cristina 2005044092181 05/03/1996 "Intrarea Iulia Simu bl 13 sc A ap 16"
+3 Sofilca Teodora-Maria 2005044092182 19/08/1999 "Ramnicu Valcea 1"
+4 Stroie Loredana-Elena 2005044092183 08/03/2000 "Gorji 1"
+5 Rominu Iosimela 2005044092184 21/05/2000 "Complex Studentesc 1"
+6 Tonu Alexandru 2005044092185 18/06/1999 "Bardar 1"
