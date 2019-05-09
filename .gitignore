@@ -52,5 +52,8 @@ Mkfile.old
 dkms.conf
 
 # vscode
-
 /.vscode/
+settings.json
+
+# OS X
+.DS_Store
