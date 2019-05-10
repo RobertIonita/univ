@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-
-#define MAX 5
 
 int read(char *path, float (*arr)[])
 {
