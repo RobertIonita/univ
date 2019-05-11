@@ -43,7 +43,7 @@ int main()
     float arr[10];
     int records = 0,
         n = 0;
-    records = read("TP/Lab11/input6.txt", &arr);
-    write("TP/Lab11/outpus6.txt", &arr, records);
+    records = read("TP/Lab11/assets/input6.txt", &arr);
+    write("TP/Lab11/assets/output6.txt", &arr, records);
     return 0;
 }
