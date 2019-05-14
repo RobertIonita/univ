@@ -1,13 +1,22 @@
 #include <unistd.h>
+#include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 
-int main() {
-   char cwd[1024];
-   if (getcwd(cwd, sizeof(cwd))) {
-       printf("Current working dir: %s\n", cwd);
-   } else {
-       perror("getcwd() error");
-       return 1;
-   }
-   return 0;
+void run()
+{
+    char cwd[1024],
+        open[1024] = "open ";
+    if (!getcwd(cwd, sizeof(cwd)))
+        perror("getcwd() error");
+    strcat(open, cwd);
+    strcat(open, "/SDA/Project/index.html");
+    printf("file: %s", open);
+    system(open);
+}
+
+int main()
+{
+    run();
+    return 0;
 }
