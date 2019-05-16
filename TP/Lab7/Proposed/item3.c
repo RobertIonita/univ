@@ -36,14 +36,12 @@ void showOff(int *arr, int count, int mode)
 }
 int main()
 {
-    int *N, n;
+    int N, n;
     printf("Nr of records: ");
     scanf("%d", &n);
-    *N = init(N, n);
-    read(N, n);
-    showOff(N, n, 1);
-    showOff(N, n, 0);
-    free(N);
-    for (size_t i = 0; i < 1; i++); //idk wth is happenig, but whithout this, it brokes
+    N = init(&N, n);
+    read(&N, n);
+    showOff(&N, n, 1);
+    showOff(&N, n, 0);
     return 0;
 }
