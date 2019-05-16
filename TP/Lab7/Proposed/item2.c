@@ -1,114 +1,108 @@
-#include<stdio.h> 
-#include<string.h> 
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
-typedef struct{ 
-    char *nume; 
-    int nr; 
+typedef struct {
+    char name[20];
+    int idnp;
 } student;
 
-#define SIZE sizeof(student)
 
-typedef student *pstud;
-
-void eroare(void){
-    puts("\n **** eroare alocare dinamica de memorie ****");
-    exit(1);
+void quit() {
+    printf("\nquiting");
 }
-
-void citeste(int *n, pstud *tab){
-    pstud t;
-    char sir[40];
+void populate(student * dumb, int *counter) {
+    ( *counter) ++;
+    printf("\nGive values\n");
+    while (getchar() != '\n')
+    ;
+    printf("Name: ");
+    gets(dumb[*counter].name);
+    printf("Matricol: ");
+    scanf("%d", & dumb[*counter].idnp);
+}
+void showOff(student * dumb, int counter) {
+    printf("\n%10s \t %5d",
+        dumb[counter].name,
+        dumb[counter].idnp
+    );
+}
+void search(student * dumb, int counter) {
     int i;
-    printf("\n dati numarul studentilor: ");
-    scanf("%d",n);
-    if(!(t=(pstud)malloc((*n)*SIZE))) eroare(); 
-    *tab = t;
-    for (i=0; i<*n; i++, t++) {
-         printf("\n nume: "); 
-         scanf("%s", sir); /* aloca dinamic spatiu pentrunumele studentului*/
-        if (!(t->nume=(char *) malloc(strlen(sir)+1))) eroare(); 
-        strcpy(t->nume, sir); 
-        printf("\n numar matricol: "); 
-        scanf("%d", &t-> nr); 
+    char st_name[20];
+    
+    printf("\nName: ");
+    while (getchar() != '\n');
+    gets(st_name);
+    for (i = 0; i <= counter; i++) {
+        if ( strcmp(dumb[i].name, st_name) == 0) {
+            showOff(dumb, i);
+            printf(" , at index: %d", i);
         }
-}
-
-void afiseaza (int n, pstud tab){
-    int i;
-    puts("\n tabelul cu studenti");
-    for (i=0; i<n; i++, tab++) 
-    printf("\n%-30s %4d", tab->nume, tab->nr);
-
-}
-
-void elibereaza(pstud tabel, int n){
-     int i;
-     for (i=0; i<n; i++) 
-        free(tabel[ i ].nume); 
-        free(tabel);
-}
-
-void meniu(void){ 
-    puts("\n c, C ---citeste tabel studenti"); 
-    puts("\n a, A ---afiseaza tabel studenti");
-    puts("\n n, N ---ordoneaza dupa nume");
-    puts("\n r, R ---ordoneaza dupa numar matricol");
-    puts("\n f, F ---cauta dupa nume");
-    puts("\n l, L ---cauta dupa numar matricol");
-    puts("\n x, X ---iesire din program"); 
     }
+}
 
-void main(void){
-    char opt;
-    int n; //numarul de studenti
-    char nume[30];
-    student s;
-    pstud tabel = NULL; //adresa tabloului cu studenti
-
-    while(1){
-        meniu();
-        opt = tolower(getchar());
-        switch(opt){
-
-            case 'c':
-            if(tabel) //daca a existat anterior un alt tablou in memorie
-            elibereaza(tabel, n);
-            citeste(&n, &tabel); 
-            break;
+void sort(student * dumb, int counter) {
+    int i, sorted;
+    char method;
+    student clone;
+    printf("\nInsert sort method ('0' for idnp, 'whatever' for name): ");
+    scanf(" %c", &method);
+    do {
+        sorted = 1;
+        for (i = 0; i < (counter); i++) {
+            if ( 
+                (method != '0' && strcmp(dumb[i].name,  dumb[i + 1].name ) > 0) ||
+                (method == '0' &&        dumb[i].idnp > dumb[i + 1].idnp)
+            ) {
+                sorted = 0;
+                clone = dumb[i];
+                dumb[i] = dumb[i + 1];
+                dumb[i + 1] = clone;
+            }
             
-            case 'a':
-            afiseaza(n, tabel); 
-            break;
+        }
+    } while (!sorted);
+}
 
-            case 'n':
-            sorteaza_alfabetic(tabel,n); 
-            break;
+int main(void) {
 
-            case 'r':
-            sorteaza_dupa_nr_matricol(tabel,n);
-            break;
+    int option = !0,
+        n = -1, i, j,
+        st_idnp;
+    char st_name[20];
+    student dumb[10];
 
-            case 'f': 
-            printf("\n dati numele: ");
-            scanf("%s", nume);
-            if(!(s.nume = (char*) malloc(strlen(nume)+1))) eroare();
-            strcpy(s.nume,nume);
-            cauta_dupa_nume(&s, tabel, n);
-            free(s.nume); 
-            break;
 
-            case 'l':
-            printf("\n dati numarul matricol: ");
-            scanf("%d", &s.nr);
-            cauta_dupa_nr_matricol(&s, tabel, n);
-            break;
-
-            case 'x':
-            exit(0);
-            
+    do {
+        printf("\nAvailable options are:");
+        printf("\n0. quit");
+        printf("\n1. add");
+        printf("\n2. show");
+        printf("\n3. search");
+        printf("\n4. sort");
+        printf("\nYor choice: ");
+        scanf("%d", & option);
+        switch (option) {
+            case 0:
+                quit();
+                break;
+            case 1:
+                populate( & dumb[0], & n);
+                break;
+            case 2:
+                for (i = 0; i <= n; i++) {
+                    showOff(dumb, i);
+                }
+                break;
+            case 3:
+                search(dumb, n);
+                break;
+            case 4:
+                sort(dumb, n);
+                break;
             default:
-            puts("Comanda gresita");
+                printf("\nInvalid option");
+                break;
         }
-    }
+    } while (option);
 }
