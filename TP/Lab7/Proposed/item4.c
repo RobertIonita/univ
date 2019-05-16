@@ -27,7 +27,7 @@ void populate(int **N, int n, int *x) {
 }
 
 void showOff(int *N, int n) {
-	for (int i = 0; i < n; i++)
+	for (int i = n-1; i >= 0; i--)
 		printf("%d ", N[i]);
 }
 int main () {
