@@ -1,32 +1,24 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-int main() {
-	int *N, *aux;
-	int i = 0, n;
-	N = (int*)malloc(1);
-
-	printf("Cititi numerele: \n");
-	do {
-		scanf("%d", &n);
-
-		aux = (int*)realloc(N, (i+1) * sizeof(int));
-		if (!aux) {
-			printf("Nu pot redimensiona spatiul alocat.\n");
-			exit(EXIT_FAILURE);
-		}
-		else {
-			N = aux;
-			N[i] = n;
-			i++;
-		}
-	} while (n != 0);
-
-	printf("Afisare in ordine inversa: ");
-	for (i = i - 2; i >= 0; i--) {
-		printf("%d", N[i]);
+void init (int *N, int *n) {
+	N = (int *) malloc (*n * sizeof(int));
+	if(!N) {
+		printf("Can not allocate");
+		exit(EXIT_FAILURE);
 	}
+}
 
-	free(N);
+void populate(int *N, int *n) {
+	printf("%d", sizeof(*N));
+	*n = 0;
+}
+
+int main () {
+	int N, n = 320;
+	init(&N, &n);
+	while (n !=0 )
+		populate(&N, &n);
+	
 	return 0;
 }
