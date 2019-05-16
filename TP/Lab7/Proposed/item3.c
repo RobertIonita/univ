@@ -16,7 +16,7 @@ void read(int *arr, int count)
 {
     for (size_t i = 0; i < count; i++)
     {
-        printf("\nArr[%d]: ", i);
+        printf("\nArr[%zu]: ", i);
         scanf("%d", &arr[i]);
     }
 }
