@@ -1,40 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int init0 (int *N, int count) {
-    N = (int *) malloc(count * sizeof (int));
-    if (!N) {
+int init(int *N, int count)
+{
+    N = (int *)malloc(count * sizeof(int));
+    if (!N)
+    {
         printf("\nUnable to alloc\n");
         exit(EXIT_FAILURE);
     }
     return *N;
 }
 
-void read (int *arr, int count) {
+void read(int *arr, int count)
+{
     for (size_t i = 0; i < count; i++)
     {
-        printf("\nArr[%zu]: ",i);
+        printf("\nArr[%d]: ", i);
         scanf("%d", &arr[i]);
     }
 }
-int main(){
-    int *N, n,
-        i;
-    
-    printf("Cate numere citim? ");
+void showOff(int *arr, int count, int mode)
+{
+    int i;
+    if (mode)
+    {
+        for (i = 0; i < count; i++)
+            printf("\nN[%d]: %d", i, arr[i]);
+    }
+    else
+    {
+        for (i = count - 1; i >=0; i--)
+            printf("\nN[%d]: %d", i, arr[i]);
+    }
+}
+int main()
+{
+    int *N, n;
+    printf("Nr of records: ");
     scanf("%d", &n);
-    // n = 3;
-    *N = init0(N, n);
+    *N = init(N, n);
     read(N, n);
-    printf("\n Afisare\n");
-    for(i = 0; i < n; i++){
-        printf("\nN[%d]: %d",i, N[i]);
-    }
-     printf("\n Afisare in ordine inversa: \n");
-    for(i=n-1; i>=0; i--){  
-        printf("\nN[%d]: %d",i, N[i]);
-    }
-
-    free(N);
+    showOff(N, n, 1);
+    showOff(N, n, 0);
+    for (size_t i = 0; i < 1; i++); //idk wth is happenig, but whithout this, it brokes
     return 0;
 }
