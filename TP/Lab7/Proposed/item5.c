@@ -25,7 +25,7 @@ char *trim(char *str, char ch)
     return str;
 }
 
-void split(int len, char (*clone)[len], char *str, char separator) {
+void split(char (*clone)[3], char *str, char separator) {
     int j = 0, k = 0, i = 0;
     for (i = 0; str[i] != '\0'; i++)
     {
@@ -36,18 +36,20 @@ void split(int len, char (*clone)[len], char *str, char separator) {
             k++; j = 0;
         }
     }
+    for (int i = 0; i < 4; i++)
+        printf("\n[%d]: %s", i, clone[i] );
 }
 
-void read (char *str, char **arr) {
+void read (char *str, char (*arr)[3]) {
     scanf("%[^\n]s", str);
-    // split()
+    split(arr, str, ' ');
     printf("%s", str);
 }
 
 int main () {
     char *input,
-        **arr;
-    read(input, arr);
+        arr[4][3];
+    read(&input, arr);
 
     return 0;
 }
