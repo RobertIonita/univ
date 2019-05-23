@@ -7,7 +7,7 @@
 // structuri
 typedef struct
 {
-    int zi,
+    unsigned short int zi,
         luna,
         an;
 } timp;
@@ -32,7 +32,7 @@ typedef struct afectiune
 typedef struct pacient
 {
     int nr;
-    long cnp;
+    unsigned long long int cnp;
     char nume[MAX_STR_LEN],
         prenume[MAX_STR_LEN];
     timp data;
@@ -72,15 +72,21 @@ void printeazaLinie(int count)
     for (size_t i = 0; i < count; i++)
         printf("-");
 }
-void despicaSir(int lungime, char (*aux)[lungime], char *sir, char separator) {
+void despicaSir(int lungime, char (*aux)[lungime], char *sir, char separator)
+{
     int j = 0, k = 0, i = 0;
     for (i = 0; sir[i] != '\0'; i++)
     {
-        if (sir[i] != separator) {
+        if (sir[i] != separator)
+        {
+            aux[k][j + 1] = '\0';
             aux[k][j++] = sir[i];
-        } else {
+        }
+        else
+        {
             aux[k][j] = '\0';
-            k++; j = 0;
+            k++;
+            j = 0;
         }
     }
 }
@@ -88,7 +94,7 @@ void despicaSir(int lungime, char (*aux)[lungime], char *sir, char separator) {
 timp dataDinSir(char *sir, char separator, timp *data)
 {
     char aux[3][4];
-    despicaSir(4, aux, &(*sir), separator);
+    despicaSir(4, aux, sir, separator);
     data->zi = atoi(aux[0]);
     data->luna = atoi(aux[1]);
     data->an = atoi(aux[2]);
@@ -97,8 +103,8 @@ timp dataDinSir(char *sir, char separator, timp *data)
 
 locuinta adresaDinSir(char *sir, char separator, locuinta *adresa)
 {
-    char aux[5][20];
-    despicaSir(MAX_STR_LEN, aux, &(*sir), separator);
+    char aux[4][MAX_STR_LEN];
+    despicaSir(MAX_STR_LEN, aux, sir, separator);
     strcpy(adresa->strada, trim(aux[0], ' '));
     adresa->nr = atoi(aux[1]);
     adresa->ap = atoi(aux[2]);
@@ -107,7 +113,7 @@ locuinta adresaDinSir(char *sir, char separator, locuinta *adresa)
     return (*adresa);
 }
 
-void creeazaPersoana(persoana *p, int nr, char *nume, char *prenume, long cnp, timp *data, locuinta *adresa)
+void creeazaPersoana(persoana *p, int nr, char *nume, char *prenume, unsigned long long int cnp, timp *data, locuinta *adresa)
 {
     p->nr = nr;
     strcpy(p->nume, nume);
@@ -156,13 +162,13 @@ stare *adaugaAfectiune(stare *prima, int nr, int pacient, char *denumire, timp *
     return prima;
 }
 
-persoana *adaugaPacient(persoana *prima, int nr, char *nume, char *prenume, long cnp, timp *data, locuinta *adresa)
+persoana *adaugaPacient(persoana *prima, int nr, char *nume, char *prenume, unsigned long long int cnp, timp *data, locuinta *adresa)
 {
     persoana *q1, *q2,
         *aux;
     aux = (persoana *)malloc(sizeof(persoana));
     creeazaPersoana(aux, nr, nume, prenume, cnp, data, adresa);
-    for (q1 = q2 = prima; q1 != NULL && strcmp(q1->nume , aux->nume) < 0; q2 = q1, q1 = q1->urm)
+    for (q1 = q2 = prima; q1 != NULL && strcmp(q1->nume, aux->nume) < 0; q2 = q1, q1 = q1->urm)
         ;
     if (q1 == q2)
     {
@@ -204,12 +210,12 @@ stare *citireAfectiuni(stare *afectiune, char *cale)
 persoana *citirePacienti(persoana *pacienti, char *cale)
 {
     int val_nr;
-    long int val_cnp;
+    unsigned long long int val_cnp;
     char val_nume[MAX_STR_LEN],
         val_prenume[MAX_STR_LEN],
         val_data[MAX_STR_LEN],
         val_adresa[MAX_STR_LEN],
-        linie[MAX_STR_LEN];
+        *token;
     timp val_timp;
     locuinta val_locuinta;
     FILE *f;
@@ -219,61 +225,17 @@ persoana *citirePacienti(persoana *pacienti, char *cale)
     {
         while (!feof(f))
         {
-            // fscanf(f, "%d %s %s %ld %s %s", &val_nr, val_nume, val_prenume, &val_cnp, val_data, val_adresa);
-            // val_timp = dataDinSir(val_data, ',', &val_timp);
-            // val_locuinta = adresaDinSir(val_adresa, ',', &val_locuinta);
-            // pacienti = adaugaPacient(pacienti, val_nr, val_nume, val_prenume, val_cnp, &val_timp, &val_locuinta);
-            fgets (linie, MAX_STR_LEN, f);
-            printf("%s", linie);
-
+            fscanf(f, "%d %s %s %llu %s %[^\n]s", &val_nr, val_nume, val_prenume, &val_cnp, val_data, val_adresa);
+            trim(val_adresa, '\"');
+            val_timp = dataDinSir(val_data, '/', &val_timp);
+            val_locuinta = adresaDinSir(val_adresa, ',', &val_locuinta);
+            pacienti = adaugaPacient(pacienti, val_nr, val_nume, val_prenume, val_cnp, &val_timp, &val_locuinta);
+            continue;
         }
         fclose(f);
     }
     return pacienti;
 }
-
-
-// void structureaza (char *sir, char separator)
-// {
-//     char aux[6][MAX_STR_LEN];
-    // int j = 0, k = 0, i = 0;
-    // for (i = 0; sir[i] != '\0'; i++)
-    // {
-    //     if (sir[i] != separator)
-    //         aux[k][j++] = sir[i];
-    //     else
-    //     {
-    //         aux[k][i] = '\0';
-    //         k++; j = 0;
-    //     }
-    // }
-//     data->zi = atoi(aux[0]);
-//     data->luna = atoi(aux[1]);
-//     data->an = atoi(aux[2]);
-//     return (*data);
-// }
-// persoana *prelucreazaLinia(char * sir, persoana * pacient) {
-//     printf("%s", sir);
-
-//     return pacient;
-// }
-// persoana *citirePacienti(persoana *pacienti, char *cale)
-// {
-//     char linie[MAX_STR_LEN];
-//     FILE *f;
-//     if ((f = fopen(cale, "rt")) == NULL)
-//         printf("\nEroare la cititrea fișierului %s", cale);
-//     else
-//     {
-//         while (!feof(f))
-//         {
-//             fgets (linie, MAX_STR_LEN, f);
-//             pacienti = prelucreazaLinia(linie, pacienti);
-//         }
-//         fclose(f);
-//     }
-//     return pacienti;
-// }
 
 // afișări
 void afiseazaAfectiuni(stare *afectiune)
@@ -295,12 +257,12 @@ void afiseazaAfectiuni(stare *afectiune)
 void afiseazaPacienti(persoana *pacient)
 {
     persoana *q;
-    printeazaLinie(105);
-    printf("\nNr |  \t  Nume |\tPrenume | \tCNP\t| Zi Luna  An  | \t Strada Nr Ap\t   Oraș     Județ");
+    printeazaLinie(107);
+    printf("\nNr |  \t  Nume |\tPrenume | \tCNP\t| Zi Luna  An  | \t Strada Nr Ap\t    Oras\t  Judet");
     for (q = pacient; q != NULL; q = q->urm)
     {
-        printeazaLinie(105);
-        printf("\n%2d |%10s |%15s | %ld | %2d %3d  %4d | %14s %2d %2d %10s %10s",
+        printeazaLinie(107);
+        printf("\n%2d |%10s |%15s | %13llu | %2d %3d  %4d | %14s %2d %2d %10s %10s",
                q->nr,
                q->nume,
                q->prenume,
