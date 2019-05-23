@@ -2,10 +2,13 @@
 #include <stdlib.h>
 
 int main()
-{   int nr;
-    printf("dati nr");
-    scanf("%d",&nr);
-    printf("\ncatul este %d",(nr>>3));
-    printf("\nrestul este %d",(nr&7));
+{
+    int n, nr;
+    printf("dati n: ");
+    scanf("%d", &n);
+    printf("dati nr: ");
+    scanf("%d", &nr);
+    printf("\ncatul este %d", (nr >> n));
+    printf("\nrestul este %d", (nr & (1 << n) - 1));
     return 0;
 }
