@@ -279,9 +279,9 @@ void afiseazaPacienti(persoana *pacient)
 }
 int main()
 {
-    afectiuni = citireAfectiuni(afectiuni, "SDA/Project/afectiuni.txt");
+    afectiuni = citireAfectiuni(afectiuni, "SDA/Project/assets/afectiuni.txt");
     afiseazaAfectiuni(afectiuni);
-    pacienti = citirePacienti(pacienti, "SDA/Project/pacienti.txt");
+    pacienti = citirePacienti(pacienti, "SDA/Project/assets/pacienti.txt");
     afiseazaPacienti(pacienti);
 
     return 0;

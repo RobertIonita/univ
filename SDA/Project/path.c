@@ -10,7 +10,7 @@ void run()
     if (!getcwd(cwd, sizeof(cwd)))
         perror("getcwd() error");
     strcat(open, cwd);
-    strcat(open, "/SDA/Project/index.html");
+    strcat(open, "/SDA/Project/WEB/index.html");
     printf("file: %s", open);
     system(open);
 }
