@@ -20,6 +20,6 @@ void test (char (*arr)[4], char * str) {
 int main()
 {
     char arr[3][4];
-    sort(arr, "12/05/2019");
+    test(arr, "12/05/2019");
     return 0;
 }

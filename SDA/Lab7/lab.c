@@ -4,7 +4,7 @@
 
 typedef struct book
 {
-    char *titlu;
+    char *title;
     struct book *next;
 } manual;
 
@@ -15,67 +15,78 @@ typedef struct autor
     struct autor *next;
 } writer;
 
-writer *prim = NULL;
+writer *root = NULL;
 
-manual *add2(manual *list, manual *p)
+manual *add_manual(manual *list, manual *item)
 {
     manual *q1, *q2;
-    for (q1 = q2 = list; q1 != NULL && strcmp(q1->titlu, p->titlu) < 0; q2 = q1, q1 = q1->next)
+    for (q1 = q2 = list; q1 != NULL && strcmp(q1->title, item->title) < 0; q2 = q1, q1 = q1->next)
         ;
-    p->next = q1;
+    item->next = q1;
     if (q1 == q2)
-        return p;
-    q2->next = p;
+        return item;
+    q2->next = item;
     return list;
 }
 
-writer *add3(writer *list, writer *p)
+writer *add_writer(writer *list, writer *item)
 {
     writer *q1, *q2;
-    for (q1 = q2 = list; q1 != NULL && strcmp(q1->name, p->name) < 0; q2 = q1, q1 = q1->next)
+    for (q1 = q2 = list; q1 != NULL && strcmp(q1->name, item->name) < 0; q2 = q1, q1 = q1->next)
         ;
-    p->next = q1;
+    item->next = q1;
 
     if (q1 == q2)
-        return p;
+        return item;
 
-    q2->next = p;
+    q2->next = item;
     return list;
 }
-
-void addod(char *n)
+void link_book(writer *autor, manual *work)
+{
+    char title[30], answer;
+    do
+    {
+        printf("\nDo you wanna add a new book? (enter 'n' to reject): ");
+        fflush(stdin);
+        scanf(" %c", &answer);
+        if (answer == 'n')
+            continue;
+        printf("\nTitle:");
+        scanf("%s", title);
+        if ((work = (manual *)malloc(sizeof(manual))) == NULL || (work->title = (char *)malloc(strlen(title) + 1)) == NULL)
+            printf("\nAn error occured while allocating memmory ");
+        strcpy(work->title, title);
+        autor->sublist = add_manual(autor->sublist, work);
+    } while (answer != 'n');
+}
+void addnod(char *n)
 {
     writer *autor;
-    manual *c;
-    char d, tit[30];
-    if ((autor = (writer *)malloc(sizeof(writer))) == NULL || (autor->name = (char *)malloc(strlen(n) + 1)) == NULL)
-        printf("Nu este suficienta memorie");
+    manual *work;
+    if ((autor = (writer *)malloc(sizeof(writer))) == NULL || (autor->name = (char *)malloc(strlen(n) + 1)) == NULL) {
+        printf("\nAn error occured while allocating memmory ");
+
+    }
     strcpy(autor->name, n);
 
-    prim = add3(prim, autor);
-    while (printf("\nDoriti introducerea unei carti d/n:"), (scanf(" %c", &d) ) != 'n') {
-        printf("\nTitle:");
-        scanf("%s", tit);
-        if ((c = (manual * ) malloc(sizeof(manual))) == NULL || (c -> titlu = (char * ) malloc(strlen(tit) + 1)) == NULL)
-            printf("Nu este suficienta memorie");
-        strcpy(c -> titlu, tit);
-        autor->sublist = add2(autor->sublist, c);
-    }
+    root = add_writer(root, autor);
+    link_book(autor, work);
 }
 
 void afisare()
 {
     writer *autor;
-    manual *c;
+    manual *work;
     printf("\nAutor\t| book");
-    for (autor = prim; autor != NULL; autor = autor->next)
+    for (autor = root; autor != NULL; autor = autor->next)
     {
         printf("\n%s", autor->name);
         if (autor->sublist != NULL)
         {
-            for (c = autor->sublist; c != NULL; c = c->next)
+            for (work = autor->sublist; work != NULL; work = work->next)
             {
-                printf("\t%s\n", c->titlu);
+                printf("\t%s\n", work->title);
             }
         }
     }
@@ -86,7 +97,7 @@ int main()
     char n1[10];
     printf("\nAutorul:");
     scanf("%s", n1);
-    addod(n1);
+    addnod(n1);
     afisare();
     return 0;
 }
