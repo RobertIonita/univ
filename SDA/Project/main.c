@@ -103,7 +103,7 @@ timp dataDinSir(char *sir, char separator, timp *data)
 
 locuinta adresaDinSir(char *sir, char separator, locuinta *adresa)
 {
-    char aux[4][MAX_STR_LEN];
+    char aux[5][MAX_STR_LEN];
     despicaSir(MAX_STR_LEN, aux, sir, separator);
     strcpy(adresa->strada, trim(aux[0], ' '));
     adresa->nr = atoi(aux[1]);
