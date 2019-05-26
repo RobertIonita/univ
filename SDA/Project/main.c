@@ -200,7 +200,7 @@ stare *citireAfectiuni(stare *afectiune, char *cale)
         {
             fscanf(f, "%d %d %s %s", &val_nr, &val_pacient, val_denumire, val_data);
             val_timp = dataDinSir(val_data, '/', &val_timp);
-            // afectiune = adaugaAfectiune(afectiune, val_nr, val_pacient, val_denumire, &val_timp);
+            afectiune = adaugaAfectiune(afectiune, val_nr, val_pacient, val_denumire, &val_timp);
         }
         fclose(f);
     }
@@ -229,7 +229,7 @@ persoana *citirePacienti(persoana *pacienti, char *cale)
             trim(val_adresa, '\"');
             val_timp = dataDinSir(val_data, '/', &val_timp);
             val_locuinta = adresaDinSir(val_adresa, ',', &val_locuinta);
-            // pacienti = adaugaPacient(pacienti, val_nr, val_nume, val_prenume, val_cnp, &val_timp, &val_locuinta);
+            pacienti = adaugaPacient(pacienti, val_nr, val_nume, val_prenume, val_cnp, &val_timp, &val_locuinta);
             continue;
         }
         fclose(f);
