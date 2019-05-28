@@ -4,46 +4,46 @@
 
 #define MAX_STR_LEN 50
 
-// structuri
+// structs
 typedef struct
 {
-    unsigned short int zi,
-        luna,
-        an;
-} timp;
+    unsigned short int day,
+        month,
+        year;
+} time;
 
 typedef struct
 {
     char strada[MAX_STR_LEN],
         oras[MAX_STR_LEN],
-        judet[MAX_STR_LEN];
+        district[MAX_STR_LEN];
     int nr,
         ap;
-} locuinta;
+} location;
 typedef struct afectiune
 {
     int nr_af,
         nr_pac;
     char denumire[MAX_STR_LEN];
-    timp data;
-    struct afectiune *urm;
+    time date;
+    struct afectiune *next;
 } stare;
 
 typedef struct pacient
 {
     int nr;
-    unsigned long long int cnp;
+    unsigned long long int id;
     char nume[MAX_STR_LEN],
         prenume[MAX_STR_LEN];
-    timp data;
-    locuinta adresa;
-    struct pacient *urm;
-} persoana;
+    time date;
+    location address;
+    struct pacient *next;
+} person;
 
 stare *afectiuni = NULL;
-persoana *pacienti = NULL;
+person *pacienti = NULL;
 
-// utilități
+// utils
 void shift(char *str, int times)
 {
     int i = 0;
@@ -66,168 +66,168 @@ char *trim(char *str, char ch)
     return str;
 }
 
-void printeazaLinie(int count)
+void printLine(int count)
 {
     printf("\n");
     for (size_t i = 0; i < count; i++)
         printf("-");
 }
-void despicaSir(int lungime, char (*aux)[lungime], char *sir, char separator)
+void split(int length, char (*token)[length], char *str, char separator)
 {
     int j = 0, k = 0, i = 0;
-    for (i = 0; sir[i] != '\0'; i++)
+    for (i = 0; str[i] != '\0'; i++)
     {
-        if (sir[i] != separator)
+        if (str[i] != separator)
         {
-            aux[k][j++] = sir[i];
+            token[k][j++] = str[i];
         }
         else
         {
-            aux[k][j] = '\0';
+            token[k][j] = '\0';
             k++;
             j = 0;
         }
     }
 }
 
-timp dataDinSir(char *sir, char separator, timp *data)
+time getDate(char *str, char separator, time *date)
 {
-    char aux[3][4];
-    despicaSir(4, aux, sir, separator);
-    data->zi = atoi(aux[0]);
-    data->luna = atoi(aux[1]);
-    data->an = atoi(aux[2]);
-    return (*data);
+    char token[3][4];
+    split(4, token, str, separator);
+    date->day = atoi(token[0]);
+    date->month = atoi(token[1]);
+    date->year = atoi(token[2]);
+    return (*date);
 }
 
-locuinta adresaDinSir(char *sir, char separator, locuinta *adresa)
+location getAddress(char *str, char separator, location *address)
 {
-    char aux[5][MAX_STR_LEN];
-    despicaSir(MAX_STR_LEN, aux, sir, separator);
-    strcpy(adresa->strada, trim(aux[0], ' '));
-    adresa->nr = atoi(aux[1]);
-    adresa->ap = atoi(aux[2]);
-    strcpy(adresa->oras, trim(aux[3], ' '));
-    strcpy(adresa->judet, trim(aux[4], ' '));
-    return (*adresa);
+    char token[5][MAX_STR_LEN];
+    split(MAX_STR_LEN, token, str, separator);
+    strcpy(address->strada, trim(token[0], ' '));
+    address->nr = atoi(token[1]);
+    address->ap = atoi(token[2]);
+    strcpy(address->oras, trim(token[3], ' '));
+    strcpy(address->district, trim(token[4], ' '));
+    return (*address);
 }
 
-void creeazaPersoana(persoana *p, int nr, char *nume, char *prenume, unsigned long long int cnp, timp *data, locuinta *adresa)
+void recordPerson(person *p, int nr, char *nume, char *prenume, unsigned long long int id, time *date, location *address)
 {
     p->nr = nr;
     strcpy(p->nume, nume);
     strcpy(p->prenume, prenume);
-    p->cnp = cnp;
-    p->data.zi = (*data).zi;
-    p->data.an = (*data).an;
-    p->data.luna = (*data).luna;
-    strcpy(p->adresa.strada, (*adresa).strada);
-    p->adresa.nr = (*adresa).nr;
-    p->adresa.ap = (*adresa).ap;
-    strcpy(p->adresa.oras, (*adresa).oras);
-    strcpy(p->adresa.judet, (*adresa).judet);
-    p->urm = NULL;
+    p->id = id;
+    p->date.day = (*date).day;
+    p->date.year = (*date).year;
+    p->date.month = (*date).month;
+    strcpy(p->address.strada, (*address).strada);
+    p->address.nr = (*address).nr;
+    p->address.ap = (*address).ap;
+    strcpy(p->address.oras, (*address).oras);
+    strcpy(p->address.district, (*address).district);
+    p->next = NULL;
 }
 
-void creeazaAfectiune(stare *p, int nr, int pacient, char *denumire, timp *data)
+void recordDisease(stare *s, int nr, int pacient, char *denumire, time *date)
 {
-    p->nr_af = nr;
-    p->nr_pac = pacient;
-    strcpy(p->denumire, denumire);
-    p->data.zi = (*data).zi;
-    p->data.an = (*data).an;
-    p->data.luna = (*data).luna;
-    p->urm = NULL;
+    s->nr_af = nr;
+    s->nr_pac = pacient;
+    strcpy(s->denumire, denumire);
+    s->date.day = (*date).day;
+    s->date.year = (*date).year;
+    s->date.month = (*date).month;
+    s->next = NULL;
 }
-// adăugări
-stare *adaugaAfectiune(stare *prima, int nr, int pacient, char *denumire, timp *data)
+// populating
+stare *addDisease(person *pacient, stare *head, int nr, int pacient_id, char *denumire, time *date)
 {
     stare *q1, *q2,
-        *aux;
-    aux = (stare *)malloc(sizeof(stare));
-    creeazaAfectiune(aux, nr, pacient, denumire, data);
-    for (q1 = q2 = prima; q1 != NULL && q1->nr_af < aux->nr_af; q2 = q1, q1 = q1->urm)
+        *token;
+    token = (stare *)malloc(sizeof(stare));
+    recordDisease(token, nr, pacient_id, denumire, date);
+    for (q1 = q2 = head; q1 != NULL && q1->nr_af < token->nr_af; q2 = q1, q1 = q1->next)
         ;
     if (q1 == q2)
     {
-        aux->urm = prima;
-        prima = aux;
+        token->next = head;
+        head = token;
     }
     else
     {
-        q2->urm = aux;
-        aux->urm = q1;
+        q2->next = token;
+        token->next = q1;
     }
-    return prima;
+    return head;
 }
 
-persoana *adaugaPacient(persoana *prima, int nr, char *nume, char *prenume, unsigned long long int cnp, timp *data, locuinta *adresa)
+person *addPatient(person *head, int nr, char *nume, char *prenume, unsigned long long int id, time *date, location *address)
 {
-    persoana *q1, *q2,
-        *aux;
-    aux = (persoana *)malloc(sizeof(persoana));
-    creeazaPersoana(aux, nr, nume, prenume, cnp, data, adresa);
-    for (q1 = q2 = prima; q1 != NULL && strcmp(q1->nume, aux->nume) < 0; q2 = q1, q1 = q1->urm)
+    person *q1, *q2,
+        *token;
+    token = (person *)malloc(sizeof(person));
+    recordPerson(token, nr, nume, prenume, id, date, address);
+    for (q1 = q2 = head; q1 != NULL && strcmp(q1->nume, token->nume) < 0; q2 = q1, q1 = q1->next)
         ;
     if (q1 == q2)
     {
-        aux->urm = prima;
-        prima = aux;
+        token->next = head;
+        head = token;
     }
     else
     {
-        q2->urm = aux;
-        aux->urm = q1;
+        q2->next = token;
+        token->next = q1;
     }
-    return prima;
+    return head;
 }
 
-// citiri
-stare *citireAfectiuni(stare *afectiune, char *cale)
+// readings
+stare *readDisease(person *pacient, stare *afectiune, char *path)
 {
     int val_nr,
         val_pacient;
     char val_denumire[MAX_STR_LEN],
-        val_data[MAX_STR_LEN];
-    timp val_timp;
+        val_date[MAX_STR_LEN];
+    time val_time;
     FILE *f;
-    if ((f = fopen(cale, "rt")) == NULL)
-        printf("\nEroare la cititrea fișierului %s", cale);
+    if ((f = fopen(path, "rt")) == NULL)
+        printf("\nError reading file: %s", path);
     else
     {
         while (!feof(f))
         {
-            fscanf(f, "%d %d %s %s", &val_nr, &val_pacient, val_denumire, val_data);
-            val_timp = dataDinSir(val_data, '/', &val_timp);
-            afectiune = adaugaAfectiune(afectiune, val_nr, val_pacient, val_denumire, &val_timp);
+            fscanf(f, "%d %d %s %s", &val_nr, &val_pacient, val_denumire, val_date);
+            val_time = getDate(val_date, '/', &val_time);
+            afectiune = addDisease(pacient, afectiune, val_nr, val_pacient, val_denumire, &val_time);
         }
         fclose(f);
     }
     return afectiune;
 }
 
-persoana *citirePacienti(persoana *pacienti, char *cale)
+person *readPatient(person *pacienti, char *path)
 {
     int val_nr;
-    unsigned long long int val_cnp;
+    unsigned long long int val_id;
     char val_nume[MAX_STR_LEN],
         val_prenume[MAX_STR_LEN],
-        val_data[MAX_STR_LEN],
-        val_adresa[MAX_STR_LEN];
-    timp val_timp;
-    locuinta val_locuinta;
+        val_date[MAX_STR_LEN],
+        val_address[MAX_STR_LEN];
+    time val_time;
+    location val_location;
     FILE *f;
-    if ((f = fopen(cale, "rt")) == NULL)
-        printf("\nEroare la cititrea fișierului %s", cale);
+    if ((f = fopen(path, "rt")) == NULL)
+        printf("\nEroare la cititrea fișierului %s", path);
     else
     {
         while (!feof(f))
         {
-            fscanf(f, "%d %s %s %llu %s %[^\n]s", &val_nr, val_nume, val_prenume, &val_cnp, val_data, val_adresa);
-            trim(val_adresa, '\"');
-            val_timp = dataDinSir(val_data, '/', &val_timp);
-            val_locuinta = adresaDinSir(val_adresa, ',', &val_locuinta);
-            pacienti = adaugaPacient(pacienti, val_nr, val_nume, val_prenume, val_cnp, &val_timp, &val_locuinta);
+            fscanf(f, "%d %s %s %llu %s %[^\n]s", &val_nr, val_nume, val_prenume, &val_id, val_date, val_address);
+            trim(val_address, '\"');
+            val_time = getDate(val_date, '/', &val_time);
+            val_location = getAddress(val_address, ',', &val_location);
+            pacienti = addPatient(pacienti, val_nr, val_nume, val_prenume, val_id, &val_time, &val_location);
             continue;
         }
         fclose(f);
@@ -239,48 +239,48 @@ persoana *citirePacienti(persoana *pacienti, char *cale)
 void afiseazaAfectiuni(stare *afectiune)
 {
     stare *q;
-    printf("Nr af | Nr pac |  Denumire | Zi Luna  An");
-    for (q = afectiune; q != NULL; q = q->urm)
+    printf("\n\nNr af | Nr pac |  Denumire | day month  An");
+    for (q = afectiune; q != NULL; q = q->next)
     {
-        printeazaLinie(41);
+        printLine(41);
         printf("\n %3d  | %4d   |%10s | %2d %3d  %4d",
                q->nr_af,
                q->nr_pac,
                q->denumire,
-               q->data.zi,
-               q->data.luna,
-               q->data.an);
+               q->date.day,
+               q->date.month,
+               q->date.year);
     }
 }
-void afiseazaPacienti(persoana *pacient)
+void afiseazaPacienti(person *pacient)
 {
-    persoana *q;
-    printeazaLinie(107);
-    printf("\nNr |  \t  Nume |\tPrenume | \tCNP\t| Zi Luna  An  | \t Strada Nr Ap\t    Oras\t  Judet");
-    for (q = pacient; q != NULL; q = q->urm)
+    person *q;
+    printLine(107);
+    printf("\n\nNr |  \t  Nume |\tPrenume | \tid\t| day month  An  | \t Strada Nr Ap\t    Oras      district");
+    for (q = pacient; q != NULL; q = q->next)
     {
-        printeazaLinie(107);
+        printLine(107);
         printf("\n%2d |%10s |%15s | %13llu | %2d %3d  %4d | %14s %2d %2d %10s %10s",
                q->nr,
                q->nume,
                q->prenume,
-               q->cnp,
-               q->data.zi,
-               q->data.luna,
-               q->data.an,
-               q->adresa.strada,
-               q->adresa.nr,
-               q->adresa.ap,
-               q->adresa.oras,
-               q->adresa.judet);
+               q->id,
+               q->date.day,
+               q->date.month,
+               q->date.year,
+               q->address.strada,
+               q->address.nr,
+               q->address.ap,
+               q->address.oras,
+               q->address.district);
     }
 }
 int main()
 {
-    afectiuni = citireAfectiuni(afectiuni, "SDA/Project/assets/afectiuni.txt");
-    afiseazaAfectiuni(afectiuni);
-    pacienti = citirePacienti(pacienti, "SDA/Project/assets/pacienti.txt");
+    pacienti = readPatient(pacienti, "SDA/Project/assets/pacienti.txt");
     afiseazaPacienti(pacienti);
+    afectiuni = readDisease(pacienti, afectiuni, "SDA/Project/assets/afectiuni.txt");
+    afiseazaAfectiuni(afectiuni);
 
     return 0;
 }
