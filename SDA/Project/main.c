@@ -79,7 +79,6 @@ void despicaSir(int lungime, char (*aux)[lungime], char *sir, char separator)
     {
         if (sir[i] != separator)
         {
-            aux[k][j + 1] = '\0';
             aux[k][j++] = sir[i];
         }
         else
@@ -214,8 +213,7 @@ persoana *citirePacienti(persoana *pacienti, char *cale)
     char val_nume[MAX_STR_LEN],
         val_prenume[MAX_STR_LEN],
         val_data[MAX_STR_LEN],
-        val_adresa[MAX_STR_LEN],
-        *token;
+        val_adresa[MAX_STR_LEN];
     timp val_timp;
     locuinta val_locuinta;
     FILE *f;
