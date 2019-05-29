@@ -44,34 +44,52 @@ writer *add_writer(writer *list, writer *item)
 }
 void link_book(writer *autor, manual *work)
 {
-    char title[30], answer;
+    char *title,
+        answer;
     do
     {
         printf("\nDo you wanna add a new book? (enter 'n' to reject): ");
-        fflush(stdin);
         scanf(" %c", &answer);
         if (answer == 'n')
             continue;
         printf("\nTitle:");
-        scanf("%s", title);
-        if ((work = (manual *)malloc(sizeof(manual))) == NULL || (work->title = (char *)malloc(strlen(title) + 1)) == NULL)
-            printf("\nAn error occured while allocating memmory ");
+        work = (manual *) malloc (sizeof(manual));
+        work->title = (char *)malloc(strlen(title) + 1);
+        if (!work || !work->title)
+            printf("\nAn error occured while allocating memory ");
         strcpy(work->title, title);
         autor->sublist = add_manual(autor->sublist, work);
     } while (answer != 'n');
 }
-void addnod(char *n)
+void addnod()
 {
     writer *autor;
     manual *work;
-    if ((autor = (writer *)malloc(sizeof(writer))) == NULL || (autor->name = (char *)malloc(strlen(n) + 1)) == NULL) {
-        printf("\nAn error occured while allocating memmory ");
+    char answer,
+        name[30];
+    do {
+        printf("\nDo you wanna add a new autor? (enter 'n' to reject): ");
+        scanf(" %c", &answer);
+        if (answer == 'n')
+            continue;
+        
+        printf("\nAutor: ");
+        scanf("%s", name);
+        printf("\nname: %s", name);
+        autor = (writer *)malloc(sizeof(writer));
+        autor->name = (char *)malloc(strlen(name) + 1);
+        if (!autor || !autor->name) {
+            printf("\nAn error occured while allocating memory ");
+            continue;
+        }
+        else {
+            strcpy(autor->name, name);
+            root = add_writer(root, autor);
+            link_book(autor, work);
+        }
 
-    }
-    strcpy(autor->name, n);
-
-    root = add_writer(root, autor);
-    link_book(autor, work);
+    } while (answer != 'n');
+    
 }
 
 void afisare()
@@ -94,10 +112,7 @@ void afisare()
 
 int main()
 {
-    char n1[10];
-    printf("\nAutorul:");
-    scanf("%s", n1);
-    addnod(n1);
+    addnod();
     afisare();
     return 0;
 }

@@ -99,7 +99,7 @@ void showOff_sub(subnode * item) {
 void showOff(node * item) {
     node * q;
     for (q = item; q != NULL; q = q -> next) {
-        printf("\n%d %d", q -> id, q -> data);
+        printf("\n\t%d %d", q -> id, q -> data);
     }
 }
 

@@ -20,28 +20,30 @@ typedef struct
     int nr,
         ap;
 } location;
-typedef struct afectiune
+typedef struct disease
 {
     int nr_af,
         nr_pac;
-    char denumire[MAX_STR_LEN];
+    char naming[MAX_STR_LEN];
     time date;
-    struct afectiune *next;
-} stare;
+    struct disease *next;
+} condition;
 
-typedef struct pacient
+typedef struct patient
 {
     int nr;
     unsigned long long int id;
-    char nume[MAX_STR_LEN],
-        prenume[MAX_STR_LEN];
+    char name[MAX_STR_LEN],
+        surname[MAX_STR_LEN];
     time date;
     location address;
-    struct pacient *next;
+    struct patient *next;
+    struct disease *sublist;
+
 } person;
 
-stare *afectiuni = NULL;
-person *pacienti = NULL;
+condition *diseases = NULL;
+person *patients = NULL;
 
 // utils
 void shift(char *str, int times)
@@ -112,11 +114,11 @@ location getAddress(char *str, char separator, location *address)
     return (*address);
 }
 
-void recordPerson(person *p, int nr, char *nume, char *prenume, unsigned long long int id, time *date, location *address)
+void recordPerson(person *p, int nr, char *name, char *surname, unsigned long long int id, time *date, location *address)
 {
     p->nr = nr;
-    strcpy(p->nume, nume);
-    strcpy(p->prenume, prenume);
+    strcpy(p->name, name);
+    strcpy(p->surname, surname);
     p->id = id;
     p->date.day = (*date).day;
     p->date.year = (*date).year;
@@ -129,23 +131,43 @@ void recordPerson(person *p, int nr, char *nume, char *prenume, unsigned long lo
     p->next = NULL;
 }
 
-void recordDisease(stare *s, int nr, int pacient, char *denumire, time *date)
+void recordDisease(condition *s, int nr, int patient, char *naming, time *date)
 {
     s->nr_af = nr;
-    s->nr_pac = pacient;
-    strcpy(s->denumire, denumire);
+    s->nr_pac = patient;
+    strcpy(s->naming, naming);
     s->date.day = (*date).day;
     s->date.year = (*date).year;
     s->date.month = (*date).month;
     s->next = NULL;
 }
-// populating
-stare *addDisease(person *pacient, stare *head, int nr, int pacient_id, char *denumire, time *date)
+
+// searching
+person *searchPatient(person *head, char *name, char *surname)
 {
-    stare *q1, *q2,
+    person *q;
+
+    for (q = head; (q != NULL && strcmp(q->name, name)) || (q != NULL && (strcmp(q->name, name) == 0) && strcmp(q->surname, surname)); q = q->next)
+        ;
+
+    return q;
+}
+
+condition *searchDisease(condition *head, char *naming)
+{
+    condition *q;
+    for (q = head; q != NULL && strcmp(q->naming, naming); q = q->next)
+        ;
+    return q;
+}
+
+// populating
+condition *addDisease(condition *head, int nr, int patient_id, char *naming, time *date)
+{
+    condition *q1, *q2,
         *token;
-    token = (stare *)malloc(sizeof(stare));
-    recordDisease(token, nr, pacient_id, denumire, date);
+    token = (condition *)malloc(sizeof(condition));
+    recordDisease(token, nr, patient_id, naming, date);
     for (q1 = q2 = head; q1 != NULL && q1->nr_af < token->nr_af; q2 = q1, q1 = q1->next)
         ;
     if (q1 == q2)
@@ -161,13 +183,13 @@ stare *addDisease(person *pacient, stare *head, int nr, int pacient_id, char *de
     return head;
 }
 
-person *addPatient(person *head, int nr, char *nume, char *prenume, unsigned long long int id, time *date, location *address)
+person *addPatient(person *head, int nr, char *name, char *surname, unsigned long long int id, time *date, location *address)
 {
     person *q1, *q2,
         *token;
     token = (person *)malloc(sizeof(person));
-    recordPerson(token, nr, nume, prenume, id, date, address);
-    for (q1 = q2 = head; q1 != NULL && strcmp(q1->nume, token->nume) < 0; q2 = q1, q1 = q1->next)
+    recordPerson(token, nr, name, surname, id, date, address);
+    for (q1 = q2 = head; q1 != NULL && strcmp(q1->name, token->name) < 0; q2 = q1, q1 = q1->next)
         ;
     if (q1 == q2)
     {
@@ -183,39 +205,43 @@ person *addPatient(person *head, int nr, char *nume, char *prenume, unsigned lon
 }
 
 // readings
-stare *readDisease(person *pacient, stare *afectiune, char *path)
+condition *readDisease(condition *head, int id, char *path)
 {
-    int val_nr,
-        val_pacient;
-    char val_denumire[MAX_STR_LEN],
-        val_date[MAX_STR_LEN];
-    time val_time;
-    FILE *f;
+    int nr,
+        patient;
+    char naming[MAX_STR_LEN],
+        date[MAX_STR_LEN];
+    time time;
+    FILE *f = NULL;
     if ((f = fopen(path, "rt")) == NULL)
-        printf("\nError reading file: %s", path);
+        printf("\nEroare la cititrea fișierului %s", path);
     else
     {
         while (!feof(f))
         {
-            fscanf(f, "%d %d %s %s", &val_nr, &val_pacient, val_denumire, val_date);
-            val_time = getDate(val_date, '/', &val_time);
-            afectiune = addDisease(pacient, afectiune, val_nr, val_pacient, val_denumire, &val_time);
+            fscanf(f, "%d %d %s %s", &nr, &patient, naming, date);
+            time = getDate(date, '/', &time);
+        if (id == patient)
+            if (searchDisease(head, naming) == NULL)
+                head = addDisease(head, nr, patient, naming, &time);
         }
         fclose(f);
     }
-    return afectiune;
+    return head;
 }
 
-person *readPatient(person *pacienti, char *path)
+person *readPatient(person *head, char *path)
 {
-    int val_nr;
-    unsigned long long int val_id;
-    char val_nume[MAX_STR_LEN],
-        val_prenume[MAX_STR_LEN],
-        val_date[MAX_STR_LEN],
-        val_address[MAX_STR_LEN];
-    time val_time;
-    location val_location;
+    int nr;
+    unsigned long long int id;
+    char name[MAX_STR_LEN],
+        surname[MAX_STR_LEN],
+        date[MAX_STR_LEN],
+        address[MAX_STR_LEN];
+    time time;
+    location location;
+    person *p;
+    condition *c;
     FILE *f;
     if ((f = fopen(path, "rt")) == NULL)
         printf("\nEroare la cititrea fișierului %s", path);
@@ -223,64 +249,72 @@ person *readPatient(person *pacienti, char *path)
     {
         while (!feof(f))
         {
-            fscanf(f, "%d %s %s %llu %s %[^\n]s", &val_nr, val_nume, val_prenume, &val_id, val_date, val_address);
-            trim(val_address, '\"');
-            val_time = getDate(val_date, '/', &val_time);
-            val_location = getAddress(val_address, ',', &val_location);
-            pacienti = addPatient(pacienti, val_nr, val_nume, val_prenume, val_id, &val_time, &val_location);
-            continue;
+            fscanf(f, "%d %s %s %llu %s %[^\n]s", &nr, name, surname, &id, date, address);
+            trim(address, '\"');
+            time = getDate(date, '/', &time);
+            location = getAddress(address, ',', &location);
+            if (searchPatient(head, name, surname) == NULL)
+            {
+                head = addPatient(head, nr, name, surname, id, &time, &location);
+            }
+            p = searchPatient(head, name, surname);
+            c = p->sublist;
+            c = readDisease(c, nr, "SDA/Project/assets/afectiuni.txt");
+            p->sublist = c;
         }
         fclose(f);
     }
-    return pacienti;
+
+    return head;
 }
 
-// afișări
-void afiseazaAfectiuni(stare *afectiune)
+// printings
+void displayDiseases(person *patient)
 {
-    stare *q;
-    printf("\n\nNr af | Nr pac |  Denumire | day month  An");
-    for (q = afectiune; q != NULL; q = q->next)
+    condition *q;
+    printf("\n\n\tNr af | Nr pac |  denumire | Zi Luna  An");
+    for (q = patient->sublist; q != NULL; q = q->next)
     {
-        printLine(41);
-        printf("\n %3d  | %4d   |%10s | %2d %3d  %4d",
+        printf("\n\t %3d  | %4d   |%10s | %2d %3d  %4d",
                q->nr_af,
                q->nr_pac,
-               q->denumire,
+               q->naming,
                q->date.day,
                q->date.month,
                q->date.year);
     }
 }
-void afiseazaPacienti(person *pacient)
+void displayPatients(person *patient, unsigned short int required)
 {
-    person *q;
+    person *p;
     printLine(107);
-    printf("\n\nNr |  \t  Nume |\tPrenume | \tid\t| day month  An  | \t Strada Nr Ap\t    Oras      district");
-    for (q = pacient; q != NULL; q = q->next)
+    printf("\n\nNr |  \t  Nume |\tPrenume | \tid\t| Zi Luna  An  | \t Strada Nr Ap\t    Oras      Judet");
+    for (p = patient; p != NULL; p = p->next)
     {
         printLine(107);
         printf("\n%2d |%10s |%15s | %13llu | %2d %3d  %4d | %14s %2d %2d %10s %10s",
-               q->nr,
-               q->nume,
-               q->prenume,
-               q->id,
-               q->date.day,
-               q->date.month,
-               q->date.year,
-               q->address.strada,
-               q->address.nr,
-               q->address.ap,
-               q->address.oras,
-               q->address.district);
+               p->nr,
+               p->name,
+               p->surname,
+               p->id,
+               p->date.day,
+               p->date.month,
+               p->date.year,
+               p->address.strada,
+               p->address.nr,
+               p->address.ap,
+               p->address.oras,
+               p->address.district);
+        if (p->sublist != NULL && required) {
+            displayDiseases(p);
+        }
     }
 }
 int main()
 {
-    pacienti = readPatient(pacienti, "SDA/Project/assets/pacienti.txt");
-    afiseazaPacienti(pacienti);
-    afectiuni = readDisease(pacienti, afectiuni, "SDA/Project/assets/afectiuni.txt");
-    afiseazaAfectiuni(afectiuni);
+    patients = readPatient(patients, "SDA/Project/assets/pacienti.txt");
+    displayPatients(patients, 1);
+    // displayDiseases(diseases);
 
     return 0;
 }
