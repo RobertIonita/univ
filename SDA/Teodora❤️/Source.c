@@ -34,6 +34,14 @@ reteta *cautare_reteta(reteta *prescriptie, char *nume)
 	return q;
 }
 
+stoc *cautare_stoc(stoc *depozit, char *nume)
+{
+	stoc *q;
+	for (q = depozit; q != NULL && strcmp(q->nume, nume); q = q->urm)
+		;
+	return q;
+}
+
 stoc *adaugare_stoc(stoc *depozit, char *nume, int cantitate, int pret)
 {
 	stoc *q1, *q2, *aux;
@@ -183,6 +191,35 @@ void afisare_reteta(reteta *prescriptie)
 	}
 }
 
+void verificare(reteta *prescriptie, stoc *depozit)
+{
+	reteta *r = NULL;
+	stoc *s = NULL;
+	char nume[MAX];
+	int suma = 0;
+	printf("\nIntroduceti denumirea retetei: ");
+	scanf("%s", nume);
+	r = cautare_reteta(prescriptie, nume);
+	if (!r)
+		printf("\nReteta nu exista\n");
+	else{
+		medicament *m;
+		for (m = r->sublista; m != NULL; m = m ->urm) {
+			s = cautare_stoc(depozit, m->nume);
+			if (m->cantitate > s->cantitate) {
+				printf("\ncantitate: %d, %d", m->cantitate, s->cantitate);
+				printf("\nNu este suficient %s", m->nume);
+				break;
+			}
+			else {
+				suma += s->pret*m->cantitate;
+			}
+		}
+	}
+	if(suma)
+		printf("\nPretul este: %d\n", suma);
+}
+
 void meniu()
 {
 	int optiune;
@@ -203,24 +240,29 @@ void meniu()
 		switch (optiune)
 		{
 		case 1:
-			if (!prescriptie && !depozit) {
+			if (!prescriptie && !depozit)
+			{
 				prescriptie = citire_reteta(prescriptie, "SDA/Teodora❤️/retete.txt");
 				depozit = citire_stoc(depozit, "SDA/Teodora❤️/stoc.txt");
 				printf("\nDatele din fisiere au fost încărcate\n");
-			} else 
+			}
+			else
 				printf("\nDatele au fost deja încărcate anterior\n");
 			break;
 		case 2:
-			if (prescriptie) 
+			if (prescriptie)
 				afisare_reteta(prescriptie);
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 3:
-			afisare_reteta(prescriptie);
+			if (prescriptie && depozit)
+				verificare(prescriptie, depozit);
+			else
+				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 4:
-			if (prescriptie) 
+			if (depozit)
 				afisare_stoc(depozit);
 			else
 				printf("\nDatele nu au fost încărcate\n");
