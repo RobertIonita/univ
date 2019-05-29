@@ -183,13 +183,55 @@ void afisare_reteta(reteta *prescriptie)
 	}
 }
 
-int main()
+void meniu()
 {
+	int optiune;
 	stoc *depozit = NULL;
 	reteta *prescriptie = NULL;
-	prescriptie = citire_reteta(prescriptie, "SDA/Teodora❤️/retete.txt");
-	afisare_reteta(prescriptie);
-	depozit = citire_stoc(depozit, "SDA/Teodora❤️/stoc.txt");
-	afisare_stoc(depozit);
+	do
+	{
+		printf("\n1. Incarca datele din fisiere");
+		printf("\n2. Afiseaza lista retetelor in ordine alfabetica.");
+		printf("\n3. Verifica pentru o reteta citita de la tastatura daca exista toate medicamentele in stoc si care e pretul ei in acest caz.");
+		printf("\n4. Afiseaza lista medicamentelor in ordine alfabetica din stoc cu informatiile legate de ele.");
+		printf("\n5. Adauga/sterge o reteta in/din lista");
+		printf("\n6. Adauga/sterge/modifica un medicament in/din lista");
+		printf("\n7. Salvare inapoi in fisierele aferente a retetelor si medicamentelor.");
+		printf("\n0. Pentru a finisa executia programului");
+		printf("\nOptiunea dorita: ");
+		scanf("%d", &optiune);
+		switch (optiune)
+		{
+		case 1:
+			if (!prescriptie && !depozit) {
+				prescriptie = citire_reteta(prescriptie, "SDA/Teodora❤️/retete.txt");
+				depozit = citire_stoc(depozit, "SDA/Teodora❤️/stoc.txt");
+				printf("\nDatele din fisiere au fost încărcate\n");
+			} else {
+				printf("\nDatele au fost deja încărcate anterior\n");
+			}
+			break;
+		case 2:
+			afisare_reteta(prescriptie);
+			break;
+		case 3:
+			afisare_reteta(prescriptie);
+			break;
+		case 4:
+			afisare_stoc(depozit);
+			break;
+		case 0:
+			printf("\n\nO zi buna sa aveti😋");
+			break;
+		default:
+			printf("\nOptiune inexistenta\n");
+			break;
+		}
+	} while (optiune != 0);
+}
+
+int main()
+{
+	meniu();
 	return 0;
 }
