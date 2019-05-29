@@ -63,6 +63,7 @@ reteta *adaugare_reteta(reteta *prescriptie, char *nume) //char * med1, int cant
 	aux = (reteta *)malloc(sizeof(reteta));
 	strcpy(aux->nume, nume);
 	aux->urm = NULL;
+	aux->sublista = NULL;
 	for (q1 = q2 = prescriptie; q1 != NULL && strcmp(q1->nume, aux->nume) < 0; q2 = q1, q1 = q1->urm)
 		;
 	if (q1 == q2)
@@ -145,6 +146,7 @@ reteta *citire_reteta(reteta *prescriptie, char *str)
 			if (cautare_reteta(prescriptie, nume) == NULL)
 				prescriptie = adaugare_reteta(prescriptie, nume);
 			r = cautare_reteta(prescriptie, nume);
+			med = r->sublista;
 			med = adaugare_med(med, med1, cantitate1);
 			med = adaugare_med(med, med2, cantitate2);
 			med = adaugare_med(med, med3, cantitate3);
@@ -161,7 +163,7 @@ void afisare_stoc(stoc *depozit)
 	stoc *q;
 	for (q = depozit; q != NULL; q = q->urm)
 	{
-		printf("\n%s %d %d",
+		printf("\n%s %2d %2d",
 			   q->nume,
 			   q->cantitate,
 			   q->pret);
@@ -175,9 +177,9 @@ void afisare_reteta(reteta *prescriptie)
 	for (r = prescriptie; r != NULL; r = r->urm)
 	{
 		printf("\n%s", r->nume);
-		if (prescriptie->sublista != NULL)
-			for (m = prescriptie->sublista; m != NULL; m = m->urm)
-				printf("\n%s %d", m->nume, m->cantitate);
+		if (r->sublista != NULL)
+			for (m = r->sublista; m != NULL; m = m->urm)
+				printf("\n\t%s %2d", m->nume, m->cantitate);
 	}
 }
 
