@@ -207,21 +207,26 @@ void meniu()
 				prescriptie = citire_reteta(prescriptie, "SDA/Teodora❤️/retete.txt");
 				depozit = citire_stoc(depozit, "SDA/Teodora❤️/stoc.txt");
 				printf("\nDatele din fisiere au fost încărcate\n");
-			} else {
+			} else 
 				printf("\nDatele au fost deja încărcate anterior\n");
-			}
 			break;
 		case 2:
-			afisare_reteta(prescriptie);
+			if (prescriptie) 
+				afisare_reteta(prescriptie);
+			else
+				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 3:
 			afisare_reteta(prescriptie);
 			break;
 		case 4:
-			afisare_stoc(depozit);
+			if (prescriptie) 
+				afisare_stoc(depozit);
+			else
+				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 0:
-			printf("\n\nO zi buna sa aveti😋");
+			printf("\n\nO zi buna sa aveti 😋 ");
 			break;
 		default:
 			printf("\nOptiune inexistenta\n");
