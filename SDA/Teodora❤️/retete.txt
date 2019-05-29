@@ -1,3 +1,3 @@
-retata1 med1 2 med2 4 med3 8
+reteta1 med1 2 med2 4 med3 8
 reteta2 med2 5 med3 7 med4 9
 reteta3 med3 1 med4 3 med5 5
