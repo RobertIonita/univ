@@ -327,7 +327,8 @@ stoc *medicament_nou(stoc *depozit_cap)
 	return depozit_cap;
 }
 
-stoc * modifica_med(stoc *depozit_cap) {
+stoc *modifica_med(stoc *depozit_cap)
+{
 	char nume[MAX];
 	int cantitate,
 		pret;
@@ -345,11 +346,38 @@ stoc * modifica_med(stoc *depozit_cap) {
 	return depozit_cap;
 }
 
+void raport_nou(reteta *reteta_cap, stoc *depozit_cap)
+{
+	FILE *f, *g;
+	reteta *r;
+	medicament *m;
+	stoc *s;
+	f = fopen("raport_retete.txt", "wt");
+	g = fopen("raport_stoc.txt", "wt");
+	if (f == NULL || g == NULL)
+		printf("\nEroare la scrierea fisierelor");
+	else
+	{
+		for (r = reteta_cap; r != NULL; r = r->urm) {
+			fprintf(f, "%s", r->nume);
+			for (m = r->sublista; m != NULL; m = m->urm) {
+				fprintf(f, " %s %d", m->nume, m->cantitate);
+			}
+			fprintf(f, "\n");
+		}
+		fclose(f);
+		for (s = depozit_cap; s != NULL; s = s->urm) {
+			fprintf(g, "%s %d %d\n", s->nume, s->cantitate, s->pret);
+		}
+		fclose(g);
+	}
+}
+
 void meniu()
 {
 	int optiune;
 	stoc *depozit = NULL;
-	reteta *reteta = NULL;
+	reteta *prescriptie = NULL;
 	do
 	{
 		printf("\n1. Incarca datele din fisiere");
@@ -368,9 +396,9 @@ void meniu()
 		switch (optiune)
 		{
 		case 1:
-			if (!reteta && !depozit)
+			if (!prescriptie && !depozit)
 			{
-				reteta = citire_reteta(reteta, "SDA/Teodora❤️/retete.txt");
+				prescriptie = citire_reteta(prescriptie, "SDA/Teodora❤️/retete.txt");
 				depozit = citire_stoc(depozit, "SDA/Teodora❤️/stoc.txt");
 				printf("\nDatele din fisiere au fost încărcate\n");
 			}
@@ -378,14 +406,14 @@ void meniu()
 				printf("\nDatele au fost deja încărcate anterior\n");
 			break;
 		case 2:
-			if (reteta)
-				afisare_reteta(reteta);
+			if (prescriptie)
+				afisare_reteta(prescriptie);
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 3:
-			if (reteta && depozit)
-				verificare(reteta, depozit);
+			if (prescriptie && depozit)
+				verificare(prescriptie, depozit);
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
@@ -396,16 +424,16 @@ void meniu()
 				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 5:
-			if (reteta)
+			if (prescriptie)
 			{
-				reteta = reteta_noua(reteta);
+				prescriptie = reteta_noua(prescriptie);
 			}
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
 		case 6:
-			if (reteta)
-				reteta = stergere_reteta(reteta);
+			if (prescriptie)
+				prescriptie = stergere_reteta(prescriptie);
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
@@ -429,6 +457,14 @@ void meniu()
 			if (depozit)
 			{
 				depozit = modifica_med(depozit);
+			}
+			else
+				printf("\nDatele nu au fost încărcate\n");
+			break;
+		case 10:
+			if (prescriptie && depozit)
+			{
+				raport_nou(prescriptie, depozit);
 			}
 			else
 				printf("\nDatele nu au fost încărcate\n");
