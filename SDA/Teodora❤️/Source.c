@@ -237,16 +237,20 @@ reteta *reteta_noua(reteta *reteta_cap)
 	scanf("%s", nume);
 	r = cautare_reteta(reteta_cap, nume);
 
-	if (r == NULL) {
+	if (r == NULL)
+	{
 		reteta_cap = adaugare_reteta(reteta_cap, nume);
-	} else {
+	}
+	else
+	{
 		printf("\nAceasta reteta deja exista");
 	}
-		
-	while (c != 'n') {
+
+	while (c != 'n')
+	{
 		printf("\nDoriti sa adaugati medicamente? ('n' - nu): ");
 		scanf(" %c", &c);
-		if(c == 'n')
+		if (c == 'n')
 			continue;
 		r = cautare_reteta(reteta_cap, nume);
 
@@ -258,21 +262,19 @@ reteta *reteta_noua(reteta *reteta_cap)
 		m = r->sublista;
 		m = adaugare_med(m, denumire, cantitate);
 		r->sublista = m;
-	} 
-	
+	}
+
 	return reteta_cap;
 }
 
 reteta *stergere_reteta(reteta *reteta_cap)
 {
 	char nume[MAX];
-	reteta *r;
+	reteta *q1, *q2;
 	printf("\nIntroduceti denumirea retetei pentru a fi stearsa: ");
 	scanf("%s", nume);
-	reteta *q1, *q2;
 	for (q1 = q2 = reteta_cap; q1 != NULL && strcmp(q1->nume, nume); q2 = q1, q1 = q1->urm)
 		;
-
 	if (q1 != NULL && (strcmp(q1->nume, nume) == 0))
 	{
 		if (q1 == q2)
@@ -286,6 +288,61 @@ reteta *stergere_reteta(reteta *reteta_cap)
 		}
 	}
 	return reteta_cap;
+}
+stoc *stergere_med(stoc *depozit_cap)
+{
+	char nume[MAX];
+	stoc *q1, *q2;
+	printf("\nIntroduceti denumirea medicamentului pentru a fi sters: ");
+	scanf("%s", nume);
+	for (q1 = q2 = depozit_cap; q1 != NULL && strcmp(q1->nume, nume); q2 = q1, q1 = q1->urm)
+		;
+	if (q1 != NULL && (strcmp(q1->nume, nume) == 0))
+	{
+		if (q1 == q2)
+		{
+			depozit_cap = depozit_cap->urm;
+		}
+		else
+		{
+			q2->urm = q1->urm;
+			free(q1);
+		}
+	}
+	return depozit_cap;
+}
+
+stoc *medicament_nou(stoc *depozit_cap)
+{
+	char nume[MAX];
+	int cantitate,
+		pret;
+	printf("\nIntroduceti denumirea medicamentului: ");
+	scanf("%s", nume);
+	printf("\nIntroduceti cantitatea medicamentului: ");
+	scanf("%d", &cantitate);
+	printf("\nIntroduceti pretul medicamentului: ");
+	scanf("%d", &pret);
+	depozit_cap = adaugare_stoc(depozit_cap, nume, cantitate, pret);
+	return depozit_cap;
+}
+
+stoc * modifica_med(stoc *depozit_cap) {
+	char nume[MAX];
+	int cantitate,
+		pret;
+	stoc *m;
+	printf("\nIntroduceti denumirea medicamentului ce dorit sa-l modificati: ");
+	scanf("%s", nume);
+	m = cautare_stoc(depozit_cap, nume);
+	printf("\nIntroduceti cantitatea noua: ");
+	scanf("%d", &cantitate);
+	m->cantitate = cantitate;
+	printf("\nIntroduceti pretul nou: ");
+	scanf("%d", &pret);
+	m->pret = pret;
+
+	return depozit_cap;
 }
 
 void meniu()
@@ -301,7 +358,7 @@ void meniu()
 		printf("\n4. Afiseaza lista medicamentelor in ordine alfabetica din stoc cu informatiile legate de ele.");
 		printf("\n5. Adauga o reteta in lista");
 		printf("\n6. Sterge o reteta din lista");
-		printf("\n7. Adauga un medicament inlista");
+		printf("\n7. Adauga un medicament in lista");
 		printf("\n8. Sterge un medicament din lista");
 		printf("\n9. Modifica un medicament din lista");
 		printf("\n10. Salvare inapoi in fisierele aferente a retetelor si medicamentelor.");
@@ -349,6 +406,30 @@ void meniu()
 		case 6:
 			if (reteta)
 				reteta = stergere_reteta(reteta);
+			else
+				printf("\nDatele nu au fost încărcate\n");
+			break;
+		case 7:
+			if (depozit)
+			{
+				depozit = medicament_nou(depozit);
+			}
+			else
+				printf("\nDatele nu au fost încărcate\n");
+			break;
+		case 8:
+			if (depozit)
+			{
+				depozit = stergere_med(depozit);
+			}
+			else
+				printf("\nDatele nu au fost încărcate\n");
+			break;
+		case 9:
+			if (depozit)
+			{
+				depozit = modifica_med(depozit);
+			}
 			else
 				printf("\nDatele nu au fost încărcate\n");
 			break;
