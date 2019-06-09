@@ -1,3 +1,5 @@
+// să se marchez cu 1 bitul bit a lui nr
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,6 +13,6 @@ int main()
         printf("%d", ((nr >> poz) & 1));
     printf("\nal catelea bit? ");
     scanf("%hu", &bit);
-    printf("%d", nr | (1 << bit));
+    printf("%d", nr & (1 << bit));
     return 0;
 }

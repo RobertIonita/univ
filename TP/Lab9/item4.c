@@ -1,3 +1,5 @@
+// să se scrie valoarea lui nr în baza 2
+
 #include <stdio.h>
 #include <stdlib.h>
 

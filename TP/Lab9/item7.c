@@ -1,3 +1,5 @@
+// să se memoreze numerele pe 8 biți nr1 și nr2 într-un întreg nr pe 16 biți
+
 #include <stdio.h>
 
 int main()

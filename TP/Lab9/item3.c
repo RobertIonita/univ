@@ -1,3 +1,5 @@
+// să se determine câtul și restul împărțirii lui nr la n 
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,3 +1,5 @@
+// să se verifice dacă n este putere a lui 2
+
 #include <stdio.h>
 #include <stdlib.h>
 

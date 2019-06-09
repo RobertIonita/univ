@@ -1,3 +1,5 @@
+//să se verifice dacă nr este par sau impar
+
 #include <stdio.h>
 int main()
 {

@@ -1,3 +1,5 @@
+// să se afișeze valoarea lui 2 la puterea nr
+
 #include <stdio.h>
 
 int main()
