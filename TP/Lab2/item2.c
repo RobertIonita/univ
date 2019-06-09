@@ -1,3 +1,7 @@
+// 2.
+// Funcție pentru transpusa unei matrici mat[20][30], cu elemente numere reale.
+// Mai intai afisam matricea, iar apoi transpusa!
+
 #include <stdio.h>
 
 #define rows 5

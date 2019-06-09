@@ -1,3 +1,5 @@
+// 6.Funcție pentru construirea unei matrici pătratice cu primele n*n pătrate perfecte
+
 #include <stdio.h>
 
 #define MAX 10

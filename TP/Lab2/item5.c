@@ -1,3 +1,5 @@
+// 5. Funcții pentru citire elemente reale matrice(data ca parametru) si inmultirea a doua matrici(daca este posibil).
+
 #include <stdio.h>
 
 #define MAX 10

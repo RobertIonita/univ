@@ -1,3 +1,7 @@
+// 1.
+// Funcție pentru sortarea crescătoare a elementelor naturale cu valoare impară a vectorului v[111];
+// Sortarea pe vectorul transmis ca parametru(iar elementelor pare nu li se schimba pozitia, si nici nu sunt eliminate din vector).
+
 #include <stdio.h>
 
 #define N 21

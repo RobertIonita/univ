@@ -1,3 +1,5 @@
+// 4. Funcție pentru  adaugarea unei noi linii cu elemente nule, dupa linia de indice 2 in matricea a[25][25]
+
 #include <stdio.h>
 
 #define rows 5

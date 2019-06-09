@@ -1,3 +1,5 @@
+//8. Program C pentru determinarea cifrelor comune din matricea de elemente naturale b[5][5]
+
 #include <stdio.h>
 
 #define MAX 5

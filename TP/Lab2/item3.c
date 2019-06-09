@@ -1,3 +1,6 @@
+//3. Funcție pentru suma elementelor intregi, pare aflate deasupra diagonalei principale a matricei a[25][25].
+
+
 #include <stdio.h>
 #define N 6
 
