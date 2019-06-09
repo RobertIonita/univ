@@ -1,9 +1,11 @@
+// Într-un fișier pe fiecare linie se află câte 2 numere reale separate prin spațiu care sunt coordonatele unor puncte în plan.
+// Se cere să se afișeze punctele sortate în ordinea distanței lor față de originea axei de coordonate.
+// În fișier pot fi maxim 50 de puncte
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-
-#define MAX 30
 
 typedef struct
 {
@@ -16,7 +18,7 @@ typedef struct item {
     struct item * next;
 } node;
 
-double get_dist(int a, int b) {
+double getDistance(int a, int b) {
     return sqrt(pow(a, 2) + pow(b, 2));
 }
 
@@ -28,7 +30,7 @@ node * add (node * first, int x, int y) {
     clone -> data.y = y;
     clone -> next = NULL;
 
-    for(q1 = q2 = first; q1 != NULL && get_dist(q1 -> data.x, q1 -> data.y) < get_dist(clone -> data.x, clone -> data.y); q2 = q1, q1 = q1 -> next);
+    for(q1 = q2 = first; q1 != NULL && getDistance(q1 -> data.x, q1 -> data.y) < getDistance(clone -> data.x, clone -> data.y); q2 = q1, q1 = q1 -> next);
     if (q1 == q2) {
         clone -> next = first;
         first = clone;

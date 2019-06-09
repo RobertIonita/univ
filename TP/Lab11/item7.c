@@ -1,5 +1,7 @@
-#include <stdio.h>
+// Se cere numele unui fișier. Să se controleze de cțte ori apare în el fiecare literă
+// și să se afișeze literele apărute și numărul lor de apariții
 
+#include <stdio.h>
 #include <stdlib.h>
 
 void read(char *path, int (*arr)[])

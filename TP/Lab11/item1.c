@@ -1,3 +1,10 @@
+// P1 Se cere un n pozitiv. Sa se scrie intr-un fisier un careu de n*n litere core contine la fiecare pozitie daca indexul
+// liniei este mai mare decat al coloanei, "0" doca sunt egale si "-" in caz contrar. 
+//Exemplu pentru n==3: 
+// 0-- 
+// +0-
+// ++0
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -1,3 +1,7 @@
+// În fișierul de intrare pe fiecare linie se conține câte un număr real ce reprezintă salariul uneo persoane.
+// Se cere să se citească toate acese numere și cele care sun mai mici de 1000 să se indexeze cu 15%.
+// Toate numerele rezultate (și cele rămase identice) să se scrie într-un fișier, câte unul pe linie;
+
 #include <stdio.h>
 #include <stdlib.h>
 

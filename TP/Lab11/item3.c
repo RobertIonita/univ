@@ -1,3 +1,7 @@
+// Într-un fișier de intrare pe fiecare linie se află câte 2 numere reale separate printr-un spațiu
+// care sunt coordonatele unui punct în plan. Se cere să se afișeze coordonatele punctului (punctelor)
+// care se află cel mai aproape de originea axei de coordonate.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
