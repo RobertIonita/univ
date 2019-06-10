@@ -23,7 +23,8 @@
             "group": {
                 "kind": "test",
                 "isDefault": true
-            }
+            },
+            "args": ["args/input.txt"]
         },
         {
             "type": "shell",

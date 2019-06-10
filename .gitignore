@@ -57,3 +57,6 @@ settings.json
 
 # OS X
 .DS_Store
+
+# task args
+/args/input.txt
