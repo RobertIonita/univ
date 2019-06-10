@@ -76,7 +76,7 @@ void menu(int *x, unsigned short *o, unsigned short *n)
         scanf("%d", x);
         if (*o > 1 && *o < 6)
         {
-            printf("\nInsert Nth bit: %d", *o);
+            printf("\nInsert Nth bit:");
             scanf("%hu", n);
         }
     }
