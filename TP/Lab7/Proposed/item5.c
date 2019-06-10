@@ -3,53 +3,62 @@
 
 #define MAX 20
 
-void split(int length, char (*token)[length], char *str, char separator)
-{
-    int j = 0, k = 0, i = 0;
-    for (i = 0; str[i] != '\0'; i++)
-    {
-        if (str[i] != separator)
-        {
-            token[k][j++] = str[i];
-        }
-        else
-        {
-            token[k][j] = '\0';
-            k++;
-            j = 0;
-        }
-    }
-}
 
-void dynamicRead(char **str, FILE * terminal, char finish)
+void dynamicRead(char **str, FILE *terminal, char finish)
 {
     char ch;
-    unsigned long long
+    unsigned short
         size = 1,
         index = 0;
-    *str = (char*) malloc(sizeof(char) * size);
+    *str = (char *)malloc(sizeof(char) * size);
     while ((ch = fgetc(terminal)) != EOF && ch != finish)
     {
         (*str)[index++] = ch;
         if (index == size)
-        {
             (*str) = realloc((*str), sizeof(char) * (size += 1));
-        }
     }
     (*str)[index++] = '\0';
-    printf("\n%llu", index);
+}
+
+int split(char ***token, char *str, char separator)
+{
+    int j = 0, k = 0, i = 0;
+    *token = (char **)malloc(sizeof(char *) * (k+1));
+    (*token)[k] = (char *)malloc(sizeof(char) * (j+1));
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        if (str[i] != separator)
+        {
+            (*token)[k][j++] = str[i];
+            (*token)[k] = realloc((*token)[k], sizeof(char) * (j + 1));
+        }
+        else
+        {
+            (*token)[k++][j] = '\0';
+            j = 0;
+            token = realloc(*token, sizeof(char *) * (k + 1));
+        }
+    }
+    return k+1;
+}
+
+void showOff(char(**arr), int n)
+{
+    for (int i = 0; i < n; i++)
+        printf("\n%s", arr[i]);
 }
 
 int main(void)
 {
     char *input,
-        token[4][MAX];
-    FILE *f;
-    f = fopen("TP/Lab7/Proposed/test.txt", "r");
+        (**token);
+    int r;
     printf("input string : ");
-    dynamicRead(&input, f, '#');
-    // printf("%s\n", input);
-
+    dynamicRead(&input, stdin, '\n');
+    printf("%s\n", input);
+    r = split(&token, input, ' ');
+    showOff(token, r);
     free(input);
     return 0;
 }
