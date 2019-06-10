@@ -24,7 +24,12 @@
                 "kind": "test",
                 "isDefault": true
             },
-            "args": ["args/input.txt"]
+            "args": [
+                "args/input.txt",
+                "args/output.txt",
+                "args/input2.txt",
+                "args/output2.txt"
+            ]
         },
         {
             "type": "shell",
