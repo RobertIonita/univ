@@ -3,13 +3,13 @@
 
 #define MAX 10
 
-void read(float **less, float **more, int *k, int *q)
+void read(float **less, float **more, int *k, int *q, char *path)
 {
     *less = (float *)malloc(sizeof(float));
     *more = (float *)malloc(sizeof(float));
     float n;
     FILE *f;
-    f = fopen("TP/Teo_cries/EXAMEN/assets/ex1_1.txt", "rt");
+    f = fopen(path, "rt");
     if (f == NULL)
         exit(EXIT_FAILURE);
     while (!feof(f))
@@ -35,11 +35,11 @@ void show(int k, int q, float (**less), float (**more))
         printf("\n%5.2f", (*more)[i]);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     float *less, *more;
     int k = 0, q = 0;
-    read(&less, &more, &k, &q);
+    read(&less, &more, &k, &q, argv[1]);
     show(k, q, &less, &more);
     return 0;
 }
