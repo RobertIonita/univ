@@ -9,7 +9,7 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${workspaceRoot}//${fileBasename}.exe"
+                "${workspaceRoot}//${fileBasenameNoExtension}.exe"
             ],
             "group": {
                 "kind": "build",
@@ -19,7 +19,7 @@
         {
             "label": "Run c file",
             "type": "shell",
-            "command": "./${fileBasename}.exe",
+            "command": "./${fileBasenameNoExtension}.exe",
             "group": {
                 "kind": "test",
                 "isDefault": true
