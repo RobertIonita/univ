@@ -22,22 +22,24 @@ void dynamicRead(char **str, FILE *terminal, char finish)
 
 int split(char ***token, char *str, char separator)
 {
-    int j = 0, k = 0, i = 0;
-    *token = (char **)malloc(sizeof(char *) * (k+1));
-    (*token)[k] = (char *)malloc(sizeof(char) * (j+1));
+    int j = 0, k = 0, i = 0,
+        size = 0;
+    *token = (char **)malloc(sizeof(char *) * (size+1));
+    (*token)[k] = (char *)malloc(sizeof(char) * (j));
 
     for (i = 0; str[i] != '\0'; i++)
     {
         if (str[i] != separator)
         {
-            (*token)[k][j++] = str[i];
             (*token)[k] = realloc((*token)[k], sizeof(char) * (j + 1));
+            (*token)[k][j++] = str[i];
+            size++;
         }
         else
         {
+            *token = realloc(*token, sizeof(char *) * (size + 1));
             (*token)[k++][j] = '\0';
             j = 0;
-            token = realloc(*token, sizeof(char *) * (k + 1));
         }
     }
     return k+1;
