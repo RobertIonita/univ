@@ -59,4 +59,4 @@ settings.json
 .DS_Store
 
 # task args
-/args/input.txt
+args
