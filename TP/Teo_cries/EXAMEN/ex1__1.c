@@ -5,8 +5,8 @@
 
 void read(float **less, float **more, int *k, int *q)
 {
-    *less = (float *)malloc(sizeof(float) * 4);
-    *more = (float *)malloc(sizeof(float) * 4);
+    *less = (float *)malloc(sizeof(float));
+    *more = (float *)malloc(sizeof(float));
     float n;
     FILE *f;
     f = fopen("TP/Teo_cries/EXAMEN/assets/ex1_1.txt", "rt");
@@ -15,10 +15,14 @@ void read(float **less, float **more, int *k, int *q)
     while (!feof(f))
     {
         fscanf(f, "%f", &n);
-        if (n < 10)
+        if (n < 10) {
             (*less)[(*k)++] = n;
-        else
+            *less = realloc(*less, sizeof(float *) * (*k));
+        }
+        else {
             (*more)[(*q)++] = n;
+            *less = realloc(*less, sizeof(float *) * (*q));
+        }
     }
     fclose(f);
 }
