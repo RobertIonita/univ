@@ -21,7 +21,7 @@ int makeNth0(int nr, int n)
 }
 unsigned short checkNthBit(int nr, int n)
 {
-    return (nr & (1 << n)) > 1;
+    return (nr & (1 << n)) > 0;
 }
 int complementNthBit(int nr, int n)
 {
