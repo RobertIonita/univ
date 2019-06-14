@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
-#define MAX 10000000
+#define MAX 100000
 
 void swap(int *a, int *b)
 {
@@ -48,24 +49,26 @@ void showOff(int arr[], int size)
         printf("%d ", arr[i]);
     }
 }
-void test()
-{
-    int arr[] = {9, 3, 1, 5, 6, 4, 7, 0},
-        n = sizeof(arr) / sizeof(arr[0]);
 
-    showOff(arr, n);
+void generateArray(int (*arr)[])
+{
+    for (size_t i = 0; i < MAX; i++)
+        (*arr)[i] = 12 * i;
+}
+
+int main()
+{
+    int arr[MAX], n;
+    generateArray(&arr);
+    n = sizeof(arr) / sizeof(arr[0]);
 
     clock_t start = clock();
-    for (size_t i = 0; i < MAX; i++)
-        quickSort(arr, 0, n - 1);
+    quickSort(arr, 0, n - 1);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
-    showOff(arr, n);
-    printf("\ntook: %f", time);
-}
-int main()
-{
-    test();
+    // showOff(arr, n); //do not uncomment if MAX is greather than 100
+    printf("\ntook: %f", time); //arr[100000] took 14.109313s (avg from 10 tests)
+
     return 0;
 }
