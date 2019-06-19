@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include <math.h>
 
+#define MAX 100000
 void insertionSort(int arr[], int n)
 {
     int i, j,
@@ -26,17 +29,26 @@ void showOff(int arr[], int n)
     printf("\n");
 }
 
+void generateArray(int (*arr)[])
+{
+    for (size_t i = 0; i < MAX; i++)
+        (*arr)[i] = rand() % 1000000 + 1;
+}
+
 int main()
 {
-    int arr[] = {3, 0, 2, 1, 5, 6},
-        n = sizeof(arr) / sizeof(arr[0]);
+   int arr[MAX], n;
+    generateArray(&arr);
+    n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("\nInitial array: ");
-    showOff(arr, n);
-    insertionSort(arr, n);
+    clock_t start = clock();
+    for (size_t i = 0; i < 10; i++)
+        insertionSort(arr, n);
+    clock_t end = clock();
 
-    printf("\nSorted array: ");
-    showOff(arr, n);
+    double time = (double)(end - start) / CLOCKS_PER_SEC;
+    // showOff(arr, n); //do not uncomment if MAX is greather than 100
+    printf("\ntook: %f", time); //arr[10000] took 1.1311852s (avg from 10 tests)
 
     return 0;
 }

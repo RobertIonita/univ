@@ -63,12 +63,13 @@ int main()
     n = sizeof(arr) / sizeof(arr[0]);
 
     clock_t start = clock();
-    quickSort(arr, 0, n - 1);
+    for (size_t i = 0; i < 10; i++)
+        quickSort(arr, 0, n - 1);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
     // showOff(arr, n); //do not uncomment if MAX is greather than 100
-    printf("\ntook: %f", time); //arr[100000] took 14.109313s (avg from 10 tests)
+    printf("\ntook: %f", time); //arr[100000] took 14.3202216s (avg from 10 tests)
 
     return 0;
 }

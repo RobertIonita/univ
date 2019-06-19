@@ -55,11 +55,12 @@ int main()
     n = sizeof(arr) / sizeof(arr[0]);
 
     clock_t start = clock();
-    justSort(getMax(arr, n), &arr, n);
+    for (size_t i = 0; i < 100; i++)
+        justSort(getMax(arr, n), &arr, n);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
     // showOff(arr, n); //do not uncomment if MAX is greather than 100
-    printf("\ntook: %f", time); //arr[1000000] took 0.0324989s (avg of 10 tests)
+    printf("\ntook: %f", time); //arr[1000000] took 0.02215126s (avg of 100 tests)
     return 0;
 }

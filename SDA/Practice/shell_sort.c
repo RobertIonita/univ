@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-#define MAX 9
+#define MAX 1000000
 
 void showOff(int a[MAX], int n)
 {
@@ -24,19 +26,30 @@ void shellSort2(int (*a)[MAX], int n)
                 (*a)[j] = (*a)[j - gap];
             }
             (*a)[j] = temp;
-            printf("\n"); showOff(*a, n); //optional, show steps
+            // printf("\n"); showOff(*a, n); //optional, show steps
         }
     }
 }
+
+void generateArray(int (*arr)[])
+{
+    for (size_t i = 0; i < MAX; i++)
+        (*arr)[i] = rand() % 1000000 + 1;
+}
+
 int main()
 {
-    int arr[MAX] = {3, 2, 8, 5, 7, 6, 10, 9, 1},
-        n = sizeof(int) / sizeof(arr[0]);
+    int arr[MAX], n;
+    generateArray(&arr);
+    n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("\nInitial: ");
-    showOff(arr, MAX);
-    shellSort2(&arr, MAX);
-    printf("\nSorted: ");
-    showOff(arr, MAX);
+    clock_t start = clock();
+    for (size_t i = 0; i < 100; i++)
+        shellSort2(&arr, MAX);
+    clock_t end = clock();
+
+    double time = (double)(end - start) / CLOCKS_PER_SEC;
+    // showOff(arr, n); //do not uncomment if MAX is greather than 100
+    printf("\ntook: %f", time); //arr[1000000] took 0.10866316s (avg of 100 tests)
     return 0;
 }
