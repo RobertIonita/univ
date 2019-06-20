@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 100000
+#define MAX 1000000
 
 void swap(int *a, int *b)
 {
@@ -12,22 +12,18 @@ void swap(int *a, int *b)
 
 int partition(int arr[], int low, int high)
 {
-    int pivot = arr[low];
-    int i = low,
-        j = high;
+    int pivot = arr[high];
+    int i = low - 1,
+        j;
 
-    while (i < j)
-    {
-        for (i = low; arr[i] <= pivot; i++)
-            ;
-        for (j = high; arr[j] > pivot; j--)
-            ;
-        if (i < j)
-            swap(&arr[i], &arr[j]);
-    }
-    swap(&arr[low], &arr[j]);
-
-    return j;
+   for (int j = low; j <= high - 1; j++)  
+        if (arr[j] <= pivot)  
+        {  
+            i++;
+            swap(&arr[i], &arr[j]);  
+        }  
+    swap(&arr[i + 1], &arr[high]);  
+    return (i + 1);  
 }
 
 void quickSort(int arr[], int low, int high)
@@ -35,7 +31,7 @@ void quickSort(int arr[], int low, int high)
     if (low < high)
     {
         int pi = partition(arr, low, high);
-        quickSort(arr, low, pi);
+        quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
 }
@@ -53,7 +49,7 @@ void showOff(int arr[], int size)
 void generateArray(int (*arr)[])
 {
     for (size_t i = 0; i < MAX; i++)
-        (*arr)[i] = 12 * i;
+        (*arr)[i] = rand() % 1000000 + 1;
 }
 
 int main()
@@ -69,7 +65,7 @@ int main()
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
     // showOff(arr, n); //do not uncomment if MAX is greather than 100
-    printf("\ntook: %f", time); //arr[100000] took 14.3202216s (avg from 10 tests)
+    printf("\ntook: %f", time); //arr[1000000] took 0.32s (avg from 10 tests)
 
     return 0;
 }
