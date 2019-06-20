@@ -20,17 +20,19 @@ void cleanUp(int (*arr)[], int n)
         (*arr)[i] = 0;
 }
 
-void justSort(int max, int (*arr)[], int n)
+void justSort(int (*arr)[], int n, int min, int max)
 {
-    int token[max],
+    int gap = abs(min) + max,
+        token[gap],
         k = 0;
-    cleanUp(&token, max);
-    for (size_t i = 0; i < n; i++)
-        token[(*arr)[i]]++;
-
-    for (size_t i = 0; i <= max; i++)
+    cleanUp(&token, gap+1);
+    for (size_t i = 0; i < n; i++) {
+        token[(*arr)[i] - min]++;
+    }
+    for (size_t i = 0; i < gap+1; i++)
         if (token[i] > 0)
-            (*arr)[k++] = i;
+            while (token[i]--)
+                (*arr)[k++] = i + min;
 }
 
 void generateArray(int (*arr)[])
@@ -39,28 +41,33 @@ void generateArray(int (*arr)[])
         (*arr)[i] = rand() % 1000000 + 1;
 }
 
-int getMax(int arr[], int n)
+void getMax(int arr[], int n, int *min, int *max)
 {
-    int max = arr[0];
+    *min = 0;
+    *max = arr[0];
     for (size_t i = 1; i < n; i++)
-        if (arr[i] > max)
-            max = arr[i];
-    return max;
+    {
+        if (arr[i] > *max)
+            *max = arr[i];
+        if (arr[i] < *min)
+            *min = arr[i];
+    }
 }
 
 int main()
 {
-    int arr[MAX], n;
+    int arr[MAX], n,
+        min, max;
     generateArray(&arr);
     n = sizeof(arr) / sizeof(arr[0]);
 
+    getMax(arr, n, &min, &max);
     clock_t start = clock();
-    for (size_t i = 0; i < 100; i++)
-        justSort(getMax(arr, n), &arr, n);
+    justSort(&arr, n, min, max);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
     // showOff(arr, n); //do not uncomment if MAX is greather than 100
-    printf("\ntook: %f", time); //arr[1000000] took 0.02215126s (avg of 100 tests)
+    printf("\ntook: %f", time); //arr[1000000] took 0.02236018s (avg of 100 tests)
     return 0;
 }
