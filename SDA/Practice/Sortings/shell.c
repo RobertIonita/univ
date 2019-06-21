@@ -13,20 +13,20 @@ void showOff(int a[MAX], int n)
     }
 }
 
-void shellSort2(int (*a)[MAX], int n)
+void shellSort2(int a[], int n)
 {
     for (size_t gap = n / 2; gap > 0; gap /= 2)
     {
         for (size_t i = gap; i < n; i++)
         {
-            int temp = (*a)[i],
+            int temp = a[i],
                 j;
-            for (j = i; j >= gap && (*a)[j - gap] > temp; j -= gap)
+            for (j = i; j >= gap && a[j - gap] > temp; j -= gap)
             {
-                (*a)[j] = (*a)[j - gap];
+                a[j] = a[j - gap];
             }
-            (*a)[j] = temp;
-            // printf("\n"); showOff(*a, n); //optional, show steps
+            a[j] = temp;
+            // printf("\n"); showOff(a n); //optional, show steps
         }
     }
 }
@@ -45,7 +45,7 @@ int main()
 
     clock_t start = clock();
     for (size_t i = 0; i < 100; i++)
-        shellSort2(&arr, MAX);
+        shellSort2(arr, MAX);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
