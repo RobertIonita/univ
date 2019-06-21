@@ -104,7 +104,6 @@ node *readNode(node *head, char *path)
     FILE *f = NULL;
     int id;
     char data[MAX];
-    node *list;
     subnode *sublist;
     if ((f = fopen(path, "rt")) == NULL)
         printf("\nError opening file %s", path);
