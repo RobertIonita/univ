@@ -35,13 +35,13 @@ void swap(int *a, int *b)
 void heapify(int arr[], int n, int i)
 {
 	int largest = i;
-	int left = 2 * i + 1;
-	int right = 2 * i + 2;
+	int left = 2 * i;
+	int right = 2 * i + 1;
 
 	if (left < n && arr[left] > arr[largest])
 		largest = left;
 
-	if (right < n && arr[right] > arr[largest])
+	if (right <n && arr[right] > arr[largest])
 		largest = right;
 
 	if (largest != i)
@@ -74,5 +74,5 @@ void showOff(int arr[], int size)
 void generateArray(int (*arr)[])
 {
     for (size_t i = 0; i < MAX; i++)
-        (*arr)[i] = 12 * i;
+        (*arr)[i] = rand() % 1000000 + 1;
 }
