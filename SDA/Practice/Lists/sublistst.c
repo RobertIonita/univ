@@ -19,7 +19,6 @@ node *addNode(node *head, int data);
 subnode *addSubnode(subnode *head, int id, int data);
 node *readNode(node *head, char *path);
 subnode *readSubnode(subnode *head, int node_id, char *path);
-node *searchNode(node *head, int id);
 void showOff(node *head);
 
 int main()
