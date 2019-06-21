@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 10
+#define MAX 13
 typedef struct subnode
 {
-    int data,
-        id;
+    int id;
+    char data[MAX];
     struct subnode *next;
 } subnode;
 
@@ -19,7 +19,7 @@ typedef struct node
 } node;
 
 node *addNode(node *head, int id, char *data);
-subnode *addSubnode(subnode *head, int id, int data);
+subnode *addSubnode(subnode *head, int id, char *data);
 node *readNode(node *head, char *path);
 subnode *readSubnode(subnode *head, int node_id, char *path);
 void showOff(node *head);
@@ -56,13 +56,13 @@ node *addNode(node *head, int id, char *data)
     }
     return head;
 }
-subnode *addSubnode(subnode *head, int id, int data)
+subnode *addSubnode(subnode *head, int id, char *data)
 {
     subnode *token,
         *q1, *q2;
     token = (subnode *)malloc(sizeof(subnode));
     token->id = id;
-    token->data = data;
+    strcpy(token->data, data);
     token->next = NULL;
     for (q1 = q2 = head; q1 != NULL && q1->data > token->data; q2 = q1, q1 = q1->next)
         ;
@@ -82,15 +82,15 @@ subnode *addSubnode(subnode *head, int id, int data)
 subnode *readSubnode(subnode *head, int node_id, char *path)
 {
     FILE *f = NULL;
-    int id,
-        data;
+    int id;
+    char data[MAX];
     if ((f = fopen(path, "rt")) == NULL)
         printf("\nError opening file %s", path);
     else
     {
         while (!feof(f))
         {
-            fscanf(f, "%d %d", &id, &data);
+            fscanf(f, "%d %s", &id, data);
             if (id == node_id)
                 head = addSubnode(head, id, data);
         }
@@ -125,11 +125,13 @@ node *readNode(node *head, char *path)
 
 void showOff(node *head)
 {
-    node *q;
-    for (q = head; q != NULL; q = q->next)
+    node *list;
+    subnode *sublist;
+    for (list = head; list != NULL; list = list->next)
     {
-        printf("\nnode: %d %s", q->id, q->data);
-        if (q->sublist != NULL)
-            printf("\n\tsubnode: %d", q->sublist->data);
+        printf("\nnode: %d %s", list->id, list->data);
+        if (list->sublist != NULL)
+            for (sublist = list->sublist; sublist != NULL; sublist = sublist->next)
+                printf("\n\tsubnode: %s", sublist->data);
     }
 }

@@ -1,4 +1,6 @@
-1 11
-2 21
-3 31
-4 41
+1 FC
+1 SDA
+2 AC
+2 TP
+3 Comunicare
+3 Overthinking
