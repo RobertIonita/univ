@@ -1,8 +1,8 @@
-#ifndef _stdio_h
-    #include <stdio.h>
-#endif
 #include "TONU.h"
 
 int main (){
-    printf("%d", add(1, 1));
+    int arr[] = {2, 0, 5, 9, 1, 0},
+        n = sizeof(arr)/sizeof(int);
+    insertion(arr, n);
+    printIntArray(arr, n);
 }
