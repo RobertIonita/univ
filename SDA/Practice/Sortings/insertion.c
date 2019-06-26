@@ -18,6 +18,13 @@ void insertionSort(int arr[], int n)
         arr[j] = clone;
     }
 }
+void insertion(int arr[], int n) {
+    for (size_t i = 1; i < n; i++)
+       for (int j = i; j >= 0 && j < n; j--)
+            if (arr[j] > arr[j+1])
+                swap(&arr[j], &arr[j+1]);
+}
+
 
 void showOff(int arr[], int n)
 {
