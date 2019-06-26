@@ -18,13 +18,6 @@ void insertionSort(int arr[], int n)
         arr[j] = clone;
     }
 }
-void insertion(int arr[], int n) {
-    for (size_t i = 1; i < n; i++)
-       for (int j = i; j >= 0 && j < n; j--)
-            if (arr[j] > arr[j+1])
-                swap(&arr[j], &arr[j+1]);
-}
-
 
 void showOff(int arr[], int n)
 {
@@ -49,12 +42,12 @@ int main()
     n = sizeof(arr) / sizeof(arr[0]);
 
     clock_t start = clock();
-    for (size_t i = 0; i < 10; i++)
+    // for (size_t i = 0; i < 10; i++)
         insertionSort(arr, n);
     clock_t end = clock();
 
     double time = (double)(end - start) / CLOCKS_PER_SEC;
-    // showOff(arr, n); //do not uncomment if MAX is greather than 100
+    showOff(arr, n); //do not uncomment if MAX is greather than 100
     printf("\ntook: %f", time); //arr[10000] took 1.1311852s (avg from 10 tests)
 
     return 0;
