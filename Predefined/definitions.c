@@ -27,9 +27,15 @@ void printCharArray(char arr[], int n)
 
 void insertion(int arr[], int n)
 {
-    for (int i = 1; i < n; i++)
-        for (int j = i; j > 0 && arr[j] < arr[j - 1]; j--)
-            swap(&arr[j], &arr[j - 1]);
+    int i, j,
+        clone;
+    for (i = 1; i < n; i++)
+        for (j = i; j > 0 && arr[j] < arr[j - 1]; j--)
+        {
+            clone = arr[j];
+            arr[j] = arr[j - 1];
+            arr[j - 1] = clone;
+        }
 }
 
 int binSearch(int a[], int item, int low, int high)
@@ -64,4 +70,8 @@ void binInsertion(int a[], int n)
         }
         a[j + 1] = selected;
     }
+}
+
+void bubble(int a[], int n)
+{
 }
