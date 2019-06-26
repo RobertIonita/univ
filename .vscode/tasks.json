@@ -29,6 +29,65 @@
             "dependsOn": [
                 "Compile c file"
             ]
+        },
+        {
+            "label": "Create custom object",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-c",
+                "Predefined/definitions.c"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Create main object",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-c",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Create custom object"
+            ]
+        },
+        {
+            "label": "Create executable",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-o",
+                "${fileDirname}/executable",
+                "main.o",
+                "definitions.o"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Create main object"
+            ]
+        },
+        {
+            "label": "Execute customs",
+            "type": "shell",
+            "command": "${fileDirname}/executable",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Create executable"
+            ]
         }
     ]
 }
