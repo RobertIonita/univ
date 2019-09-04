@@ -6,6 +6,10 @@
         "stdlib.h": "c",
         "limits": "c",
         "time.h": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "array": "c",
+        "string_view": "c",
+        "string": "c",
+        "vector": "c"
     }
 }
