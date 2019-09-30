@@ -14,13 +14,13 @@ class Driver
 
 public:
     //funcție inline într-un mod automat
-    void initialize()
+    void initialize(char *d_name, char *d_surname, char *d_address, int d_id, int d_age)
     {
-        cin.get(name, 20);
-        cin.get(surname, 20);
-        cin.get(address, 50);
-        cin >> id;
-        cin >> age;
+        strcpy(name, d_name);
+        strcpy(surname, d_surname);
+        strcpy(address, d_address);
+        id = d_id;
+        age = d_age;
     }
     //functie de showOff
     void showOff()
@@ -28,8 +28,8 @@ public:
         cout << "Nume: " << name << endl;
         cout << "Prenume: " << surname << endl;
         cout << "Vârsta: " << age << endl;
-        cout << "CNP: " << id << endl;
         cout << "Adresa: " << id << endl;
+        cout << "CNP: " << id << endl;
     }
 };
 
@@ -42,12 +42,12 @@ class Vehicle
 
 public:
     //funcție inline într-un mod automat
-    void initialize()
+    void initialize(char *c_make, char *c_model, char *c_driver,  int c_year)
     {
-        cin >> year;
-        cin.get(make, 20);
-        cin.get(model, 20);
-        cin.get(driver, 20);
+        strcpy(make, c_make);
+        strcpy(model, c_model);
+        strcpy(driver, c_driver);
+        year = c_year;
     }
     //functie de showOff
     void showOff()
@@ -71,28 +71,29 @@ int main()
         make[20],
         model[20],
         driver[20];
-        
+    
     cout << "Dați numele șoferului: ";
-    cin >> name;
+    cin.getline(name, 20);
     cout << "Dați prenumele șoferului: ";
-    cin >> surname;
+    cin.getline(surname, 20);
     cout << "Dați adresa șoferului: ";
-    cin >> address;
+    cin.getline(address, 50);
     cout << "Dați vârsta șoferului: ";
     cin >> age;
     cout << "Dați cnp-ul șoferului: ";
     cin >> id;
+    fflush(stdin);
     cout << "Dați marca mașinii: ";
-    cin >> make;
+    cin.getline(make, 20);
     cout << "Dați modelul mașinii: ";
-    cin >> model;
+    cin.getline(model, 20);
+    cout << "Dați numele șoferului mașinii: ";
+    cin.getline(driver, 20);
     cout << "Dați anul de fabricare mașinii: ";
     cin >> year;
-    cout << "Dați numele șoferului mașinii: ";
-    cin >> driver;
 
-    student.initialize();
-    car.initialize();
+    student.initialize(name, surname, address, age, id);
+    car.initialize(make, model, driver, year);
     student.showOff();
     car.showOff();
 
