@@ -82,8 +82,9 @@ int main()
     cin >> age;
     cout << "Dați cnp-ul șoferului: ";
     cin >> id;
-    fflush(stdin);
     cout << "Dați marca mașinii: ";
+    while (getchar() != '\n')
+    ;
     cin.getline(make, 20);
     cout << "Dați modelul mașinii: ";
     cin.getline(model, 20);
