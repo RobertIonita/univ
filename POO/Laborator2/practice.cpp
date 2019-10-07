@@ -1,104 +1,46 @@
 #include <iostream>
-// #include <stdafx.h>
-#include <string.h>
-
 using namespace std;
-
-class Driver
+class Book
 {
-    char name[20],
-        surname[20],
-        address[50];
-    int id,
-        age;
+    char title[20],
+        author[20],
+        edit[20];
+    unsigned int year;
 
 public:
-    //funcție inline într-un mod automat
-    void initialize(char *d_name, char *d_surname, char *d_address, int d_id, int d_age)
-    {
-        strcpy(name, d_name);
-        strcpy(surname, d_surname);
-        strcpy(address, d_address);
-        id = d_id;
-        age = d_age;
-    }
-    //functie de showOff
+    //class constructor signature
+    Book(char book_title[20], char book_author[20], char book_edit[20], int book_year);
+    //class destructor signature
+    ~Book();
+    //display function
     void showOff()
     {
-        cout << "Nume: " << name << endl;
-        cout << "Prenume: " << surname << endl;
-        cout << "Vârsta: " << age << endl;
-        cout << "Adresa: " << id << endl;
-        cout << "CNP: " << id << endl;
-    }
-};
-
-class Vehicle
-{
-    int year;
-    char make[20],
-        model[20],
-        driver[20];
-
-public:
-    //funcție inline într-un mod automat
-    void initialize(char *c_make, char *c_model, char *c_driver,  int c_year)
-    {
-        strcpy(make, c_make);
-        strcpy(model, c_model);
-        strcpy(driver, c_driver);
-        year = c_year;
-    }
-    //functie de showOff
-    void showOff()
-    {
-        cout << "Make: " << make << endl;
-        cout << "Model: " << model << endl;
+        cout << "Title: " << title << endl;
+        cout << "Author: " << author << endl;
+        cout << "Edit: " << edit << endl;
         cout << "Year: " << year << endl;
-        cout << "Driver: " << driver << endl;
     }
 };
+//constructor
+Book::Book(char book_title[20], char book_author[20], char book_edit[20], int book_year)
+{
+    strcpy(title, book_title);
+    strcpy(author, book_author);
+    strcpy(edit, book_edit);
+    year = book_year;
+    cout << "\nConstructor said: record created" << endl;
+}
+//destructor
+Book::~Book()
+{
+    cout << "\nDestructor said: memory for " << title << " was freed up" << endl;
+}
 
 int main()
 {
-    Driver student;
-    Vehicle car;
-
-    int age, id, year;
-    char name[20],
-        surname[20],
-        address[50],
-        make[20],
-        model[20],
-        driver[20];
-    
-    cout << "Dați numele șoferului: ";
-    cin.getline(name, 20);
-    cout << "Dați prenumele șoferului: ";
-    cin.getline(surname, 20);
-    cout << "Dați adresa șoferului: ";
-    cin.getline(address, 50);
-    cout << "Dați vârsta șoferului: ";
-    cin >> age;
-    cout << "Dați cnp-ul șoferului: ";
-    cin >> id;
-    cout << "Dați marca mașinii: ";
-    while (getchar() != '\n')
-    ;
-    cin.getline(make, 20);
-    cout << "Dați modelul mașinii: ";
-    cin.getline(model, 20);
-    cout << "Dați numele șoferului mașinii: ";
-    cin.getline(driver, 20);
-    cout << "Dați anul de fabricare mașinii: ";
-    cin >> year;
-
-    student.initialize(name, surname, address, age, id);
-    car.initialize(make, model, driver, year);
-    student.showOff();
-    car.showOff();
-
-
-
+    Book book1("Book1", "Author1", "Edit1", 1);
+    book1.showOff();
+    Book book2("Book2", "Author2", "Edit2", 2);
+    book2.showOff();
     return 0;
 }
