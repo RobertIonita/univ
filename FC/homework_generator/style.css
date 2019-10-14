@@ -1,0 +1,50 @@
+body{
+    width: 210mm;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1cm;
+    font-family: sans-serif;
+}
+
+
+.d_fl {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.a_c {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.j_c {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.j_sb {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.j_sa {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+
+header span {
+    min-width: 194px;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+    margin: 100px auto;
+}
+.students {
+    display: none;
+}
