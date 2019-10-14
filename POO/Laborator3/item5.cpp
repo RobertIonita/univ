@@ -2,7 +2,7 @@
 using namespace std;
 class Carte
 {
-    char titlu[64];
+    string titlu;
     float const cost2 = 100;
 
 protected:
@@ -13,9 +13,9 @@ protected:
 
 public:
     // cconstructor
-    Carte(char *titlu)
+    Carte(string titlu)
     {
-        strcpy(Carte::titlu, titlu);
+        Carte::titlu = titlu;
         cout << "constructorul clasei de baza1" << endl;
     }
     void afis_carte()
@@ -62,14 +62,14 @@ public:
 // moștenire multipla
 class FisaBiblioteca : Carte, Pagini
 {
-    char autor[64], editura[64];
+    string autor, editura;
 
 public:
     // constructor
-    FisaBiblioteca(char *titlu, char *autor, char *editura) : Carte(titlu), Pagini(50)
+    FisaBiblioteca(string titlu, string autor, string editura) : Carte(titlu), Pagini(50)
     {
-        strcpy(FisaBiblioteca::autor, autor);
-        strcpy(FisaBiblioteca::editura, editura);
+        FisaBiblioteca::autor = autor;
+        FisaBiblioteca::editura = editura;
         cost = 100;
         cout << "Constructorul clasei derivate" << endl;
     }
@@ -101,7 +101,7 @@ int main()
 // Pentru versiuni de Visual Studio inferioare 2015, la declararea constantelor de la începutul
 //                                                       codului sursă se va folosi următoarea variantă : ....class Carte
 // {
-//     char titlu[64];
+//     string titlu;
 //     float const cost2;
 
 // protected:
@@ -111,9 +111,9 @@ int main()
 //     }
 
 // public:
-//     Carte(char *titlu) : cost2(100)
+//     Carte(string titlu) : cost2(100)
 //     {
-//         strcpy(Carte::titlu, titlu);
+//         Carte::titlu = titlu;
 //         cout << "constructorul clasei de baza1" << endl;
 //     }
 //     void afis_carte()

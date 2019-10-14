@@ -3,13 +3,13 @@ using namespace std;
 // clasa de bază
 class Carte
 {
-    char titlu[64];
+    string titlu;
 
 public:
     // constructorul clasei de bază
-    Carte(char *titlu)
+    Carte(string titlu)
     {
-        strcpy(Carte::titlu, titlu);
+        Carte::titlu = titlu;
     }
     void afis_carte()
     {
@@ -26,15 +26,15 @@ protected:
 // clasa derivata
 class FisaBiblioteca : public Carte
 {
-    char autor[64], editura[64];
+    string autor, editura;
 
 public:
     // constructorul clasei derivate
-    FisaBiblioteca(char *titlu, char *autor, char *editura) : Carte(titlu)
+    FisaBiblioteca(string titlu, string autor, string editura) : Carte(titlu)
     {
         // initializarea variabilelor
-        strcpy(FisaBiblioteca::autor, autor);
-        strcpy(FisaBiblioteca::editura, editura);
+        FisaBiblioteca::autor = autor;
+        FisaBiblioteca::editura = editura;
         cost = 49.98;
     }
     void afis_biblio()

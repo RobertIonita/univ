@@ -2,18 +2,18 @@
 using namespace std;
 class Persoana
 {
-    char nume[50];
-    char prenume[50];
+    string nume;
+    string prenume;
     unsigned int varsta;
 
 public:
     //constructor vid folosit pentru declararea vectorului
     Persoana() {}
     //constructor pentru initializarea variabilelor
-    Persoana(char *nume, char *prenume, unsigned int varsta)
+    Persoana(string nume, string prenume, unsigned int varsta)
     {
-        strcpy(Persoana::nume, nume);
-        strcpy(Persoana::prenume, prenume);
+        Persoana::nume = nume;
+        Persoana::prenume = prenume;
         Persoana::varsta = varsta;
     }
     //functie de afisare
@@ -25,12 +25,12 @@ public:
         cout << "Varsta: " << Persoana::varsta << "\n";
     }
     //returnare nume pentru functia de cautare
-    char *returnareNume()
+    string returnareNume()
     {
         return Persoana::nume;
     }
     //returnare prenume pentru functia de stergere
-    char *returnarePrenume()
+    string returnarePrenume()
     {
         return Persoana::prenume;
     }
@@ -38,15 +38,15 @@ public:
 class Angajat : public Persoana
 {
     unsigned int salar;
-    char departament[50];
+    string departament;
 
 public:
     //constructor vid folosit pentru declararea vectorului
     Angajat() {}
     //constructor pentru initializarea variabilelor
-    Angajat(char *nume, char *prenume, int varsta, char *departament, unsigned int salar) : Persoana(nume, prenume, varsta)
+    Angajat(string nume, string prenume, int varsta, string departament, unsigned int salar) : Persoana(nume, prenume, varsta)
     {
-        strcpy(Angajat::departament, departament);
+        Angajat::departament = departament;
         Angajat::salar = salar;
     }
     //functia de afisare
@@ -60,7 +60,7 @@ public:
 };
 int main()
 {
-    char n[100], p[100], d[100];
+    string n, p, d;
     int v, s, ok = 0, ok2 = 0;
     Angajat angajati[20];
     unsigned int nr, opt;
@@ -106,12 +106,13 @@ int main()
             }
             break;
         case 3:
+        {
             //cautare angajat dupa nume
-            char num[50];
+            string num;
             cout << "Dati numele cautat: ";
             cin >> num;
             for (int i = 0; i < nr; i++)
-                if (strcmp(num, angajati[i].returnareNume()) == 0)
+                if (num == angajati[i].returnareNume())
                 {
                     cout << "Am gasit angajatul!\n";
                     ok = 1;
@@ -119,13 +120,15 @@ int main()
             if (ok == 0)
                 cout << "Angajatul nu s-a gasit!\n";
             break;
+        }
         case 4:
+        {
             //stergere angajat dupa prenume
-            char pren[20];
+            string pren;
             cout << "Dati prenumele care vreti sa-l stergeti: ";
             cin >> pren;
             for (int i = 0; i < nr; i++)
-                if (strcmp(pren, angajati[i].returnarePrenume()) == 0)
+                if (pren == angajati[i].returnarePrenume())
                 {
                     for (int j = i; j < nr; j++)
                         angajati[j] = angajati[j + 1];
@@ -135,6 +138,7 @@ int main()
             if (ok2 == 0)
                 cout << "Prenumele nu exista, nu s-a sters nimic!\n";
             break;
+        }
         case 0:
             break;
         default:
