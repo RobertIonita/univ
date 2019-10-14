@@ -47,7 +47,7 @@ public:
 int main()
 {
     // crearea unui obiect
-    FisaBiblioteca fisa("Programare Orientata pe Obiecte", "Vasile Stoicu-Tivadar", "Politehnica");
+    FisaBiblioteca fisa("POO", "Vasile Stoicu-Tivadar", "Politehnica");
     // afișarea obiectului
     fisa.afis_biblio();
 
