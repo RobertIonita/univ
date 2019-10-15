@@ -1,4 +1,4 @@
-body{
+body {
     width: 210mm;
     margin: 0 auto;
     box-sizing: border-box;
@@ -41,10 +41,11 @@ header span {
     text-align: center;
 }
 
-h1{
+h1 {
     text-align: center;
     margin: 100px auto;
 }
+
 .students {
     display: none;
 }
