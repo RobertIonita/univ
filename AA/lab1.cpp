@@ -2,17 +2,18 @@
 using namespace std;
 #define MAX 20
 
-void showOff(int keys[],int parents[], int n);
-void insert(int (*keys)[], int (*parents)[], int *n);
-
+void showOff(int keys[], int parents[], int n);
+void insert(int (*keys)[MAX], int (*parents)[MAX], int *n);
+void searchParentOf(int keys[], int parents[], int n);
+void searchRightSibling(int keys[], int parents[], int n);
 int main()
 {
 
-    int keys[] = {2, 4},
-        parents[] = {2, 4},
-        n = sizeof(keys)/sizeof(int);
+    int keys[MAX],
+        parents[MAX],
+        n = 0;
     unsigned short int option;
-    while(1)
+    while (1)
     {
         cout << "\n0. Exit";
         cout << "\n1. Insert";
@@ -25,14 +26,20 @@ int main()
         switch (option)
         {
         case 0:
-            cout << "\nexecution terminated";
+            cout << "\nExecution terminated";
             return 0;
             break;
         case 1:
-            // insert(keys, &parents, &n);
+            insert(&keys, &parents, &n);
             break;
         case 2:
             showOff(keys, parents, n);
+            break;
+        case 3:
+            searchParentOf(keys, parents, n);
+            break;
+        case 4:
+            searchRightSibling(keys, parents, n);
             break;
         default:
             cout << "\nInvalid option";
@@ -40,14 +47,43 @@ int main()
         }
     }
 }
-void showOff(int keys[],int parents[], int n)
+void showOff(int keys[], int parents[], int n)
 {
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         printf("key: %d, parent: %d\n", keys[i], parents[i]);
     }
 }
-void insert(int (*keys)[],int (*parents)[], int *n){
+void insert(int (*keys)[MAX], int (*parents)[MAX], int *n)
+{
     cout << "Node key: ";
     cin >> (*keys)[*n];
-    cout << (*keys)[*n];
+    (*parents)[*n] = (*n) > 0 ? (*keys)[((*n + 1) / 2) - 1] : -1;
+    (*n)++;
+}
+void searchParentOf(int keys[], int parents[], int n)
+{
+    unsigned short int key;
+    cout << "Insert a key: ";
+    cin >> key;
+    for (size_t i = 0; i < n; i++)
+        if (keys[i] == key)
+        {
+            cout << "Parent key is: " << parents[i];
+            break;
+        }
+}
+void searchRightSibling(int keys[], int parents[], int n)
+{
+    unsigned short int key;
+    cout << "Insert a key: ";
+    cin >> key;
+    for (size_t i = 0; i < n; i++)
+        if (keys[i] == key)
+        {
+            if (parents[i] == parents[i+1])
+                cout << "Sibling key is: " << keys[i+1];
+            else cout << "This node does not have a right sibling";
+            break;
+        }
 }
