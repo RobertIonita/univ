@@ -6,6 +6,7 @@ void showOff(int keys[], int parents[], int n);
 void insert(int (*keys)[MAX], int (*parents)[MAX], int *n);
 void searchParentOf(int keys[], int parents[], int n);
 void searchRightSibling(int keys[], int parents[], int n);
+void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n);
 int main()
 {
 
@@ -40,6 +41,9 @@ int main()
             break;
         case 4:
             searchRightSibling(keys, parents, n);
+            break;
+        case 5:
+            deleteNode(&keys, &parents, &n);
             break;
         default:
             cout << "\nInvalid option";
@@ -81,9 +85,37 @@ void searchRightSibling(int keys[], int parents[], int n)
     for (size_t i = 0; i < n; i++)
         if (keys[i] == key)
         {
-            if (parents[i] == parents[i+1])
-                cout << "Sibling key is: " << keys[i+1];
-            else cout << "This node does not have a right sibling";
+            if (parents[i] == parents[i + 1])
+                cout << "Sibling key is: " << keys[i + 1];
+            else
+                cout << "This node does not have a right sibling";
             break;
         }
+}
+
+void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n)
+{
+    int x, i, k, p = -1;
+    cout << "Node to be deleted: ";
+    cin >> x;
+    for (i = 0; i <= *n; i++)
+    {
+        if ((*keys)[i] == x)
+        {
+            p = (*parents)[i];
+            k = i;
+            break;
+        }
+    }
+    for (i = 0; i <= *n; i++)
+    {
+        if ((*parents)[i] == x)
+            (*parents)[i] = p;
+    }
+    for (i = k; i < *n; i++)
+    {
+        (*keys)[i] = (*keys)[i + 1];
+        (*parents)[i] = (*parents)[i + 1];
+    }
+    (*n)--;
 }
