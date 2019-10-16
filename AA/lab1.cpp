@@ -95,21 +95,16 @@ void searchRightSibling(int keys[], int parents[], int n)
 
 void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n)
 {
-    int x, i, k, p = -1;
+    int key, i, k, p = -1;
     cout << "Node to be deleted: ";
-    cin >> x;
+    cin >> key;
+    for (i = 0; i <= *n && (*keys)[i] != key; i++)
+        ;
+    p = (*parents)[i];
+    k = i;
     for (i = 0; i <= *n; i++)
     {
-        if ((*keys)[i] == x)
-        {
-            p = (*parents)[i];
-            k = i;
-            break;
-        }
-    }
-    for (i = 0; i <= *n; i++)
-    {
-        if ((*parents)[i] == x)
+        if ((*parents)[i] == key)
             (*parents)[i] = p;
     }
     for (i = k; i < *n; i++)
