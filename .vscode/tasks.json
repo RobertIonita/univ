@@ -29,8 +29,8 @@
         },
         {
             "type": "shell",
-            "label": "debug",
-            "command": "/usr/bin/gcc",
+            "label": "g++ build active file",
+            "command": "/usr/bin/g++",
             "args": [
                 "-g",
                 "${file}",
