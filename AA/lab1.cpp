@@ -98,30 +98,21 @@ void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n)
     int key, i, k, p = -1;
     cout << "Node to be deleted: ";
     cin >> key;
-    if ((*keys)[0] == key)
+    for (i = 0; i <= *n && (*keys)[i] != key; i++)
+        ;
+    p = (*parents)[i];
+    k = i;
+    for (i = 0; i <= *n; i++)
+        if ((*parents)[i] == key)
+            (*parents)[i] = p;
+    for (i = k; i < *n; i++)
     {
-        for (i = 0; i < *n - 1; i++) //1 4 1 5 1 6 1 3 1 7 1 8
-        {
-            (*keys)[i] = (*keys)[i + 1];
-            (*parents)[i] = (*parents)[i + 1];
-        }
-        (*parents)[0] = (*keys)[1];
-        (*parents)[1] = -1;
+        (*keys)[i] = (*keys)[i + 1];
+        (*parents)[i] = (*parents)[i + 1];
     }
-    else
-    {
-        for (i = 0; i <= *n && (*keys)[i] != key; i++)
-            ;
-        p = (*parents)[i];
-        k = i;
-        for (i = 0; i <= *n; i++)
-            if ((*parents)[i] == key)
-                (*parents)[i] = p;
-        for (i = k; i < *n; i++)
-        {
-            (*keys)[i] = (*keys)[i + 1];
-            (*parents)[i] = (*parents)[i + 1];
-        }
-    }
+    if (p == -1)
+        for (i = 0; i < *n; i++)
+            if ((*parents)[i] == -1 && (*keys)[i] != (*keys)[k])
+                (*parents)[i] = (*keys)[k];
     (*n)--;
 }
