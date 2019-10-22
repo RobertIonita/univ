@@ -98,20 +98,20 @@ void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n)
     int key, i, k, p = -1;
     cout << "Node to be deleted: ";
     cin >> key;
-    for (i = 0; i <= *n && (*keys)[i] != key; i++)
+    for (i = 0; i <= *n && (*keys)[i] != key; i++) // get index of node in the keys array
         ;
-    p = (*parents)[i];
+    p = (*parents)[i]; // flag to who is the parent of the node to be deleted
     k = i;
-    for (i = 0; i <= *n; i++)
+    for (i = 0; i <= *n; i++) // now parent of node's children is their grandfather
         if ((*parents)[i] == key)
             (*parents)[i] = p;
-    for (i = k; i < *n; i++)
+    for (i = k; i < *n; i++) // overwrite array
     {
         (*keys)[i] = (*keys)[i + 1];
         (*parents)[i] = (*parents)[i + 1];
     }
-    if (p == -1)
-        for (i = 0; i < *n; i++)
+    if (p == -1) // if node that we want to delete is root
+        for (i = 0; i < *n; i++) // replace in parents vector keys "-1" with the new node's key (when trying to delete root node, the grandfather is -1)
             if ((*parents)[i] == -1 && (*keys)[i] != (*keys)[k])
                 (*parents)[i] = (*keys)[k];
     (*n)--;
