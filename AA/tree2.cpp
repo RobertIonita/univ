@@ -11,6 +11,8 @@ int getLeftChild(int keys[], int parents[], int key, int n);
 int getRightChild(int keys[], int parents[], int key, int n);
 void searchParentOf(int keys[], int parents[], int n);
 void searchRightSibling(int keys[], int parents[], int n);
+void deleteKey(int (*keys)[MAX], int (*parents)[MAX], int key, int *n);
+void swapNode(int (*keys)[MAX], int (*parents)[MAX], int key, int deputy, int *n);
 void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n);
 int main()
 {
@@ -76,7 +78,8 @@ void showOff(int keys[], int parents[], int n)
 
 void preorder(int keys[], int parents[], int key, int n)
 {
-    if (key != -1) {
+    if (key != -1)
+    {
         cout << key << " ";
         preorder(keys, parents, getLeftChild(keys, parents, key, n), n);
         preorder(keys, parents, getRightChild(keys, parents, key, n), n);
@@ -84,7 +87,8 @@ void preorder(int keys[], int parents[], int key, int n)
 }
 void inorder(int keys[], int parents[], int key, int n)
 {
-    if (key != -1) {
+    if (key != -1)
+    {
         inorder(keys, parents, getLeftChild(keys, parents, key, n), n);
         cout << key << " ";
         inorder(keys, parents, getRightChild(keys, parents, key, n), n);
@@ -92,7 +96,8 @@ void inorder(int keys[], int parents[], int key, int n)
 }
 void postorder(int keys[], int parents[], int key, int n)
 {
-    if (key != -1) {
+    if (key != -1)
+    {
         postorder(keys, parents, getLeftChild(keys, parents, key, n), n);
         postorder(keys, parents, getRightChild(keys, parents, key, n), n);
         cout << key << " ";
@@ -144,7 +149,7 @@ int getLeftChild(int keys[], int parents[], int key, int n)
 {
     int kid = -1;
     for (size_t i = 0; i < n; i++)
-        if (parents[i] == key)
+        if (parents[i] == key && keys[i] < key)
         {
             kid = keys[i];
             return kid;
@@ -155,8 +160,11 @@ int getRightChild(int keys[], int parents[], int key, int n)
 {
     int kid = -1;
     for (size_t i = n - 1; i > 0; i--)
-        if (parents[i] == key && parents[i - 1] == key)
+        if (parents[i] == key && keys[i] > key)
+        {
             kid = keys[i];
+            return kid;
+        }
     return kid;
 }
 
@@ -188,10 +196,73 @@ void searchRightSibling(int keys[], int parents[], int n)
         }
 }
 
+void deleteKey(int (*keys)[MAX], int (*parents)[MAX], int key, int *n)
+{
+    int i, k;
+    for (i = 0; i < *n && (*keys)[i] != key; i++)
+        ;
+    k = i;
+    for (i = k; i < *n; i++)
+    {
+        (*keys)[i] = (*keys)[i + 1];
+        (*parents)[i] = (*parents)[i + 1];
+    }
+    (*n)--;
+}
+
+void swapNode(int (*keys)[MAX], int (*parents)[MAX], int key, int deputy, int *n)
+{
+    deleteKey(&(*keys), &(*parents), deputy, &(*n));
+    for (int i = 0; i < *n; i++)
+    {
+        if ((*parents)[i] == key)
+            (*parents)[i] = deputy;
+        if ((*keys)[i] == key)
+            (*keys)[i] = deputy;
+    }
+}
+
 void deleteNode(int (*keys)[MAX], int (*parents)[MAX], int *n)
 {
-    int key, i, k, p = -1;
+    int key, i, digger, node, k;
     cout << "Node to be deleted: ";
     cin >> key;
-    
+    int leftKid = getLeftChild((*keys), (*parents), key, *n),
+        rightKid = getRightChild((*keys), (*parents), key, *n);
+    if (leftKid == rightKid)
+        deleteKey(&(*keys), &(*parents), key, &(*n));
+    else if (leftKid != -1)
+    {
+        if ((digger = getRightChild((*keys), (*parents), leftKid, *n)) != -1)
+        {
+            node = digger;
+            while (digger != -1)
+            {
+                digger = getRightChild((*keys), (*parents), digger, *n);
+                digger != -1 ? node = digger : 0;
+            }
+            swapNode(&(*keys), &(*parents), key, node, &(*n));
+        }
+        else
+        {
+            swapNode(&(*keys), &(*parents), key, leftKid, &(*n));
+        }
+    }
+    else
+    {
+        if ((digger = getLeftChild((*keys), (*parents), rightKid, *n)) != -1)
+        {
+            node = digger;
+            while (digger != -1)
+            {
+                digger = getLeftChild((*keys), (*parents), digger, *n);
+                digger != -1 ? node = digger : 0;
+            }
+            swapNode(&(*keys), &(*parents), key, node, &(*n));
+        }
+        else
+        {
+            swapNode(&(*keys), &(*parents), key, rightKid, &(*n));
+        }
+    }
 }
