@@ -1,8 +1,7 @@
 #include <stdio.h>
 #define MAX 20
 
-int arr[] = {3, 9, 5, 1, 3},
-    n = sizeof(arr) / sizeof(arr[0]);
+int arr[] = {4, 9, 4, 4, 1, 9, 4, 4, 9, 4, 4, 1, 4};
 
 void swap(int *a, int *b)
 {
@@ -19,7 +18,7 @@ void quickSort(int low, int high)
         val = arr[pivot];
     while (i < j)
     {
-        while (arr[i] <= val && i <= high-cj)
+        while (arr[i] <= val && i <= high)
         {
             if (arr[i] == val)
                 if (i-low != ci++)
@@ -29,11 +28,10 @@ void quickSort(int low, int high)
             else
                 break;
         }
-        while (arr[j] >= val && j >= low+ci)
+        while (arr[j] >= val && j >= low)
         {
             if (arr[j] == val)
-                if (high - j != cj++)
-                    swap(&arr[high - cj + 1], &arr[j]);
+                swap(&arr[ci++], &arr[j]);
             if (j - 1 >= low)
                 j--;
             else
@@ -42,16 +40,16 @@ void quickSort(int low, int high)
         if (i < j)
             swap(&arr[i], &arr[j]);
     }
-    showOff(n);
-    for (int k = 0; k < ci; k++)
-        swap(&arr[low+k], &arr[i - k]);
-    for (int k = 0; k < cj; k++)
-        swap(&arr[high - k], &arr[j + k]);
+    showOff(13);
+    // for (int k = 0; k < ci-1; k++)
+    //     swap(&arr[low+k], &arr[i - k-1]);
+    // for (int k = 0; k < cj-1; k++)
+    //     swap(&arr[high - k], &arr[j + k+1]);
 
-    if (low < j - ci)
-        quickSort(low, j - ci);
-    if (i + cj < high)
-        quickSort(i + cj, high);
+    // if (low < j - ci)
+    //     quickSort(low, j - ci);
+    // if (i + cj < high)
+    //     quickSort(i + cj, high);
 }
 
 void showOff(int n)
@@ -63,6 +61,8 @@ void showOff(int n)
 
 int main()
 {
+    int n;
+    n = sizeof(arr) / sizeof(arr[0]);
     quickSort(0, n - 1);
 
     // showOff(n); //do not uncomment if MAX is greather than 100
