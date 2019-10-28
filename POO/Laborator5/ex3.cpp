@@ -72,7 +72,7 @@ public:
     void afisare_lista();
 };
 
-class Lista::adaugare(Produse_magazin *a)
+void Lista::adaugare(Produse_magazin *a)
 {
     Produse_magazin *p;
     p = head;
@@ -94,7 +94,6 @@ class Lista::adaugare(Produse_magazin *a)
     else
     {
         head = a;
-        s
     }
 };
 void Lista::afisare_lista()
