@@ -23,7 +23,7 @@ void inserare(int (*noduri)[MAX], int (*parinti)[MAX], int *n)
     }
 }
 
-void gasire_parinte(int noduri[MAX], int parinti[MAX], int n)
+void cautare_parinte(int noduri[MAX], int parinti[MAX], int n)
 {
     int x, i;
     printf("\nParintele carui nod doriti sa-l gasiti?: ");
@@ -38,10 +38,10 @@ void gasire_parinte(int noduri[MAX], int parinti[MAX], int n)
     }
 }
 
-void gasire_frate(int noduri[MAX], int parinti[MAX], int n)
+void cautare_frate(int noduri[MAX], int parinti[MAX], int n)
 {
     int x, i;
-    printf("\nFratele carui nod doriti sa-l gasiti?: ");
+    printf("Fratele carui nod cautati?: ");
     scanf("%d", &x);
     for (i = 0; i <= n; i++)
         if (noduri[i] == x)
@@ -54,30 +54,27 @@ void gasire_frate(int noduri[MAX], int parinti[MAX], int n)
         }
 }
 
-void stergere(int (*noduri)[MAX], int (*parinti)[MAX], int *n)
+void stergere_nod(int (*noduri)[MAX], int (*parinti)[MAX], int *n)
 {
     int x, i, k, p = -1;
     printf("Ce nod doriti sa stergeti?: ");
     scanf("%d", &x);
+    for (i = 0; i <= *n && (*noduri)[i] != x; i++)
+        ;
+    p = (*parinti)[i];
+    k = i;
     for (i = 0; i <= *n; i++)
-    {
-        if ((*noduri)[i] == x)
-        {
-            p = (*parinti)[i];
-            k = i;
-            break;
-        }
-    }
-    for (i = 0; i <= *n; i++)
-    {
         if ((*parinti)[i] == x)
             (*parinti)[i] = p;
-    }
     for (i = k; i < *n; i++)
     {
         (*noduri)[i] = (*noduri)[i + 1];
         (*parinti)[i] = (*parinti)[i + 1];
     }
+    if (p == -1)
+        for (i = 0; i < *n; i++)
+            if ((*parinti)[i] == -1 && (*noduri)[i] != (*noduri)[k])
+                (*parinti)[i] = (*noduri)[k];
     (*n)--;
 }
 
@@ -91,12 +88,12 @@ int main()
 
     do
     {
-        printf("1.Inserare\n");
+        printf("1.Inserare noduri si parinti\n");
         printf("2.Afisare\n");
-        printf("3.Gasire parinte\n");
-        printf("4.Gasire frate drept\n");
+        printf("3.Cautare parinte\n");
+        printf("4.Cautare frate drept\n");
         printf("5.Stergere nod\n");
-        printf("0.Iesire\n");
+        printf("0.Exit\n");
         printf("Optiunea dvs:");
         scanf("%d", &opt);
         switch (opt)
@@ -108,16 +105,16 @@ int main()
             afisare(noduri, parinti, n);
             break;
         case 3:
-            gasire_parinte(noduri, parinti, n);
+            cautare_parinte(noduri, parinti, n);
             break;
         case 4:
-            gasire_frate(noduri, parinti, n);
+            cautare_frate(noduri, parinti, n);
             break;
         case 5:
-            stergere(&noduri, &parinti, &n);
+            stergere_nod(&noduri, &parinti, &n);
             break;
         case 0:
-            printf("executie terminata");
+            printf("exit");
             break;
         }
 
