@@ -15,7 +15,7 @@ window.onload = function () {
             var trigger = e.target.getAttribute('data-toggle');
             contents = q('.contents.' + trigger);
             toggleIt(contents);
-            if(trigger != 'bases') {
+            if (trigger != 'bases') {
                 toggleIt(q('body'));
             }
         }
@@ -132,7 +132,7 @@ window.onload = function () {
             var data = element.getAttribute('data-mantisse').split('-');
             k = data[0],
                 mantisse_length = data[1];
-            (k, mantisse_length);
+            fulfilMantise(k, mantisse_length);
 
             custom = q('.custom');
             if (element.getAttribute('data-toggle') == 'custom') {
@@ -144,7 +144,7 @@ window.onload = function () {
             }
         }
     });
-    var fulfilHexa = function() {
+    var fulfilHexa = function () {
         var h_val = 0,
             hex_digits = qA('div', hexa),
             bin_digits = qA('div:not(.hexa)>div.a_c.j_c', mantisse);
