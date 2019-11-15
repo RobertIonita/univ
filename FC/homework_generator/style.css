@@ -49,3 +49,9 @@ h1 {
 .students {
     display: none;
 }
+
+.items li {
+    width: 95px;
+    font-family: monospace;
+    font-size: 18px;
+}
