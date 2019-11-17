@@ -1,4 +1,3 @@
-// #include <bits/stdc++.h>
 #include <iostream>
 using namespace std;
 
@@ -282,6 +281,6 @@ int main()
     printf("\nRB tree:");
     avg = analyseStatistics("AA/Comparisons/assets/RB.txt");
 
-    printf("\nAVL raported to RBTree : %.2f%%", (11.363118 / avg - 1) * 100);
+    printf("\nAVL raported to RBTree : %.2f%%", (18.322313 / avg - 1) * 100);
     return 0;
 }

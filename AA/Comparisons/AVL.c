@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,8 +10,10 @@ struct Node
     int height;
 };
 
+// A utility function to get maximum of two integers
 int max(int a, int b);
 
+// A utility function to get the height of the tree
 int height(struct Node *N)
 {
     if (N == NULL)
@@ -18,6 +21,7 @@ int height(struct Node *N)
     return N->height;
 }
 
+// A utility function to get maximum of two integers
 int max(int a, int b)
 {
     return (a > b) ? a : b;
@@ -28,7 +32,7 @@ int max(int a, int b)
 struct Node *newNode(int key)
 {
     struct Node *node = (struct Node *)
-        malloc(sizeof(Node));
+        malloc(sizeof(struct Node));
     node->key = key;
     node->left = NULL;
     node->right = NULL;
@@ -36,34 +40,33 @@ struct Node *newNode(int key)
     return (node);
 }
 
+// A utility function to right rotate subtree rooted with y
+// See the diagram given above.
 struct Node *rightRotate(struct Node *y)
 {
     struct Node *x = y->left;
     struct Node *T2 = x->right;
-
     x->right = y;
     y->left = T2;
-
     y->height = max(height(y->left), height(y->right)) + 1;
     x->height = max(height(x->left), height(x->right)) + 1;
-
     return x;
 }
 
+// A utility function to left rotate subtree rooted with x
+// See the diagram given above.
 struct Node *leftRotate(struct Node *x)
 {
     struct Node *y = x->right;
     struct Node *T2 = y->left;
-
     y->left = x;
     x->right = T2;
-
     x->height = max(height(x->left), height(x->right)) + 1;
     y->height = max(height(y->left), height(y->right)) + 1;
-
     return y;
 }
 
+// Get Balance factor of node N
 int getBalance(struct Node *N)
 {
     if (N == NULL)
@@ -71,25 +74,27 @@ int getBalance(struct Node *N)
     return height(N->left) - height(N->right);
 }
 
+// Recursive function to insert a key in the subtree rooted
+// with node and returns the new root of the subtree.
 struct Node *insert(struct Node *node, int key)
 {
+    /* 1.  Perform the normal BST insertion */
     if (node == NULL)
         return (newNode(key));
-
     if (key < node->key)
         node->left = insert(node->left, key);
     else if (key > node->key)
         node->right = insert(node->right, key);
     else
-        return node;
-
+        return node; /* 2. Update height of this ancestor node */
     node->height = 1 + max(height(node->left),
-                           height(node->right));
-
+                           height(node->right)); /* 3. Get the balance factor of this ancestor 
+          node to check whether this node became 
+          unbalanced */
     int balance = getBalance(node);
+
     if (balance > 1 && key < node->left->key)
         return rightRotate(node);
-
     if (balance < -1 && key > node->right->key)
         return leftRotate(node);
     if (balance > 1 && key > node->left->key)
@@ -97,27 +102,54 @@ struct Node *insert(struct Node *node, int key)
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
-
     if (balance < -1 && key < node->right->key)
     {
         node->right = rightRotate(node->right);
         return leftRotate(node);
-    }
+    } /* return the (unchanged) node pointer */
     return node;
 }
-struct Node *search(Node *node, int key, int *count)
+
+void inOrder(struct Node *root)
 {
-    if (node == NULL || node->key == key)
-        return node;
-    else if (key > node->key)
+    if (root != NULL)
+    {
+        inOrder(root->left);
+        printf("%d ", root->key);
+        inOrder(root->right);
+    }
+}
+
+void populate(struct Node **head, int arr[], int *n)
+{
+    FILE *f = fopen("AA/Comparisons/assets/input.txt", "rt");
+    int key;
+    if (f != NULL)
+    {
+        while (!feof(f))
+        {
+            fscanf(f, "%d", &key);
+            *head = insert(*head, key);
+            arr[(*n)++] = key;
+        }
+        fclose(f);
+    }
+    else
+        printf("error reading file");
+}
+struct Node *search(struct Node *head, int key, int *count)
+{
+    if (head == NULL || head->key == key)
+        return head;
+    else if (key > head->key)
     {
         (*count)++;
-        return search(node->right, key, &(*count));
+        return search(head->right, key, &(*count));
     }
     else
     {
         (*count)++;
-        return search(node->left, key, &(*count));
+        return search(head->left, key, &(*count));
     }
 }
 
@@ -160,47 +192,17 @@ float analyseStatistics(char *path)
         printf("\nerror readin file");
     return -1;
 }
-void populate(struct Node *head, int arr[], int *n)
-{
-    FILE *f = fopen("AA/Comparisons/assets/input.txt", "rt");
-    int key;
-    if (f != NULL)
-    {
-        while (!feof(f))
-        {
-            fscanf(f, "%d", &key);
-            head = insert(head, key);
-            arr[(*n)++] = key;
-        }
-        fclose(f);
-    }
-    else
-        printf("error reading file");
-
-
-} 
-
-void inorder (struct Node *node)
-{
-    if (node == NULL)
-        return;
-    inorder(node->left);
-    printf("%d ", node->key);
-    inorder(node->right);
-}
 int main()
 {
     struct Node *root = NULL;
     int n = 0, arr[1000000];
     float avg;
-    populate(root, arr, &n);
-    printf("\n nr: %d", n);
+    populate(&root, arr, &n);
 
-    printf("\ninorder:\n");
-    inorder(root);
+    // inOrder(root);
+
     writeStatistics("AA/Comparisons/assets/AVL.txt", root, arr, n);
     printf("\nAVL tree:");
     avg = analyseStatistics("AA/Comparisons/assets/AVL.txt");
-    printf("\nAVL raported to RBTree : %.2f%%", (11.363118 / avg - 1) * 100);
     return 0;
 }

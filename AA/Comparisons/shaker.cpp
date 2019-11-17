@@ -10,7 +10,7 @@ int populate(char *path, int arr[], int n);
 int main()
 {
     int *arr,
-        n = 10;
+        n = 1000000;
     generateArray(&arr, n);
     // showOff(arr, n); //do not uncoment for big values of n !!!
     populate("AA/Comparisons/assets/input.txt", arr, n);
