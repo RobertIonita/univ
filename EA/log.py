@@ -8,17 +8,17 @@ today = datetime.now()
 today = today.strftime("%d_%m_%Y")
 log_file = "log_"+today+".txt"
 ser = serial.Serial(serial_port, baud_rate)
-output_file = open(log_file, "w+")
-logs = 0
+data = []
 while True:
     line = ser.readline()
     line = line.decode("utf-8")
-    logs+=1
-    if "Write logs down" in line or logs == 10:
+    if "Write logs down" in line or len(data) == 10:
         print("Oh, write that down")
-        logs = 0
-        output_file.close()
         output_file = open(log_file, "w+")
+        for record in data:
+            output_file.write(record + datetime.now().strftime("%h_%m_%s"))
+        data=[]
+        output_file.close()
     else:
-        output_file.write(line + str(datetime.now()))
+        data.append(line)
         print(line)
