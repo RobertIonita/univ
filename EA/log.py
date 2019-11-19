@@ -2,7 +2,7 @@ import serial
 from datetime import datetime
 
 sensor = "DH11"
-serial_port = '/dev/cu.wchusbserialfa130'
+serial_port = '/dev/cu.wchusbserialfd120'
 baud_rate = 9600
 today = datetime.now()
 today = today.strftime("%d_%m_%Y")
@@ -21,7 +21,7 @@ while True:
         output_file.close()
     else:
         time_stamp = datetime.now().strftime("%H:%M:%S")
-        data.append(time_stamp+line)
+        data.append(time_stamp+line.strip()+"\n")
         print(line)
 
 output_file.close()
