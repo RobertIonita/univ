@@ -1,9 +1,0 @@
-strcmp
-strstr
-strstr
-strstr
-strstr
-strstr
-strstr
-strlen
-sqrt

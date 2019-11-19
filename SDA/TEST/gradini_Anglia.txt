@@ -1,5 +1,0 @@
-efg tuv
-abc xyz
-bcd wxy
-cde vwx
-def uvw
