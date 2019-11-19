@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
     else
     {
         printf("\nYou've choosed to link %s to %s\n", destination, source);
-        link(source, destination);
+        symlink(source, destination);
     }
 
     return 0;
