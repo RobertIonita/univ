@@ -9,13 +9,14 @@ var makePost = (msg) => {
     body: JSON.stringify({ message: msg})
   })
 },
-  url = 'http://localhost:5000/api/post';
+  url = 'http://localhost:5000/api/post',
+  rd;
 
 fs.readdir(LogFolder, (dirReadErr, files) => {
   if (dirReadErr) throw dirReadErr;
   files.forEach(file => {
     if (file.includes("log")) {
-      var rd = readline.createInterface({
+        rd = readline.createInterface({
         input: fs.createReadStream(LogFolder + file),
         output: process.stdout,
         console: false
