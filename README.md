@@ -69,3 +69,9 @@ TONU_lib.js
                 (ex: qM('.monkey').nearest('banana') will return the nearest node, which classname
                 is 'banana', to initial node with classname 'monkey'.
                 In other words: it would bring the nearest banana to monkey).
+
+--------------------------------------------------------------------------------------------------
+
+clear.sh
+        Utility to remove all unnecessary files and folders resulted after build
+        Run command in terminal: >$ sh clear.sh $PWD
