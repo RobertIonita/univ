@@ -118,7 +118,59 @@ public:
     }
 };
 
+int menu();
+void tempUtility();
+
 int main(void) // Driver function
+{
+    menu();
+    return 0;
+}
+
+int menu()
+{
+    unsigned short int option;
+
+    while (1)
+    {
+        cout << "\n1. Încarcare informații dintr-un fișier.";
+        cout << "\n2. Adăugarea unui articol nou";
+        cout << "\n3. Afișarea articolelor pe categorie și salvarea în fișier";
+        cout << "\n4. Stergerea unei articol după producător și culoare.";
+        cout << "\n5. Modificarea prețului";
+        cout << "\n6. Sortarea listei după culoare";
+        cout << "\n7. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
+        cout << "\n8. Ieșire";
+        cout << "\nOptiunea aleasă: ";
+        cin >> option;
+
+        switch (option)
+        {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            return 0;
+            break;
+        default:
+            cout << "\nOptiunea invalida: ";
+            break;
+        }
+    }
+}
+
+void tempUtility()
 {
     Base *base;
     Mobile *mobile;
@@ -148,6 +200,4 @@ int main(void) // Driver function
     base->display();
     mobile->display();
     landline->display();
-
-    return 0;
 }
