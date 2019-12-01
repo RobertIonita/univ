@@ -2,6 +2,20 @@
 #include <fstream>  // Header providing file stream classes
 using namespace std;
 
+class List;
+class Base;
+class Mobile;
+class Landline;
+int menu();
+void tempUtility();
+
+int main(void) // Driver function
+{
+    // tempUtility();
+    menu();
+    return 0;
+}
+
 class Base // Base class
 {
 private:
@@ -10,6 +24,7 @@ private:
     unsigned short int
         price,  // in USD
         weight; // in grams
+    Base *next;
 
 public:
     Base( // Base class object constructor
@@ -35,6 +50,7 @@ public:
     {
         return this;
     }
+    friend class List;
 };
 
 class Mobile : public Base // Derived class Mobile extends class Base
@@ -68,6 +84,7 @@ public:
         cout << "\nOperating system: " << operatingSystem;
         cout << "\nWarranty: " << warranty << " months";
     }
+    friend class List;
 };
 class Size // Utility class to store size
 {
@@ -116,21 +133,100 @@ public:
         cout << "\nHeight: " << size->height << "mm";
         cout << "\nThickness: " << size->thickness << "mm";
     }
+    friend class List;
 };
 
-int menu();
-void tempUtility();
-
-int main(void) // Driver function
+class List
 {
-    menu();
-    return 0;
+public:
+    Base *head;
+    void addNode(Base *node);
+    void displayList();
+    void insert();
+};
+
+void List::addNode(Base *node)
+{
+    Base *bptr;
+    bptr = head;
+
+    if (bptr)
+    {
+        while (bptr->next && (bptr->next)->color < node->color)
+            bptr = bptr->next;
+        node->next = bptr->next;
+        bptr->next = node;
+    }
+    else
+        head = node;
+}
+
+void List::displayList()
+{
+    Base *bptr;
+    bptr = head;
+
+    if (!bptr)
+        cout << "List is empty";
+    else
+        while (bptr)
+        {
+            bptr->display();
+            bptr = bptr->next;
+        }
+}
+
+class Overload // class used to overload operators
+{
+private:
+    string manufacturer, // Google/Apple/..
+        color;           // White/Black/..
+    unsigned short int
+        price,  // in USD
+        weight; // in grams
+public:
+    Base *bptr;
+    Base *construnctBase()
+    {
+        bptr = new Base(manufacturer, color, price, weight);
+        return bptr;
+    }
+    friend ostream &operator<<(ostream &out, Overload &stream);
+    friend istream &operator>>(istream &in, Overload &stream);
+};
+ostream &operator<<(ostream &out, Overload &stream) // function to overload displaying
+{
+    cout << "\nData will be recorded:\n";
+    return out;
+}
+istream &operator>>(istream &in, Overload &stream) // function to overload reading
+{
+    cout << "Manufacturer: ";
+    cin >> stream.manufacturer;
+    cout << "Color: ";
+    cin >> stream.color;
+    cout << "Price: ";
+    cin >> stream.price;
+    cout << "Weight: ";
+    cin >> stream.weight;
+    return in;
+}
+
+void List::insert()
+{
+    Base *bptr;      // instance of Base object pointer
+    Overload stream; // instance of Overload object
+    cout << stream;  // overload displaying
+    cin >> stream;   // overload reading
+    bptr = stream.construnctBase();
+    this->addNode(bptr);
 }
 
 int menu()
 {
     unsigned short int option;
-
+    List list;
+    list.head = NULL;
     while (1)
     {
         cout << "\n1. Încarcare informații dintr-un fișier.";
@@ -149,8 +245,10 @@ int menu()
         case 1:
             break;
         case 2:
+            list.insert();
             break;
         case 3:
+            list.displayList();
             break;
         case 4:
             break;
