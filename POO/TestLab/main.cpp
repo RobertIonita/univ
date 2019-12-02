@@ -106,7 +106,6 @@ private:
     int type;
 
 public:
-    Market *bptr;
     string getName()
     {
         return this->name;
