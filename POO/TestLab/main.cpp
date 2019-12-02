@@ -1,3 +1,4 @@
+// Problema 1 POO INFO AN II 02/12/2019
 // Fructe autohtone (denumire, preț) și import (denumire, importator)
 // 1. Adăugare fruct
 // 2. Afișare stoc sortat după denumire cu posibilitatea de a alege categoria
@@ -19,13 +20,13 @@ public:
     int data;
     Exception()
     {
-        message = "";
-        data = 0;
+        this->message = "";
+        this->data = 0;
     }
-    Exception(string str, int d)
+    Exception(string mesage, int data)
     {
-        message = str;
-        data = d;
+        this->message = mesage;
+        this->data = data;
     }
 };
 
@@ -108,11 +109,11 @@ public:
     Market *bptr;
     string getName()
     {
-        return name;
+        return this->name;
     }
     int getType()
     {
-        return type;
+        return this->type;
     }
     friend ostream &operator<<(ostream &out, Overload &stream);
     friend istream &operator>>(istream &in, Overload &stream);
