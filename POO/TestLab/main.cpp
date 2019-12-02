@@ -2,6 +2,7 @@
 // 1. Adăugare fruct
 // 2. Afișare stoc sortat după denumire cu posibilitatea de a alege categoria
 // 3 Afișare fructe autohtone mai scumpe decât un preț citit de la tastieră
+// Pentru nota zece se vor folosi surpraîncărări de operatori/tratare de excepții
 
 
 #include <iostream>
@@ -199,10 +200,8 @@ void List::displayExpensier()
 void List::insert()
 {
     Market *mptr;
-    int type = 0,
-        price;
-    string name,
-        importer;
+    int price;
+    string importer;
     Overload stream;
     cout << stream;
     cin >> stream;
