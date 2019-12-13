@@ -6,7 +6,7 @@
 typedef struct subnode
 {
     int id,
-    	cost;
+        cost;
     char data[MAX];
     struct subnode *next;
 } subnode;
@@ -14,6 +14,7 @@ typedef struct subnode
 typedef struct node
 {
     int id;
+    unsigned short int visited : 1;
     char data[MAX];
     struct node *next;
     struct subnode *sublist;
@@ -25,19 +26,20 @@ subnode *removeSubode(subnode *head, char *data);
 subnode *addSubnode(subnode *head, int id, char *data, int cost);
 node *readNode(node *head, char *path);
 subnode *readSubnode(subnode *head, int node_id, char *path);
-node *searchNode(node *head, int id);
-void visitNodes(node *head, int id);
+node *searchNode(node *head, char *data);
+void visitNodes(node *list, subnode *head, int *cost);
 void showOff(node *head);
 
 int main()
 {
     node *list = NULL;
-    list = readNode(list, "assets/list.txt");
-    showOff(list);
+    list = readNode(list, "AA/Graph/assets/list.txt");
+    int cost = 0;
+    // showOff(list);
     // removeNode(list, 3);
     // showOff(list);
-    visitNodes(list, 0);
-    printf("\n");
+    visitNodes(list, list->sublist, &cost);
+    printf("\ncost: %d", cost-(list->sublist->cost)*(-1));
     return 0;
 }
 
@@ -50,6 +52,7 @@ node *addNode(node *head, int id, char *data)
     strcpy(token->data, data);
     token->next = NULL;
     token->sublist = NULL;
+    token->visited = 0;
     for (q1 = q2 = head; q1 != NULL && q1->data < token->data; q2 = q1, q1 = q1->next)
         ;
     if (q1 == q2)
@@ -96,12 +99,10 @@ node *removeNode(node *head, int id)
         ;
     if (q1 != q2)
     {
-        printf("\n------------------------------\n");
         q2->next = q1->next;
         for (q2 = head; q2 != NULL; q2 = q2->next)
             if (q2->sublist)
-            	q2->sublist = removeSubode(q2->sublist, q1->data);
-        printf("\n------------------------------\n");
+                q2->sublist = removeSubode(q2->sublist, q1->data);
         free(q1);
     }
     return head;
@@ -109,25 +110,30 @@ node *removeNode(node *head, int id)
 
 subnode *removeSubode(subnode *head, char *data)
 {
-	subnode *q1, *q2;
-		for (q1 = q2 = head; q1 != NULL && strcmp (q1 -> data, data); q2 = q1, q1 = q1 -> next);
+    subnode *q1, *q2;
+    for (q1 = q2 = head; q1 != NULL && strcmp(q1->data, data); q2 = q1, q1 = q1->next)
+        ;
 
-		if (q1 != NULL && (strcmp (q1 -> data, data) == 0) ) {
-		    if (q1 == q2) {
-		        head = head -> next;
-		    } else {
-		        q2 -> next = q1 -> next;
-		        free(q1);
-		    }
-		}
-	return head;
+    if (q1 != NULL && (strcmp(q1->data, data) == 0))
+    {
+        if (q1 == q2)
+        {
+            head = head->next;
+        }
+        else
+        {
+            q2->next = q1->next;
+            free(q1);
+        }
+    }
+    return head;
 }
 
 subnode *readSubnode(subnode *head, int node_id, char *path)
 {
     FILE *f = NULL;
     int id,
-    	cost;
+        cost;
     char data[MAX];
     if ((f = fopen(path, "rt")) == NULL)
         printf("\nError opening file %s", path);
@@ -159,13 +165,13 @@ node *readNode(node *head, char *path)
         {
             if (fscanf(f, "%d %s", &id, data) != EOF)
             {
-                if (searchNode(head, id) == NULL)
+                if (searchNode(head, data) == NULL)
                 {
                     head = addNode(head, id, data);
                 }
-                nptr = searchNode(head, id);
+                nptr = searchNode(head, data);
                 sublist = nptr->sublist;
-                sublist = readSubnode(sublist, id, "assets/sublist.txt");
+                sublist = readSubnode(sublist, id, "AA/Graph/assets/sublist.txt");
                 nptr->sublist = sublist;
             }
         }
@@ -174,37 +180,30 @@ node *readNode(node *head, char *path)
     return head;
 }
 
-
-node *searchNode(node *head, int id)
+node *searchNode(node *head, char *data)
 {
     node *q;
-    for (q = head; q != NULL && q->id != id; q = q->next)
+    for (q = head; q != NULL && strcmp(q->data, data); q = q->next)
         ;
     return q;
 }
 
-void visitNodes(node *head, int id)
+void visitNodes(node *list, subnode *head, int *cost)
 {
-	if(head != NULL)
-	{
-		node *nptr = head;
-		subnode *sublist;
-		int min = (head->sublist)->cost;
-		//for (nptr = head; nptr != NULL; nptr = nptr->next)
-		//{
-	    printf("\nnode: %d key: %s", nptr->id, nptr->data);
-	    if (nptr->sublist != NULL)
-	    {
-			if((nptr->sublist)->cost < min)
-				min = (nptr->sublist)->cost;
-	    	printf("\n\tvertex: %s-%s", nptr->data, (nptr->sublist)->data);
-	    	printf("\n\tcost: %d, min: %d", (nptr->sublist)->cost, min);    
-		}
-		visitNodes(nptr->next, nptr->id);
-		//}
-	}
+    subnode *sptr = head;
+    node *nptr;
+    while (sptr)
+    {
+        if ((nptr = searchNode(list, sptr->data))->visited == 0)
+        {
+            printf("\nNode: %s, cost: %d", sptr->data, *cost);
+            nptr->visited = 1;
+            *cost += sptr->cost;
+            visitNodes(list, nptr->sublist, cost);
+        }
+        sptr = sptr->next;
+    }
 }
-
 
 void showOff(node *head)
 {
@@ -218,5 +217,3 @@ void showOff(node *head)
                 printf("\n\tvertex: %s-%s, cost: %d", list->data, sublist->data, sublist->cost);
     }
 }
-
-
