@@ -82,6 +82,9 @@
         "utility": "cpp",
         "valarray": "cpp",
         "vector": "cpp",
-        "hashtable": "cpp"
+        "hashtable": "cpp",
+        "types.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c"
     }
 }
