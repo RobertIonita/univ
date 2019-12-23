@@ -7,9 +7,9 @@ var makePost, likePost, deletePost, deletePost,
 
 window.onload = () => {
 
-    const msg = document.getElementById("input"),
+    const form = document.querySelector("form"),
         posts_container = document.getElementById("posts"),
-        url = 'http://localhost:5000/api/post';
+        url = 'http://localhost:3000/users';
 
     async function getRecordsAsync() {
         let response = await fetch(url),
@@ -25,26 +25,29 @@ window.onload = () => {
             posts_container.innerHTML += `
                     <div class="block post">
                         <div class="message_area">
-                            <p>${element.Message}</p>
+                            <p>${element.firstName} ${element.lastName}</p>
                         </div>
-                        <div class="actions_aria">
-                            <div>
-                                <button class="like" onclick="likePost('${element.Id}')">inc</button>
-                                <span>${element.Likes}</span>
-                                <button class="dislike" onclick="dislikePost('${element.Id}')">dec</button>
-                            </div>
-                        </div>
-                        <i class="icon_close" onclick="deletePost('${element.Id}')"></i>
+                        <p>${element.age}</p>
+                        <p>${element.email}</p>
+                        <button onclick="deletePost('${element.id}')">Delete</button>
                     </div>
                 `
         });
     }
 
-    makePost = () => {
+    makePost = (e) => {
+        var data = new Object();
+        data = {
+            "firstName": "Lk",
+            "lastName": "fwewfe",
+            "email": "meesfark.ff@example.com",
+            "age": 121,
+            "companyId": "1"
+        }
         fetch(url, {
             headers: { 'Content-Type': 'application/json' },
             method: "POST",
-            body: JSON.stringify({ message: msg.value })
+            body: JSON.stringify(data)
         })
     }
     likePost = function (id) {

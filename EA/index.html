@@ -13,9 +13,14 @@
     <section id="wall">
         <h1 align=center>Whistler</h1>
         <div class="form block">
-            <form onsubmit="makePost()">
-                <input id="input" autofocus type="text" placeholder="Insert a whist here" required minlength="1">
-                <input type="submit">
+            <!-- <form onsubmit="makePost(e)"> -->
+            <form>
+                <input class="form_item first_name" type="text" placeholder="First name" required minlength="1" autofocus>
+                <input class="form_item last_name" type="text" placeholder="Last name" required minlength="1">
+                <input class="form_item email" type="email" placeholder="Email" required minlength="1">
+                <input class="form_item age" type="number" placeholder="Age" required min="18" max="140">
+                <!-- <input type="submit"> -->
+                <input type="button" onclick="makePost()">
             </form>
         </div>
         <div id="posts">

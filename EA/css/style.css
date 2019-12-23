@@ -1,15 +1,3 @@
-.icon_close:before {
-  content: url(../assets/close.svg);
-}
-
-.icon_like:before {
-  content: url(../assets/like.svg);
-}
-
-.icon_dislike:before {
-  content: url(../assets/dislike.svg);
-}
-
 body {
   font-family: sans-serif;
 }
@@ -49,7 +37,7 @@ body {
   padding: 0 10px;
   outline: none;
 }
-#wall .form input[type=text] {
+#wall .form input.form_item {
   width: 100%;
   height: 36px;
   border: solid 1px #bdbdbd;
