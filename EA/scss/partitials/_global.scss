@@ -1,0 +1,61 @@
+@use '_theme';
+@use '_flex';
+
+body {
+    font-family: _theme.$face;
+    padding: 0;
+    margin: 0;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+header {
+    height: 64px;
+    width: 100%;
+
+    nav {
+        padding: 0 15px;
+        box-sizing: border-box;
+        background-color: _theme.$primary;
+        box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+
+        &>div {
+            height: 100%;
+        }
+
+        i.sidenav-trigger {
+            color: white;
+            margin: 0;
+        }
+
+        .logotype {
+            font-size: 22px;
+            font-family: _theme.$face;
+            color: white;
+        }
+    }
+
+    #slide-out {
+        padding: 0 15px;
+        box-sizing: border-box;
+
+        .heading {
+            height: 64px;
+
+            @media screen and (max-width:600px) {
+                height: 56px;
+            }
+        }
+
+        a {
+            padding: 0;
+        }
+
+        .divider {
+            margin: 0 0 10px;
+        }
+    }
+}
