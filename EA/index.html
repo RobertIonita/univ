@@ -5,9 +5,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Whistler</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Gangiubas - Home</title>
+
 </head>
+<header>
+    <nav>
+        <div class="d_fl a_c j_sb">
+            <a class="logotype" href="index.html">Gangiubas</a>
+            <i data-target="slide-out" class="material-icons sidenav-trigger clickable">menu</i>
+        </div>
+    </nav>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="heading d_fl a_c j_sb">
+                <span>Menu</span>
+                <i class="material-icons sidenav-close clickable">close</i>
+            </div>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="logs.html">Logs</a></li>
+        <li><a href="logs.html">Preferences</a></li>
+    </ul>
+
+</header>
 
 <body>
     <section id="wall">
@@ -15,7 +40,8 @@
         <div class="form block">
             <!-- <form onsubmit="makePost(e)"> -->
             <form>
-                <input class="form_item first_name" type="text" placeholder="First name" required minlength="1" autofocus>
+                <input class="form_item first_name" type="text" placeholder="First name" required minlength="1"
+                    autofocus>
                 <input class="form_item last_name" type="text" placeholder="Last name" required minlength="1">
                 <input class="form_item email" type="email" placeholder="Email" required minlength="1">
                 <input class="form_item age" type="number" placeholder="Age" required min="18" max="140">
@@ -26,6 +52,7 @@
         <div id="posts">
         </div>
     </section>
+    <script src="materialize/js/materialize.min.js"></script>
     <script src="js/main.js" defer></script>
 </body>
 

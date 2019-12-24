@@ -1,0 +1,86 @@
+.d_fl {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.j_sb {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.j_sa {
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+
+.j_c {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.a_c {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+header {
+  height: 64px;
+  width: 100%;
+}
+header nav {
+  padding: 0 15px;
+  box-sizing: border-box;
+  background-color: #3f51b5;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+}
+header nav > div {
+  height: 100%;
+}
+header nav i.sidenav-trigger {
+  color: white;
+  margin: 0;
+}
+header nav .logotype {
+  font-size: 22px;
+  font-family: sans-serif;
+  color: white;
+}
+header #slide-out {
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+header #slide-out .heading {
+  height: 64px;
+}
+@media screen and (max-width: 600px) {
+  header #slide-out .heading {
+    height: 56px;
+  }
+}
+header #slide-out a {
+  padding: 0;
+}
+header #slide-out .divider {
+  margin: 0 0 10px;
+}
+
+#wall {
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=logs.css.map */
