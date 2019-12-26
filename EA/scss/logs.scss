@@ -1,6 +1,33 @@
 @use 'partitials/global';
+@use 'partitials/theme';
 
 #wall {
     padding: 0 15px;
     box-sizing: border-box;
+
+    .tabs {
+        border-radius: 4px;
+
+        .tab {
+            a {
+                color: white;
+                background-color: transparent;
+            }
+        }
+
+        .indicator {
+            background-color: theme.$accent;
+        }
+    }
+
+    #logs {
+        .log {
+            padding: 10px;
+            box-sizing: border-box;
+
+            i:hover {
+                color: theme.$danger;
+            }
+        }
+    }
 }

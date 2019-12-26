@@ -1,73 +1,78 @@
-var makePost, likePost, deletePost, deletePost,
-    nearest = (name, node) => {
-        while (node.className.indexOf(name) == -1 && parent != null)
-            node = node.parentElement;
-        return node;
-    }
+var makeLog, likeLog, deleteLog, deleteLog;
+var nearest = (name, node) => {
+    while (node.className.indexOf(name) == -1 && parent != null)
+        node = node.parentElement;
+    return node;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
-
     const form = document.querySelector("form"),
-        posts_container = document.getElementById("posts"),
-        url = 'http://localhost:3000/users';
+        logs_container = document.getElementById("logs"),
+        api = 'http://192.168.0.45:3000';
 
-    async function getRecordsAsync() {
+    async function getRecordsAsync(url) {
         let response = await fetch(url),
             data = await response.json()
         return data;
     }
-    getRecordsAsync()
-        .then(data => renderPosts(data));
-    var renderPosts = (records) => {
-        posts_container.innerHTML = "";
+    getRecordsAsync(api + '/light')
+        .then(data => renderLogs(data));
+    var renderLogs = (records) => {
+        logs_container.innerHTML = `
+            <table class="striped centered">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Value</th>
+                        <th>Set</th>
+                        <th width="60">Action</th>
+                    </tr>
+                </thead>
+                <tbody>`;
         records.sort((a, b) => (a.Likes < b.Likes) ? 1 : -1);
         records.forEach(element => {
-            posts_container.innerHTML += `
-                    <div class="block post">
-                        <div class="message_area">
-                            <p>${element.firstName} ${element.lastName}</p>
-                        </div>
-                        <p>${element.age}</p>
-                        <p>${element.email}</p>
-                        <button onclick="deletePost('${element.id}')">Delete</button>
-                    </div>
-                `
+            logs_container.querySelector('tbody').innerHTML += `
+                    <tr class="log">
+                        <td>${element.time}</td>
+                        <td>${element.value}</td>
+                        <td>${element.set}</td>
+                        <td><i class="material-icons clickable" onclick="deleteLog('${element.id}')">delete</i><td>
+                    </tr>`
         });
     }
-
-    makePost = (e) => {
-        var data = new Object();
-        data = {
-            "firstName": "Lk",
-            "lastName": "fwewfe",
-            "email": "meesfark.ff@example.com",
-            "age": 121,
-            "companyId": "1"
-        }
-        fetch(url, {
-            headers: { 'Content-Type': 'application/json' },
-            method: "POST",
-            body: JSON.stringify(data)
-        })
+    var getActiveTab = () => {
+        var tab = document.querySelector('.tabs .active');
+        return tab.innerHTML;
     }
-    likePost = function (id) {
+    likeLog = function (id) {
         fetch(url + '/like/' + id, { method: 'PUT' })
         let counter = nearest("actions_aria", event.target).querySelector("span");
         counter.innerHTML = Number(counter.innerHTML) + 1;
     }
-    dislikePost = (id) => {
+    dislikeLog = (id) => {
         fetch(url + '/dislike/' + id, { method: 'PUT' })
         let counter = nearest("actions_aria", event.target).querySelector("span");
         counter.innerHTML == "0" ? 0 : counter.innerHTML = Number(counter.innerHTML) - 1;
     }
-    deletePost = (id) => {
-        fetch(url + '/' + id, { method: 'DELETE' })
-        posts_container.removeChild(nearest("post", event.target));
+    deleteLog = (id) => {
+
+        fetch(api + '/' + getActiveTab()+ '/' + id, { method: 'DELETE' })
+        logs_container.querySelector('tbody').removeChild(nearest("log", event.target));
+
     }
 
-    var elems = document.querySelectorAll('.sidenav'),
-        options = {
+    var navElems = document.querySelectorAll('.sidenav'),
+        tabElems = document.querySelectorAll('.tabs'),
+        navOptions = {
             "edge": "right"
         },
-        instances = M.Sidenav.init(elems, options);
+        tabOptions = {
+            "onShow": function () {
+                var link = api + this.$activeTabLink[0].hash.replace('#', '/');
+                getRecordsAsync(link)
+                    .then(data => renderLogs(data));
+            }
+        },
+        sidenav = M.Sidenav.init(navElems, navOptions),
+        tabs = M.Tabs.init(tabElems, tabOptions);
 });

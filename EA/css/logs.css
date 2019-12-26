@@ -82,5 +82,22 @@ header #slide-out .divider {
   padding: 0 15px;
   box-sizing: border-box;
 }
+#wall .tabs {
+  border-radius: 4px;
+}
+#wall .tabs .tab a {
+  color: white;
+  background-color: transparent;
+}
+#wall .tabs .indicator {
+  background-color: #e65100;
+}
+#wall #logs .log {
+  padding: 10px;
+  box-sizing: border-box;
+}
+#wall #logs .log i:hover {
+  color: #f44336;
+}
 
 /*# sourceMappingURL=logs.css.map */
