@@ -134,7 +134,7 @@ header #slide-out .divider {
 #wall .form .input-field.col label {
   left: 0;
 }
-#wall .form input[type=submit] {
+#wall .form input[type=submit], #wall .form input[type=button] {
   background: #5959bd;
   color: white;
   height: 32px;
@@ -155,11 +155,18 @@ header #slide-out .divider {
   padding: 0 10px;
   outline: none;
 }
-#wall .form .dropdown-content li > a,
-#wall .form .dropdown-content li > span {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+#wall .form .dropdown-content li {
+  padding: 0 10px;
+  position: relative;
+}
+#wall .form .dropdown-content li span {
+  padding-left: 0;
+  width: 100%;
+}
+#wall .form .dropdown-content li i {
+  position: absolute;
+  right: 10px;
+  z-index: 1;
 }
 
 /*# sourceMappingURL=preferences.css.map */

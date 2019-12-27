@@ -1,18 +1,17 @@
 const API = "http://" + window.location.hostname;
 
-var makePost, likePost,
+var updatePreferences,
+    likePost,
+    deletePreference,
     nearest = (name, node) => {
         while (node.className.indexOf(name) == -1 && parent != null)
             node = node.parentElement;
         return node;
     },
-
-    deletePreference = (id) => {
-        fetch(API + ':3000/preferences/' + id, { method: 'DELETE' })
-    },
-    updateCurrentAsync = (newPreference) => {
+    updateCurrentAsync = (newPreference, newId) => {
         data = {
-            "current": newPreference
+            "current": newPreference,
+            "currentId": newId
         }
         fetch(API + ':3000/preferences/0', {
             headers: { "Content-type": "application/json" },
@@ -29,39 +28,39 @@ async function getRecordsAsync(url) {
         data = await response.json()
     return data;
 }
-async function getKindAsync(url) {
-    let response = await fetch(url),
-        data = await response.json()
-    return data;
-}
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    var select = document.querySelector("#kind"),
-        inputs = document.querySelectorAll('.input-field input[required]'),
+    var inputs = document.querySelectorAll('.input-field input[required]'),
         selElems = document.querySelectorAll('select');
+
+
+    deletePreference = (id) => {
+        fetch(API + ':3000/preferences/' + id, { method: 'DELETE' });
+        var el = event.currentTarget.parentElement;
+        el.parentElement.removeChild(el);
+
+    };
     let i = 0, current;
     var addIcon = (element, item) => {
-
-        item.className = 'd_fl a_c j_sb';
-        item.innerHTML = `
-            <span>${item.innerHTML}</span>
-            <i class="material-icons clickable" onclick="deletePreference('${element.id}')">delete</i>
-        `
+        let parent = item.parentElement;
+        parent.className = 'd_fl a_c j_sb';
+        //parent.innerHTML += `<i class="material-icons clickable" onclick="deletePreference('${element.id}')">delete</i>`
     }
-    getKindAsync(API + ":3000/preferences")
+    getRecordsAsync(API + ":3000/preferences")
         .then(path => {
             path.forEach(element => {
                 if (element.current != undefined) {
                     current = element.current;
                     return;
                 }
-
-                select.innerHTML += `
-                    <option value="${element.name}">${element.name}</option>
-                `
+                let selected = '';
+                element.name == current ? selected = 'selected' : '';
+                selElems[0].innerHTML += `
+                        <option data-id="${element.id}" ${selected} value="${element.name}">${element.name}</option>
+                    `
                 if (element.name == current) {
                     inputs[0].value = element.light;
                     inputs[1].value = element.temperature;
@@ -70,32 +69,39 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             var selInstances = M.FormSelect.init(selElems);
             M.updateTextFields()
-            let list = document.querySelectorAll(".dropdown-content span"),
-                i = 0;
-            path.forEach(element => {
+            let list = document.querySelectorAll(".dropdown-content span");
+            for (let i = 0; i < path.length - 1; i++) {
                 list[i].addEventListener("click", function () {
-                    updateCurrentAsync(this.innerText.replace('\ndelete', ''));
+                    let currentName = this.innerText.replace('\ndelete', ''),
+                        origin = document.querySelector('[value="' + currentName + '"]'),
+                        dataId = origin.getAttribute('data-id');
+                    updateCurrentAsync(currentName, dataId);
+                    currentId = getRecordsAsync(API + ':3000/preferences/' + dataId)
+                        .then(data => {
+                            inputs[0].value = data.light;
+                            inputs[1].value = data.temperature;
+                            inputs[2].value = data.water;
+                        });
                 });
-                if (element.name != current)
-                    addIcon(element, list[i]);
-                i++;
-            })
+                if (path[i + 1].name != current)
+                    addIcon(path[i + 1], list[i]);
+            }
         });
-    makePost = () => {
-        var data = new Object();
-        inputs.forEach(element => {
-            console.log(element)
-        })
-        data = {
-            "time": "13:22:45",
-            "value": 124,
-            "set": 123
-        }
-        // fetch(url, {
-        //     headers: { 'Content-Type': 'application/json' },
-        //     method: "POST",
-        //     body: JSON.stringify(data)
-        // })
+    updatePreferences = () => {
+        currentId = getRecordsAsync(API + ':3000/preferences/0')
+            .then(data => {
+                var record = new Object();
+                record = {
+                    "light": Number(inputs[0].value),
+                    "temperature": Number(inputs[1].value),
+                    "water": Number(inputs[2].value)
+                }
+                fetch(API + ':3000/preferences/' + data.currentId, {
+                    headers: { 'Content-Type': 'application/json' },
+                    method: "PATCH",
+                    body: JSON.stringify(record)
+                })
+            })
     }
 
     var navElems = document.querySelectorAll('.sidenav'),

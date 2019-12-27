@@ -27,7 +27,9 @@
         }
 
         input {
-            &[type="submit"] {
+
+            &[type="submit"],
+            &[type="button"] {
                 background: rgb(89, 89, 189);
                 color: white;
                 height: 32px;
@@ -51,11 +53,20 @@
             outline: none;
         }
 
-        .dropdown-content li>a,
-        .dropdown-content li>span {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
+        .dropdown-content li {
+            padding: 0 10px;
+            position: relative;
+
+            span {
+                padding-left: 0;
+                width: 100%;
+            }
+
+            i {
+                position: absolute;
+                right: 10px;
+                z-index: 1;
+            }
         }
     }
 }

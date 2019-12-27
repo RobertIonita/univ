@@ -38,11 +38,10 @@
     <section id="wall">
         <h4 >Preferences</h4 >
         <div class="form block">
-            <!-- <form onsubmit="makePost()"> -->
-            <form>
+            <form onsubmit="updatePreferences()">
+            <!-- <form> -->
                 <div class="input-field col s12">
                     <select id="kind">
-                        <option value="" disabled selected>Choose your option</option>
                     </select>
                     <label>Greenhouse preferences</label>
                 </div>
@@ -58,11 +57,9 @@
                     <input id="water" type="number" required min="1" max="1023">
                     <label for="water">Water</label>
                 </div>
-                <!-- <input type="submit"> -->
-                <button onclick="makePost()">Submit</button>
+                <input type="submit">
+                <!-- <input type="button" value="Submit" onclick="updatePreferences()"> -->
             </form>
-        </div>
-        <div id="posts">
         </div>
     </section>
     <script src="materialize/js/materialize.min.js"></script>
