@@ -168,5 +168,8 @@ header #slide-out .divider {
   right: 10px;
   z-index: 1;
 }
+#wall .form .dropdown-content li.selected i {
+  display: none;
+}
 
 /*# sourceMappingURL=preferences.css.map */

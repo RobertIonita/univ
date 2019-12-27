@@ -39,15 +39,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     deletePreference = (id) => {
         fetch(API + ':3000/preferences/' + id, { method: 'DELETE' });
-        var el = event.currentTarget.parentElement;
-        el.parentElement.removeChild(el);
+        location.reload();
+        let el = event.currentTarget.parentElement,
+            trigger = document.querySelector('.select-dropdown.dropdown-trigger');
+        // el.parentElement.removeChild(el);
+
+        // currentId = getRecordsAsync(API + ':3000/preferences/0')
+        //     .then(data => {
+        //         trigger.value = data.current;
+        //     })
 
     };
-    let i = 0, current;
     var addIcon = (element, item) => {
         let parent = item.parentElement;
         parent.className = 'd_fl a_c j_sb';
-        //parent.innerHTML += `<i class="material-icons clickable" onclick="deletePreference('${element.id}')">delete</i>`
+        parent.innerHTML += `<i class="material-icons clickable" onclick="deletePreference('${element.id}')">delete</i>`
     }
     getRecordsAsync(API + ":3000/preferences")
         .then(path => {
@@ -67,15 +73,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     inputs[2].value = element.water;
                 }
             });
-            var selInstances = M.FormSelect.init(selElems);
-            M.updateTextFields()
-            let list = document.querySelectorAll(".dropdown-content span");
+            M.updateTextFields();
+            M.FormSelect.init(selElems)
+            let list = document.querySelectorAll(".dropdown-content span")
             for (let i = 0; i < path.length - 1; i++) {
-                list[i].addEventListener("click", function () {
+                addIcon(path[i + 1], list[i]);
+            }
+            list = document.querySelectorAll(".dropdown-content span");
+            list.forEach(item => {
+                item.addEventListener("click", function () {
+
                     let currentName = this.innerText.replace('\ndelete', ''),
                         origin = document.querySelector('[value="' + currentName + '"]'),
                         dataId = origin.getAttribute('data-id');
+
                     updateCurrentAsync(currentName, dataId);
+
                     currentId = getRecordsAsync(API + ':3000/preferences/' + dataId)
                         .then(data => {
                             inputs[0].value = data.light;
@@ -83,9 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             inputs[2].value = data.water;
                         });
                 });
-                if (path[i + 1].name != current)
-                    addIcon(path[i + 1], list[i]);
-            }
+            })
         });
     updatePreferences = () => {
         currentId = getRecordsAsync(API + ':3000/preferences/0')
@@ -107,8 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var navElems = document.querySelectorAll('.sidenav'),
         navOptions = {
             "edge": "right"
-        },
-        navInstances = M.Sidenav.init(navElems, navOptions);
-
+        };
+        M.Sidenav.init(navElems, navOptions);
 
 });
