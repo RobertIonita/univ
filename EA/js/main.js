@@ -5,41 +5,36 @@ var makePost, likePost, deletePost, deletePost,
         return node;
     }
 
+async function getRecordsAsync(url) {
+    let response = await fetch(url),
+        data = await response.json()
+    return data;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+    const api = "http://" + window.location.hostname;
+    var items = document.querySelectorAll('.data .item b');
+    getRecordsAsync(api + ":3000/preferences")
+        .then(path => path.forEach(element => {
+            if (element.current != undefined) {
+                current = element.current;
+                document.querySelector('#wall .heading span').innerHTML = current;
+                return;
+            }
+            
+            if (element.name == current) {
+                items[0].innerHTML = element.light;
+                items[1].innerHTML = element.temperature;
+                items[2].innerHTML = element.water;
+            }
+            M.updateTextFields();
+            var selElems = document.querySelectorAll('select'),
+                selInstances = M.FormSelect.init(selElems);
+        }));
 
-    const url = 'http://localhost:3000/lightSensor';
-
-    async function getRecordsAsync() {
-        let response = await fetch(url),
-            data = await response.json()
-        return data;
-    }
-    // getRecordsAsync();
-
-    makePost = (e) => {
-        var data = new Object();
-        data = {
-            "firstName": "Lk",
-            "lastName": "fwewfe",
-            "email": "meesfark.ff@example.com",
-            "age": 121,
-            "companyId": "1"
-        }
-        fetch(url, {
-            headers: { 'Content-Type': 'application/json' },
-            method: "POST",
-            body: JSON.stringify(data)
-        })
-    }
-    deletePost = (id) => {
-        fetch(url + '/' + id, { method: 'DELETE' })
-        posts_container.removeChild(nearest("post", event.target));
-    }
-
-    var elems = document.querySelectorAll('.sidenav'),
-        options = {
+    var navElems = document.querySelectorAll('.sidenav')
+        navOptions = {
             "edge": "right"
         },
-        instances = M.Sidenav.init(elems, options);
-
+        instances = M.Sidenav.init(navElems, navOptions);
 });

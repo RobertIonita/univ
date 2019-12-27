@@ -29,27 +29,31 @@
             <div class="divider"></div>
         </li>
         <li><a href="logs.html">Logs</a></li>
-        <li><a href="logs.html">Preferences</a></li>
+        <li><a href="preferences.html">Preferences</a></li>
     </ul>
 
 </header>
 
 <body>
     <section id="wall">
-        <h1 align=center>Whistler</h1>
-        <div class="form block">
-            <!-- <form onsubmit="makePost(e)"> -->
-            <form>
-                <input class="form_item first_name" type="text" placeholder="First name" required minlength="1"
-                    autofocus>
-                <input class="form_item last_name" type="text" placeholder="Last name" required minlength="1">
-                <input class="form_item email" type="email" placeholder="Email" required minlength="1">
-                <input class="form_item age" type="number" placeholder="Age" required min="18" max="140">
-                <!-- <input type="submit"> -->
-                <input type="button" onclick="makePost()">
-            </form>
+        <h4>Greenhouse data</h4>
+        <div class="heading d_fl a_c">
+            <h6 class="d_fl a_c">Current preference</h6>
+            <span>Gangiubas</span>
         </div>
-        <div id="posts">
+        <div class="data">
+            <div class="item">
+                <span>Light:</span>
+                <b></b>
+            </div>
+            <div class="item">
+                <span>Temperature:</span>
+                <b></b>
+            </div>
+            <div class="item">
+                <span>Water:</span>
+                <b></b>
+            </div>
         </div>
     </section>
     <script src="materialize/js/materialize.min.js"></script>

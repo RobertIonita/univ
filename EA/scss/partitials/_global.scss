@@ -1,16 +1,61 @@
-@use '_theme';
+@use 'theme';
 @use '_flex';
 
 body {
-    font-family: _theme.$face;
+    font-family: theme.$face;
     padding: 0;
     margin: 0;
+    min-height: 100vh;
 }
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-field input[type=number]:focus+label {
+    color: theme.$primary !important;
+}
+
+.input-field input[type=number]:focus {
+    border-bottom: 1px solid theme.$primary !important;
+    box-shadow: 0 1px 0 0 theme.$primary !important;
+}
+
+.input-field input[type=number].valid {
+    border-bottom: 1px solid theme.$primary !important;
+    box-shadow: 0 1px 0 0 theme.$primary !important;
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+    color: theme.$primary;
+}
+
+.select-wrapper input.select-dropdown,
+.select-wrapper input.select-dropdown:focus {
+    border-bottom-color: theme.$primary;
+    border-width: 2px;
+}
+
 
 .clickable {
     cursor: pointer;
 }
 
+#wall {
+
+    &>h4 {
+        margin: 40px 0;
+        font-size: 32px;
+        font-family: theme.$face;
+    }
+}
 
 header {
     height: 64px;
@@ -19,7 +64,7 @@ header {
     nav {
         padding: 0 15px;
         box-sizing: border-box;
-        background-color: _theme.$primary;
+        background-color: theme.$primary;
         box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
 
         &>div {
@@ -33,7 +78,7 @@ header {
 
         .logotype {
             font-size: 22px;
-            font-family: _theme.$face;
+            font-family: theme.$face;
             color: white;
         }
     }

@@ -128,45 +128,38 @@ header #slide-out .divider {
   padding: 0 10px;
   margin: 0 auto;
 }
-#wall .heading {
-  height: 54px;
-  margin: 10px 0;
-  border-radius: 5px;
-  overflow: hidden;
-  background: whitesmoke;
+#wall .form {
+  margin-bottom: 20px;
 }
-#wall .heading h6 {
-  width: 37%;
-  height: 100%;
-  margin: 0;
-  background-color: #3f51b5;
+#wall .form .input-field.col label {
+  left: 0;
+}
+#wall .form input[type=submit] {
+  background: #5959bd;
   color: white;
-  padding: 0 10px;
-  box-sizing: border-box;
+  height: 32px;
+  border: none;
+  float: right;
+  font-size: 14px;
 }
-#wall .heading span {
-  font-size: 16px;
-  padding: 0 10px;
-  width: 63%;
-  box-sizing: border-box;
-  text-align: center;
-}
-#wall .data {
-  margin-top: 20px;
-}
-#wall .data .item {
-  margin: 10px 0;
-  background: whitesmoke;
+#wall .form button {
+  background: #5959bd;
+  color: white;
+  height: 32px;
+  border: none;
+  float: right;
+  font-size: 14px;
   border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0 10px;
+  outline: none;
 }
-#wall .data .item span {
-  color: #3f51b5;
-  font-size: 16px;
-  font-weight: 500;
-}
-#wall .data .item b {
-  font-size: 16px;
+#wall .form .dropdown-content li > a,
+#wall .form .dropdown-content li > span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=preferences.css.map */

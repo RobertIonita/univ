@@ -2,7 +2,7 @@ import serial
 from datetime import datetime
 
 sensor = "DH11"
-serial_port = '/dev/cu.wchusbserialfd120'
+serial_port = '/dev/cu.wchusbserialfa130'
 baud_rate = 9600
 today = datetime.now()
 today = today.strftime("%d_%m_%Y")

@@ -8,8 +8,8 @@ var nearest = (name, node) => {
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector("form"),
         logs_container = document.getElementById("logs"),
-        api = 'http://192.168.0.45:3000';
-
+        api = "http://"+window.location.hostname + ":3000";
+    console.log(api)
     async function getRecordsAsync(url) {
         let response = await fetch(url),
             data = await response.json()
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     deleteLog = (id) => {
 
-        fetch(api + '/' + getActiveTab()+ '/' + id, { method: 'DELETE' })
+        fetch(api + '/' + getActiveTab() + '/' + id, { method: 'DELETE' })
         logs_container.querySelector('tbody').removeChild(nearest("log", event.target));
 
     }
