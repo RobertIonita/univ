@@ -2,6 +2,7 @@ import requests, serial, time
 from datetime import datetime
 
 API = "http://192.168.0.45:3000"
+preferences_endpoint = "http://192.168.0.45:3000/preferences/0"
 sensor = "DH11"
 serial_port = '/dev/cu.wchusbserialfa130'
 baud_rate = 115200
@@ -12,8 +13,13 @@ ser = serial.Serial(serial_port, baud_rate, timeout=.1)
 time.sleep(1)  # give the connection a second to settle)
 data = []
 log = {}
+
+r = requests.get(url=preferences_endpoint)
+current = r.json()
+config_msg = str(list(current)[3:6]).replace(", ", "e", 2).replace("[","",1).replace("]","e",1)
+print (config_msg)
 while True:
-    ser.write("123e234e345ef".encode())
+    ser.write(config_msg.encode())
     line = ser.readline().strip()
     line = line.decode("utf-8")
     if line:
