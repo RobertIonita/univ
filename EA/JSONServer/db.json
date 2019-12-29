@@ -37,43 +37,43 @@
       "id": 0,
       "current": "Alaskan Thunderfuck",
       "currentId": 5,
-      "light": 132,
-      "temperature": 34,
+      "light": "132",
+      "temperature": "34",
       "water": 39
     },
     {
       "id": 1,
       "name": "Barck O Bubba",
-      "light": 120,
-      "temperature": 40,
+      "light": "120",
+      "temperature": "40",
       "water": 30
     },
     {
       "id": 2,
       "name": "Poochie Love",
-      "light": 110,
-      "temperature": 36,
+      "light": "110",
+      "temperature": "36",
       "water": 43
     },
     {
       "id": 3,
       "name": "Purple Monkey Balls",
-      "light": 93,
-      "temperature": 32,
+      "light": "93",
+      "temperature": "32",
       "water": 29
     },
     {
       "id": 4,
       "name": "Cannasutra",
-      "light": 109,
-      "temperature": 41,
+      "light": "109",
+      "temperature": "41",
       "water": 33
     },
     {
       "id": 5,
       "name": "Alaskan Thunderfuck",
-      "light": 132,
-      "temperature": 34,
+      "light": "132",
+      "temperature": "34",
       "water": 39
     }
   ]
