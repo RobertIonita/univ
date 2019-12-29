@@ -8,10 +8,13 @@ var updatePreferences,
             node = node.parentElement;
         return node;
     },
-    updateCurrentAsync = (newPreference, newId) => {
+    updateCurrentAsync = (record) => {
         data = {
-            "current": newPreference,
-            "currentId": newId
+            "current": record.name,
+            "currentId": record.id,
+            "light": record.light,
+            "temperature": record.temperature,
+            "water": record.water
         }
         fetch(API + ':3000/preferences/0', {
             headers: { "Content-type": "application/json" },
@@ -22,14 +25,11 @@ var updatePreferences,
             .then(json => console.log(json))
     }
 
-
 async function getRecordsAsync(url) {
     let response = await fetch(url),
         data = await response.json()
     return data;
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         origin = document.querySelector('[value="' + currentName + '"]'),
                         dataId = origin.getAttribute('data-id');
 
-                    updateCurrentAsync(currentName, dataId);
-
                     currentId = getRecordsAsync(API + ':3000/preferences/' + dataId)
                         .then(data => {
+                            updateCurrentAsync(data);
                             inputs[0].value = data.light;
                             inputs[1].value = data.temperature;
                             inputs[2].value = data.water;
                         });
+
                 });
             })
         });

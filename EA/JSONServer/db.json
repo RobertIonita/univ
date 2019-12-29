@@ -35,8 +35,11 @@
   "preferences": [
     {
       "id": 0,
-      "current": "Cannasutra",
-      "currentId": "4"
+      "current": "Alaskan Thunderfuck",
+      "currentId": 5,
+      "light": 132,
+      "temperature": 34,
+      "water": 39
     },
     {
       "id": 1,

@@ -14,23 +14,14 @@ async function getRecordsAsync(url) {
 document.addEventListener('DOMContentLoaded', function () {
     const api = "http://" + window.location.hostname;
     var items = document.querySelectorAll('.data .item b');
-    getRecordsAsync(api + ":3000/preferences")
-        .then(path => path.forEach(element => {
-            if (element.current != undefined) {
-                current = element.current;
-                document.querySelector('#wall .heading span').innerHTML = current;
-                return;
-            }
-            
-            if (element.name == current) {
-                items[0].innerHTML = element.light;
-                items[1].innerHTML = element.temperature;
-                items[2].innerHTML = element.water;
-            }
+    getRecordsAsync(api + ":3000/preferences/0")
+        .then(data => {
+            document.querySelector('#wall .heading span').innerHTML = data.current;
+            items[0].innerHTML = data.light;
+            items[1].innerHTML = data.temperature;
+            items[2].innerHTML = data.water;
             M.updateTextFields();
-            var selElems = document.querySelectorAll('select'),
-                selInstances = M.FormSelect.init(selElems);
-        }));
+        });
 
     var navElems = document.querySelectorAll('.sidenav')
         navOptions = {
