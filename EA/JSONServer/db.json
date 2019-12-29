@@ -55,6 +55,27 @@
       "value": "417",
       "set": "417",
       "id": "Xg2pGhd"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:18",
+      "value": "475",
+      "set": "475",
+      "id": "8Pz7k6K"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:21",
+      "value": "444",
+      "set": "444",
+      "id": "9hExf4v"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:24",
+      "value": "431",
+      "set": "431",
+      "id": "FCRtktj"
     }
   ],
   "temperature": [
@@ -113,6 +134,27 @@
       "value": "417",
       "set": "417",
       "id": "x_53wT-"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:18",
+      "value": "475",
+      "set": "475",
+      "id": "WLJlMPF"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:21",
+      "value": "444",
+      "set": "444",
+      "id": "hBUpme5"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:24",
+      "value": "431",
+      "set": "431",
+      "id": "ca-6ZPG"
     }
   ],
   "water": [
@@ -171,13 +213,27 @@
       "value": "417",
       "set": "417",
       "id": "Xi009Tq"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:18",
+      "value": "475",
+      "set": "475",
+      "id": "h2Bfefa"
+    },
+    {
+      "date": "27_12_2019",
+      "time": "23:39:21",
+      "value": "444",
+      "set": "444",
+      "id": "hIZ1QIG"
     }
   ],
   "preferences": [
     {
       "id": 0,
-      "current": "Alaskan Thunderfuck",
-      "currentId": "5"
+      "current": "Cannasutra",
+      "currentId": "4"
     },
     {
       "id": 1,

@@ -1,15 +1,15 @@
-import requests
-import serial
+import requests, serial, time
 from datetime import datetime
 
-API = "http://192.168.1.100:3000"
+API = "http://192.168.1.105:3000"
 sensor = "DH11"
 serial_port = '/dev/cu.wchusbserialfa130'
-baud_rate = 9600
+baud_rate = 115200
 today = datetime.now()
 today = today.strftime("%d_%m_%Y")
 log_file = "Logs/log_"+today+".txt"
-ser = serial.Serial(serial_port, baud_rate)
+ser = serial.Serial(serial_port, baud_ratetimeout=.1)
+time.sleep(1) #give the connection a second to settle)
 data = []
 log = {}
 while True:
