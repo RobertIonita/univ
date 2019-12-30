@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     </tr>
                 </thead>
                 <tbody>`;
-        records.sort((a, b) => (a.Likes < b.Likes) ? 1 : -1);
         records.forEach(element => {
             logs_container.querySelector('tbody').innerHTML += `
                     <tr class="log">
@@ -44,21 +43,9 @@ document.addEventListener('DOMContentLoaded', function () {
         var tab = document.querySelector('.tabs .active');
         return tab.innerHTML;
     }
-    likeLog = function (id) {
-        fetch(url + '/like/' + id, { method: 'PUT' })
-        let counter = nearest("actions_aria", event.target).querySelector("span");
-        counter.innerHTML = Number(counter.innerHTML) + 1;
-    }
-    dislikeLog = (id) => {
-        fetch(url + '/dislike/' + id, { method: 'PUT' })
-        let counter = nearest("actions_aria", event.target).querySelector("span");
-        counter.innerHTML == "0" ? 0 : counter.innerHTML = Number(counter.innerHTML) - 1;
-    }
     deleteLog = (id) => {
-
         fetch(api + '/' + getActiveTab() + '/' + id, { method: 'DELETE' })
         logs_container.querySelector('tbody').removeChild(nearest("log", event.target));
-
     }
 
     var navElems = document.querySelectorAll('.sidenav'),
