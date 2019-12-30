@@ -1,8 +1,8 @@
 import requests, serial, time
 from datetime import datetime
 
-API = "http://192.168.0.45:3000"
-preferences_endpoint = "http://192.168.0.45:3000/preferences/0"
+API = "http://192.168.1.102:3000"
+preferences_endpoint = API+"/preferences/0"
 sensor = "DH11"
 serial_port = '/dev/cu.wchusbserialfa130'
 baud_rate = 115200
@@ -16,7 +16,7 @@ log = {}
 
 r = requests.get(url=preferences_endpoint)
 current = r.json()
-config_msg = str(list(current)[3:6]).replace(", ", "e", 2).replace("[","",1).replace("]","e",1)
+config_msg = current['light']+"e"+current['temperature']+"e"+current['water']+"ef"
 print (config_msg)
 while True:
     ser.write(config_msg.encode())
@@ -52,6 +52,8 @@ while True:
                 "set": line[5]
             }
             rsp_light = requests.post(url=API+"/light", data=log_light)
-            rsp_temperature = requests.post(url=API+"/temperature", data=log_temperature)
+            time.sleep(.5)  # give the connection a second to settle)
             rsp_water = requests.post(url=API+"/water", data=log_water)
+            time.sleep(.5)  # give the connection a second to settle)
+            rsp_temperature = requests.post(url=API+"/temperature", data=log_temperature)
             print(line, rsp_light.text, rsp_temperature.text, rsp_water.text)
