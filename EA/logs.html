@@ -39,16 +39,18 @@
         <div class="pick_time">
             <span>Logs from:</span>
             <form>
+                <!-- <form onsubmit="setFilter()"> -->
                 <input type="text" placeholder="Date" class="datepicker">
                 <input type="text" placeholder="Time" class="timepicker">
-                <input type="submit">
+                <!-- <input type="submit"> -->
+                <input type="button" value="Submit" onclick="setFilter()">
             </form>
         </div>
         <div class="row">
             <div class="col s12">
                 <ul class="tabs indigo">
                     <li class="tab col s4"><a href="#light">Light</a></li>
-                    <li class="tab col s4"><a href="#temperature"  class="active">Temperature</a></li>
+                    <li class="tab col s4"><a href="#temperature" class="active">Temperature</a></li>
                     <li class="tab col s4"><a href="#water">Water</a></li>
                 </ul>
             </div>

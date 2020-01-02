@@ -1,9 +1,9 @@
-var makeLog, likeLog, deleteLog, deleteLog;
-var nearest = (name, node) => {
-    while (node.className.indexOf(name) == -1 && parent != null)
-        node = node.parentElement;
-    return node;
-}
+var makeLog, likeLog, deleteLog, deleteLog, setFilter,
+    nearest = (name, node) => {
+        while (node.className.indexOf(name) == -1 && parent != null)
+            node = node.parentElement;
+        return node;
+    }
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector("form"),
@@ -27,13 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then((myJson) => {
-            console.log(myJson);
+            // console.log(myJson);
         });
     var renderLogs = (records) => {
         logs_container.innerHTML = `
             <table class="striped centered">
                 <thead>
                     <tr>
+                        <th>Date</th>
                         <th>Time</th>
                         <th>Value</th>
                         <th>Set</th>
@@ -44,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         records.forEach(element => {
             logs_container.querySelector('tbody').innerHTML += `
                     <tr class="log">
+                        <td>${element.date}</td>
                         <td>${element.time}</td>
                         <td>${element.value}</td>
                         <td>${element.set}</td>
@@ -51,16 +53,33 @@ document.addEventListener('DOMContentLoaded', function () {
                     </tr>`
         });
     }
-    var getActiveTab = () => {
-        var tab = document.querySelector('.tabs .active');
-        return tab.innerHTML;
-    }
     deleteLog = (id) => {
         fetch(api + '/' + getActiveTab() + '/' + id, { method: 'DELETE' })
         logs_container.querySelector('tbody').removeChild(nearest("log", event.target));
     }
-
-    var navElems = document.querySelectorAll('.sidenav'),
+    setFilter = () => {
+        let date = this.querySelector(".datepicker").value,
+            time = this.querySelector(".timepicker").value;
+        if (date != "" && time != "") {
+            updateLogs(getActiveTab().toLowerCase(), date, time + ":00")
+        }
+        else {
+            M.toast({ html: 'Please select date and time' })
+        }
+    }
+    var getActiveTab = () => {
+        var tab = document.querySelector('.tabs .active');
+        return tab.innerHTML;
+    },
+        updateLogs = (type, date, time) => {
+            let location = api + `/${type}?q=${date}&time_gte=${time}&_sort=time&_order=desc&_page=1&_limit=10`;
+            getRecordsAsync(location)
+                .then(data => {
+                    renderLogs(data)
+                    console.log(type, data, logs_container, location)
+                })
+        }
+    navElems = document.querySelectorAll('.sidenav'),
         tabElems = document.querySelectorAll('.tabs'),
         navOptions = {
             "edge": "right"
@@ -74,12 +93,16 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         datepicker = document.querySelectorAll('.datepicker'),
         timepicker = document.querySelectorAll('.timepicker'),
-        timeOptions = {
-            "twelveHour": false
+        currentDate = new Date(),
+        dateOptions = {
+            "maxDate": currentDate
         }
+    timeOptions = {
+        "twelveHour": false
+    }
 
-        M.Sidenav.init(navElems, navOptions);
-        M.Datepicker.init(datepicker);
-        M.Timepicker.init(timepicker, timeOptions);
-        M.Tabs.init(tabElems, tabOptions);
+    M.Sidenav.init(navElems, navOptions);
+    M.Datepicker.init(datepicker, dateOptions);
+    M.Timepicker.init(timepicker, timeOptions);
+    M.Tabs.init(tabElems, tabOptions);
 });

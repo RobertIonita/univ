@@ -7,7 +7,7 @@ sensor = "DH11"
 serial_port = '/dev/cu.wchusbserialfa130'
 baud_rate = 115200
 today = datetime.now()
-today = today.strftime("%d_%m_%Y")
+today = today.strftime("%b %d, %Y")
 log_file = "Logs/log_"+today+".txt"
 ser = serial.Serial(serial_port, baud_rate, timeout=.1)
 time.sleep(1)  # give the connection a second to settle)
