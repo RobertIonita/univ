@@ -83,8 +83,10 @@ document.addEventListener('DOMContentLoaded', function () {
         datepicker = document.querySelectorAll('.datepicker'),
         timepicker = document.querySelectorAll('.timepicker'),
         currentDate = new Date(),
+        currentYear = currentDate.getFullYear(),
         dateOptions = {
-            "maxDate": currentDate
+            "maxDate": currentDate,
+            "yearRange": [currentYear - 5, currentYear]
         }
     timeOptions = {
         "twelveHour": false
