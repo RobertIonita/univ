@@ -14,21 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
             data = await response.json()
         return data;
     }
-    getRecordsAsync(api + '/temperature?_sort=time&_order=desc&_page=1&_limit=10')
+    getRecordsAsync(api + '/light?_sort=time&_order=desc&_page=1&_limit=10')
         .then(data => {
             renderLogs(data)
-            // var req = new XMLHttpRequest();
-            // req.open('GET', api + '/light?_sort=time&_order=desc&_page=1&_limit=10', false);
-            // req.send(null);
-            // var headers = req.getAllResponseHeaders();
         })
-    fetch(api + '/light?_sort=time&_order=desc&_page=1&_limit=10')
-        .then((response) => {
-            return response.json();
-        })
-        .then((myJson) => {
-            // console.log(myJson);
-        });
     var renderLogs = (records) => {
         logs_container.innerHTML = `
             <table class="striped centered">
