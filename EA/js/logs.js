@@ -84,7 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
         timepicker = document.querySelectorAll('.timepicker'),
         currentDate = new Date(),
         dateOptions = {
-            "maxDate": currentDate
+            "maxDate": currentDate,
+            "yearRange": [2015,2020]
         }
     timeOptions = {
         "twelveHour": false
