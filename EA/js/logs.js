@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <table class="striped centered">
                 <thead>
                     <tr>
-                        <th>Date</th>
+                        <th class="date_cell">Date</th>
                         <th>Time</th>
                         <th>Value</th>
                         <th>Set</th>
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         records.forEach(element => {
             logs_container.querySelector('tbody').innerHTML += `
                     <tr class="log">
-                        <td>${element.date}</td>
+                        <td class="date_cell">${element.date}</td>
                         <td>${element.time}</td>
                         <td>${element.value}</td>
                         <td>${element.set}</td>

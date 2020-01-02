@@ -39,4 +39,10 @@
             }
         }
     }
+
+    .date_cell {
+        @media screen and (max-width:374px) {
+            display: none;
+        }
+    }
 }
