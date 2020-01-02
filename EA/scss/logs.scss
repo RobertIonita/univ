@@ -2,16 +2,24 @@
 @use 'partitials/global';
 
 #wall {
-    padding: 0 15px;
+    padding: 0 30px;
+    @media screen and (max-width:425px) {
+        padding: 0 15px;
+    }
+
     box-sizing: border-box;
 
     .pick_time {
         margin: 20px 0 60px;
-        padding: 0 15px;
+        padding: 10px 15px;
 
         &>span {
             font-size: 18px;
         }
+    }
+
+    .tabs_container>div {
+        padding: 0;
     }
 
     .tabs {
@@ -30,6 +38,8 @@
     }
 
     #logs {
+        margin: 0 auto 40px;
+
         .log {
             padding: 10px;
             box-sizing: border-box;
