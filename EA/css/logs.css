@@ -167,7 +167,7 @@ header #slide-out .divider {
   box-sizing: border-box;
 }
 #wall .pick_time {
-  margin: 20px 0;
+  margin: 20px 0 60px;
   padding: 0 15px;
 }
 #wall .pick_time > span {
