@@ -5,6 +5,15 @@
     padding: 0 15px;
     box-sizing: border-box;
 
+    .pick_time {
+        margin: 20px 0;
+        padding: 0 15px;
+
+        &>span {
+            font-size: 18px;
+        }
+    }
+
     .tabs {
         border-radius: 4px;
 

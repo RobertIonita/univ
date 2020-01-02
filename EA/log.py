@@ -17,7 +17,6 @@ log = {}
 r = requests.get(url=preferences_endpoint)
 current = r.json()
 config_msg = current['light']+"e"+current['temperature']+"e"+current['water']+"ef"
-print (config_msg)
 while True:
     ser.write(config_msg.encode())
     line = ser.readline().strip()

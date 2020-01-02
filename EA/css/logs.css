@@ -69,6 +69,22 @@ input::-webkit-inner-spin-button {
   border-width: 2px;
 }
 
+input[type=submit], input[type=button] {
+  margin: 10px 0;
+  background: #3f51b5;
+  color: white;
+  height: 32px;
+  border: none;
+  float: right;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+.picker__date-display,
+.picker__weekday-display {
+  background-color: #3f51b5;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -123,6 +139,13 @@ header #slide-out .divider {
 #wall {
   padding: 0 15px;
   box-sizing: border-box;
+}
+#wall .pick_time {
+  margin: 20px 0;
+  padding: 0 15px;
+}
+#wall .pick_time > span {
+  font-size: 18px;
 }
 #wall .tabs {
   border-radius: 4px;

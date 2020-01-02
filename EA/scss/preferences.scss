@@ -25,20 +25,7 @@
         .input-field.col label {
             left: 0;
         }
-
-        input {
-
-            &[type="submit"],
-            &[type="button"] {
-                background: rgb(89, 89, 189);
-                color: white;
-                height: 32px;
-                border: none;
-                float: right;
-                font-size: 14px;
-            }
-        }
-
+        
         button {
             background: rgb(89, 89, 189);
             color: white;

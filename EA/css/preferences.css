@@ -69,6 +69,16 @@ input::-webkit-inner-spin-button {
   border-width: 2px;
 }
 
+#wall .form input[type=submit], #wall .form input[type=button] {
+  background: #5959bd;
+  color: white;
+  height: 32px;
+  border: none;
+  float: right;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
 .clickable {
   cursor: pointer;
 }
@@ -133,14 +143,6 @@ header #slide-out .divider {
 }
 #wall .form .input-field.col label {
   left: 0;
-}
-#wall .form input[type=submit], #wall .form input[type=button] {
-  background: #5959bd;
-  color: white;
-  height: 32px;
-  border: none;
-  float: right;
-  font-size: 14px;
 }
 #wall .form button {
   background: #5959bd;

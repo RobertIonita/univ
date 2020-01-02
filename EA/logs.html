@@ -35,12 +35,20 @@
 
     </header>
     <section id="wall">
-        <h4>Today logs</h4>
+        <h4>Watch logs</h4>
+        <div class="pick_time">
+            <span>Logs from:</span>
+            <form>
+                <input type="text" placeholder="Date" class="datepicker">
+                <input type="text" placeholder="Time" class="timepicker">
+                <input type="submit">
+            </form>
+        </div>
         <div class="row">
             <div class="col s12">
                 <ul class="tabs indigo">
-                    <li class="tab col s4"><a href="#light" class="active">Light</a></li>
-                    <li class="tab col s4"><a href="#temperature">Temperature</a></li>
+                    <li class="tab col s4"><a href="#light">Light</a></li>
+                    <li class="tab col s4"><a href="#temperature"  class="active">Temperature</a></li>
                     <li class="tab col s4"><a href="#water">Water</a></li>
                 </ul>
             </div>

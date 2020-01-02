@@ -43,6 +43,24 @@ input::-webkit-inner-spin-button {
     border-width: 2px;
 }
 
+input {
+    &[type=submit],
+    &[type=button] {
+        margin: 10px 0;
+        background: theme.$primary;
+        color: white;
+        height: 32px;
+        border: none;
+        float: right;
+        font-size: 14px;
+        border-radius: 2px;
+    }
+}
+
+.picker__date-display,
+.picker__weekday-display {
+    background-color: theme.$primary;
+}
 
 .clickable {
     cursor: pointer;
