@@ -11,10 +11,27 @@ void tempUtility();
 
 int main(void) // Driver function
 {
-    // tempUtility();
-    menu();
+    tempUtility();
+    // menu();
     return 0;
 }
+
+class Exception
+{
+public:
+    string message;
+    int data;
+    Exception()
+    {
+        this->message = "";
+        this->data = 0;
+    }
+    Exception(string mesage, int data)
+    {
+        this->message = mesage;
+        this->data = data;
+    }
+};
 
 class Base // Base class
 {
@@ -22,8 +39,9 @@ private:
     string manufacturer, // Google/Apple/..
         color;           // White/Black/..
     unsigned short int
-        price,  // in USD
-        weight; // in grams
+        price,    // in USD
+        weight,   // in grams
+        category; // 0 - mobile / !0 - landline
     Base *next;
 
 public:
@@ -31,20 +49,22 @@ public:
         string manufacturer,
         string color,
         unsigned short int price,
-        unsigned short int weight)
+        unsigned short int weight,
+        unsigned short int category)
     {
         this->manufacturer = manufacturer;
         this->color = color;
         this->price = price;
         this->weight = weight;
+        this->category = category;
     }
     virtual void display() // Display Base class object fileds
     {
         cout << "\n------------------------------------\n";
         cout << "\nManufacturer: " << this->manufacturer;
         cout << "\nColor: " << this->color;
-        cout << "\nPrice: " << this->price;
-        cout << "\nWeight: " << this->weight;
+        cout << "\nPrice: $" << this->price;
+        cout << "\nWeight: " << this->weight << "g";
     }
     virtual Base *getData() // Get Base class object
     {
@@ -68,10 +88,12 @@ public:
         string manufacturer,
         string color,
         unsigned short int price,
-        unsigned short int weight) : Base(manufacturer,
-                                          color,
-                                          price,
-                                          weight)
+        unsigned short int weight,
+        unsigned short int category) : Base(manufacturer,
+                                            color,
+                                            price,
+                                            weight,
+                                            category)
     {
         this->screen = screen;
         this->operatingSystem = operatingSystem;
@@ -91,7 +113,7 @@ class Size // Utility class to store size
 public:
     unsigned short int
         width,     // in mm
-        height,    // in mm
+        length,    // in mm
         thickness; // in mm
     Size *getData()
     {
@@ -104,7 +126,7 @@ class Landline : public Base // Derived class Landline extends class Base
 private:
     unsigned short int
         type : 1,       // 0 - Analog/ 1 - Digital
-        ringtoneVolume; // in db
+        ringtoneVolume; // in dB
     Size *size;         // Size of landline
 
 public:
@@ -115,22 +137,27 @@ public:
         string manufacturer,
         string color,
         unsigned short int price,
-        unsigned short int weight) : Base(manufacturer,
-                                          color,
-                                          price,
-                                          weight)
+        unsigned short int weight,
+        unsigned short int category) : Base(manufacturer,
+                                            color,
+                                            price,
+                                            weight,
+                                            category)
     {
-        this->size = size->getData();
+        this->size = size;
         this->type = type;
         this->ringtoneVolume = ringtoneVolume;
     }
     void display() // Display Landline class object and Base class object fileds
     {
+        string techType;
+        type ? techType = "Digital" : techType = "Analog";
+
         Base::display(); // Display Base class object fileds
-        cout << "\nType: " << type ? "Digital" : "Analog";
-        cout << "\nRingtone volume: " << ringtoneVolume;
+        cout << "\nType: " << techType;
+        cout << "\nRingtone volume: " << ringtoneVolume << "dB";
         cout << "\nWidth: " << size->width << "mm";
-        cout << "\nHeight: " << size->height << "mm";
+        cout << "\nLength: " << size->length << "mm";
         cout << "\nThickness: " << size->thickness << "mm";
     }
     friend class List;
@@ -149,13 +176,20 @@ void List::addNode(Base *node)
 {
     Base *bptr;
     bptr = head;
-
     if (bptr)
     {
-        while (bptr->next && (bptr->next)->color < node->color)
-            bptr = bptr->next;
-        node->next = bptr->next;
-        bptr->next = node;
+        if (node->color < bptr->color)
+        {
+            node->next = head;
+            head = node;
+        }
+        else
+        {
+            while (bptr->next && (bptr->next)->color < node->color)
+                bptr = bptr->next;
+            node->next = bptr->next;
+            bptr->next = node;
+        }
     }
     else
         head = node;
@@ -182,13 +216,18 @@ private:
     string manufacturer, // Google/Apple/..
         color;           // White/Black/..
     unsigned short int
-        price,  // in USD
-        weight; // in grams
+        price,    // in USD
+        weight,   // in grams
+        category; // 0 - mobile / !0 - landline
 public:
     Base *bptr;
+    int getCategory()
+    {
+        return this->category;
+    }
     Base *construnctBase()
     {
-        bptr = new Base(manufacturer, color, price, weight);
+        bptr = new Base(manufacturer, color, price, weight, category);
         return bptr;
     }
     friend ostream &operator<<(ostream &out, Overload &stream);
@@ -202,13 +241,20 @@ ostream &operator<<(ostream &out, Overload &stream) // function to overload disp
 istream &operator>>(istream &in, Overload &stream) // function to overload reading
 {
     cout << "Manufacturer: ";
-    cin >> stream.manufacturer;
+    // cin >> stream.manufacturer;
+    stream.manufacturer = "LG";
     cout << "Color: ";
-    cin >> stream.color;
+    // cin >> stream.color;
+    stream.color = "White";
     cout << "Price: ";
-    cin >> stream.price;
+    // cin >> stream.price;
+    stream.price = 230;
     cout << "Weight: ";
-    cin >> stream.weight;
+    // cin >> stream.weight;
+    stream.weight = 139;
+    cout << "Category (0 - mobile / !0 - landline): ";
+    // cin >> stream.category;
+    stream.category = 1;
     return in;
 }
 
@@ -219,7 +265,91 @@ void List::insert()
     cout << stream;  // overload displaying
     cin >> stream;   // overload reading
     bptr = stream.construnctBase();
-    this->addNode(bptr);
+
+    if (stream.getCategory() == 0)
+    { // mobile
+        Mobile *mptr;
+        string screen,
+            operatingSystem;
+        unsigned short int warranty;
+
+        try
+        {
+            cout << "Screen technology: ";
+            cin >> screen;
+            cout << "Operating system: ";
+            cin >> operatingSystem;
+            cout << "Warranty: ";
+            cin >> warranty;
+            if (warranty < 6)
+                throw(Exception("\nWarranty should be at least 6 months", warranty));
+        }
+        catch (Exception e)
+        {
+            do
+            {
+                cout << e.message;
+                cout << "\nInseart a valid warranty period: ";
+                cin >> warranty;
+            } while (warranty < 6);
+        }
+        mptr = new Mobile(screen,
+                          operatingSystem,
+                          warranty,
+                          bptr->manufacturer,
+                          bptr->color,
+                          bptr->price,
+                          bptr->weight,
+                          bptr->category);
+        this->addNode(mptr);
+    }
+    else
+    { // landline
+        Landline *lptr;
+        Size size;
+        unsigned short int
+            type,
+            ringtoneVolume;
+
+        cout << "Width (mm): ";
+        // cin >> size.width;
+        size.width = 203;
+        cout << "Length (mm): ";
+        // cin >> size.length;
+        size.length = 308;
+        cout << "Thickness (mm): ";
+        // cin >> size.thickness;
+        size.thickness = 49;
+        cout << "Type (0 - analog / 1 - digital): ";
+        // cin >> type;
+        type = 1;
+        try
+        {
+            cout << "Ringtone volume (dB): ";
+            // cin >> ringtoneVolume;
+            ringtoneVolume = 56;
+            if (ringtoneVolume >= 160)
+                throw(Exception("\nYour eardrums will burst at this point", ringtoneVolume));
+        }
+        catch (Exception e)
+        {
+            do
+            {
+                cout << e.message;
+                cout << "\nInseart a safe ringtone volume: ";
+                cin >> ringtoneVolume;
+            } while (ringtoneVolume >= 160);
+        }
+        lptr = new Landline(&size,
+                            type,
+                            ringtoneVolume,
+                            bptr->manufacturer,
+                            bptr->color,
+                            bptr->price,
+                            bptr->weight,
+                            bptr->category);
+        this->addNode(lptr);
+    }
 }
 
 int menu()
@@ -238,14 +368,15 @@ int menu()
         cout << "\n7. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
         cout << "\n8. Ieșire";
         cout << "\nOptiunea aleasă: ";
-        cin >> option;
-
+        // cin >> option;
+        option = 2;
         switch (option)
         {
         case 1:
             break;
         case 2:
             list.insert();
+            list.displayList();
             break;
         case 3:
             list.displayList();
@@ -271,6 +402,7 @@ int menu()
 void tempUtility()
 {
     Base *base;
+    List list;
     Mobile *mobile;
     Landline *landline;
 
@@ -285,17 +417,20 @@ void tempUtility()
         weight = 162,
         warranty = 24,
         volume = 45,
-        type = 1;
+        type = 1,
+        category = 0;
 
     Size size;
     size.width = 200;
-    size.height = 240;
+    size.length = 240;
     size.thickness = 80;
 
-    base = new Base(manuf, color, price, weight);
-    mobile = new Mobile(screen, os, warranty, manuf, color, price, weight);
-    landline = new Landline(&size, type, volume, manuf, color, price, weight);
+    base = new Base(manuf, color, price, weight, category);
+    mobile = new Mobile(screen, os, warranty, manuf, color, price, weight, category);
+    category = 1;
+    landline = new Landline(&size, type, volume, manuf, color, price, weight, category);
     base->display();
-    mobile->display();
-    landline->display();
+    list.addNode(mobile);
+    list.addNode(landline);
+    list.displayList();
 }
