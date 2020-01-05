@@ -28,7 +28,6 @@ public:
         cout << "Material: " << material << "\n";
         cout << "Culoare: " << culoare << "\n";
         cout << "Producator: " << producator << "\n";
-        cout << "Type: " << tip << "\n";
     }
 
     inline virtual string getNume() { return 0; }
@@ -98,7 +97,7 @@ public:
     void stergere(string cul);
     void cautare_lista(string materiaaal);
     void salvare();
-    void citire();
+    void citire(Lista &list);
 };
 
 void Lista::cautare_lista(string materiaaal)
@@ -276,7 +275,7 @@ void introducere(Lista &list, int x)
     }
 }
 
-void Lista::citire()
+void Lista::citire(Lista &list)
 {
     Instrumente *a;
     Pian *pian;
@@ -295,14 +294,14 @@ void Lista::citire()
                 f >> getNume;
                 f >> getVechime;
                 pian = new Pian(tipp, materiall, culoaree, producatorr, getNume, getVechime);
-                adaugare(pian);
+                list.adaugare(pian);
             }
             if (tipp == 3)
             {
                 f >> brandd;
                 f >> octavee;
                 flaut = new Flaut(tipp, materiall, culoaree, producatorr, brandd, octavee);
-                adaugare(flaut);
+                list.adaugare(flaut);
             }
         }
     }
@@ -323,7 +322,6 @@ void Lista::salvare()
             f << a->material << " ";
             f << a->culoare << " ";
             f << a->producator << " ";
-            cout << "\ntype: " << a->tip;
             if (a->tip == 2)
             {
                 f << a->getNume() << " ";
@@ -363,7 +361,7 @@ int main()
         switch (opt)
         {
         case 1:
-            list.citire();
+            list.citire(list);
             break;
         case 2:
             introducere(list, 2);
