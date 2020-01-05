@@ -169,7 +169,7 @@ public:
     void addNode(Base *node);
     void displayList();
     void insert();
-    void writeDown();
+    void writeDown(unsigned short int price, string path);
     void deleteNode();
     void populate();
     void editPrice();
@@ -229,33 +229,36 @@ void List::displayList()
     cout << "\n------------------------------------\n";
 }
 
-void List::writeDown()
+void List::writeDown(unsigned short int price, string path)
 {
     Base *bptr;
     bptr = head;
     ofstream file;
 
-    file.open("POO/Project/assets/output.txt");
+    file.open(path);
     if (file.is_open())
     {
         while (bptr)
         {
-            file << bptr->category << " ";
-            file << bptr->manufacturer << " ";
-            file << bptr->color << " ";
-            file << bptr->price << " ";
-            file << bptr->weight << " ";
-            if (bptr->category == 0)
-            { // mobile
-                file << bptr->getScreenType() << " ";
-                file << bptr->getOS() << " ";
-                file << bptr->getWarranty() << "\n";
-            }
-            else
-            { // landline
-                file << bptr->getTechType() << " ";
-                file << bptr->getRingVolume() << " ";
-                file << bptr->getSize() << "\n";
+            if (bptr->price > price)
+            {
+                file << bptr->category << " ";
+                file << bptr->manufacturer << " ";
+                file << bptr->color << " ";
+                file << bptr->price << " ";
+                file << bptr->weight << " ";
+                if (bptr->category == 0)
+                { // mobile
+                    file << bptr->getScreenType() << " ";
+                    file << bptr->getOS() << " ";
+                    file << bptr->getWarranty() << "\n";
+                }
+                else
+                { // landline
+                    file << bptr->getTechType() << " ";
+                    file << bptr->getRingVolume() << " ";
+                    file << bptr->getSize() << "\n";
+                }
             }
             bptr = bptr->next;
         }
@@ -501,6 +504,7 @@ int menu()
     unsigned short int option;
     List list;
     list.head = NULL;
+    unsigned short int price;
     while (1)
     {
         cout << "\n0. Ieșire";
@@ -525,7 +529,7 @@ int menu()
             break;
         case 3:
             list.displayList();
-            list.writeDown();
+            list.writeDown(0, "POO/Project/assets/output.txt");
             break;
         case 4:
             list.deleteNode();
@@ -534,6 +538,9 @@ int menu()
             list.editPrice();
             break;
         case 6:
+            cout << "\nInsert price limit: ";
+            cin >> price;
+            list.writeDown(price, "POO/Project/assets/expensier.txt");
             break;
         default:
             cout << "\nOptiunea invalida: ";
