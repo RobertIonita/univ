@@ -1,5 +1,1 @@
-1
-0
-1
-1
-0
+0 Google White 980 193 OLED Android 12

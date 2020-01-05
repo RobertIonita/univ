@@ -171,6 +171,7 @@ public:
     void insert();
     void writeDown();
     void deleteNode();
+    void popuate();
 };
 
 void List::addNode(Base *node)
@@ -431,6 +432,41 @@ void List::deleteNode()
         cout << "\nList is empty";
 }
 
+void List::popuate()
+{
+    Base *bptr;
+    Mobile *mptr;
+    Landline *lptr;
+    bptr = head;
+    ifstream file;
+    string screen, manufacturer, color, OS;
+    unsigned short int warranty, price, weight, category, type, volume;
+    float size;
+
+    file.open("POO/Project/assets/input.txt");
+    if (file.is_open())
+    {
+        while (file >> category >> manufacturer >> color >> price)
+        {
+            if (category == 0)
+            {
+                file >> screen >> OS >> warranty;
+                mptr = new Mobile(screen, OS, warranty, manufacturer, color, price, weight, category);
+                this->addNode(mptr);
+            }
+            else
+            {
+                file >> size >> type >> volume;
+                lptr = new Landline(size, type, volume, manufacturer, color, price, weight, category);
+                this->addNode(lptr);
+            }
+        }
+        file.close();
+    }
+    else
+        cout << "\nFile was not open";
+}
+
 int menu()
 {
     unsigned short int option;
@@ -451,6 +487,7 @@ int menu()
         switch (option)
         {
         case 1:
+            list.popuate();
             break;
         case 2:
             list.insert();
