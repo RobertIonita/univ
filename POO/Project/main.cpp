@@ -503,17 +503,20 @@ int menu()
     list.head = NULL;
     while (1)
     {
+        cout << "\n0. Ieșire";
         cout << "\n1. Încarcare informații dintr-un fișier.";
         cout << "\n2. Adăugarea unui articol nou";
         cout << "\n3. Afișarea articolelor pe categorie și salvarea în fișier";
         cout << "\n4. Stergerea unei articol după producător și culoare.";
         cout << "\n5. Modificarea prețului";
         cout << "\n6. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
-        cout << "\n7. Ieșire";
         cout << "\nOptiunea aleasă: ";
         cin >> option;
         switch (option)
         {
+        case 0:
+            return 0;
+            break;
         case 1:
             list.populate();
             break;
@@ -531,9 +534,6 @@ int menu()
             list.editPrice();
             break;
         case 6:
-            break;
-        case 7:
-            return 0;
             break;
         default:
             cout << "\nOptiunea invalida: ";
