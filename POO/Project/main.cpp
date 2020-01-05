@@ -442,11 +442,11 @@ void List::popuate()
     string screen, manufacturer, color, OS;
     unsigned short int warranty, price, weight, category, type, volume;
     float size;
-
+    string str;
     file.open("POO/Project/assets/input.txt");
     if (file.is_open())
     {
-        while (file >> category >> manufacturer >> color >> price)
+        while (file >> category >> manufacturer >> color >> price >> weight)
         {
             if (category == 0)
             {
