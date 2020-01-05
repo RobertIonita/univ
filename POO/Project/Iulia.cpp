@@ -95,15 +95,15 @@ public:
     void adaugare(Instrumente *a);
     void afisare_lista();
     void stergere(string cul);
-    void cautare_lista(string materiaaal);
+    void cautare_lista(Lista &list, string materiaaal);
     void salvare();
     void citire(Lista &list);
 };
 
-void Lista::cautare_lista(string materiaaal)
+void Lista::cautare_lista(Lista &list, string materiaaal)
 {
     Instrumente *a;
-    for (a = head; a && a->material != materiaaal; a = a->urm)
+    for (a = list.head; a && a->material != materiaaal; a = a->urm)
         ;
     if (a)
         a->afisare();
@@ -375,7 +375,7 @@ int main()
         case 5:
             cout << "Dati materialul: ";
             cin >> m;
-            list.cautare_lista(m);
+            list.cautare_lista(list, m);
             break;
         case 6:
             cout << "\nDati culoarea: ";
