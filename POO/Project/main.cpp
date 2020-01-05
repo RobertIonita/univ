@@ -171,7 +171,7 @@ public:
     void insert();
     void writeDown();
     void deleteNode();
-    void popuate();
+    void populate();
 };
 
 void List::addNode(Base *node)
@@ -432,7 +432,7 @@ void List::deleteNode()
         cout << "\nList is empty";
 }
 
-void List::popuate()
+void List::populate()
 {
     Base *bptr;
     Mobile *mptr;
@@ -487,7 +487,7 @@ int menu()
         switch (option)
         {
         case 1:
-            list.popuate();
+            list.populate();
             break;
         case 2:
             list.insert();
