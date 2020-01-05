@@ -172,6 +172,7 @@ public:
     void writeDown();
     void deleteNode();
     void populate();
+    void editPrice();
 };
 
 void List::addNode(Base *node)
@@ -466,6 +467,34 @@ void List::populate()
     else
         cout << "\nFile was not open";
 }
+void List::editPrice()
+{
+    Base *bptr;
+    bptr = head;
+    if (bptr)
+    {
+        string manufacturer;
+        unsigned short int price;
+        cout << "Manufacturer: ";
+        cin >> manufacturer;
+        cout << "Price: ";
+        cin >> price;
+
+        while (bptr && (bptr->manufacturer != manufacturer || bptr->price != price))
+            bptr = bptr->next;
+
+        if (!bptr)
+            cout << "\nRecord not found";
+        else
+        {
+            cout << "\nInsert new price: ";
+            cin >> price;
+            bptr->price = price;
+        }
+    }
+    else
+        cout << "\nList is empty";
+}
 
 int menu()
 {
@@ -499,6 +528,7 @@ int menu()
             list.deleteNode();
             break;
         case 5:
+            list.editPrice();
             break;
         case 6:
             break;
