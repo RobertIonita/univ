@@ -11,8 +11,8 @@ void tempUtility();
 
 int main(void) // Driver function
 {
-    tempUtility();
-    // menu();
+    // tempUtility();
+    menu();
     return 0;
 }
 
@@ -70,6 +70,12 @@ public:
     {
         return this;
     }
+    inline virtual string getScreenType() { return 0; }
+    inline virtual string getOS() { return 0; }
+    inline virtual unsigned short int getWarranty() { return 0; }
+    inline virtual float getSize() { return 0; }
+    inline virtual unsigned short int getTechType() { return 0; }
+    inline virtual unsigned short int getRingVolume() { return 0; }
     friend class List;
 };
 
@@ -106,19 +112,11 @@ public:
         cout << "\nOperating system: " << operatingSystem;
         cout << "\nWarranty: " << warranty << " months";
     }
+    inline string getScreenType() { return this->screen; }
+    inline string getOS() { return this->operatingSystem; }
+    inline unsigned short int getWarranty() { return this->warranty; }
+
     friend class List;
-};
-class Size // Utility class to store size
-{
-public:
-    unsigned short int
-        width,     // in mm
-        length,    // in mm
-        thickness; // in mm
-    Size *getData()
-    {
-        return this;
-    }
 };
 
 class Landline : public Base // Derived class Landline extends class Base
@@ -127,11 +125,11 @@ private:
     unsigned short int
         type : 1,       // 0 - Analog/ 1 - Digital
         ringtoneVolume; // in dB
-    Size *size;         // Size of landline
+    float size;         // Size of landline
 
 public:
     Landline( // Derived class object constructor
-        Size *size,
+        float size,
         unsigned short int type,
         unsigned short int ringtoneVolume,
         string manufacturer,
@@ -156,10 +154,11 @@ public:
         Base::display(); // Display Base class object fileds
         cout << "\nType: " << techType;
         cout << "\nRingtone volume: " << ringtoneVolume << "dB";
-        cout << "\nWidth: " << size->width << "mm";
-        cout << "\nLength: " << size->length << "mm";
-        cout << "\nThickness: " << size->thickness << "mm";
+        cout << "\nSize: " << size << "inch";
     }
+    inline float getSize() { return this->size; }
+    inline unsigned short int getTechType() { return this->type; }
+    inline unsigned short int getRingVolume() { return this->ringtoneVolume; }
     friend class List;
 };
 
@@ -170,6 +169,7 @@ public:
     void addNode(Base *node);
     void displayList();
     void insert();
+    void writeDown();
 };
 
 void List::addNode(Base *node)
@@ -201,13 +201,70 @@ void List::displayList()
     bptr = head;
 
     if (!bptr)
-        cout << "List is empty";
+        cout << "\nList is empty";
     else
+    {
+        cout << "\n\t\tMobile:";
         while (bptr)
         {
-            bptr->display();
+            if (bptr->category == 0)
+                bptr->display();
             bptr = bptr->next;
         }
+        bptr = head;
+
+        cout << "\n\n\t\tLandline:";
+        while (bptr)
+        {
+            if (bptr->category == 1)
+            {
+                bptr->display();
+            }
+            bptr = bptr->next;
+        }
+    }
+    cout << "\n------------------------------------\n";
+}
+
+void List::writeDown()
+{
+    Base *bptr;
+    bptr = head;
+    ofstream file;
+
+    file.open("POO/Project/assets/output.txt");
+    if (file.is_open())
+    {
+        while (bptr)
+        {
+            file << bptr->category << " ";
+            file << bptr->manufacturer << " ";
+            file << bptr->color << " ";
+            file << bptr->price << " ";
+            file << bptr->weight << " ";
+            if (bptr->category == 0)
+            { // mobile
+                file << bptr->getScreenType() << " ";
+                file << bptr->getOS() << " ";
+                file << bptr->getWarranty() << "\n";
+            }
+            else
+            { // landline
+                file << bptr->getTechType() << " ";
+                file << bptr->getRingVolume() << " ";
+                file << bptr->getSize() << "\n";
+                cout << bptr->getTechType() << "\n";
+                cout << bptr->getRingVolume() << "\n";
+                cout << bptr->getSize() << "\n";
+            }
+            bptr = bptr->next;
+        }
+        file.close();
+    }
+    else
+    {
+        cout << "\nFile was not open";
+    }
 }
 
 class Overload // class used to overload operators
@@ -241,20 +298,15 @@ ostream &operator<<(ostream &out, Overload &stream) // function to overload disp
 istream &operator>>(istream &in, Overload &stream) // function to overload reading
 {
     cout << "Manufacturer: ";
-    // cin >> stream.manufacturer;
-    stream.manufacturer = "LG";
+    cin >> stream.manufacturer;
     cout << "Color: ";
-    // cin >> stream.color;
-    stream.color = "White";
+    cin >> stream.color;
     cout << "Price: ";
-    // cin >> stream.price;
-    stream.price = 230;
+    cin >> stream.price;
     cout << "Weight: ";
-    // cin >> stream.weight;
-    stream.weight = 139;
+    cin >> stream.weight;
     cout << "Category (0 - mobile / !0 - landline): ";
-    // cin >> stream.category;
-    stream.category = 1;
+    cin >> stream.category;
     return in;
 }
 
@@ -306,28 +358,19 @@ void List::insert()
     else
     { // landline
         Landline *lptr;
-        Size size;
+        float size;
         unsigned short int
             type,
             ringtoneVolume;
 
-        cout << "Width (mm): ";
-        // cin >> size.width;
-        size.width = 203;
-        cout << "Length (mm): ";
-        // cin >> size.length;
-        size.length = 308;
-        cout << "Thickness (mm): ";
-        // cin >> size.thickness;
-        size.thickness = 49;
+        cout << "Size (inch): ";
+        cin >> size;
         cout << "Type (0 - analog / 1 - digital): ";
-        // cin >> type;
-        type = 1;
+        cin >> type;
         try
         {
             cout << "Ringtone volume (dB): ";
-            // cin >> ringtoneVolume;
-            ringtoneVolume = 56;
+            cin >> ringtoneVolume;
             if (ringtoneVolume >= 160)
                 throw(Exception("\nYour eardrums will burst at this point", ringtoneVolume));
         }
@@ -340,7 +383,7 @@ void List::insert()
                 cin >> ringtoneVolume;
             } while (ringtoneVolume >= 160);
         }
-        lptr = new Landline(&size,
+        lptr = new Landline(size,
                             type,
                             ringtoneVolume,
                             bptr->manufacturer,
@@ -368,18 +411,17 @@ int menu()
         cout << "\n7. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
         cout << "\n8. Ieșire";
         cout << "\nOptiunea aleasă: ";
-        // cin >> option;
-        option = 2;
+        cin >> option;
         switch (option)
         {
         case 1:
             break;
         case 2:
             list.insert();
-            list.displayList();
             break;
         case 3:
             list.displayList();
+            list.writeDown();
             break;
         case 4:
             break;
@@ -419,16 +461,11 @@ void tempUtility()
         volume = 45,
         type = 1,
         category = 0;
-
-    Size size;
-    size.width = 200;
-    size.length = 240;
-    size.thickness = 80;
-
+    float size = 5.4;
     base = new Base(manuf, color, price, weight, category);
     mobile = new Mobile(screen, os, warranty, manuf, color, price, weight, category);
     category = 1;
-    landline = new Landline(&size, type, volume, manuf, color, price, weight, category);
+    landline = new Landline(size, type, volume, manuf, color, price, weight, category);
     base->display();
     list.addNode(mobile);
     list.addNode(landline);
