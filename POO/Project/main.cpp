@@ -479,9 +479,8 @@ int menu()
         cout << "\n3. Afișarea articolelor pe categorie și salvarea în fișier";
         cout << "\n4. Stergerea unei articol după producător și culoare.";
         cout << "\n5. Modificarea prețului";
-        cout << "\n6. Sortarea listei după culoare";
-        cout << "\n7. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
-        cout << "\n8. Ieșire";
+        cout << "\n6. Salvarea într-un fișier a articolelor după un preț citit de la tastatură.";
+        cout << "\n7. Ieșire";
         cout << "\nOptiunea aleasă: ";
         cin >> option;
         switch (option)
@@ -504,8 +503,6 @@ int menu()
         case 6:
             break;
         case 7:
-            break;
-        case 8:
             return 0;
             break;
         default:
