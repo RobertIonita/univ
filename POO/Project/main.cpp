@@ -170,6 +170,7 @@ public:
     void displayList();
     void insert();
     void writeDown();
+    void deleteNode();
 };
 
 void List::addNode(Base *node)
@@ -253,9 +254,6 @@ void List::writeDown()
                 file << bptr->getTechType() << " ";
                 file << bptr->getRingVolume() << " ";
                 file << bptr->getSize() << "\n";
-                cout << bptr->getTechType() << "\n";
-                cout << bptr->getRingVolume() << "\n";
-                cout << bptr->getSize() << "\n";
             }
             bptr = bptr->next;
         }
@@ -395,6 +393,44 @@ void List::insert()
     }
 }
 
+void List::deleteNode()
+{
+    Base *bptr, *aux;
+    bptr = aux = head;
+    string manufacturer,
+        color;
+    cout << "Manufacturer: ";
+    cin >> manufacturer;
+    cout << "Color: ";
+    cin >> color;
+
+    if (bptr)
+    {
+        while (bptr && (bptr->manufacturer != manufacturer || bptr->color != color))
+        {
+            aux = bptr;
+            bptr = bptr->next;
+        }
+        if (bptr)
+        {
+            if (bptr != aux)
+            {
+                aux->next = bptr->next;
+                delete bptr;
+            }
+            else
+            {
+                head = bptr->next;
+                delete bptr;
+            }
+        }
+        else
+            cout << "\nRecord not found";
+    }
+    else
+        cout << "\nList is empty";
+}
+
 int menu()
 {
     unsigned short int option;
@@ -424,6 +460,7 @@ int menu()
             list.writeDown();
             break;
         case 4:
+            list.deleteNode();
             break;
         case 5:
             break;
