@@ -1,1 +1,2 @@
 0 Google White 980 193 OLED Android 12
+1 LG Red 25 430 4.6 1 34
