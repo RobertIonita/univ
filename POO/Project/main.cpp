@@ -11,12 +11,11 @@ void tempUtility();
 
 int main(void) // Driver function
 {
-    // tempUtility();
     menu();
     return 0;
 }
 
-class Exception
+class Exception // Exception class
 {
 public:
     string message;
@@ -162,17 +161,17 @@ public:
     friend class List;
 };
 
-class List
+class List // Linked list class
 {
 public:
     Base *head;
-    void addNode(Base *node);
-    void displayList();
-    void insert();
-    void writeDown(unsigned short int price, string path);
-    void deleteNode();
-    void populate();
-    void editPrice();
+    void addNode(Base *node);                              // add node to the list
+    void displayList();                                    // display list
+    void insert();                                         // insert an item to the list
+    void writeDown(unsigned short int price, string path); // save records in a file
+    void deleteNode();                                     // remove an item from the list
+    void populate();                                       // upload records from a file
+    void editPrice();                                      // edit price in a record
 };
 
 void List::addNode(Base *node)
@@ -180,14 +179,14 @@ void List::addNode(Base *node)
     Base *bptr;
     bptr = head;
     if (bptr)
-    {
+    { // if list isn't empty
         if (node->color < bptr->color)
-        {
+        { // insert at the begining
             node->next = head;
             head = node;
         }
         else
-        {
+        { // insert at the end or in the middle
             while (bptr->next && (bptr->next)->color < node->color)
                 bptr = bptr->next;
             node->next = bptr->next;
@@ -209,7 +208,7 @@ void List::displayList()
     {
         cout << "\n\t\tMobile:";
         while (bptr)
-        {
+        { // display all records of the first derived class
             if (bptr->category == 0)
                 bptr->display();
             bptr = bptr->next;
@@ -218,7 +217,7 @@ void List::displayList()
 
         cout << "\n\n\t\tLandline:";
         while (bptr)
-        {
+        { // display all records of the second derived class
             if (bptr->category == 1)
             {
                 bptr->display();
@@ -239,7 +238,7 @@ void List::writeDown(unsigned short int price, string path)
     if (file.is_open())
     {
         while (bptr)
-        {
+        { // if list is not empty
             if (bptr->price > price)
             {
                 file << bptr->category << " ";
@@ -547,35 +546,4 @@ int menu()
             break;
         }
     }
-}
-
-void tempUtility()
-{
-    Base *base;
-    List list;
-    Mobile *mobile;
-    Landline *landline;
-
-    string
-        manuf = "Google",
-        color = "White",
-        screen = "OLED",
-        os = "Android";
-
-    unsigned short int
-        price = 2,
-        weight = 162,
-        warranty = 24,
-        volume = 45,
-        type = 1,
-        category = 0;
-    float size = 5.4;
-    base = new Base(manuf, color, price, weight, category);
-    mobile = new Mobile(screen, os, warranty, manuf, color, price, weight, category);
-    category = 1;
-    landline = new Landline(size, type, volume, manuf, color, price, weight, category);
-    base->display();
-    list.addNode(mobile);
-    list.addNode(landline);
-    list.displayList();
 }
