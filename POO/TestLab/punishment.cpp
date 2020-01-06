@@ -1,5 +1,26 @@
 #include <iostream>
+#include <ostream>
+#include <istream>
 using namespace std;
+
+class Exception
+{
+public:
+    string message;
+    int data;
+    Exception()
+    {
+        message = "";
+        data = 0;
+    };
+    Exception(
+        string message,
+        int data)
+    {
+        message = message;
+        data = data;
+    };
+};
 
 class Base
 {
@@ -16,31 +37,31 @@ public:
         int price,
         int category)
     {
-        manufacturer = manufacturer;
-        nrMotors = nrMotors;
-        price = price;
-        category = category;
+        this->manufacturer = manufacturer;
+        this->nrMotors = nrMotors;
+        this->price = price;
+        this->category = category;
     }
     virtual void display()
     {
-        cout << "\nManufacturer: " << manufacturer;
-        cout << "\nPrice: " << price;
-        cout << "\nNr motors: " << nrMotors;
+        std::cout << "\nManufacturer: " << manufacturer;
+        std::cout << "\nPrice: " << price;
+        std::cout << "\nNr motors: " << nrMotors;
     }
     friend class List;
 };
 
 class Traditional : Base
 {
-    int energyClass,
+    int energyClass;
+    string color,
         control;
-    string color;
 
 public:
     Traditional(
-        int energyClass,
-        int control,
         string color,
+        string control,
+        int energyClass,
         string manufactuter,
         int nrMotors,
         int price,
@@ -49,30 +70,31 @@ public:
                              price,
                              category)
     {
-        this->energyClass = energyClass;
         this->control = control;
         this->color = color;
+        this->energyClass = energyClass;
     }
     void display()
     {
         Base::display();
-        cout << "\nEnergy class: " << energyClass;
-        cout << "\nControl: " << control;
-        cout << "\nColor: " << color;
+        std::cout << "\nControl: " << control;
+        std::cout << "\nColor: " << color;
+        std::cout << "\nEnergy class: " << energyClass;
+        std::cout << "\n--------------------";
     }
     friend class List;
 };
 class Embeddable : Base
 {
     int type,
-        energyConsumption,
-        filter;
+        energyConsumption;
+    string filter;
 
 public:
     Embeddable(
         int type,
         int energyConsumption,
-        int filter,
+        string filter,
         string manufactuter,
         int nrMotors,
         int price,
@@ -81,16 +103,17 @@ public:
                              price,
                              category)
     {
-        type = type;
-        energyConsumption = energyConsumption;
-        filter = filter;
+        this->type = type;
+        this->energyConsumption = energyConsumption;
+        this->filter = filter;
     }
     void display()
     {
         Base::display();
-        cout << "\nType: " << type;
-        cout << "\nEnergy consumption: " << energyConsumption;
-        cout << "\nFilter: " << filter;
+        std::cout << "\nType: " << type;
+        std::cout << "\nFilter: " << filter;
+        std::cout << "\nEnergy consumption: " << energyConsumption;
+        std::cout << "\n--------------------";
     }
     friend class List;
 };
@@ -141,54 +164,33 @@ private:
         price;
 
 public:
-    inline string getManufacturer() { return manufacturer; }
-    inline int getCategory() { return category; }
-    inline int getNrMotors() { return nrMotors; }
-    inline int getPrice() { return price; }
+    Base *bptr;
+    Base *construnctBase()
+    {
+        bptr = new Base(manufacturer, nrMotors, price, category);
+        return bptr;
+    }
     friend ostream &operator<<(ostream &out, Overload &stream);
     friend istream &operator>>(istream &in, Overload &stream);
 };
 
 ostream &operator<<(ostream &out, Overload &stream)
 {
-    cout << "\nPay attention\n";
+    std::cout << "\nPay attention\n";
     return out;
 }
 istream &operator>>(istream &in, Overload &stream)
 {
-    cout << "Manufacturer: ";
-    // cin >> stream.manufacturer;
-    stream.manufacturer = "AA";
-    cout << "Nr of motors: ";
-    // cin >> stream.nrMotors;
-    stream.nrMotors = 12;
-    cout << "Price: ";
-    // cin >> stream.price;
-    stream.price = 13;
-    cout << "Category (0 - embeddable / !0 - traditional): ";
-    // cin >> stream.category;
-    stream.category = 1;
+    std::cout << "Manufacturer: ";
+    std::cin >> stream.manufacturer;
+    std::cout << "Nr of motors: ";
+    std::cin >> stream.nrMotors;
+    std::cout << "Price: ";
+    std::cin >> stream.price;
+    std::cout << "Category (0 - embeddable / !0 - traditional): ";
+    std::cin >> stream.category;
     return in;
 }
-
-class Exception
-{
-public:
-    string message;
-    int data;
-    Exception()
-    {
-        message = "";
-        data = 0;
-    };
-    Exception(
-        string message,
-        int data)
-    {
-        message = message;
-        data = data;
-    };
-};
 
 void List::insert(List &list)
 {
@@ -198,26 +200,24 @@ void List::insert(List &list)
         nrMotors,
         price;
     Overload stream;
-    cout << stream;
-    cin >> stream;
+    std::cout << stream;
+    std::cin >> stream;
+    bptr = stream.construnctBase();
 
-    if (stream.getCategory())
+    if (bptr->category)
     { // traditional
-        int energyClass,
+        int energyClass;
+        string color,
             control;
-        string color;
 
-        cout << "Control: ";
-        // cin >> control;
-        control = 14;
-        cout << "Color: ";
-        // cin >> color;
-        color = "aa";
+        std::cout << "Control: ";
+        std::cin >> control;
+        std::cout << "Color: ";
+        std::cin >> color;
         try
         {
-            cout << "Energy class: ";
-            // cin >> energyClass;
-            energyClass = 4;
+            std::cout << "Energy class: ";
+            std::cin >> energyClass;
             if (energyClass <= 0)
                 throw Exception("\nIt's supposed to be a positive integer", energyClass);
         }
@@ -225,36 +225,36 @@ void List::insert(List &list)
         {
             do
             {
-                cout << e.message;
-                cout << "\nEnter a valid value: ";
-                cin >> energyClass;
+                std::cout << e.message;
+                std::cout << "\nEnter a valid value: ";
+                std::cin >> energyClass;
             } while (energyClass <= 0);
         }
         Traditional *tptr;
-        tptr = new Traditional(energyClass,
-                               control,
+        tptr = new Traditional(control,
                                color,
-                               stream.getManufacturer(),
-                               stream.getNrMotors(),
-                               stream.getPrice(),
-                               stream.getCategory());
+                               energyClass,
+                               bptr->manufacturer,
+                               bptr->nrMotors,
+                               bptr->price,
+                               bptr->category);
         bptr = tptr;
         list.addNode(bptr);
     }
     else
     { // embeddable
         int type,
-            energyConsumption,
-            filter;
+            energyConsumption;
+        string filter;
 
-        cout << "Type: ";
-        cin >> type;
-        cout << "Filter: ";
-        cin >> filter;
+        std::cout << "Type: ";
+        std::cin >> type;
+        std::cout << "Filter: ";
+        std::cin >> filter;
         try
         {
-            cout << "Energy consumption: ";
-            cin >> energyConsumption;
+            std::cout << "Energy consumption: ";
+            std::cin >> energyConsumption;
             if (energyConsumption <= 0)
                 throw Exception("\nIt's supposed to be a positive integer", energyConsumption);
         }
@@ -262,9 +262,9 @@ void List::insert(List &list)
         {
             do
             {
-                cout << e.message;
-                cout << "\nEnter a valid value: ";
-                cin >> energyConsumption;
+                std::cout << e.message;
+                std::cout << "\nEnter a valid value: ";
+                std::cin >> energyConsumption;
             } while (energyConsumption <= 0);
         }
 
@@ -272,11 +272,12 @@ void List::insert(List &list)
         eptr = new Embeddable(type,
                               energyConsumption,
                               filter,
-                              stream.getManufacturer(),
-                              stream.getNrMotors(),
-                              stream.getPrice(),
-                              stream.getCategory());
-        list.addNode(eptr);
+                              bptr->manufacturer,
+                              bptr->nrMotors,
+                              bptr->price,
+                              bptr->category);
+        bptr = eptr;
+        list.addNode(bptr);
     }
 }
 void List::displayList()
@@ -292,34 +293,99 @@ void List::displayList()
         }
     }
     else
-        cout << "\nList is empty";
+        std::cout << "\nList is empty";
 }
 void List::displayByPrice()
 {
+    int price;
+    std::cout << "\nPrice: ";
+    std::cin >> price;
+
+    Base *bptr;
+    bptr = head;
+    if (bptr)
+    {
+        while (bptr)
+        {
+            if (bptr->price == price)
+                bptr->display();
+            bptr = bptr->next;
+        }
+    }
+    else
+        std::cout << "\nList is empty";
 }
 void List::deleteNode()
 {
+    Base *aux,
+        *bptr;
+    bptr = aux = head;
+    string manufacturer;
+    int nrMotors;
+    std::cout << "Manufacturer: ";
+    std::cin >> manufacturer;
+    std::cout << "Nr of motors: ";
+    std::cin >> nrMotors;
+
+    if (bptr)
+    {
+        while (bptr && (bptr->manufacturer != manufacturer || bptr->nrMotors != nrMotors))
+        {
+            aux = bptr;
+            bptr = bptr->next;
+        }
+        if (bptr)
+        {
+            if (bptr != aux)
+            {
+                aux->next = bptr->next;
+                delete bptr;
+            }
+            else
+            {
+                head = bptr->next;
+                delete bptr;
+            }
+        }
+        else
+            std::cout << "\nRecord not found";
+    }
+    else
+        std::cout << "\nList is empty";
 }
 void List::searchNode()
 {
+    Base *bptr;
+    bptr = head;
+    string manufacturer;
+    int price;
+    std::cout << "Manufacturer: ";
+    std::cin >> manufacturer;
+    std::cout << "Price: ";
+    std::cin >> price;
+    while (bptr->next && (bptr->manufacturer != manufacturer || bptr->price != price))
+        bptr = bptr->next;
+    if (bptr)
+        bptr->display();
+    else
+        std::cout << "\nRecord not found";
 }
 int main()
 {
-    int option = 0;
+    int option;
     List list;
     list.head = NULL;
 
-    while (option != 1)
+    while (1)
     {
-        cout << "\n0. Exit";
-        cout << "\n1. Add";
-        cout << "\n2. Display alphabetically";
-        cout << "\n3. Display by price";
-        cout << "\n4. Delete by manufacturer and nr of motors";
-        cout << "\n5. Search by manufacturer and price";
-        cout << "\nOption: ";
-        // cin >> option;
-        option = 1;
+        std::cout << "\n0. Exit";
+        std::cout << "\n1. Add";
+        std::cout << "\n2. Display alphabetically";
+        std::cout << "\n3. Display by price";
+        std::cout << "\n4. Delete by manufacturer and nr of motors";
+        std::cout << "\n5. Search by manufacturer and price";
+        std::cout << "\nOption: ";
+        std::cin >> option;
 
         switch (option)
         {
@@ -328,8 +394,6 @@ int main()
             break;
         case 1:
             list.insert(list);
-            list.displayList();
-            return 0;
             break;
         case 2:
             list.displayList();
