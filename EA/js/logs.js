@@ -14,8 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
             data = await response.json()
         return data;
     }
-    getRecordsAsync(api + '/light?_sort=time&_order=desc&_page=1&_limit=10')
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const current_datetime = new Date();
+    const formatted_date = months[current_datetime.getMonth()] +' '+ current_datetime.getDate() + ", " + current_datetime.getFullYear();
+    getRecordsAsync(api + '/light/?q='+formatted_date+'&?_sort=time&_order=asc&_page=1&_limit=10')
         .then(data => {
+            console.log(formatted_date);
             renderLogs(data)
         })
     var renderLogs = (records) => {
@@ -76,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tabOptions = {
             "onShow": function () {
                 var link = api + this.$activeTabLink[0].hash.replace('#', '/');
-                getRecordsAsync(link + "?_sort=time&_order=desc&_page=1&_limit=10")
+                getRecordsAsync(link + '?q='+formatted_date+'&_sort=time&_order=asc&_page=1&_limit=10')
                     .then(data => renderLogs(data));
             }
         },
