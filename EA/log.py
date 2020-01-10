@@ -1,4 +1,4 @@
-import requests, serial, time
+import requests, serial, time, threading
 from datetime import datetime
 
 API = "http://192.168.1.102:3000"
@@ -12,12 +12,31 @@ log_file = "Logs/log_"+today+".txt"
 ser = serial.Serial(serial_port, baud_rate, timeout=.1)
 time.sleep(1)  # give the connection a second to settle)
 data = []
-log = {}
 
 r = requests.get(url=preferences_endpoint)
 current = r.json()
 config_msg = current['light']+"e"+current['temperature']+"e"+current['water']+"ef"
-while True:
+StartTime = time.time()
+
+class setInterval:
+    def __init__(self, interval, action):
+        self.interval = interval
+        self.action = action
+        self.stopEvent = threading.Event()
+        thread = threading.Thread(target=self.__setInterval)
+        thread.start()
+
+    def __setInterval(self):
+        nextTime = time.time()+self.interval
+        while not self.stopEvent.wait(nextTime-time.time()):
+            nextTime += self.interval
+            self.action()
+
+    def cancel(self):
+        self.stopEvent.set()
+
+def handleLogs():
+    global data
     ser.write(config_msg.encode())
     line = ser.readline().strip()
     line = line.decode("utf-8")
@@ -56,3 +75,7 @@ while True:
             time.sleep(.5)  # give the connection a second to settle)
             rsp_temperature = requests.post(url=API+"/temperature", data=log_temperature)
             print(line, rsp_light.text, rsp_temperature.text, rsp_water.text)
+
+inter = setInterval(3, handleLogs)
+# t = threading.Timer(30, inter.cancel)
+# t.start()
