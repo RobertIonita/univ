@@ -23,9 +23,10 @@ double lightSet ; // will be the desired value
 double lightValue; // photo sensor
 double lightPWM ; //LED
 //PID parameters
-double Kp=0, Ki=10, Kd=0; 
+double Kp=0, Ki=3, Kd=0; 
 PID lightPID(&lightValue, &lightPWM, &lightSet, Kp, Ki, Kd, DIRECT);
-const short int isDemoPIDMode = 1;
+
+const short int isDemoMode = 0;
 
 
 double buff[3]={0};
@@ -49,11 +50,11 @@ const uint8_t degreeCelsius[] = {
 void(* resetFunc) (void) = 0;
 
 void updateConfig() {
-  if(isDemoPIDMode)
+  if(isDemoMode)
   {
-    lightSet = 40;
-    temperatureSet = 30;
-    waterSet = 50;    
+    lightSet = 50;
+    temperatureSet = 20;
+    waterSet = 60;    
   }
   else
   {
@@ -127,20 +128,16 @@ void coolerRoutine() {
 }
 
 void lightRoutine(){
+  // Map controller
 //  lightValue = map(analogRead(pResistorAnalog), 0, 1023, lightSet, 0);
 //  analogWrite(lightOut, lightValue);
+
+  //PID controller
   lightValue = map(analogRead(A0), 0, 1024, 0, 255);  // photo senor is set on analog pin 5
   //PID calculation
   lightPID.Compute();
   //Write the lightPWM as calculated by the PID function
   analogWrite(10,lightPWM); //LED is set to digital 3 this is a pwm pin. 
-  //Send data by serial for plotting 
-  Serial.print(lightValue);
-  Serial.print(" ");
-  Serial.print(lightPWM);
-  Serial.print(" ");  
-  Serial.println(lightSet);
-
 }
 
 void recieveSerial() {
@@ -160,12 +157,24 @@ void recieveSerial() {
 }
 
 void transmitSerial() {
-//    Serial.print(lightValue); Serial.print("-");
-//    Serial.print(lightSet); Serial.print("-");
-//    Serial.print(temperatureValue); Serial.print("-");
-//    Serial.print(temperatureSet); Serial.print("-");
-//    Serial.print(waterValue); Serial.print("-");
-//    Serial.print(waterSet); Serial.print("\n");
+  if(isDemoMode)
+  {
+    //Send data by serial for plotting 
+    Serial.print(lightValue);
+    Serial.print(" ");
+    Serial.print(lightPWM);
+    Serial.print(" ");  
+    Serial.println(lightSet);
+  }
+  else
+  {
+    Serial.print(lightValue); Serial.print("-");
+    Serial.print(lightSet); Serial.print("-");
+    Serial.print(temperatureValue); Serial.print("-");
+    Serial.print(temperatureSet); Serial.print("-");
+    Serial.print(waterValue); Serial.print("-");
+    Serial.print(waterSet); Serial.print("\n");
+  }
 }
 
 void loop(){
@@ -174,8 +183,8 @@ void loop(){
   ultrasonicRoutine();
   lightRoutine();
 
-  if(Serial.available() > 0) {
+//  if(Serial.available() > 0) {
     transmitSerial();
-  }
+//  }
 
 }
