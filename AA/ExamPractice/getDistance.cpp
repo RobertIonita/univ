@@ -33,6 +33,29 @@ int getDistance(string str1, string str2)
     return distance;
 }
 
+string toUppercase(string str)
+{
+    for (size_t i = 0; str[i] != '\0'; i++)
+        if (str[i] > 96)
+            str[i] -= 32;
+    return str;
+}
+
+int getNrOfVowels(string str)
+{
+    str = toUppercase(str);
+    char vowels[] = {'A', 'E', 'I', 'O', 'U'};
+    int nr = 0;
+    for (size_t i = 0; str[i] != '\0'; i++)
+        for (size_t j = 0; j < 5; j++)
+            if (str[i] == vowels[j])
+            {
+                nr++;
+                break;
+            }
+    return nr;
+}
+
 int main()
 {
     cout << "\ndistance: " << getDistance("PISICA", "PIERSICA");
@@ -40,7 +63,20 @@ int main()
     cout << "\ndistance: " << getDistance("PISICA", "PICICA");
     cout << "\ndistance: " << getDistance("PISICA", "PIERSIIA");
     cout << "\ndistance: " << getDistance("PISICA", "PISCA");
-    cout << "\ndistance: " << getDistance("Oreo", "LollyPop");
+    cout << "\ndistance: " << getDistance("Oreo", "LollyPop") << endl;;
+
+    cout << "\nabc: " << toUppercase("abc");
+    cout << "\nLol: " << toUppercase("Lol");
+    cout << "\nJKUTwk: " << toUppercase("JKUTwk");
+    cout << "\nOreo: " << toUppercase("Oreo");
+    cout << "\nLollyPop: " << toUppercase("LollyPop") << endl;
+
+    cout << "\nvowels: " << getNrOfVowels("PIERSICA");
+    cout << "\nvowels: " << getNrOfVowels("PISICA");
+    cout << "\nvowels: " << getNrOfVowels("PICICA");
+    cout << "\nvowels: " << getNrOfVowels("PIERSIIA");
+    cout << "\nvowels: " << getNrOfVowels("PISCA");
+    cout << "\nvowels: " << getNrOfVowels("LollyPop");
 
     // if you found a bug - kindly ask you to report it here:
     // https://github.com/tonualexandru/univ/commit/d4995d92a1adec68daa4b04ae3fcd90e50847b0a
