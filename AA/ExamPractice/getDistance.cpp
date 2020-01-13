@@ -41,5 +41,7 @@ int main()
     cout << "\ndistance: " << getDistance("PISICA", "PIERSIIA");
     cout << "\ndistance: " << getDistance("PISICA", "PISCA");
 
+    // if you found a bug - kindly ask you to report it here:
+    // https://github.com/tonualexandru/univ/commit/d4995d92a1adec68daa4b04ae3fcd90e50847b0a
     return 0;
 }
