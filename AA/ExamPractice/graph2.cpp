@@ -48,7 +48,7 @@ void displayList(Node *head);
 Node *cleanUp(Node *head);
 Node *readNode(Node *head);
 Node *addNode(Node *head, string key);
-void deleteNode(Node *head);
+Node *deleteNode(Node *head);
 Subnode *deleteSubnode(Subnode *head, string key);
 Subnode *addSubnode(Subnode *head, string key, int cost);
 void depthTraversal(Node *head, Node *current);
@@ -99,7 +99,7 @@ int main()
             deleteEdge(list);
             break;
         case 8:
-            deleteNode(list);
+            list = deleteNode(list);
             break;
         case 9:
             getPath(list);
@@ -371,7 +371,7 @@ void PrimTraversal(Node *head, Subnode *shead)
     }
 }
 
-void deleteNode(Node *head)
+Node *deleteNode(Node *head)
 {
     string key;
     cout << "\nkey: ";
@@ -389,6 +389,7 @@ void deleteNode(Node *head)
     }
     else
         head = head->next;
+    return head;
 }
 
 Subnode *deleteSubnode(Subnode *head, string key)
