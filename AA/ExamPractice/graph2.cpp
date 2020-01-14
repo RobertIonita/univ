@@ -8,9 +8,11 @@
 // b) Să se afișeze graful prin cuprindere/adâncime. 2.5p
 // Dacă două cuvinte au același număr de vocale arcul e indrptat arbitrar. (Distanța levanstein)
 
+// 1 1 1 2 1 3 1 4 1 5 1 6 3 1 2 3 1 3 3 2 4 3 2 5 3 4 5 3 4 6 3 3 5 3 5 6
+
 #include <iostream>
 using namespace std;
-
+#define MAX 30
 typedef struct Subnode
 {
     int cost;
@@ -42,13 +44,15 @@ void menu(int *option)
 }
 Node *searchNode(Node *head, string key);
 void displayList(Node *head);
+Node *cleanUp(Node *head);
 Node *readNode(Node *head);
 Node *addNode(Node *head, string key);
 void deleteNode(Node *head);
 Subnode *deleteSubode(Subnode *head, string key);
 Subnode *addSubnode(Subnode *head, string key, int cost);
 void depthTraversal(Node *head, Node *current);
-void breadthTraversal(Node *head, Node *current);
+void breadthTraversal(Node *head, string key);
+void BFT(Node *head, string Queue[MAX]);
 void PrimTraversal(Node *head, Subnode *shead);
 Node *addEdge(Node *head);
 void deleteEdge(Node *head);
@@ -79,12 +83,15 @@ int main()
             break;
         case 4:
             depthTraversal(list, list);
+            list = cleanUp(list);
             break;
         case 5:
-            breadthTraversal(list, list);
+            breadthTraversal(list, list->key);
+            list = cleanUp(list);
             break;
         case 6:
             PrimTraversal(list, list->sublist);
+            list = cleanUp(list);
             break;
         case 7:
             deleteEdge(list);
@@ -183,8 +190,7 @@ Node *addEdge(Node *head)
     Subnode *subnode;
     Node *nodeA, *nodeB;
     string keyA, keyB;
-    unsigned short int distance = 0,
-                       vowels = 0;
+    unsigned short int distance = 0;
     cout << "\nInsert first vertex: ";
     cin >> keyA;
     while ((nodeA = searchNode(head, keyA)) == NULL)
@@ -272,16 +278,62 @@ void displayList(Node *head)
                 cout << "\n\tVertex: " << subnode->key << ", cost: " << subnode->cost;
     }
 }
-
-void breadthTraversal(Node *head, Node *current) // TODO
+Node *cleanUp(Node *head)
 {
-    if (current && current->visited != 1)
+    Node *node = head;
+    for (node = head; node; node = node->next)
+        node->visited = 0;
+    return head;
+}
+
+string popQueue(string Queue[MAX])
+{
+    string aux = Queue[0];
+    int i, k = 0;
+    for (i = 0; i < MAX - 1; i++)
     {
-        current->visited = 1;
-        cout << "\nnode (b): " << current->key;
-        Subnode *subnode = current->sublist;
-        for (subnode = current->sublist; subnode; subnode = subnode->next)
-            breadthTraversal(head, searchNode(head, subnode->key));
+        if (Queue[i] != "")
+            k++;
+        Queue[i] = Queue[i + 1];
+    }
+    Queue[k] = "";
+    return aux;
+}
+
+void pushQueue(string Queue[MAX], string str)
+{
+    int i;
+    for (i = MAX - 1; Queue[i].length() == 0; i--)
+        ;
+    Queue[i + 1] = str;
+}
+
+void breadthTraversal(Node *head, string key)
+{
+    string Queue[MAX];
+    Queue[0] = key;
+    cout << "\nnode (b): " << key;
+    BFT(head, Queue);
+}
+void BFT(Node *head, string Queue[MAX])
+{
+    string current = popQueue(Queue);
+    Node *node;
+    node = searchNode(head, current);
+    if (node && node->visited == 0)
+    {
+        node->visited = 1;
+        Subnode *subnode = node->sublist;
+        while (subnode != NULL)
+        {
+            if (searchNode(head, subnode->key)->visited == 0)
+            {
+                cout << "\nnode (b): " << subnode->key;
+                pushQueue(Queue, subnode->key);
+            }
+            subnode = subnode->next;
+        }
+        BFT(head, Queue);
     }
 }
 
@@ -293,7 +345,7 @@ void depthTraversal(Node *head, Node *current)
         cout << "\nnode (d): " << current->key;
         Subnode *subnode = current->sublist;
         for (subnode = current->sublist; subnode; subnode = subnode->next)
-            breadthTraversal(head, searchNode(head, subnode->key));
+            depthTraversal(head, searchNode(head, subnode->key));
     }
 }
 
