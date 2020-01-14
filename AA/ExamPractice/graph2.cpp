@@ -49,7 +49,7 @@ Node *cleanUp(Node *head);
 Node *readNode(Node *head);
 Node *addNode(Node *head, string key);
 void deleteNode(Node *head);
-Subnode *deleteSubode(Subnode *head, string key);
+Subnode *deleteSubnode(Subnode *head, string key);
 Subnode *addSubnode(Subnode *head, string key, int cost);
 void depthTraversal(Node *head, Node *current);
 void breadthTraversal(Node *head, string key);
@@ -127,7 +127,6 @@ Subnode *searchSubnode(Subnode *head, string key)
 
 Node *readNode(Node *head)
 {
-    Node *node;
     string key;
     cout << "\nInsert key: ";
     cin >> key;
@@ -385,14 +384,14 @@ void deleteNode(Node *head)
         q2->next = q1->next;
         for (q2 = head; q2 != NULL; q2 = q2->next)
             if (q2->sublist)
-                q2->sublist = deleteSubode(q2->sublist, q1->key);
+                q2->sublist = deleteSubnode(q2->sublist, q1->key);
         free(q1);
     }
     else
         head = head->next;
 }
 
-Subnode *deleteSubode(Subnode *head, string key)
+Subnode *deleteSubnode(Subnode *head, string key)
 {
     Subnode *q1, *q2;
     for (q1 = q2 = head; q1 != NULL && q1->key != key; q2 = q1, q1 = q1->next)
@@ -431,8 +430,8 @@ void deleteEdge(Node *head)
         cin >> keyB;
     }
 
-    nodeA->sublist = deleteSubode(nodeA->sublist, nodeB->key);
-    nodeB->sublist = deleteSubode(nodeB->sublist, nodeA->key);
+    nodeA->sublist = deleteSubnode(nodeA->sublist, nodeB->key);
+    nodeB->sublist = deleteSubnode(nodeB->sublist, nodeA->key);
 }
 void searchPath(Node *head, Node *current, Node *end)
 {
