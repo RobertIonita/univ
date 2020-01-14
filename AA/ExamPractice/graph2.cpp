@@ -39,6 +39,7 @@ void menu(int *option)
     cout << "\n6. Prim traversal";
     cout << "\n7. Delete an edge";
     cout << "\n8. Delete a node";
+    cout << "\n9. Get path between two vertices";
     cout << "\nOption: ";
     cin >> *option;
 }
@@ -58,6 +59,7 @@ Node *addEdge(Node *head);
 void deleteEdge(Node *head);
 int getDistance(string str1, string str2);
 int getNrOfVowels(string str);
+void getPath(Node *head);
 string toUppercase(string str);
 
 int main()
@@ -98,6 +100,10 @@ int main()
             break;
         case 8:
             deleteNode(list);
+            break;
+        case 9:
+            getPath(list);
+            list = cleanUp(list);
             break;
         default:
             break;
@@ -427,4 +433,38 @@ void deleteEdge(Node *head)
 
     nodeA->sublist = deleteSubode(nodeA->sublist, nodeB->key);
     nodeB->sublist = deleteSubode(nodeB->sublist, nodeA->key);
+}
+void searchPath(Node *head, Node *current, Node *end)
+{
+    if (current && current->visited != 1 && end->key != current->key)
+    {
+        // current->visited = 1; // uncomment if you wanna see only one path
+        cout << current->key << " -> ";
+        Subnode *subnode = current->sublist;
+        for (subnode = current->sublist; subnode; subnode = subnode->next)
+            searchPath(head, searchNode(head, subnode->key), end);
+        cout << "\n"; // comment if you wanna see only one path
+    }
+}
+void getPath(Node *head)
+{
+    Node *nodeA, *nodeB;
+    string keyA, keyB;
+    cout << "\nInsert first vertex: ";
+    cin >> keyA;
+    while ((nodeA = searchNode(head, keyA)) == NULL)
+    {
+        cout << "\nInsert an existing vertex: ";
+        cin >> keyA;
+    }
+    cout << "\nInsert second vertex: ";
+    cin >> keyB;
+    while ((nodeB = searchNode(head, keyB)) == NULL || keyA == keyB)
+    {
+        cout << "\nInsert an existing vertex different from first one: ";
+        cin >> keyB;
+    }
+    cout << "\npath: ";
+    searchPath(head, nodeA, nodeB);
+    cout << nodeB->key;
 }
