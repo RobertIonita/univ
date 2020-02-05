@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="materialize/css/materialize.min.css">
     <link rel="icon" href="ghfavicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="css/preferences.css">
-    <title>Greenhouse - Preferences</title>
+    <title>Activity - Preferences</title>
 
 </head>
 <header>
     <nav>
         <div class="d_fl a_c j_sb">
-            <a class="logotype" href="index.html">Gangiubas</a>
+            <a class="logotype" href="index.html">Activity</a>
             <i data-target="slide-out" class="material-icons sidenav-trigger clickable">menu</i>
         </div>
     </nav>
@@ -29,7 +29,6 @@
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="logs.html">Logs</a></li>
         <li><a href="preferences.html">Preferences</a></li>
     </ul>
 
@@ -41,22 +40,9 @@
         <div class="form block">
             <form onsubmit="updatePreferences()">
             <!-- <form> -->
-                <div class="input-field col s12">
-                    <select id="kind">
-                    </select>
-                    <label>Greenhouse preferences</label>
-                </div>
                 <div class="input-field col s6">
-                    <input id="light" type="number" required min="1" max="1023">
-                    <label for="light">Light</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="temperature" type="number" required min="1" max="1023">
-                    <label for="temperature">Temperature</label>
-                </div>
-                <div class="input-field col s6">
-                    <input id="water" type="number" required min="1" max="1023">
-                    <label for="water">Water</label>
+                    <input id="water" type="number" required min="1" max="4">
+                    <label for="water">Nr echipe</label>
                 </div>
                 <input type="submit">
                 <!-- <input type="button" value="Submit" onclick="updatePreferences()"> -->

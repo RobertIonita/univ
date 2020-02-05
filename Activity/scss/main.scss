@@ -1,0 +1,137 @@
+@use 'partitials/theme';
+@use 'partitials/global';
+
+#map {
+  width: 100%;
+  padding: 20px 30px;
+  box-sizing: border-box;
+
+  .item {
+    margin: 0 10px;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 225px;
+
+    &.speak {
+      background-color: #ac0202;
+    }
+
+    &.mimic {
+      background-color: #abb30e;
+    }
+
+    &.paint {
+      background-color: #33a502;
+    }
+
+    &.finish, &.start {
+      background-color: #8e6114;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      display: flex;
+      border-radius: 3px 50px 50px 3px !important;
+
+      img {
+        width: 100px;
+      }
+    }
+    &.start{
+      background-color: #127db1;
+    }
+
+    img {
+      width: 140px;
+      max-width: 80%;
+      margin: 10px auto;
+      display: block;
+
+    }
+
+    span {
+      display: block;
+      text-align: center;
+      color: whitesmoke;
+      font: 400 normal 22px sans-serif;
+    }
+
+    .players {
+      height: 40px;
+      box-sizing: border-box;
+      padding: 0 20px;
+      width: 100%;
+
+      .one {
+        background-color: whitesmoke;
+      }
+
+      .two {
+        background-color: coral;
+      }
+
+      .three {
+        background-color: purple;
+      }
+
+      .four {
+        background-color: turquoise;
+      }
+
+      &>div {
+        display: none;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        margin: 0 5px;
+      }
+
+      &.one {
+        .one {
+          display: initial;
+        }
+      }
+
+      &.two {
+        .two {
+          display: initial;
+        }
+      }
+
+      &.three {
+        .three {
+          display: initial;
+        }
+      }
+
+      &.four {
+        .four {
+          display: initial;
+        }
+      }
+    }
+  }
+
+  .row_container {
+    margin: 10px 0;
+
+    &:nth-of-type(even) {
+      .item:first-of-type {
+        border-radius: 3px 3px 3px 50px;
+      }
+
+      .item:last-of-type {
+        border-radius: 3px 50px 3px 3px;
+      }
+    }
+
+    &:nth-of-type(odd) {
+      .item:first-of-type {
+        border-radius: 50px 3px 3px 3px;
+      }
+
+      .item:last-of-type {
+        border-radius: 3px 3px 50px 3px;
+      }
+    }
+  }
+}

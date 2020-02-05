@@ -171,54 +171,103 @@ header #slide-out .divider {
   margin: 0 0 10px;
 }
 
-#wall {
-  width: calc(100% - 30px);
-  max-width: 500px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  margin: 40px auto;
-}
-#wall .heading {
-  height: 54px;
-  margin: 10px 0 30px;
-  border-radius: 5px;
-  overflow: hidden;
-  background: whitesmoke;
-}
-#wall .heading h6 {
-  width: 37%;
-  height: 100%;
-  margin: 0;
-  background-color: #3f51b5;
-  color: white;
-  padding: 0 10px;
+#map {
+  width: 100%;
+  padding: 20px 30px;
   box-sizing: border-box;
 }
-#wall .heading span {
-  font-size: 16px;
-  padding: 0 10px;
-  width: 63%;
-  box-sizing: border-box;
-  text-align: center;
-}
-#wall .data {
-  margin-top: 20px;
-}
-#wall .data .item {
-  margin: 15px 0;
-  background: whitesmoke;
+#map .item {
+  margin: 0 10px;
   border-radius: 3px;
-  padding: 10px 10px;
-  box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.2), 0 1px 5px -4px rgba(0, 0, 0, 0.14), 0 1px 6px 0px rgba(0, 0, 0, 0.12);
+  width: 100%;
+  min-height: 225px;
 }
-#wall .data .item span {
-  color: #3f51b5;
-  font-size: 16px;
-  font-weight: 500;
+#map .item.speak {
+  background-color: #ac0202;
 }
-#wall .data .item b {
-  font-size: 16px;
+#map .item.mimic {
+  background-color: #abb30e;
+}
+#map .item.paint {
+  background-color: #33a502;
+}
+#map .item.finish, #map .item.start {
+  background-color: #8e6114;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  border-radius: 3px 50px 50px 3px !important;
+}
+#map .item.finish img, #map .item.start img {
+  width: 100px;
+}
+#map .item.start {
+  background-color: #127db1;
+}
+#map .item img {
+  width: 140px;
+  max-width: 80%;
+  margin: 10px auto;
+  display: block;
+}
+#map .item span {
+  display: block;
+  text-align: center;
+  color: whitesmoke;
+  font: 400 normal 22px sans-serif;
+}
+#map .item .players {
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 20px;
+  width: 100%;
+}
+#map .item .players .one {
+  background-color: whitesmoke;
+}
+#map .item .players .two {
+  background-color: coral;
+}
+#map .item .players .three {
+  background-color: purple;
+}
+#map .item .players .four {
+  background-color: turquoise;
+}
+#map .item .players > div {
+  display: none;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+#map .item .players.one .one {
+  display: initial;
+}
+#map .item .players.two .two {
+  display: initial;
+}
+#map .item .players.three .three {
+  display: initial;
+}
+#map .item .players.four .four {
+  display: initial;
+}
+#map .row_container {
+  margin: 10px 0;
+}
+#map .row_container:nth-of-type(even) .item:first-of-type {
+  border-radius: 3px 3px 3px 50px;
+}
+#map .row_container:nth-of-type(even) .item:last-of-type {
+  border-radius: 3px 50px 3px 3px;
+}
+#map .row_container:nth-of-type(odd) .item:first-of-type {
+  border-radius: 50px 3px 3px 3px;
+}
+#map .row_container:nth-of-type(odd) .item:last-of-type {
+  border-radius: 3px 3px 50px 3px;
 }
 
 /*# sourceMappingURL=main.css.map */

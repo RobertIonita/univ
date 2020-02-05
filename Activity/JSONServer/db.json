@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "0",
+      "teams": "4",
+      "current": 1
+    }
+  ],
+  "words": [
+    {
+      "id": "1",
+      "word": "lorem"
+    }
+  ]
+}
