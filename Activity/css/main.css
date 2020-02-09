@@ -171,6 +171,18 @@ header #slide-out .divider {
   margin: 0 0 10px;
 }
 
+nav .data {
+  width: 300px;
+}
+nav .data b {
+  font-size: 20px;
+}
+nav .data button {
+  text-transform: none;
+  background-color: white !important;
+  color: #3f51b5;
+}
+
 #map {
   width: 100%;
   padding: 20px 30px;
@@ -222,17 +234,18 @@ header #slide-out .divider {
   box-sizing: border-box;
   padding: 0 20px;
   width: 100%;
+  background-color: transparent !important;
 }
-#map .item .players .one {
-  background-color: whitesmoke;
+#map .item .players .alb {
+  background-color: white;
 }
-#map .item .players .two {
+#map .item .players .coral {
   background-color: coral;
 }
-#map .item .players .three {
+#map .item .players .purple {
   background-color: purple;
 }
-#map .item .players .four {
+#map .item .players .turquoise {
   background-color: turquoise;
 }
 #map .item .players > div {
@@ -242,20 +255,26 @@ header #slide-out .divider {
   border-radius: 50%;
   margin: 0 5px;
 }
-#map .item .players.one .one {
+#map .item .players.alb .alb {
   display: initial;
 }
-#map .item .players.two .two {
+#map .item .players.coral .coral {
   display: initial;
 }
-#map .item .players.three .three {
+#map .item .players.purple .purple {
   display: initial;
 }
-#map .item .players.four .four {
+#map .item .players.turquoise .turquoise {
   display: initial;
 }
 #map .row_container {
   margin: 10px 0;
+}
+#map .row_container .item:first-of-type {
+  border-radius: 3px 3px 50px 3px;
+}
+#map .row_container .item:last-of-type {
+  border-radius: 50px 3px 3px 3px;
 }
 #map .row_container:nth-of-type(even) .item:first-of-type {
   border-radius: 3px 3px 3px 50px;
@@ -263,11 +282,18 @@ header #slide-out .divider {
 #map .row_container:nth-of-type(even) .item:last-of-type {
   border-radius: 3px 50px 3px 3px;
 }
-#map .row_container:nth-of-type(odd) .item:first-of-type {
-  border-radius: 50px 3px 3px 3px;
+#map .row_container:nth-of-type(odd) {
+  flex-direction: row-reverse;
 }
-#map .row_container:nth-of-type(odd) .item:last-of-type {
-  border-radius: 3px 3px 50px 3px;
+
+.modal .modal-close {
+  text-transform: none !important;
+}
+.modal button.correct_answer {
+  background-color: #3f51b5;
+}
+.modal button.wrong_answer {
+  background-color: #f44336;
 }
 
 /*# sourceMappingURL=main.css.map */

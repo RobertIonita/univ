@@ -1,10 +1,27 @@
 @use 'partitials/theme';
 @use 'partitials/global';
 
+nav {
+  .data {
+    width: 300px;
+
+    b {
+      font-size: 20px;
+    }
+
+    button {
+      text-transform: none;
+      background-color: white!important;
+      color: theme.$primary;
+    }
+  }
+}
+
 #map {
   width: 100%;
   padding: 20px 30px;
   box-sizing: border-box;
+
 
   .item {
     margin: 0 10px;
@@ -24,7 +41,8 @@
       background-color: #33a502;
     }
 
-    &.finish, &.start {
+    &.finish,
+    &.start {
       background-color: #8e6114;
       align-items: center;
       flex-direction: column;
@@ -36,7 +54,8 @@
         width: 100px;
       }
     }
-    &.start{
+
+    &.start {
       background-color: #127db1;
     }
 
@@ -60,20 +79,21 @@
       box-sizing: border-box;
       padding: 0 20px;
       width: 100%;
+      background-color: transparent !important;
 
-      .one {
-        background-color: whitesmoke;
+      .alb {
+        background-color: white;
       }
 
-      .two {
+      .coral {
         background-color: coral;
       }
 
-      .three {
+      .purple {
         background-color: purple;
       }
 
-      .four {
+      .turquoise {
         background-color: turquoise;
       }
 
@@ -85,26 +105,26 @@
         margin: 0 5px;
       }
 
-      &.one {
-        .one {
+      &.alb {
+        .alb {
           display: initial;
         }
       }
 
-      &.two {
-        .two {
+      &.coral {
+        .coral {
           display: initial;
         }
       }
 
-      &.three {
-        .three {
+      &.purple {
+        .purple {
           display: initial;
         }
       }
 
-      &.four {
-        .four {
+      &.turquoise {
+        .turquoise {
           display: initial;
         }
       }
@@ -113,6 +133,15 @@
 
   .row_container {
     margin: 10px 0;
+
+    .item:first-of-type {
+      border-radius: 3px 3px 50px 3px;
+    }
+
+    .item:last-of-type {
+      border-radius: 50px 3px 3px 3px;
+    }
+
 
     &:nth-of-type(even) {
       .item:first-of-type {
@@ -125,13 +154,20 @@
     }
 
     &:nth-of-type(odd) {
-      .item:first-of-type {
-        border-radius: 50px 3px 3px 3px;
-      }
-
-      .item:last-of-type {
-        border-radius: 3px 3px 50px 3px;
-      }
+      flex-direction: row-reverse;
     }
+  }
+}
+
+.modal{
+  .modal-close{
+    text-transform: none!important;
+  }
+
+  button.correct_answer{
+    background-color: theme.$primary;
+  }
+  button.wrong_answer{
+    background-color: theme.$danger;
   }
 }

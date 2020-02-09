@@ -2,14 +2,28 @@
   "data": [
     {
       "id": "0",
-      "teams": "4",
-      "current": 1
+      "teams": 0,
+      "time": 30,
+      "names": [
+        "alb",
+        "coral",
+        "purple",
+        "turquoise"
+      ],
+      "scores": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "current": "coral"
     }
   ],
   "words": [
     {
       "id": "1",
-      "word": "lorem"
+      "word": "lorem",
+      "type": "Vorbește"
     }
   ]
 }
