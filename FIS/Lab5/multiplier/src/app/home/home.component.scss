@@ -1,0 +1,52 @@
+.main {
+  width: 100%;
+  height: calc(100% - 60px);
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: border-box;
+  background: #f5f5f5;
+
+  .app_card {
+    width: 100%;
+
+    mat-card-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    mat-card-content.d_fl {
+      display: flex;
+
+      &>div {
+        width: 50%;
+        box-sizing: border-box;
+        padding: 0 10px;
+
+        &:last-of-type {
+          border-left: solid 1px #c7c7c7;
+          padding-left: 25px;
+        }
+
+        p {
+          font: 400 normal 20px monospace;
+          margin: 10px 0 0;
+        }
+      }
+    }
+
+    mat-card-actions {
+      padding: 0 20px;
+      box-sizing: border-box;
+
+      form {
+        .multiply_field {
+          width: 60px;
+        }
+      }
+
+      span.values {
+        padding-left: 25px;
+      }
+    }
+  }
+}

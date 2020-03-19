@@ -1,0 +1,24 @@
+<div class="main d_fl a_c">
+    <mat-card class="app_card">
+        <mat-card-title>{{homeTitle}}</mat-card-title>
+        <mat-card-content class="d_fl">
+            <div #randoms>
+                <p *ngFor="let randomNumber of randomsArr">{{randomNumber}}</p>
+            </div>
+            <div #results>
+                <p *ngFor="let randomNumber of randomsArr">{{randomNumber}} * {{multiplier}} =
+                    {{randomNumber*multiplier}}</p>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <form class="d_fl a_c j_sb">
+                <mat-form-field class="multiply_field">
+                    <mat-label>Multiply by</mat-label>
+                    <input matInput placeholder="Ex. 5" value="5">
+                </mat-form-field>
+                <span class="values">Values: <b>{{values}}</b></span>
+                <button mat-raised-button>Generate</button>
+            </form>
+        </mat-card-actions>
+    </mat-card>
+</div>
