@@ -3,10 +3,11 @@
         <mat-card-title>{{homeTitle}}</mat-card-title>
         <mat-card-content class="d_fl">
             <div #randoms>
-                <p *ngFor="let randomNumber of randomsArr">{{randomNumber}}</p>
+                <p *ngFor="let randomNumber of randomsArr">{{randomNumber < 10 ? '0' + randomNumber:randomNumber }}</p>
             </div>
             <div #results>
-                <p *ngFor="let randomNumber of randomsArr">{{randomNumber}} * {{multiplier}} =
+                <p *ngFor="let randomNumber of randomsArr">{{randomNumber < 10 ? '0' + randomNumber:randomNumber }} *
+                    {{multiplier}} =
                     {{randomNumber*multiplier}}</p>
             </div>
         </mat-card-content>

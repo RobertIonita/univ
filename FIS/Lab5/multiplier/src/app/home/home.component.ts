@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   randomsArr: number[] = [];
   constructor() {
     for (let i = 0; i < this.values; i++) {
-      this.randomsArr.push(Math.floor(Math.random() * 100));
+      this.randomsArr.push(Math.floor(Math.random() * 100 + 1));
     }
   }
   ngOnInit(): void {
