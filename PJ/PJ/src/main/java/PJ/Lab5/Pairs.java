@@ -6,17 +6,17 @@ import java.util.Scanner;
 
 public class Pairs {
     public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String line = null;
         int x = 0, y = 0;
         do {
             try {
                 System.out.print("Insert first number: ");
-                line = scan.next();
+                line = scanner.next();
                 x = Integer.parseInt(line);
                 try {
                     System.out.print("Insert second number: ");
-                    line = scan.next();
+                    line = scanner.next();
                     y = Integer.parseInt(line);
                     if (y <= x) {
                         System.out.println("Invalid input, please insert the pair in ascendent order!\n");
@@ -38,6 +38,6 @@ public class Pairs {
         FileWriter fw = new FileWriter(outputFile);
         fw.write("the pair is: " + x + "," + y);
         fw.close();
-        scan.close();
+        scanner.close();
     }
 }
