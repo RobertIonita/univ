@@ -7,16 +7,19 @@ namespace Lab4
     {
         private static void RSAGenerateKey(int size)
         {
-            AesManaged myAES = new AesManaged();
+            RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
             int count = 100;
-
+            int keySize = 0;
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
-                myAES.GenerateKey();
+            {
+                myRSA = new RSACryptoServiceProvider(size);
+                keySize = myRSA.KeySize;
+            }
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
             Console.WriteLine("Generate key cost for " + size + ": " + time_consumed);
         }
 
@@ -24,41 +27,38 @@ namespace Lab4
         {
             RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
-            AesManaged myAES = new AesManaged();
-            int count = 1;
-            myAES.GenerateKey();
-
+            int count = 100;
+            int keySize = myRSA.KeySize;
+            byte[] bytesKey = BitConverter.GetBytes(keySize);
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
-                myRSA.Encrypt(myAES.Key, true);
+                myRSA.Encrypt(bytesKey, true);
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
             Console.WriteLine("RSA encrypt cost for " + size + ": " + time_consumed);
         }
         private static void RSADecrypt(int size)
         {
             RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
-            AesManaged myAES = new AesManaged();
+            int keySize = myRSA.KeySize;
             byte[] RSAciphertext;
             int count = 100;
-            myAES.GenerateKey();
-            RSAciphertext = myRSA.Encrypt(myAES.Key, true);
+            RSAciphertext = myRSA.Encrypt(BitConverter.GetBytes(keySize), true);
 
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
                 myRSA.Decrypt(RSAciphertext, true);
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
             Console.WriteLine("RSA cost for " + size + ": " + time_consumed);
         }
         private static void RSASigning(int size)
         {
             RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
-            AesManaged myAES = new AesManaged();
             SHA256Managed myHash = new SHA256Managed();
             byte[] signature;
             int count = 100;
@@ -68,8 +68,32 @@ namespace Lab4
                 signature = myRSA.SignData(System.Text.Encoding.ASCII.GetBytes("Hello, World!"), myHash);
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
             Console.WriteLine("RSA signing cost for " + size + ": " + time_consumed);
+        }
+        private static void RSAValidate(int size)
+        {
+            RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
+            System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
+            myRSA = new RSACryptoServiceProvider(size);
+            int keySize = myRSA.KeySize;
+            int count = 100;
+            byte[] RSAciphertext;
+            byte[] signature;
+            String time_consumed;
+            SHA256Managed myHash = new SHA256Managed();
+            
+            RSAciphertext = myRSA.Encrypt(BitConverter.GetBytes(keySize), true);
+            myRSA.Decrypt(RSAciphertext, true);
+            signature = myRSA.SignData(System.Text.Encoding.ASCII.GetBytes("Hello, World"), myHash);
+
+            swatch.Start();
+            for (int i = count - 1; i >= 0; i--)
+                myRSA.VerifyData(System.Text.Encoding.ASCII.GetBytes("Hello, World"), myHash, signature);
+            swatch.Stop();
+
+            time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
+            Console.WriteLine("RSA overall cost for " + size + ": " + time_consumed);
         }
 
         private static void RSAComputationalCost(int size)
@@ -77,10 +101,10 @@ namespace Lab4
 
             RSACryptoServiceProvider myRSA = new RSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
-            AesManaged myAES = new AesManaged();
             int count = 100;
             byte[] RSAciphertext;
             byte[] signature;
+            int keySize;
             String time_consumed;
             SHA256Managed myHash = new SHA256Managed();
 
@@ -92,15 +116,16 @@ namespace Lab4
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
             {
-                myAES.GenerateKey();
-                RSAciphertext = myRSA.Encrypt(myAES.Key, true);
+                myRSA = new RSACryptoServiceProvider(size);
+                keySize = myRSA.KeySize;
+                RSAciphertext = myRSA.Encrypt(BitConverter.GetBytes(keySize), true);
                 myRSA.Decrypt(RSAciphertext, true);
                 signature = myRSA.SignData(System.Text.Encoding.ASCII.GetBytes(firstMessage), myHash);
                 myRSA.VerifyData(System.Text.Encoding.ASCII.GetBytes(secondMessage), myHash, signature);
             }
             swatch.Stop();
 
-            time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
             Console.WriteLine("RSA overall cost for " + size + ": " + time_consumed);
         }
         static void Main(string[] args)
@@ -115,6 +140,7 @@ namespace Lab4
                 Console.WriteLine("2. Cost of RSA encryption");
                 Console.WriteLine("3. Cost of RSA decryption");
                 Console.WriteLine("4. Cost of RSA signing");
+                Console.WriteLine("4. Cost of RSA validation");
                 Console.WriteLine("5. Total computational cost of RSA cryptosystem");
                 Console.Write("Your choice: ");
 
