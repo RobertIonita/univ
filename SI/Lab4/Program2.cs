@@ -8,13 +8,17 @@ namespace Lab4
     {
         private static void DSAGenerateKey(int size)
         {
-            AesManaged myAES = new AesManaged();
+            DSACryptoServiceProvider myDSA = new DSACryptoServiceProvider(size);
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
             int count = 100;
+            int keySize = 0;
 
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
-                myAES.GenerateKey();
+            {
+                myDSA = new DSACryptoServiceProvider(size);
+                keySize = myDSA.KeySize;
+            }
             swatch.Stop();
 
             String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
@@ -59,16 +63,19 @@ namespace Lab4
 
         private static void DSAComputationalCost(int size)
         {
-
             DSACryptoServiceProvider myDSA = new DSACryptoServiceProvider(size);
             byte[] data = Encoding.ASCII.GetBytes("Hello, world");
             System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch();
             byte[] signature = null;
             int count = 100;
-
+            int keySize = 0;
+            byte[] bytesKey = null;
             swatch.Start();
             for (int i = count - 1; i >= 0; i--)
             {
+                myDSA = new DSACryptoServiceProvider(size);
+                keySize = myDSA.KeySize;
+                bytesKey = BitConverter.GetBytes(keySize);
                 signature = myDSA.SignData(data);
                 myDSA.VerifyData(data, signature);
             }
