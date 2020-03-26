@@ -21,7 +21,7 @@ namespace Lab4
             }
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds/count).ToString() + " ms";
             Console.WriteLine("Generate key cost for " + size + ": " + time_consumed);
         }
         private static void DSASigning(int size)
@@ -39,7 +39,7 @@ namespace Lab4
             swatch.Stop();
 
             bool verify = myDSA.VerifyData(data, signature);
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds/count).ToString() + " ms";
             Console.WriteLine("DSA signing cost for " + size + ": " + time_consumed);
         }
         private static void DSAValidate(int size)
@@ -57,7 +57,7 @@ namespace Lab4
 
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds/count).ToString() + " ms";
             Console.WriteLine("DSA validating cost for " + size + ": " + time_consumed);
         }
 
@@ -82,8 +82,8 @@ namespace Lab4
 
             swatch.Stop();
 
-            String time_consumed = (swatch.Elapsed.TotalMilliseconds).ToString() + " ms";
-            Console.WriteLine("DSA validating cost for " + size + ": " + time_consumed);
+            String time_consumed = (swatch.Elapsed.TotalMilliseconds/count).ToString() + " ms";
+            Console.WriteLine("DSA overall cost for " + size + ": " + time_consumed);
         }
         static void Main(string[] args)
         {
@@ -110,25 +110,25 @@ namespace Lab4
                         Program2.DSAGenerateKey(512);
                         Program2.DSAGenerateKey(640);
                         Program2.DSAGenerateKey(768);
-                        Program2.DSAGenerateKey(768);
+                        Program2.DSAGenerateKey(1024);
                         break;
                     case 2:
                         Program2.DSASigning(512);
                         Program2.DSASigning(640);
                         Program2.DSASigning(768);
-                        Program2.DSASigning(768);
+                        Program2.DSASigning(1024);
                         break;
                     case 3:
                         Program2.DSAValidate(512);
                         Program2.DSAValidate(640);
                         Program2.DSAValidate(768);
-                        Program2.DSAValidate(768);
+                        Program2.DSAValidate(1024);
                         break;
                     case 4:
                         Program2.DSAComputationalCost(512);
                         Program2.DSAComputationalCost(640);
                         Program2.DSAComputationalCost(768);
-                        Program2.DSAComputationalCost(768);
+                        Program2.DSAComputationalCost(1024);
                         break;
                     default:
                         Console.WriteLine("Invalid option");

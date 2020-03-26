@@ -93,7 +93,7 @@ namespace Lab4
             swatch.Stop();
 
             time_consumed = (swatch.Elapsed.TotalMilliseconds / count).ToString() + " ms";
-            Console.WriteLine("RSA overall cost for " + size + ": " + time_consumed);
+            Console.WriteLine("RSA validating cost for " + size + ": " + time_consumed);
         }
 
         private static void RSAComputationalCost(int size)
@@ -140,8 +140,8 @@ namespace Lab4
                 Console.WriteLine("2. Cost of RSA encryption");
                 Console.WriteLine("3. Cost of RSA decryption");
                 Console.WriteLine("4. Cost of RSA signing");
-                Console.WriteLine("4. Cost of RSA validation");
-                Console.WriteLine("5. Total computational cost of RSA cryptosystem");
+                Console.WriteLine("5. Cost of RSA validation");
+                Console.WriteLine("6. Total computational cost of RSA cryptosystem");
                 Console.Write("Your choice: ");
 
                 caseSwitch = Convert.ToInt16(Console.ReadLine());
@@ -176,6 +176,12 @@ namespace Lab4
                         Program.RSASigning(4096);
                         break;
                     case 5:
+                        Program.RSASigning(1024);
+                        Program.RSASigning(2048);
+                        Program.RSASigning(3072);
+                        Program.RSASigning(4096);
+                        break;
+                    case 6:
                         Program.RSAComputationalCost(1024);
                         Program.RSAComputationalCost(2048);
                         Program.RSAComputationalCost(3072);
