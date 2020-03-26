@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 
-namespace democonsole
+namespace Lab4
 {
     class Program2
     {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alexandru/Documents/GitHub/univ/SI/democonsole/democonsole.csproj": {}
+    "/Users/alexandru/Documents/GitHub/univ/SI/Lab4/Lab4.csproj": {}
   },
   "projects": {
-    "/Users/alexandru/Documents/GitHub/univ/SI/democonsole/democonsole.csproj": {
+    "/Users/alexandru/Documents/GitHub/univ/SI/Lab4/Lab4.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alexandru/Documents/GitHub/univ/SI/democonsole/democonsole.csproj",
-        "projectName": "democonsole",
-        "projectPath": "/Users/alexandru/Documents/GitHub/univ/SI/democonsole/democonsole.csproj",
+        "projectUniqueName": "/Users/alexandru/Documents/GitHub/univ/SI/Lab4/Lab4.csproj",
+        "projectName": "Lab4",
+        "projectPath": "/Users/alexandru/Documents/GitHub/univ/SI/Lab4/Lab4.csproj",
         "packagesPath": "/Users/alexandru/.nuget/packages/",
-        "outputPath": "/Users/alexandru/Documents/GitHub/univ/SI/democonsole/obj/",
+        "outputPath": "/Users/alexandru/Documents/GitHub/univ/SI/Lab4/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
