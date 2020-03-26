@@ -109,7 +109,7 @@ namespace democonsole
 
             while (true)
             {
-                Console.WriteLine("\nComputational cost of RSA evaluation");
+                Console.WriteLine("\nYou have some options: ");
                 Console.WriteLine("0. Exit");
                 Console.WriteLine("1. Cost of RSA key generation");
                 Console.WriteLine("2. Cost of RSA encryption");
