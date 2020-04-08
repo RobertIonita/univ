@@ -63,7 +63,7 @@
                                 </ImageView>
                             </children>
                         </VBox>
-                        <Button layoutX="309.0" layoutY="438.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="324.0" style="-fx-background-color: #0083FD; -fx-background-radius: 20;" text="Adaugă Component" textFill="WHITE">
+                        <Button fx:id="addBtn" layoutX="309.0" layoutY="438.0" mnemonicParsing="false" onAction="#gotoAdd"  prefHeight="80.0" prefWidth="324.0" style="-fx-background-color: #0083FD; -fx-background-radius: 20;" text="Adaugă Component" textFill="WHITE">
                             <font>
                                 <Font name="GothamPro-Black" size="25.0" />
                             </font>
