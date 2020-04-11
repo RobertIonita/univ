@@ -21,20 +21,27 @@
 
 .homeBtn {
     -fx-background-image: url("../assets/home.png");
+    -fx-background-repeat: no-repeat;
 }
 
 .systemsBtn {
     -fx-background-image: url("../assets/tower-pc.png");
+    -fx-background-repeat: no-repeat;
 }
 
 .componentsBtn {
     -fx-background-image: url("../assets/componente.png");
+    -fx-background-repeat: no-repeat;
 }
 
 .chartBtn {
     -fx-background-image: url("../assets/graf.png");
+    -fx-background-repeat: no-repeat;
+   -fx-position-shape: absolute;
 }
 
 .plusBtn {
     -fx-background-image: url("../assets/plus.png");
+   -fx-background-repeat: no-repeat;
+
 }
