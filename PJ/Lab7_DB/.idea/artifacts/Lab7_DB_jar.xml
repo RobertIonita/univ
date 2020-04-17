@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Lab7_DB:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lab7_DB_jar</output-path>
+    <root id="archive" name="Lab7_DB.jar">
+      <element id="module-output" name="Lab7_DB" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/jars/java-json.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

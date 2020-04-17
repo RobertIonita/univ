@@ -1,0 +1,106 @@
+.main_container{
+    -fx-background-color: whitesmoke;
+}
+
+.disabled {
+    -fx-opacity: 0.3;
+    -fx-cursor: none!important;
+}
+
+.hidden {
+    -fx-visibility: hidden;
+}
+
+.border {
+    -fx-border-width: 1;
+    -fx-border-color: #dcdcdc;
+    -fx-color: #3e3e3e;
+}
+
+.icon {
+    -fx-background-color: transparent;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+    -fx-cursor: hand;
+}
+
+.icon_search {
+    -fx-background-image: url('../assets/search.png');
+}
+.icon_add {
+    -fx-background-image: url('../assets/add.png');
+}
+.icon_next {
+    -fx-background-image: url('../assets/next.png');
+}
+.icon_previous {
+    -fx-background-image: url('../assets/previous.png');
+}
+.icon_last {
+    -fx-background-image: url('../assets/last.png');
+}
+.icon_first {
+    -fx-background-image: url('../assets/first.png');
+}
+.icon_edit {
+    -fx-background-image: url('../assets/edit.png');
+}
+.icon_remove {
+    -fx-background-image: url('../assets/remove.png');
+}
+.icon_reset {
+    -fx-background-image: url('../assets/reset.png');
+}
+
+.header {
+    -fx-border-style: hidden hidden solid hidden;
+}
+
+.header TextField {
+    -fx-background: transparent;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 5 5 5 25;
+}
+
+.table_heading{
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: 1;
+    -fx-border-color: #dcdcdc;
+    -fx-pref-height: 54;
+    -fx-color: #3e3e3e;
+}
+
+.table_row {
+    -fx-border-style: hidden hidden solid hidden;
+}
+
+.table_row.even {
+    -fx-background-color: whitesmoke;
+}
+
+.table_row .icon{
+    visibility: hidden;
+}
+.table_row:hover .icon {
+    visibility: visible;
+}
+
+.table_row.empty .icon{
+    visibility: hidden;
+}
+
+
+.pagination{
+    -fx-border-style: solid hidden hidden hidden;
+    -fx-pref-height: 48;
+}
+
+.wrapper{
+    -fx-background-color: white;
+    -fx-background-insets: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, #dcdcdc, 10, 0, 0, 0);
+}
