@@ -115,3 +115,8 @@
     -fx-background-position: 13px 15px;
 
 }
+.card{
+    -fx-background-color:  #0083FD;
+    -fx-background-radius:  15;
+    -fx-effect:  dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}

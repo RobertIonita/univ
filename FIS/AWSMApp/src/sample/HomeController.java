@@ -27,6 +27,9 @@ public class HomeController extends workspaceController {
     @FXML
     private AnchorPane anchorRoot;
 
+    public HomeController() throws IOException {
+    }
+
     @FXML
     private void gotoSystems(ActionEvent event) throws IOException {
 

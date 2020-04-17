@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SystemsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.workspaceController">
     <children>
         <Pane prefHeight="700.0" prefWidth="950.0">
             <children>
-            <ScrollPane layoutX="167.0" layoutY="201.0" prefHeight="430.0" prefWidth="662.0">
-               <content>
-                  <HBox prefHeight="202.0" prefWidth="662.0">
-                     <children>
-                        <HBox prefHeight="350.0" prefWidth="662.0" />
-                     </children></HBox>
-               </content>
-            </ScrollPane>
             <TextField layoutX="567.0" layoutY="23.0" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@css/style.css" />
+            <Pane layoutX="150.0" layoutY="178.0" prefHeight="476.0" prefWidth="638.0">
+               <children>
+                <AnchorPane fx:id="frame" layoutX="-5.0" layoutY="2.0" minHeight="0.0" minWidth="0.0" prefHeight="476.0" prefWidth="638.0">
+                     <children>
+                        <ScrollPane fx:id="scroll" layoutX="-1.0" layoutY="-5.0" prefHeight="467.0" prefWidth="630.0">
+                          <content>
+                            <AnchorPane fx:id="elements" minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="615.0" />
+                          </content>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </children></Pane>
             </children>
         </Pane>
     </children>

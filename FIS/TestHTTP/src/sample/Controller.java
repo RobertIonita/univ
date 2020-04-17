@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -32,6 +33,12 @@ public class Controller {
     @FXML
     private Pane wrapper;
 
+    @FXML
+    private ScrollPane scroll;
+
+    @FXML
+    private VBox last;
+
     public void appendTemplate(String name, String count, int layoutX, int layoutY) {
         Pane pane = new Pane();
         pane.setPrefSize(120, 120);
@@ -45,6 +52,8 @@ public class Controller {
         pane.getChildren().add(name_label);
         pane.getChildren().add(count_label);
         wrapper.getChildren().add(pane);
+        scroll.setContent(wrapper);
+        last.getChildren().add(scroll);
     }
 
     public void setData(String data) {
