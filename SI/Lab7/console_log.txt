@@ -1,0 +1,105 @@
+MacBookAir:Lab7 alexandru$ ls
+Ex8_4_1.java            fc_tonu_rocks.crt       tonu_rocks.crt
+MacBookAir:Lab7 alexandru$ sudo keytool -import -alias fc_tonu_rocks -file fc_tonu_rocks.crt -keystore /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/jre/lib/security/cacerts
+Password:
+Enter keystore password:  
+Owner: CN=fc.tonu.rocks, OU=PositiveSSL, OU=Domain Control Validated
+Issuer: CN=Sectigo RSA Domain Validation Secure Server CA, O=Sectigo Limited, L=Salford, ST=Greater Manchester, C=GB
+Serial number: 994ef0abb7379e53ed5b30b9582c0197
+Valid from: Thu Nov 14 02:00:00 EET 2019 until: Sat Nov 14 01:59:59 EET 2020
+Certificate fingerprints:
+         MD5:  D3:E2:FE:92:47:52:E2:47:1D:42:1B:B5:EB:68:C5:11
+         SHA1: 9F:9C:DF:B4:C4:61:54:87:A4:0D:D0:32:B8:01:0D:77:99:F5:24:05
+         SHA256: 21:4B:03:DB:9B:24:38:01:95:3C:9C:6F:18:C3:A5:23:09:D2:7F:64:9A:8A:E4:8D:0B:4F:AE:90:6D:44:74:D3
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 3
+
+Extensions: 
+
+#1: ObjectId: 1.3.6.1.4.1.11129.2.4.2 Criticality=false
+0000: 04 81 F3 00 F1 00 77 00   07 B7 5C 1B E5 7D 68 FF  ......w...\...h.
+0010: F1 B0 C6 1D 23 15 C7 BA   E6 57 7C 57 94 B7 6A EE  ....#....W.W..j.
+0020: BC 61 3A 1A 69 D3 A2 1C   00 00 01 6E 69 50 FB 07  .a:.i......niP..
+0030: 00 00 04 03 00 48 30 46   02 21 00 91 7F F0 CB AF  .....H0F.!......
+0040: 1D 6F C8 C5 8D 5F 04 94   ED E8 19 C7 AF 7F D4 78  .o..._.........x
+0050: 95 A6 81 CF 09 7E EE 50   FD D4 FE 02 21 00 92 13  .......P....!...
+0060: 60 98 03 1B 0C 5E 84 42   76 DB 22 E6 1A CD 35 63  `....^.Bv."...5c
+0070: 74 3F D5 F3 6E E7 31 FB   BC B0 35 6D 27 49 00 76  t?..n.1...5m'I.v
+0080: 00 5E A7 73 F9 DF 56 C0   E7 B5 36 48 7D D0 49 E0  .^.s..V...6H..I.
+0090: 32 7A 91 9A 0C 84 A1 12   12 84 18 75 96 81 71 45  2z.........u..qE
+00A0: 58 00 00 01 6E 69 50 FA   F5 00 00 04 03 00 47 30  X...niP.......G0
+00B0: 45 02 20 2A 16 35 AA BF   72 86 22 B6 C1 24 DC D4  E. *.5..r."..$..
+00C0: EE F8 64 BC F3 B5 6C 57   E5 78 AF A9 EA 73 11 DB  ..d...lW.x...s..
+00D0: D3 E0 4D 02 21 00 BB C8   4C 5B DF 49 23 87 D6 A7  ..M.!...L[.I#...
+00E0: 26 47 1C 73 CD 31 92 8F   3A 36 57 E8 4E DF BC 3D  &G.s.1..:6W.N..=
+00F0: 0C FB E4 29 44 33                                  ...)D3
+
+
+#2: ObjectId: 1.3.6.1.5.5.7.1.1 Criticality=false
+AuthorityInfoAccess [
+  [
+   accessMethod: caIssuers
+   accessLocation: URIName: http://crt.sectigo.com/SectigoRSADomainValidationSecureServerCA.crt
+, 
+   accessMethod: ocsp
+   accessLocation: URIName: http://ocsp.sectigo.com
+]
+]
+
+#3: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: 8D 8C 5E C4 54 AD 8A E1   77 E9 9B F9 9B 05 E1 B8  ..^.T...w.......
+0010: 01 8D 61 E1                                        ..a.
+]
+]
+
+#4: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:false
+  PathLen: undefined
+]
+
+#5: ObjectId: 2.5.29.32 Criticality=false
+CertificatePolicies [
+  [CertificatePolicyId: [1.3.6.1.4.1.6449.1.2.2.7]
+[PolicyQualifierInfo: [
+  qualifierID: 1.3.6.1.5.5.7.2.1
+  qualifier: 0000: 16 17 68 74 74 70 73 3A   2F 2F 73 65 63 74 69 67  ..https://sectig
+0010: 6F 2E 63 6F 6D 2F 43 50   53                       o.com/CPS
+
+]]  ]
+  [CertificatePolicyId: [2.23.140.1.2.1]
+[]  ]
+]
+
+#6: ObjectId: 2.5.29.37 Criticality=false
+ExtendedKeyUsages [
+  serverAuth
+  clientAuth
+]
+
+#7: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  DigitalSignature
+  Key_Encipherment
+]
+
+#8: ObjectId: 2.5.29.17 Criticality=false
+SubjectAlternativeName [
+  DNSName: fc.tonu.rocks
+  DNSName: www.fc.tonu.rocks
+]
+
+#9: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 31 4C 41 DA 1F 23 5D 7A   78 F8 82 39 F5 52 DC 61  1LA..#]zx..9.R.a
+0010: FB 22 8E A1                                        ."..
+]
+]
+
+Trust this certificate? [no]:  yes
+Certificate was added to keystore
+MacBookAir:Lab7 alexandru$ 
