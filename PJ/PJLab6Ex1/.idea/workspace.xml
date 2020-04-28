@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PJLab6Ex1:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7fa2d439-f6e9-4602-b3b2-ce09d65e961e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZxaqGG4N0whU7OMAsHhUrmD9PH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Calculator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Calculator" />
+      <module name="PJLab6Ex1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Calculator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7fa2d439-f6e9-4602-b3b2-ce09d65e961e" name="Default Changelist" comment="" />
+      <created>1585783387753</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1585783387753</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="458" y="250" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585787048100">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state x="458" y="250" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1440.873@0.23.1440.873" timestamp="1585787048100" />
+    <state width="1398" height="229" key="GridCell.Tab.0.bottom" timestamp="1586198618228">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state width="1398" height="229" key="GridCell.Tab.0.bottom/0.23.1440.873@0.23.1440.873" timestamp="1586198618228" />
+    <state width="1398" height="229" key="GridCell.Tab.0.center" timestamp="1586198618226">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state width="1398" height="229" key="GridCell.Tab.0.center/0.23.1440.873@0.23.1440.873" timestamp="1586198618226" />
+    <state width="1398" height="229" key="GridCell.Tab.0.left" timestamp="1586198618226">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state width="1398" height="229" key="GridCell.Tab.0.left/0.23.1440.873@0.23.1440.873" timestamp="1586198618226" />
+    <state width="1398" height="229" key="GridCell.Tab.0.right" timestamp="1586198618227">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state width="1398" height="229" key="GridCell.Tab.0.right/0.23.1440.873@0.23.1440.873" timestamp="1586198618227" />
+    <state x="208" y="41" key="SettingsEditor" timestamp="1585787088469">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state x="208" y="41" key="SettingsEditor/0.23.1440.873@0.23.1440.873" timestamp="1585787088469" />
+    <state x="114" y="82" key="new project wizard" timestamp="1586198615462">
+      <screen x="0" y="23" width="1440" height="873" />
+    </state>
+    <state x="114" y="82" key="new project wizard/0.23.1440.873@0.23.1440.873" timestamp="1586198615462" />
+  </component>
+</project>

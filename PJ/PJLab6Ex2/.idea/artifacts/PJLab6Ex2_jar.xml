@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PJLab6Ex2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PJLab6Ex2_jar</output-path>
+    <root id="archive" name="PJLab6Ex2.jar">
+      <element id="module-output" name="PJLab6Ex2" />
+    </root>
+  </artifact>
+</component>
