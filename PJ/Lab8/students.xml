@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE students>
+<students>
+    <student>
+        <name>John Doe</name>
+        <year>2</year>
+        <class>3</class>
+    </student>
+    <student>
+        <name>Jane Doe</name>
+        <year>3</year>
+        <class>1</class>
+    </student>
+    <student>
+        <name>Jeff Doe</name>
+        <year>4</year>
+        <class>2</class>
+    </student>
+</students>
