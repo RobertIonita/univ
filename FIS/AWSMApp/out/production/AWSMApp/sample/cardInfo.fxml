@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="wrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="264.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.workspaceController">
+   <children>
+      <Pane fx:id="elements" layoutX="2.0" layoutY="-4.0" prefHeight="192.0" prefWidth="174.0" style="-fx-background-color: #0083FD; -fx-background-radius: 15;">
+         <children>
+            <Pane fx:id="textBox" layoutY="137.0" prefHeight="55.0" prefWidth="174.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 15 15;">
+               <children>
+                  <Text fx:id="numeProd" fill="#636363" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nume">
+                     <font>
+                        <Font name="Arial Black" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="cantitateProd" fill="#bebebe" layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cant">
+                     <font>
+                        <Font name="Arial Black" size="11.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
