@@ -40,7 +40,7 @@ public class graphController {
     @FXML
     private Text idProdus;
     @FXML
-    private VBox description;
+    private Pane description;
 
     public StringBuffer jsonStr = new StringBuffer();
     public graphController() throws IOException {
@@ -82,12 +82,26 @@ public class graphController {
         numeProd.setLayoutX(7);
         numeProd.setLayoutY(20);
 
+        nume=new Text("denumire produs: "+name);
+        nume.setStyle("-fx-fill: #bebebe; -fx-font-family: 'Arial Black';-fx-font-size: 11");
+        nume.setLayoutX(7);
+        nume.setLayoutY(40);
+
+
         cantitateProd = new Text(count);
         cantitateProd.setStyle("-fx-font-family: 'Arial Black';-fx-font-size: 11;-fx-background-color:#bebebe ");
         cantitateProd.setLayoutX(7);
         cantitateProd.setLayoutY(37);
         ///
+        stocProd=new Text("stoc magazin: "+count);
+        stocProd.setStyle("-fx-font-family: 'Arial Black';-fx-font-size: 11;-fx-fill: #bebebe ");
+        stocProd.setLayoutX(7);
+        stocProd.setLayoutY(80);
 
+        idProdus=new Text("idProdus: "+id);
+        idProdus.setStyle("-fx-font-family: 'Arial Black';-fx-font-size: 11;-fx-fill: #bebebe ");
+        idProdus.setLayoutX(7);
+        idProdus.setLayoutY(120);
 
         textBg.getChildren().add(numeProd);
         textBg.getChildren().add(cantitateProd);
@@ -101,6 +115,12 @@ public class graphController {
         placeit.setVisible(true);
         placeit.getChildren().add(paneContainer);
 
+        description.setVisible(true);
+        description.getChildren().clear();
+        description.getChildren().add(nume);
+        description.getChildren().add(stocProd);
+        description.getChildren().add(idProdus);
+
 
 
 
@@ -112,6 +132,7 @@ public class graphController {
     private void search(ActionEvent event) throws JSONException, IOException {
 
         placeit.setVisible(false);
+        description.setVisible(false);
         JSONArray jsonArray = new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
 

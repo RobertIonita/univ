@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.glass.events.MouseEvent;
 import com.sun.prism.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,8 @@ public class systemsController {
 
     @FXML
     private AnchorPane wrapper;
+    @FXML
+    private ScrollPane scroll;
 
     @FXML
     private Pane elements;
@@ -96,38 +99,31 @@ public class systemsController {
         pane.getChildren().add(textBg);
 
         paneContainer.getChildren().add(pane);
+        paneContainer.getStyleClass().add("card");
+        paneContainer.setOnMouseClicked((e)->{
+
+        });
         wrapper.getChildren().add(paneContainer);
+        scroll.setContent(wrapper);
     }
 
 
     @FXML
     public void initialize() throws JSONException, IOException {
 
-
-        wrapper.getChildren().remove(0,1);
         int layoutY = 0;
         JSONArray jsonArray = new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
             String[] elementNames = JSONObject.getNames(objectInArray);
-            System.out.printf("%d ELEMENTS IN CURRENT OBJECT:\n", elementNames.length);
-            for (String elementName : elementNames) {
-                String k = new Integer(8).toString();
-                System.out.print(elementName + " ");
-                try {
-                    System.out.println(objectInArray.getInt(elementName));
-                } catch (JSONException e) {
-                    System.out.println(objectInArray.getString(elementName));
-                }
-            }
+
             String name = objectInArray.getString("name");
             Integer count = objectInArray.getInt("count");
             int layoutX = i % 3 == 0 ? 100 : 300;
             appendTemplate(objectInArray.getString("name"), count.toString(), layoutX, layoutY);
+            layoutY += i % 3 == 0 ? 0 : 230;
 
-            layoutY += i % 2 == 0 ? 0 : 230;
 
-            System.out.println();
         }
     }
 }

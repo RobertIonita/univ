@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
-
-<Pane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.workspaceController">
+<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.workspaceController">
    <children>
       <Pane prefHeight="700.0" prefWidth="957.0" visible="false">
          <children>
@@ -85,7 +87,7 @@
                   <Insets bottom="12.0" right="1.0" />
                </opaqueInsets>
             </TextField>
-            <Button fx:id="addBtn" layoutX="114.0" layoutY="391.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" text="adauga" textFill="WHITE">
+            <Button fx:id="addBtn" layoutX="114.0" layoutY="391.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="14.0" />
                </font>

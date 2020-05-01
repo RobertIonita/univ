@@ -28,21 +28,41 @@ public class HomeController extends workspaceController {
     private AnchorPane anchorRoot;
 
     public HomeController() throws IOException {
+
+
     }
 
     @FXML
     private void gotoSystems(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("systemsScene.fxml"));
+        Scene systemsScene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(systemsScene);
+        window.show();
 
-        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
+    }
+    @FXML
+    private void gotoAdd(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("adaugaComponente.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);
         window.show();
     }
     @FXML
-    private void gotoAdd(ActionEvent event) throws IOException {
+    private void gotoComponents(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("componenteScene.fxml"));
+        Scene systemsScene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(systemsScene);
+        window.show();
+    }
+    @FXML
+    private void gotoGraph(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("graphScene.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);

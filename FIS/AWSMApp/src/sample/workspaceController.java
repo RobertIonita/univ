@@ -50,7 +50,8 @@ public class workspaceController {
         }
 
         @FXML
-        void compBtn(MouseEvent event) {
+        void compBtn(MouseEvent event) throws IOException {
+           loadPage("componenteScene");
 
 
         }
@@ -58,8 +59,8 @@ public class workspaceController {
 
 
         @FXML
-        void graphBtn(MouseEvent event) {
-
+        void graphBtn(MouseEvent event) throws IOException {
+            loadPage("graphScene");
         }
 
         @FXML
@@ -81,10 +82,8 @@ public class workspaceController {
 
 
     @FXML
-    void initialize() {
-        assert systemBtn != null : "fx:id=\"systemBtn\" was not injected: check your FXML file 'workspace.fxml'.";
-        assert plusBtn != null : "fx:id=\"plusBtn\" was not injected: check your FXML file 'workspace.fxml'.";
-        assert homeBtn != null : "fx:id=\"homeBtn\" was not injected: check your FXML file 'workspace.fxml'.";
+    void initialize() throws IOException {
+
 
     }
     void loadPage(String page) throws IOException {
