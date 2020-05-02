@@ -87,7 +87,7 @@ public class workspaceController {
 
     }
     void loadPage(String page) throws IOException {
-    Parent root=null;
+   Parent root=null;
         try{
            root= FXMLLoader.load(getClass().getResource(page+".fxml"));
 

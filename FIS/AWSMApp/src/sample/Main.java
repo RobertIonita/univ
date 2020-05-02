@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("homeScene.fxml"));
         primaryStage.setTitle("AWSM App");
         primaryStage.setScene(new Scene(root, 960, 720));
         primaryStage.setResizable(false);

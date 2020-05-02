@@ -13,7 +13,7 @@
     <children>
         <Pane prefHeight="700.0" prefWidth="950.0">
             <children>
-            <TextField layoutX="567.0" layoutY="23.0" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@css/style.css" />
+            <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@css/style.css" />
             <Pane layoutX="150.0" layoutY="178.0" prefHeight="476.0" prefWidth="638.0">
                <children>
                 <AnchorPane fx:id="frame" layoutX="-5.0" layoutY="2.0" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="638.0">

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import javafx.scene.control.TextField;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -48,6 +49,8 @@ public class systemsController {
 
     @FXML
     private Text cantitateProd;
+    @FXML
+    private TextField searchBar;
 
 
 
@@ -65,7 +68,7 @@ public class systemsController {
 
     @FXML
 
-    public void appendTemplate(String name, String count, int layoutX, int layoutY) throws IOException {
+    public void appendTemplate(String name, String count,String id,int layoutX, int layoutY) throws IOException {
 
         Pane paneContainer = new Pane();
       // paneContainer.setPrefSize(810,710);
@@ -106,7 +109,42 @@ public class systemsController {
         wrapper.getChildren().add(paneContainer);
         scroll.setContent(wrapper);
     }
+    @FXML
+    private void search(ActionEvent event) throws JSONException, IOException {
+        wrapper.getChildren().clear();
 
+        int layoutY = 0;
+        JSONArray jsonArray = new JSONArray(jsonStr.toString());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject objectInArray = jsonArray.getJSONObject(i);
+            String[] elementNames = JSONObject.getNames(objectInArray);
+
+            if (searchBar.getText().equalsIgnoreCase(String.valueOf(objectInArray.getString("name")))) {
+
+                for (String elementName : elementNames) {
+
+                    String k = new Integer(8).toString();
+                    System.out.print(elementName + " ");
+                    try {
+                        System.out.println(objectInArray.getInt(elementName));
+                    } catch (JSONException e) {
+                        System.out.println(objectInArray.getString(elementName));
+                    }
+                }
+
+                String name = objectInArray.getString("name");
+                Integer count = objectInArray.getInt("count");
+                Integer id=objectInArray.getInt("id");
+                int layoutX = i % 3 == 0 ? 100 : 300;
+                appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),layoutX,layoutY);
+                layoutY += i % 3 == 0 ? 0 : 230;
+            }
+
+        }
+
+
+
+    }
 
     @FXML
     public void initialize() throws JSONException, IOException {
@@ -119,8 +157,9 @@ public class systemsController {
 
             String name = objectInArray.getString("name");
             Integer count = objectInArray.getInt("count");
+            Integer id=objectInArray.getInt("id");
             int layoutX = i % 3 == 0 ? 100 : 300;
-            appendTemplate(objectInArray.getString("name"), count.toString(), layoutX, layoutY);
+            appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),layoutX,layoutY);
             layoutY += i % 3 == 0 ? 0 : 230;
 
 

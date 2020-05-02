@@ -34,7 +34,7 @@ public class HomeController extends workspaceController {
 
     @FXML
     private void gotoSystems(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("systemsScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);
@@ -44,7 +44,7 @@ public class HomeController extends workspaceController {
     @FXML
     private void gotoAdd(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("adaugaComponente.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);
@@ -53,7 +53,7 @@ public class HomeController extends workspaceController {
     @FXML
     private void gotoComponents(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("componenteScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);
@@ -62,7 +62,7 @@ public class HomeController extends workspaceController {
     @FXML
     private void gotoGraph(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("graphScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(systemsScene);
