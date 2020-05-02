@@ -78,17 +78,19 @@ public class adaugaController {
 
             CategorieProdus.setItems(FXCollections.observableArrayList(
                     "Placa de baza", "microprocesor", "hdd","carcase","monitor"));
-            furnizorHBOX.getChildren().addAll(furnizorText,furnizorProdus);
+            CategorieProdus.setStyle("-fx-background-color: FFFFFF;-fx-effect: dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 ); -fx-font-family: 'Arial';-fx-font-size: 13;-fx-text-fill: #bebebe");
+
             statusHBOX.getChildren().addAll(statusText,platit,waiting);
             observatiiHBOX.getChildren().addAll(observatiiText,observatii);
-            cantitateProdus.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,30,1,1));
+            cantitateProdus.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0,30,0,1));
         }else if(sisteme.isSelected()){
             CategorieProdus.setItems(FXCollections.observableArrayList(
                     "laptop","laptop mini","desktop office","desktop gaming","desktop replacement"));
-            furnizorHBOX.getChildren().clear();
+            CategorieProdus.setStyle("-fx-background-color: FFFFFF;-fx-effect: dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );-fx-font-family: 'Arial';-fx-font-size: 13; -fx-text-fill: #bebebe");
             statusHBOX.getChildren().clear();
             observatiiHBOX.getChildren().clear();
-            cantitateProdus.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1,30,1,1));
+
+            cantitateProdus.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0,30,0,1));
         }
     }
 

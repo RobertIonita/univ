@@ -11,7 +11,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.systemsController">
     <children>
-        <Pane prefHeight="700.0" prefWidth="950.0">
+        <Pane fx:id="stage" prefHeight="700.0" prefWidth="950.0">
             <children>
             <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@css/style.css" />
             <Pane layoutX="150.0" layoutY="178.0" prefHeight="476.0" prefWidth="638.0">

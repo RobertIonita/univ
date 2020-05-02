@@ -95,12 +95,6 @@ public class componenteController {
     }
     @FXML
     public void initialize() throws JSONException, IOException {
-
-
-        // wrapper.getChildren().remove(0,1);
-
-
-
         int layoutY = 0;
         JSONArray jsonArray = new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -119,7 +113,7 @@ public class componenteController {
             }
             String name = objectInArray.getString("name");
             Integer count = objectInArray.getInt("count");
-            int layoutX = i % 3 == 0 ? 100 : 300;
+            int layoutX = i % 2 == 0 ? 100 : 300;
             appendTemplate(objectInArray.getString("name"), count.toString(), layoutX, layoutY);
 
             layoutY += i % 2 == 0 ? 0 : 210;

@@ -1,6 +1,7 @@
 package sample;
 
 import com.sun.glass.events.MouseEvent;
+import com.sun.glass.ui.EventLoop;
 import com.sun.prism.paint.Color;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,29 +10,35 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import javafx.scene.control.TextField;
 
+import javax.swing.*;
+import javax.swing.text.Element;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
+import java.util.Optional;
 
 public class systemsController {
     @FXML
     private Text name;
 
+    @FXML
+    private Pane stage;
 
     @FXML
     private AnchorPane wrapper;
@@ -81,7 +88,22 @@ public class systemsController {
        pane.setStyle("-fx-background-color:  #0083FD; -fx-background-radius:  15; -fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );-fx-background-position: top ");
        pane.setPrefSize(174, 192);
 
-       Pane textBg=new Pane();
+       //imaginea produsului
+        File file = new File("F:\\GitHub\\Tonu\\univ\\FIS\\AWSMApp\\src\\sample\\assets\\aw-m15-hd-rollupimage.jfif");
+       Image img = new Image(file.toURI().toString());
+        ImageView iv=new ImageView();
+        iv.setImage(img);
+        iv.setFitWidth(300);
+        iv.setFitHeight(300);
+        iv.setPreserveRatio(true);
+        Pane imgPane= new Pane();
+        imgPane.setMaxSize(300,300);
+        imgPane.getChildren().add(iv);
+
+
+
+
+        Pane textBg=new Pane();
        textBg.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 15 15;-fx-background-position: bottom ");
        textBg.setPrefSize(174,55);
        textBg.setLayoutY(137);
@@ -103,7 +125,52 @@ public class systemsController {
 
         paneContainer.getChildren().add(pane);
         paneContainer.getStyleClass().add("card");
+        //click pe produs
         paneContainer.setOnMouseClicked((e)->{
+            BoxBlur blur=new BoxBlur(3,3,3);
+            BorderPane centrum = new BorderPane();
+
+            centrum.setCenter(imgPane);
+            Pane continutPane = new Pane();
+            continutPane.setPrefSize(300,300);
+            VBox continut = new VBox();
+
+            continut.getChildren().add(new Text("Denumirea produsului: "+name));
+            continut.getChildren().add(new Text("stocul curent: "+count));
+            continut.getChildren().add(new Text("Codul produsului: "+id));
+            continut.setSpacing(3);
+            continut.setLayoutX(40);
+            continut.setLayoutY(40);
+            continutPane.getChildren().add(continut);
+
+            centrum.setRight(continutPane);
+
+            Alert a = new Alert(Alert.AlertType.NONE);
+            // set alert type
+            a.setAlertType(Alert.AlertType.INFORMATION);
+
+            a.setHeaderText(null);
+            a.setGraphic(null);
+           a.setTitle(null);
+           DialogPane dialog=a.getDialogPane();
+           dialog.setStyle("-fx-background-color: #E6E7E7" );
+           a.initStyle(StageStyle.TRANSPARENT);
+
+
+            a.getDialogPane().setContent(centrum);
+
+            // show the dialog
+
+
+            stage.setEffect(blur);
+            Optional<ButtonType> result = a.showAndWait();
+            ButtonType button = result.orElse(ButtonType.OK);
+            if(button==ButtonType.OK){
+                stage.setEffect(null);
+
+            }
+
+
 
         });
         wrapper.getChildren().add(paneContainer);
@@ -158,9 +225,9 @@ public class systemsController {
             String name = objectInArray.getString("name");
             Integer count = objectInArray.getInt("count");
             Integer id=objectInArray.getInt("id");
-            int layoutX = i % 3 == 0 ? 100 : 300;
+            int layoutX = i % 2 == 0 ? 100 : 300;
             appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),layoutX,layoutY);
-            layoutY += i % 3 == 0 ? 0 : 230;
+            layoutY += i % 2 == 0 ? 0 : 230;
 
 
         }

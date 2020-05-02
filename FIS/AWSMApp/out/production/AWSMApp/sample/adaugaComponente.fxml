@@ -35,16 +35,20 @@
       </Pane>
       <VBox layoutX="263.0" layoutY="134.0" style="-fx-spacing: 20;">
          <children>
-            <Label alignment="CENTER" text="Adauga Produs" textFill="#636363">
-               <font>
-                  <Font name="Arial Black" size="25.0" />
-               </font>
-            </Label>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" text="Adauga Produs" textFill="#636363">
+                     <font>
+                        <Font name="Arial Black" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <VBox prefHeight="69.0" prefWidth="439.0" style="-fx-spacing: 10;">
                <children>
-                  <HBox fx:id="tipProdusHBOX" style="-fx-spacing: 15;">
+                  <HBox fx:id="tipProdusHBOX" style="-fx-spacing: 10;">
                      <children>
-                          <Label text="Tip Produs" textFill="#404040">
+                          <Label prefWidth="100.0" text="Tip Produs" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
@@ -66,22 +70,22 @@
                   </HBox>
                   <HBox fx:id="categorieHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label text="Categorie" textFill="#404040">
+                        <Label prefWidth="100.0" text="Categorie" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="CategorieProdus" prefWidth="150.0" />
+                        <ChoiceBox fx:id="CategorieProdus" prefWidth="150.0" style="-fx-background-color: FFFFFF; -fx-effect: dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );" />
                      </children>
                   </HBox>
-                  <HBox fx:id="denumireHBOX" style="-fx-spacing: 20;">
+                  <HBox fx:id="denumireHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label text="Denumire" textFill="#404040">
+                        <Label prefWidth="100.0" text="Denumire" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
                         </Label>
-                        <TextField id="denumire" fx:id="denumireProdus" prefHeight="26.0" prefWidth="264.0" promptText="type here.." style="-fx-border-color: #0083FD; -fx-background-color: transparent; -fx-border-radius: 14;">
+                        <TextField id="denumire" fx:id="denumireProdus" prefHeight="26.0" prefWidth="264.0" promptText="type here.." style="-fx-border-color: #0083FD; -fx-background-color: transparent; -fx-border-radius: 1;">
                            <opaqueInsets>
                               <Insets bottom="12.0" right="1.0" />
                            </opaqueInsets>
@@ -93,12 +97,12 @@
                   </HBox>
                   <HBox fx:id="furnizorHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label fx:id="furnizorText" text="Furnizor" textFill="#404040">
+                        <Label fx:id="furnizorText" prefWidth="100.0" text="Furnizor" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
                         </Label>
-                        <TextField id="furnozor" fx:id="furnizorProdus" prefHeight="26.0" prefWidth="264.0" promptText="type here.." style="-fx-border-color: #0083FD; -fx-background-color: transparent; -fx-border-radius: 14;">
+                        <TextField id="furnozor" fx:id="furnizorProdus" prefHeight="26.0" prefWidth="264.0" promptText="type here.." style="-fx-border-color: #0083FD; -fx-background-color: transparent; -fx-border-radius: 1;">
                            <opaqueInsets>
                               <Insets bottom="12.0" right="1.0" />
                            </opaqueInsets>
@@ -107,7 +111,7 @@
                   </HBox>
                   <HBox fx:id="cantitateHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label text="Cantitate" textFill="#404040">
+                        <Label prefHeight="23.0" prefWidth="100.0" text="Cantitate" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
@@ -117,7 +121,7 @@
                   </HBox>
                   <HBox fx:id="statusHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label fx:id="statusText" text="Status" textFill="#404040">
+                        <Label fx:id="statusText" prefHeight="23.0" prefWidth="100.0" text="Status" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
@@ -139,7 +143,7 @@
                   </HBox>
                   <HBox fx:id="observatiiHBOX" style="-fx-spacing: 10;">
                      <children>
-                        <Label fx:id="observatiiText" text="Observatii" textFill="#404040">
+                        <Label fx:id="observatiiText" prefWidth="100.0" text="Observatii" textFill="#404040">
                            <font>
                               <Font name="Arial Black" size="15.0" />
                            </font>
@@ -149,11 +153,15 @@
                   </HBox>
                </children>
             </VBox>
-            <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
-               <font>
-                  <Font name="Arial Black" size="14.0" />
-               </font>
-            </Button>
+            <HBox fx:id="adaugaHBOX" alignment="CENTER">
+               <children>
+                  <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
