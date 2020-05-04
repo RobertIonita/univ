@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -99,6 +101,8 @@ public class systemsController {
         Pane imgPane= new Pane();
         imgPane.setMaxSize(300,300);
         imgPane.getChildren().add(iv);
+        imgPane.setLayoutY(20);
+        imgPane.setLayoutX(20);
 
 
 
@@ -130,28 +134,45 @@ public class systemsController {
             BoxBlur blur=new BoxBlur(3,3,3);
             BorderPane centrum = new BorderPane();
 
-            centrum.setCenter(imgPane);
+            Pane imgPopupP = new Pane();
+            imgPopupP.getChildren().add(imgPane);
+
+            centrum.setCenter(imgPopupP);
             Pane continutPane = new Pane();
             continutPane.setPrefSize(300,300);
             VBox continut = new VBox();
 
-            continut.getChildren().add(new Text("Denumirea produsului: "+name));
-            continut.getChildren().add(new Text("stocul curent: "+count));
-            continut.getChildren().add(new Text("Codul produsului: "+id));
+            Text numePopup = new Text("Denumire produs: "+name);
+            numePopup.setFont(Font.font("Arial Black",11));
+
+            Text cantPopup = new Text("Denumire produs: "+count);
+            cantPopup.setFont(Font.font("Arial Black",11));
+
+            Text idPopup = new Text("Denumire produs: "+id);
+            idPopup.setFont(Font.font("Arial Black",11));
+
+
+            continut.getChildren().add(numePopup);
+            continut.getChildren().add(cantPopup);
+            continut.getChildren().add(idPopup);
             continut.setSpacing(3);
             continut.setLayoutX(40);
-            continut.setLayoutY(40);
+            continut.setLayoutY(20);
             continutPane.getChildren().add(continut);
 
             centrum.setRight(continutPane);
 
+            //alert dialog
+
+
+
             Alert a = new Alert(Alert.AlertType.NONE);
             // set alert type
             a.setAlertType(Alert.AlertType.INFORMATION);
-
             a.setHeaderText(null);
             a.setGraphic(null);
-           a.setTitle(null);
+            a.setTitle(null);
+
            DialogPane dialog=a.getDialogPane();
            dialog.setStyle("-fx-background-color: #E6E7E7" );
            a.initStyle(StageStyle.TRANSPARENT);
@@ -165,6 +186,8 @@ public class systemsController {
             stage.setEffect(blur);
             Optional<ButtonType> result = a.showAndWait();
             ButtonType button = result.orElse(ButtonType.OK);
+            
+
             if(button==ButtonType.OK){
                 stage.setEffect(null);
 
