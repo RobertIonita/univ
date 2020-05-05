@@ -37,10 +37,11 @@
                 </div>
                 <div class="d_fl a_c j_sb">
                     <div class="input-field text_area">
-                        <textarea id="textarea1" name="address" class="materialize-textarea validate" required>
-
-                        </textarea>
-                        <label for="textarea1">Adresa</label>
+                        <label for="address">Adresa</label>
+                        <input id="address" name="address" type="text" class="validate"
+                                  required pattern="^[^\x22'` ][^\x22'`]+[^\x22'` ]$"/>
+                        <span class="helper-text"
+                              data-error="Nu sunt permise caracterele „ ' ”, „ &#x22; ”, precum și spații la început și sfârșit"></span>
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Adaugă"/>
@@ -49,6 +50,6 @@
 </div>
 
 <script type="text/javascript" src="js/materialize.min.js" defer></script>
-<script type="text/javascript" src="js/main.js" defer></script>
+<script type="text/javascript" src="js/add.min.js" defer></script>
 </body>
 </html>

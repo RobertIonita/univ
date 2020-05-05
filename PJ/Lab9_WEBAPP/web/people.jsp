@@ -34,33 +34,14 @@
         </div>
         <div class="table_body">
         </div>
-        <div class="pagination d_fl a_c j_sb">
-            <select name="pages">
-                <option value="" disabled selected>Înregistrări per pagină</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="25">25</option>
-            </select>
-            <ul class="d_fl a_c j_sb">
-                <li class="disabled">
-                    <i class="icon_first_page material-icons">first_page</i>
-                </li>
-                <li class="disabled">
-                    <i class="icon_arrow_left material-icons">navigate_before</i>
-                </li>
-                <li class="disabled">
-                    <i class="icon_arrow_right material-icons">navigate_next</i>
-                </li>
-                <li class="disabled">
-                    <i class="icon_last_page material-icons">last_page</i>
-                </li>
-            </ul>
+        <div class="go_back">
+            <a href="./" class="btn">Go back</a>
         </div>
     </div>
 </div>
 <script src="js/FileSaver.min.js"></script>
 <script src="js/xlsx.full.min.js"></script>
-<script src="js/people.js"></script>
+<script src="js/people.min.js"></script>
 <script src="js/materialize.min.js"></script>
 </body>
 </html>

@@ -2,8 +2,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     let datePickers = document.querySelectorAll('.datepicker'),
         datePickerOptions = {
-            "maxDate": new Date()
+            "maxDate": new Date(),
+            "yearRange" : 100,
+            "firstDay": 1
         };
-        M.Datepicker.init(datePickers, datePickerOptions);
+    M.Datepicker.init(datePickers, datePickerOptions);
 });
 

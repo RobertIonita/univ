@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="column_body phone"><span>${person.phone}</span></div>
                 </div>`
         }
-        populate = (people) => {
-            people.forEach(person => {
-                appendPerson(person);
-            });
-        };
-    var people = [];
+    populate = (people) => {
+        people.forEach(person => {
+            appendPerson(person);
+        });
+    };
+    let people = [];
     fetch("./people")
         .then(response => {
             response.json()
@@ -31,15 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const filterDate = (filter_date) => {
             table.innerHTML = "";
             people.forEach(person => {
-               if(Date.parse(person.birth_date) >= filter_date)
-                   appendPerson(person);
+                if (Date.parse(person.birth_date) >= filter_date)
+                    appendPerson(person);
             });
         },
         datePickers = document.querySelectorAll('.datepicker'),
         datePickerOptions = {
             "maxDate": new Date(),
+            "yearRange": 100,
             "firstDay": 1,
-            "onClose": function() {
+            "onClose": function () {
                 filterDate(this.date)
             }
         },
@@ -50,24 +51,23 @@ document.addEventListener('DOMContentLoaded', function () {
             for (let i = 0; i < str.length; i++)
                 view[i] = str.charCodeAt(i) & 0xFF;
             return buf;
-        },
-        selects = document.querySelectorAll('select');
-        btn_download.onclick = () => {
-            let report = XLSX.utils.book_new(),
-                people_sheet = XLSX.utils.json_to_sheet(people);
-
-            report.Props = {
-                Title: "JSP Web Application",
-                Subject: "Collected data",
-                Author: "alexandru@tonu.rocks",
-                CreatedDate: new Date()
-            };
-            report.SheetNames.push("People");
-            report.Sheets["People"] = people_sheet;
-
-            let wordbook = XLSX.write(report, { bookType: 'xlsx', type: 'binary' });
-            saveAs(new Blob([stringToArrayBuffer(wordbook)], { type: "application/octet-stream" }), 'Report.xlsx');
         };
-    M.FormSelect.init(selects);
+
+    btn_download.onclick = () => {
+        let report = XLSX.utils.book_new(),
+            people_sheet = XLSX.utils.json_to_sheet(people);
+
+        report.Props = {
+            Title: "JSP Web Application",
+            Subject: "Collected data",
+            Author: "alexandru@tonu.rocks",
+            CreatedDate: new Date()
+        };
+        report.SheetNames.push("People");
+        report.Sheets["People"] = people_sheet;
+
+        let wordbook = XLSX.write(report, {bookType: 'xlsx', type: 'binary'});
+        saveAs(new Blob([stringToArrayBuffer(wordbook)], {type: "application/octet-stream"}), 'Report.xlsx');
+    };
     M.Datepicker.init(datePickers, datePickerOptions);
 });

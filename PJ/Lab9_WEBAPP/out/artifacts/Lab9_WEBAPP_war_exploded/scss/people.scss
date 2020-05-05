@@ -34,44 +34,6 @@ i.material-icons {
     }
   }
 
-  .pagination {
-    padding: 0 15px;
-    list-style: none;
-    box-sizing: border-box;
-    margin: 0 0 0 auto;
-    height: 40px;
-
-    .select-wrapper {
-      input.select-dropdown.dropdown-trigger {
-        height: 34px;
-        width: 190px;
-        color: #3e3e3e;
-        margin: 0;
-      }
-
-      .select-dropdown li.disabled > span {
-        font-size: 14px;
-      }
-    }
-    ul {
-      li {
-        height: auto;
-
-        i {
-          cursor: pointer;
-        }
-
-        &.disabled {
-          i {
-            pointer-events: none;
-            opacity: 0.3;
-            cursor: not-allowed;
-          }
-        }
-      }
-    }
-  }
-
   .table {
     width: calc(100% - 30px);
     margin: 0 auto;
@@ -127,5 +89,12 @@ i.material-icons {
       }
     }
 
+    .go_back{
+      padding: 10px 15px;
+      .btn{
+        width: fit-content;
+        max-width: 120px;
+      }
+    }
   }
 }
