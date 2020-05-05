@@ -1,0 +1,131 @@
+@import "imports";
+@import 'globals';
+
+h4 {
+  margin: 40px auto;
+  text-align: center;
+  font: 400 normal 32px Montserrat;
+}
+
+i.material-icons {
+  color: #9e9d9d;
+}
+
+.main_container {
+  margin: 40px 0;
+
+  .controls {
+    padding: 0 15px 5px;
+    height: 60px;
+    box-sizing: border-box;
+    border-bottom: solid 1px #dcdcdc;
+    align-items: flex-end;
+
+    .date_from {
+      margin: 0;
+      input#birth_date {
+        height: 30px;
+        margin: 0;
+      }
+    }
+
+    .download {
+      margin-bottom: 10px;
+    }
+  }
+
+  .pagination {
+    padding: 0 15px;
+    list-style: none;
+    box-sizing: border-box;
+    margin: 0 0 0 auto;
+    height: 40px;
+
+    .select-wrapper {
+      input.select-dropdown.dropdown-trigger {
+        height: 30px;
+        width: 190px;
+        color: #3e3e3e;
+        margin: 0;
+      }
+
+      .select-dropdown li.disabled > span {
+        font-size: 14px;
+      }
+    }
+    ul {
+      li {
+        height: auto;
+
+        i {
+          cursor: pointer;
+        }
+
+        &.disabled {
+          i {
+            pointer-events: none;
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+
+  .table {
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0;
+
+    .table_heading {
+      padding: 16px 0;
+
+      .row_body {
+        box-sizing: border-box;
+        padding: 0 15px;
+      }
+
+      .column_body {
+        span {
+          font: 400 normal 18px sans-serif;
+          color: #3e3e3e;
+        }
+
+      }
+    }
+
+    .table_body {
+      .row_body {
+        height: 54px;
+        border-bottom: solid 1px #dcdcdc;
+        box-sizing: border-box;
+        padding: 0 15px;
+
+        &:nth-of-type(odd) {
+          background-color: #f3f3f3;
+        }
+      }
+
+      .column_body {
+        span {
+          font: 400 normal 14px sans-serif;
+          color: #2b2b2b;
+        }
+      }
+    }
+
+
+    .column_body {
+      width: 110px;
+
+      &.phone {
+        text-align: right;
+      }
+      &.address {
+        min-width: 250px;
+      }
+    }
+
+  }
+}

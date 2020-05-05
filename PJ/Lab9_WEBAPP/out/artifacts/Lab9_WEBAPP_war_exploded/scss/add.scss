@@ -1,0 +1,54 @@
+@import 'imports';
+@import 'globals';
+
+$primary: #3f51b5;
+
+.main_container {
+
+  h4 {
+    margin: 40px auto;
+    text-align: center;
+    font: 400 normal 32px Montserrat;
+  }
+
+  h5 {
+    margin: 0 0 30px;
+    text-align: left;
+    font: 400 normal 20px Montserrat;
+  }
+}
+
+#data_form {
+  .btn {
+    margin: 0 0 0 auto;
+    background: #3f51b5;
+    border: none;
+    color: white;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px #a7a7a7;
+    border-radius: 6px;
+    font: 400 normal 14px/2.5 Montserrat;
+    display: block;
+  }
+
+  .input-field{
+    width: 45%;
+
+    &.text_area {
+      width: 100%;
+    }
+  }
+}
+
+
+@media screen and (max-width: 450px) {
+  .main_container {
+    h4 {
+      font-size: 28px;
+    }
+
+    .card {
+      width: 100%;
+    }
+  }
+}
