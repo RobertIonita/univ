@@ -22,7 +22,7 @@
                 <label for="birth_date">Începând de la:</label>
             </div>
             <a href="../modules/export_clients.php">
-                <i class="material-icons">get_app</i>
+                <i class="material-icons download">get_app</i>
             </a>
         </div>
         <div class="table_heading">

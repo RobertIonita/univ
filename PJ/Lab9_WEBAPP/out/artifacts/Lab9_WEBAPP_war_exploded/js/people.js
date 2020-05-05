@@ -1,23 +1,26 @@
 document.addEventListener('DOMContentLoaded', function () {
     const table = document.querySelector(".table_body"),
+        appendPerson = (person) => {
+            table.innerHTML +=
+                `<div class="row_body d_fl j_sb a_c">
+                    <div class="column_body last_name"><span>${person.last_name}</span></div>
+                    <div class="column_body first_name"><span>${person.first_name}</span></div>
+                    <div class="column_body birth_date"><span>${person.birth_date}</span></div>
+                    <div class="column_body address"><span>${person.address}</span></div>
+                    <div class="column_body phone"><span>${person.phone}</span></div>
+                </div>`
+        }
         populate = (people) => {
-            console.log(people);
             people.forEach(person => {
-                table.innerHTML +=
-                    `<div class="row_body d_fl j_sb a_c">
-                        <div class="column_body last_name"><span>${person.last_name}</span></div>
-                        <div class="column_body first_name"><span>${person.first_name}</span></div>
-                        <div class="column_body birth_date"><span>${person.birth_date}</span></div>
-                        <div class="column_body address"><span>${person.address}</span></div>
-                        <div class="column_body phone"><span>${person.phone}</span></div>
-                    </div>`
+                appendPerson(person);
             });
         };
+    var people = [];
     fetch("./people")
         .then(response => {
             response.json()
                 .then(data => {
-                    console.log(data);
+                    people = data;
                     populate(data);
                 })
                 .catch(error => console.error('Failed to parse json: ', error))
@@ -25,10 +28,20 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error(error);
         });
-
-    let datePickers = document.querySelectorAll('.datepicker'),
+    const filterDate = (filter_date) => {
+            table.innerHTML = "";
+            people.forEach(person => {
+               if(Date.parse(person.birth_date) >= filter_date)
+                   appendPerson(person);
+            });
+        },
+        datePickers = document.querySelectorAll('.datepicker'),
         datePickerOptions = {
-            "maxDate": new Date()
+            "maxDate": new Date(),
+            "firstDay": 1,
+            "onClose": function() {
+                filterDate(this.date)
+            }
         },
         selects = document.querySelectorAll('select');
     M.FormSelect.init(selects);
