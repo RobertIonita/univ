@@ -30,10 +30,10 @@ public class peopleServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.println("[");
+        out.print("[");
         int nr_records = people.size();
         for (int i = 0; i < nr_records; i++) {
-            out.println(people.get(i).toString());
+            out.print(people.get(i).toString());
             if (i < nr_records - 1)
                 out.println(",");
         }

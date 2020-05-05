@@ -21,9 +21,7 @@
                 <input id="birth_date" name="birth_date" type="text" class="datepicker">
                 <label for="birth_date">Începând de la:</label>
             </div>
-            <a href="../modules/export_clients.php">
-                <i class="material-icons download">get_app</i>
-            </a>
+            <i class="material-icons download">get_app</i>
         </div>
         <div class="table_heading">
             <div class="row_body d_fl j_sb a_c">
@@ -60,6 +58,8 @@
         </div>
     </div>
 </div>
+<script src="js/FileSaver.min.js"></script>
+<script src="js/xlsx.full.min.js"></script>
 <script src="js/people.js"></script>
 <script src="js/materialize.min.js"></script>
 </body>

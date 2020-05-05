@@ -43,7 +43,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 filterDate(this.date)
             }
         },
+        btn_download = document.querySelector("i.download"),
+        stringToArrayBuffer = (str) => {
+            let buf = new ArrayBuffer(str.length),
+                view = new Uint8Array(buf);
+            for (let i = 0; i < str.length; i++)
+                view[i] = str.charCodeAt(i) & 0xFF;
+            return buf;
+        },
         selects = document.querySelectorAll('select');
+        btn_download.onclick = () => {
+            let report = XLSX.utils.book_new(),
+                people_sheet = XLSX.utils.json_to_sheet(people);
+
+            report.Props = {
+                Title: "JSP Web Application",
+                Subject: "Collected data",
+                Author: "alexandru@tonu.rocks",
+                CreatedDate: new Date()
+            };
+            report.SheetNames.push("People");
+            report.Sheets["People"] = people_sheet;
+
+            let wordbook = XLSX.write(report, { bookType: 'xlsx', type: 'binary' });
+            saveAs(new Blob([stringToArrayBuffer(wordbook)], { type: "application/octet-stream" }), 'Report.xlsx');
+        };
     M.FormSelect.init(selects);
     M.Datepicker.init(datePickers, datePickerOptions);
 });

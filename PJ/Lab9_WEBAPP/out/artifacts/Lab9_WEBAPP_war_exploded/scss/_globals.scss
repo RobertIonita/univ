@@ -49,6 +49,10 @@ body {
   color: orange;
 }
 
+i.material-icons {
+  cursor: pointer;
+}
+
 input:not(.browser-default).valid,
 input:not(.browser-default):focus.valid,
 input:not(.browser-default):not(.invalid):focus:not([readonly]),
