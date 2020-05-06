@@ -1,0 +1,12 @@
+MacBookAir:Si_l8 alexandru$ diff output/ex1_1.txt output/ex1_2.txt
+9,12c9,12
+< USER=alexandruSSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Aak3PQoil1/Listeners__CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/alexandru/Documents/GitHub/univ/Flutter/flutter/bin:/Users/alexandru/Library/Android/sdk/emulator:/Users/alexandru/Lib
+< rary/Android/sdk/tools:/Users/alexandru/Library/Android/sdk/tools/bin:/Users/alexandru/Library/Android/sdk/platform-tools:/Users
+< /alexandru/Documents/GitHub/univ/Flutter/flutter/bin:/Users/alexandru/Library/Android/sdk/emulator:/Users/alexandru/Library/Andr
+< oid/sdk/tools:/Users/alexandru/Library/Android/sdk/tools/bin:/Users/alexandru/Library/Android/sdk/platform-tools
+---
+> USER=alexandru
+> SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.Aak3PQoil1/Listeners
+> __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+> PATH=/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Users/alexandru/Documents/GitHub/univ/Flutter/flutter/bin:/Users/alexandru/Library/Android/sdk/emulator:/Users/alexandru/Library/Android/sdk/tools:/Users/alexandru/Library/Android/sdk/tools/bin:/Users/alexandru/Library/Android/sdk/platform-tools:/Users/alexandru/Documents/GitHub/univ/Flutter/flutter/bin:/Users/alexandru/Library/Android/sdk/emulator:/Users/alexandru/Library/Android/sdk/tools:/Users/alexandru/Library/Android/sdk/tools/bin:/Users/alexandru/Library/Android/sdk/platform-tools
+MacBookAir:Si_l8 alexandru$ 
