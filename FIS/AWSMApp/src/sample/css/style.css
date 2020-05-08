@@ -179,3 +179,25 @@
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
+
+.combo-box{
+    -fx-background-color: transparent;
+    -fx-border-color: #9599A1;
+    -fx-mark-color:#9599A1;
+    -fx-border-radius: 10;
+}
+.warranty{
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/plus.png");
+    -fx-max-width: 80%;
+    -fx-min-width: 80%;
+    -fx-background-position: center-left;
+    -fx-background-repeat: no-repeat;
+}
+
+.report{
+
+}
+.report:hover{
+    -fx-cursor: hand;
+}
