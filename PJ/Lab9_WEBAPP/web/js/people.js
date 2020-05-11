@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <div class="column_body address"><span>${person.address}</span></div>
                     <div class="column_body phone"><span>${person.phone}</span></div>
                 </div>`
-        }
-    populate = (people) => {
-        people.forEach(person => {
-            appendPerson(person);
-        });
-    };
+        },
+        populate = (people) => {
+            people.forEach(person => {
+                appendPerson(person);
+            });
+        };
     let people = [];
     fetch("./people")
         .then(response => {
@@ -40,6 +40,42 @@ document.addEventListener('DOMContentLoaded', function () {
             "maxDate": new Date(),
             "yearRange": 100,
             "firstDay": 1,
+            "i18n": {
+                "months": [
+                    'Ianuarie',
+                    'Februarie',
+                    'Martie',
+                    'Aprile',
+                    'Mai',
+                    'Iunie',
+                    'Iulie',
+                    'August',
+                    'Septembrie',
+                    'Octombrie',
+                    'Noviembrie',
+                    'Decembrie'
+                ],
+                "weekdaysShort": [
+                    'Dum',
+                    'Lun',
+                    'Mar',
+                    'Mie',
+                    'Joi',
+                    'Vin',
+                    'Sâm'
+                ],
+                "weekdays": [
+                    'Duminică',
+                    'Luni',
+                    'Marți',
+                    'Miercuri',
+                    'Joi',
+                    'Vineri',
+                    'Sâmbătă'
+                ],
+                "weekdaysAbbrev": ['D','L','M','M','J','V','S'],
+                "cancel": 'Renunță'
+            },
             "onClose": function () {
                 filterDate(this.date)
             }

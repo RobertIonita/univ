@@ -17,12 +17,11 @@ public class Person {
 
     @Override
     public String toString() {
-        final String GET_PARAMS = "{\n" +
+        return "{\n" +
                 "    \"first_name\": \"" + first_name + "\",\r\n" +
                 "    \"last_name\": \"" + last_name + "\",\r\n" +
                 "    \"birth_date\": \"" + birth_date + "\",\r\n" +
                 "    \"address\": \"" + address + "\",\r\n" +
                 "    \"phone\": \"" + phone + "\"" + "\n}";
-        return GET_PARAMS;
     }
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="css/add.css"/>
-    <link rel="icon-x/image" href="assets/favicon.ico"/>
+    <link rel="icon" type="image/x-icon"href="assets/favicon.ico"/>
     <title>JSP WEB Application | Form</title>
 </head>
 <body>
@@ -39,12 +39,13 @@
                     <div class="input-field text_area">
                         <label for="address">Adresa</label>
                         <input id="address" name="address" type="text" class="validate"
-                                  required pattern="^[^\x22'` ][^\x22'`]+[^\x22'` ]$"/>
+                               required pattern="^[^\x22'` ][^\x22'`]+[^\x22'` ]$"/>
                         <span class="helper-text"
                               data-error="Nu sunt permise caracterele „ ' ”, „ &#x22; ”, precum și spații la început și sfârșit"></span>
                     </div>
                 </div>
                 <input type="submit" class="btn" value="Adaugă"/>
+            </div>
         </form>
     </div>
 </div>
