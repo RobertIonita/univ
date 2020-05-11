@@ -34,11 +34,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.Element;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.sql.*;
+import java.util.Iterator;
 import java.util.Optional;
 
 public class systemsController {
@@ -75,7 +80,7 @@ public class systemsController {
 
     public StringBuffer jsonStr = new StringBuffer();
     public systemsController() throws IOException {
-        URL url = new URL("https://tonu.rocks/AWSMApp/api/systems.php");
+        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components.php");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -84,47 +89,78 @@ public class systemsController {
         reader.close();
     }
 
+ /*  public  JSONObject jsonRecords=new JSONObject();
+   public  JSONArray array=new JSONArray();
+   public systemsController() throws IOException, SQLException, JSONException {
+       String url="jdbc:mysql://localhost:3306/awsmapp";
+       Statement sql;
+       ResultSet rs;
+       Connection con=DriverManager.getConnection(url,"root","priwet12");
+       sql=con.createStatement();
+       rs=sql.executeQuery("select * from componente");
+       while(rs.next()){
+            JSONObject jsonObject=new JSONObject();
+           jsonObject.put("idcomponente",rs.getInt("idcomponente"));
+           jsonObject.put("categorie",rs.getString("categorie"));
+           jsonObject.put("denumire",rs.getString("denumire"));
+           jsonObject.put("furnizor",rs.getString("furnizor"));
+           jsonObject.put("cantitate",rs.getInt("cantitate"));
+           jsonObject.put("platit",rs.getInt("platit"));
+           jsonObject.put("data",rs.getString("data"));
+           jsonObject.put("observatii",rs.getString("observatii"));
+           jsonObject.put("img",rs.getString("img"));
 
+            array.put(jsonObject);
 
+       }
+       jsonRecords.put("Componente:",array);
+
+       con.close();
+       sql.close();
+       rs.close();
+   }
+*/
 
 
     @FXML
 
-    public void appendTemplate(String name, String count,String id,boolean hasWarranty,int layoutX, int layoutY) throws IOException {
+    public void appendTemplate(String name, String count,String id,boolean hasWarranty,String image,int layoutX, int layoutY) throws IOException {
 
 
+            Pane paneContainer = new Pane();
+            // paneContainer.setPrefSize(810,710);
+            paneContainer.setLayoutX(layoutX);
+            paneContainer.setLayoutY(layoutY);
+            paneContainer.setVisible(true);
 
-        Pane paneContainer = new Pane();
-      // paneContainer.setPrefSize(810,710);
-       paneContainer.setLayoutX(layoutX);
-       paneContainer.setLayoutY(layoutY);
-       paneContainer.setVisible(true);
+        //delete btn
 
-       //delete btn
-        Button deleteBtn=new Button();
-        deleteBtn.setStyle("-fx-background-color:#FF4200;\n" +
-                "    -fx-background-radius: 10;\n" +
-                "    -fx-font-style: \"Open Sans SemiBold\";\n" +
-                "    -fx-font-size: 12;\n" +
-                "-fx-text-fill: #FFFFFF;\n"+
-                "    -fx-cursor: hand;");
-        deleteBtn.setPrefWidth(100);
-        deleteBtn.setPrefHeight(30);
-        deleteBtn.setText("Sterge");
+            Button deleteBtn = new Button();
+            deleteBtn.setStyle("-fx-background-color:#FF4200;\n" +
+                    "    -fx-background-radius: 10;\n" +
+                    "    -fx-font-style: \"Open Sans SemiBold\";\n" +
+                    "    -fx-font-size: 12;\n" +
+                    "-fx-text-fill: #FFFFFF;\n" +
+                    "    -fx-cursor: hand;");
+            deleteBtn.setPrefWidth(100);
+            deleteBtn.setPrefHeight(30);
+            deleteBtn.setText("Sterge");
 
         //modifica btn
-        Button modificaBtn=new Button();
-        modificaBtn.setStyle("-fx-background-color: #FFA000;\n" +
-                "    -fx-background-radius: 10;\n" +
-                "    -fx-font-family: 'Open Sans',11pt;\n" +
-                "    -fx-font-size: 12;\n" +
-                "-fx-text-fill: #FFFFFF;\n"+
-                "    -fx-cursor: hand;");
-        modificaBtn.setPrefWidth(100);
-        modificaBtn.setPrefHeight(30);
-        modificaBtn.setText("Modifica datele");
+
+            Button modificaBtn = new Button();
+            modificaBtn.setStyle("-fx-background-color: #FFA000;\n" +
+                    "    -fx-background-radius: 10;\n" +
+                    "    -fx-font-family: 'Open Sans',11pt;\n" +
+                    "    -fx-font-size: 12;\n" +
+                    "-fx-text-fill: #FFFFFF;\n" +
+                    "    -fx-cursor: hand;");
+            modificaBtn.setPrefWidth(100);
+            modificaBtn.setPrefHeight(30);
+            modificaBtn.setText("Modifica datele");
 
         //report warranty
+
         HBox reportArea = new HBox();
         reportArea.setSpacing(5);
 
@@ -136,7 +172,7 @@ public class systemsController {
 
         ComboBox reportTypes = new ComboBox<>();
         reportTypes.setItems(FXCollections.observableArrayList(
-                "Placa de baza", "microprocesor", "hdd","carcase","monitor"));
+                "Placa de baza", "microprocesor", "hdd", "carcase", "monitor"));
         reportTypes.setVisible(false);
         reportTypes.getSelectionModel().selectFirst();
         reportArea.getChildren().add(reportTextField);
@@ -145,35 +181,35 @@ public class systemsController {
 
 
        //design promo badge
-        Pane promo=new Pane();
-        promo.setStyle("-fx-background-color: #FF4200;-fx-background-radius: 3;-fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 )");
-        promo.setPrefSize(62,20);
-        promo.setLayoutX(-5);
-        promo.setLayoutY(13);
+
+            Pane promo = new Pane();
+            promo.setStyle("-fx-background-color: #FF4200;-fx-background-radius: 3;-fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 )");
+            promo.setPrefSize(62, 20);
+            promo.setLayoutX(-5);
+            promo.setLayoutY(13);
 
         //text promo
 
-        Text textProm = new Text("promo");
-        textProm.setFont(Font.font("Open Sans",12));
-        textProm.setFill(Color.WHITE);
-        textProm.setLayoutX(15);
-        textProm.setLayoutY(12);
-        promo.getChildren().add(textProm);
+            Text textProm = new Text("promo");
+            textProm.setFont(Font.font("Open Sans", 12));
+            textProm.setFill(Color.WHITE);
+            textProm.setLayoutX(15);
+            textProm.setLayoutY(12);
+            promo.getChildren().add(textProm);
 
 
        //designul la carduri
        Pane pane=new Pane();
-       pane.setStyle("-fx-background-color:  #0083FD; -fx-background-radius:  15; -fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );-fx-background-position: top ");
-       pane.setPrefSize(174, 192);
+       pane.setStyle("-fx-background-image: url("+image+");" +
+               "    -fx-background-color: transparent;" +
+               "    -fx-background-repeat: no-repeat;"+
+               "-fx-background-position: center center;"+
+               "    -fx-background-size: cover,auto;"+
+               "    -fx-background-radius:  15;" +
+               "     -fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );" +
+               "    -fx-background-position: top ");
 
-       //imaginea produsului
-        File file = new File("F:\\GitHub\\Tonu\\univ\\FIS\\AWSMApp\\src\\sample\\assets\\aw-m15-hd-rollupimage.jfif");
-       Image img = new Image(file.toURI().toString());
-        ImageView iv=new ImageView();
-        iv.setImage(img);
-       iv.setFitWidth(300);
-       //iv.setFitHeight(300);
-        iv.setPreserveRatio(true);
+       pane.setPrefSize(174, 192);
 
         //imaginea produsului cadou
         File produsCadou = new File("F:\\GitHub\\Tonu\\univ\\FIS\\AWSMApp\\src\\sample\\assets\\imprimanta-laser-mono-samsung-sl-m2026.jpg");
@@ -202,14 +238,16 @@ public class systemsController {
         iconPanes.setLayoutY(0);
         iconPanes.setLayoutX(0);
 
-
-
         //container imagine produs
         Pane imgPane= new Pane();
-        imgPane.setMaxSize(300,300);
-        imgPane.getChildren().add(iv);
+        imgPane.setPrefSize(300,300);
+        imgPane.setStyle("-fx-background-image: url("+image+");" +
+                "-fx-background-position: center center;" +
+                " -fx-background-repeat: no-repeat;" +
+                "-fx-background-size: cover,auto");
         imgPane.setLayoutY(20);
         imgPane.setLayoutX(20);
+
 
         //container imagine produs cadou
         Pane imgCadou= new Pane();
@@ -218,27 +256,31 @@ public class systemsController {
         imgCadou.setLayoutY(20);
         imgCadou.setLayoutX(0);
 
+
+
+
+        //sectiunea de jos a cardului cu numele produsului
         Pane textBg=new Pane();
        textBg.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 15 15;-fx-background-position: bottom ");
-       textBg.setPrefSize(174,55);
-       textBg.setLayoutY(137);
+       //textBg.setPrefSize(174,55);
+       textBg.setPrefWidth(174);
+       textBg.setMinHeight(50);
+       textBg.setLayoutY(174);
 
         numeProd = new Text(name);
-        numeProd.setStyle("-fx-font-family: 'Arial Black';-fx-font-size: 15;-fx-background-color:#636363 ");
-        numeProd.setLayoutX(7);
-        numeProd.setLayoutY(20);
-
-        cantitateProd = new Text(count);
-        cantitateProd.setStyle("-fx-font-family: 'Arial Black';-fx-font-size: 11;-fx-background-color:#bebebe ");
-        cantitateProd.setLayoutX(7);
-        cantitateProd.setLayoutY(37);
-        ///
-
+        numeProd.setStyle("-fx-padding:10 10 10 0;-fx-font-family: 'Arial Black';-fx-font-size: 12;-fx-background-color:#636363 ");
+        numeProd.setWrappingWidth(130);
+        numeProd.setLayoutX(15);
+        numeProd.setLayoutY(24);
         textBg.getChildren().add(numeProd);
-        textBg.getChildren().add(cantitateProd);
+
+
+
         pane.getChildren().add(textBg);
 
+
         paneContainer.getChildren().add(pane);
+
         paneContainer.getStyleClass().add("card");
 
         //click pe produs
@@ -265,6 +307,7 @@ public class systemsController {
             garantie.setLayoutX(40);
 
             Text numePopup = new Text("Denumire produs: "+name);
+            numePopup.setWrappingWidth(200);
             numePopup.setFont(Font.font("Open Sans",14));
 
             Text cantPopup = new Text("Stoc produs: "+count);
@@ -393,30 +436,24 @@ public class systemsController {
         wrapper.getChildren().clear();
 
         int layoutY = 0;
-        JSONArray jsonArray = new JSONArray(jsonStr.toString());
+        JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
-            String[] elementNames = JSONObject.getNames(objectInArray);
 
-            if (searchBar.getText().equalsIgnoreCase(String.valueOf(objectInArray.getString("name")))) {
 
-                for (String elementName : elementNames) {
-
-                    String k = new Integer(8).toString();
-                    System.out.print(elementName + " ");
-                    try {
-                        System.out.println(objectInArray.getInt(elementName));
-                    } catch (JSONException e) {
-                        System.out.println(objectInArray.getString(elementName));
-                    }
-                }
-
-                String name = objectInArray.getString("name");
-                Integer count = objectInArray.getInt("count");
+            if (objectInArray.getString("name").toLowerCase().contains(searchBar.getText().toLowerCase())) {
                 Integer id=objectInArray.getInt("id");
-                int layoutX = i % 3 == 0 ? 100 : 300;
-                appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
-                layoutY += i % 3 == 0 ? 0 : 230;
+                String category=objectInArray.getString("category");
+                String name=objectInArray.getString("name");
+                String provider=objectInArray.getString("provider");
+                Integer amount=objectInArray.getInt("amount");
+                Boolean paid=objectInArray.getBoolean("paid");
+                String date=objectInArray.getString("date");
+                String comments=objectInArray.getString("comments");
+                String image=objectInArray.getString("image");
+                int layoutX = i % 2 == 0 ? 100 : 330;
+                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+                layoutY += i % 2 == 0 ? 0 : 230;
             }
 
         }
@@ -435,42 +472,32 @@ public class systemsController {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
             String[] elementNames = JSONObject.getNames(objectInArray);
 
-            if (categorieBox.getValue().toString().equalsIgnoreCase(String.valueOf(objectInArray.getString("name")))) {
+            if (categorieBox.getValue().toString().equalsIgnoreCase(String.valueOf(objectInArray.getString("denumire")))) {
 
-                for (String elementName : elementNames) {
-
-                    String k = new Integer(8).toString();
-                    System.out.print(elementName + " ");
-                    try {
-                        System.out.println(objectInArray.getInt(elementName));
-                    } catch (JSONException e) {
-                        System.out.println(objectInArray.getString(elementName));
-                    }
-                }
-
-                String name = objectInArray.getString("name");
-                Integer count = objectInArray.getInt("count");
                 Integer id=objectInArray.getInt("id");
+                String category=objectInArray.getString("category");
+                String name=objectInArray.getString("name");
+                String provider=objectInArray.getString("provider");
+                Integer amount=objectInArray.getInt("amount");
+                Boolean paid=objectInArray.getBoolean("paid");
+                String date=objectInArray.getString("date");
+                String comments=objectInArray.getString("comments");
+                String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
-                appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
+                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
                 layoutY += i % 2 == 0 ? 0 : 230;
             }else if(categorieBox.getValue().toString().equalsIgnoreCase("All")){
-                for (String elementName : elementNames) {
-
-                    String k = new Integer(8).toString();
-                    System.out.print(elementName + " ");
-                    try {
-                        System.out.println(objectInArray.getInt(elementName));
-                    } catch (JSONException e) {
-                        System.out.println(objectInArray.getString(elementName));
-                    }
-                }
-
-                String name = objectInArray.getString("name");
-                Integer count = objectInArray.getInt("count");
                 Integer id=objectInArray.getInt("id");
+                String category=objectInArray.getString("category");
+                String name=objectInArray.getString("name");
+                String provider=objectInArray.getString("provider");
+                Integer amount=objectInArray.getInt("amount");
+                Boolean paid=objectInArray.getBoolean("paid");
+                String date=objectInArray.getString("date");
+                String comments=objectInArray.getString("comments");
+                String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
-                appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
+                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
                 layoutY += i % 2 == 0 ? 0 : 230;
             }
 
@@ -484,23 +511,28 @@ public class systemsController {
     void showAll(ActionEvent event) throws JSONException, IOException {
         wrapper.getChildren().clear();
         int layoutY = 0;
-        JSONArray jsonArray = new JSONArray(jsonStr.toString());
+        JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
-            String[] elementNames = JSONObject.getNames(objectInArray);
-
-            String name = objectInArray.getString("name");
-            Integer count = objectInArray.getInt("count");
             Integer id=objectInArray.getInt("id");
+            String category=objectInArray.getString("category");
+            String name=objectInArray.getString("name");
+            String provider=objectInArray.getString("provider");
+            Integer amount=objectInArray.getInt("amount");
+            Boolean paid=objectInArray.getBoolean("paid");
+            String date=objectInArray.getString("date");
+            String comments=objectInArray.getString("comments");
+            String image=objectInArray.getString("image");
+
             int layoutX = i % 2 == 0 ? 100 : 330;
-            appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
+            appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 230;
 
 
         }
     }
 
-    @FXML
+   /* @FXML
     public void initialize() throws JSONException, IOException {
         categorieBox.setItems(FXCollections.observableArrayList("All","laptop","laptop mini","desktop office","desktop gaming","desktop replacement"));
         categorieBox.getSelectionModel().selectFirst();
@@ -517,6 +549,34 @@ public class systemsController {
             int layoutX = i % 2 == 0 ? 100 : 330;
             appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 230;
+
+
+        }
+    }
+*/
+    @FXML
+    public void initialize() throws JSONException, IOException {
+        categorieBox.setItems(FXCollections.observableArrayList("All","laptop","laptop mini","desktop office","desktop gaming","desktop replacement"));
+        categorieBox.getSelectionModel().selectFirst();
+
+        int layoutY = 0;
+        JSONArray jsonArray=new JSONArray(jsonStr.toString());
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject objectInArray = jsonArray.getJSONObject(i);
+
+            Integer id=objectInArray.getInt("id");
+            String category=objectInArray.getString("category");
+            String name=objectInArray.getString("name");
+            String provider=objectInArray.getString("provider");
+            Integer amount=objectInArray.getInt("amount");
+            Boolean paid=objectInArray.getBoolean("paid");
+            String date=objectInArray.getString("date");
+            String comments=objectInArray.getString("comments");
+            String image=objectInArray.getString("image");
+            System.out.println("\n nume:"+image);
+            int layoutX = i % 2 == 0 ? 100 : 330;
+            appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+            layoutY += i % 2 == 0 ? 0 : 270;
 
 
         }

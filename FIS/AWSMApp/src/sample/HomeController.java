@@ -1,9 +1,5 @@
 package sample;
 
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +10,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class HomeController extends workspaceController {
 
@@ -26,19 +19,18 @@ public class HomeController extends workspaceController {
     private StackPane parentContainer;
     @FXML
     private AnchorPane anchorRoot;
-
+ static  workspaceController sidebarController;
     public HomeController() throws IOException {
 
 
     }
+    public workspaceController getController(){
+        return sidebarController;
+    }
 
     @FXML
-    private void gotoSystems(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
-        Scene systemsScene = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(systemsScene);
-        window.show();
+    private void gotoSystems(MouseEvent event) throws IOException {
+     
 
     }
     @FXML
