@@ -89,39 +89,6 @@ public class systemsController {
         reader.close();
     }
 
- /*  public  JSONObject jsonRecords=new JSONObject();
-   public  JSONArray array=new JSONArray();
-   public systemsController() throws IOException, SQLException, JSONException {
-       String url="jdbc:mysql://localhost:3306/awsmapp";
-       Statement sql;
-       ResultSet rs;
-       Connection con=DriverManager.getConnection(url,"root","priwet12");
-       sql=con.createStatement();
-       rs=sql.executeQuery("select * from componente");
-       while(rs.next()){
-            JSONObject jsonObject=new JSONObject();
-           jsonObject.put("idcomponente",rs.getInt("idcomponente"));
-           jsonObject.put("categorie",rs.getString("categorie"));
-           jsonObject.put("denumire",rs.getString("denumire"));
-           jsonObject.put("furnizor",rs.getString("furnizor"));
-           jsonObject.put("cantitate",rs.getInt("cantitate"));
-           jsonObject.put("platit",rs.getInt("platit"));
-           jsonObject.put("data",rs.getString("data"));
-           jsonObject.put("observatii",rs.getString("observatii"));
-           jsonObject.put("img",rs.getString("img"));
-
-            array.put(jsonObject);
-
-       }
-       jsonRecords.put("Componente:",array);
-
-       con.close();
-       sql.close();
-       rs.close();
-   }
-*/
-
-
     @FXML
 
     public void appendTemplate(String name, String count,String id,boolean hasWarranty,String image,int layoutX, int layoutY) throws IOException {
@@ -556,8 +523,7 @@ public class systemsController {
 */
     @FXML
     public void initialize() throws JSONException, IOException {
-        categorieBox.setItems(FXCollections.observableArrayList("All","laptop","laptop mini","desktop office","desktop gaming","desktop replacement"));
-        categorieBox.getSelectionModel().selectFirst();
+
 
         int layoutY = 0;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
@@ -574,11 +540,16 @@ public class systemsController {
             String comments=objectInArray.getString("comments");
             String image=objectInArray.getString("image");
             System.out.println("\n nume:"+image);
+
+            FXCollections.observableArrayList(category);
+
             int layoutX = i % 2 == 0 ? 100 : 330;
             appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 270;
 
 
         }
+        categorieBox.setItems();
+        categorieBox.getSelectionModel().selectFirst();
     }
 }
