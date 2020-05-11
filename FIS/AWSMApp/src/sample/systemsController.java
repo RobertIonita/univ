@@ -76,7 +76,7 @@ public class systemsController {
     private Button showAll;
 
 
-
+    Set categorii =new HashSet();
     public StringBuffer jsonStr = new StringBuffer();
     public systemsController() throws IOException {
         URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components.php");
@@ -137,8 +137,7 @@ public class systemsController {
                 "    -fx-cursor: hand;");
 
         ComboBox reportTypes = new ComboBox<>();
-        reportTypes.setItems(FXCollections.observableArrayList(
-                "Placa de baza", "microprocesor", "hdd", "carcase", "monitor"));
+        reportTypes.setItems(FXCollections.observableArrayList(categorii));
         reportTypes.setVisible(false);
         reportTypes.getSelectionModel().selectFirst();
         reportArea.getChildren().add(reportTextField);
@@ -523,7 +522,7 @@ public class systemsController {
     @FXML
     public void initialize() throws JSONException, IOException {
 
-        Set categorii =new HashSet();
+
         int layoutY = 0;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
