@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,7 +20,7 @@ public class Controller {
 
     public StringBuffer jsonStr = new StringBuffer();
     public Controller() throws IOException {
-        URL url = new URL("https://tonu.rocks/AWSMApp/api/systems.php");
+        URL url = new URL("https://tonu.rocks/AWSMApp/api/components.php");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -33,37 +34,31 @@ public class Controller {
     @FXML
     private Pane wrapper;
 
-    @FXML
-    private ScrollPane scroll;
-
-    @FXML
-    private VBox last;
-
-    public void appendTemplate(String name, String count, int layoutX, int layoutY) {
+    public void appendTemplate(String name, String count, String imgSource, int layoutX, int layoutY) {
         Pane pane = new Pane();
         pane.setPrefSize(120, 120);
         pane.setLayoutX(layoutX);
         pane.setLayoutY(layoutY);
         pane.setVisible(true);
         Text name_label = new Text(name);
-        name_label.setY(90);
+        name_label.setY(100);
         Text count_label = new Text(count);
         count_label.setY(110);
         pane.getChildren().add(name_label);
         pane.getChildren().add(count_label);
+        Pane image = new Pane();
+        image.setStyle("-fx-background-image: url("+imgSource+"); -fx-background-size: cover; -fx-background-position: center center;");
+        image.setPrefSize(100, 90);
+        image.setLayoutX(0);
+        image.setLayoutY(0);
+        pane.getChildren().add(image);
         wrapper.getChildren().add(pane);
         scroll.setContent(wrapper);
         last.getChildren().add(scroll);
     }
 
-    public void setData(String data) {
-        name.setText(data);
-    }
-
     @FXML
     public void initialize() throws JSONException {
-        setData("kek");
-        wrapper.getChildren().remove(0,1);
         int layoutY = 0;
         JSONArray jsonArray = new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -80,9 +75,10 @@ public class Controller {
                 }
             }
             String name = objectInArray.getString("name");
-            Integer count = objectInArray.getInt("count");
-            int layoutX = i % 2 == 0 ? 100 : 250;
-            appendTemplate(objectInArray.getString("name"), count.toString(), layoutX, layoutY);
+            String category = objectInArray.getString("category");
+            String imgSource = objectInArray.getString("image");
+            int layoutX = i % 2 == 0 ? 100 : 350;
+            appendTemplate(name, category, imgSource, layoutX, layoutY);
             layoutY += i % 2 == 0 ? 0 : 150;
             System.out.println();
         }
