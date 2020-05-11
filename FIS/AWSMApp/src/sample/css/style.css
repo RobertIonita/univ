@@ -28,7 +28,16 @@
     -fx-cursor: hand;
 
 }
-.homeBtn:focused {
+.homeBtn:focused{
+    -fx-background-color:transparent;
+    -fx-background-image: url("../assets/home-active.png");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+
+    -fx-cursor: hand;
+
+}
+.homeBtn:hover {
     -fx-background-color:transparent;
     -fx-background-image: url("../assets/home-active.png");
     -fx-background-position: center center;
@@ -56,6 +65,15 @@
     -fx-cursor: hand;
 
 }
+.systemsBtn:hover {
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/pc-active.png");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+
+    -fx-cursor: hand;
+
+}
 
 .componentsBtn {
     -fx-background-color: transparent;
@@ -71,6 +89,14 @@
     -fx-background-repeat: no-repeat;
     -fx-cursor: hand;
 }
+.componentsBtn:hover{
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/componente-active.png");
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
+}
+
 
 .chartBtn {
     -fx-background-color: transparent;
@@ -81,6 +107,14 @@
 }
 
 .chartBtn:focused{
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/graf-active.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-cursor: hand;
+
+}
+.chartBtn:hover{
     -fx-background-color: transparent;
     -fx-background-image: url("../assets/graf-active.png");
     -fx-background-repeat: no-repeat;
@@ -104,6 +138,13 @@
     -fx-background-repeat: no-repeat;
     -fx-cursor: hand;
 }
+.plusBtn:hover{
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/plus.png");
+    -fx-background-position: center-left;
+    -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
+}
 .searchBar{
     -fx-background-color: #FFA000;
     -fx-opacity: 0.47;
@@ -114,4 +155,49 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: 13px 15px;
 
+}
+.card:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+
+}
+.codeSearch{
+    -fx-background-color: #BEBEBE;
+    -fx-opacity: 0.47;
+    -fx-padding: 0px 0px 0px 40px;
+    -fx-background-radius: 9;
+    -fx-background-image: url("../assets/search.png");
+
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 13px 15px;
+
+}
+.adauga{
+    -fx-cursor: hand;
+}
+.adauga:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.combo-box{
+    -fx-background-color: transparent;
+    -fx-border-color: #9599A1;
+    -fx-mark-color:#9599A1;
+    -fx-border-radius: 10;
+}
+.warranty{
+    -fx-background-color: transparent;
+    -fx-background-image: url("../assets/plus.png");
+    -fx-max-width: 80%;
+    -fx-min-width: 80%;
+    -fx-background-position: center-left;
+    -fx-background-repeat: no-repeat;
+}
+
+.report{
+
+}
+.report:hover{
+    -fx-cursor: hand;
 }

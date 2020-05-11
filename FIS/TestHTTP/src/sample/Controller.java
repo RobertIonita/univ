@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -52,6 +53,8 @@ public class Controller {
         image.setLayoutY(0);
         pane.getChildren().add(image);
         wrapper.getChildren().add(pane);
+        scroll.setContent(wrapper);
+        last.getChildren().add(scroll);
     }
 
     @FXML

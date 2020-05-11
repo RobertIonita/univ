@@ -27,8 +27,22 @@ public class HomeController extends workspaceController {
     @FXML
     private AnchorPane anchorRoot;
 
+    public HomeController() throws IOException {
+
+
+    }
+
     @FXML
     private void gotoSystems(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
+        Scene systemsScene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(systemsScene);
+        window.show();
+
+    }
+    @FXML
+    private void gotoAdd(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
@@ -37,7 +51,16 @@ public class HomeController extends workspaceController {
         window.show();
     }
     @FXML
-    private void gotoAdd(ActionEvent event) throws IOException {
+    private void gotoComponents(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
+        Scene systemsScene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(systemsScene);
+        window.show();
+    }
+    @FXML
+    private void gotoGraph(ActionEvent event) throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("workspace.fxml"));
         Scene systemsScene = new Scene(root);
