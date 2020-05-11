@@ -43,8 +43,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.*;
-import java.util.Iterator;
-import java.util.Optional;
+import java.util.*;
 
 public class systemsController {
     @FXML
@@ -439,7 +438,7 @@ public class systemsController {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
             String[] elementNames = JSONObject.getNames(objectInArray);
 
-            if (categorieBox.getValue().toString().equalsIgnoreCase(String.valueOf(objectInArray.getString("denumire")))) {
+            if (categorieBox.getValue().toString().equalsIgnoreCase(String.valueOf(objectInArray.getString("category")))) {
 
                 Integer id=objectInArray.getInt("id");
                 String category=objectInArray.getString("category");
@@ -524,7 +523,7 @@ public class systemsController {
     @FXML
     public void initialize() throws JSONException, IOException {
 
-
+        Set categorii =new HashSet();
         int layoutY = 0;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -541,7 +540,7 @@ public class systemsController {
             String image=objectInArray.getString("image");
             System.out.println("\n nume:"+image);
 
-            FXCollections.observableArrayList(category);
+            categorii.add(category);
 
             int layoutX = i % 2 == 0 ? 100 : 330;
             appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
@@ -549,7 +548,7 @@ public class systemsController {
 
 
         }
-        categorieBox.setItems();
+        categorieBox.setItems(FXCollections.observableArrayList(categorii));
         categorieBox.getSelectionModel().selectFirst();
     }
 }
