@@ -1,16 +1,25 @@
 <resources>
-    <string name="app_name">Lab10</string>
-    <string name="previous">Previous</string>
+    <string name="app_name">Lab 10 Tonu Alexandru</string>
+    <string name="ID" translatable="false">ID</string>
+    <string name="Name">Name</string>
+    <string name="Age">Age</string>
+    <string name="add">ADD</string>
+    <string name="show">Show</string>
+    <string name="update">update</string>
+    <string name="delete">delete</string>
+    <string name="filter_by_age">Filter by age</string>
+    <string name="ageFrom">From</string>
+    <string name="Back">Back</string>
+    <string name="ageTo">To</string>
+    <string name="no_records_found">0 records found</string>
+    <string name="error_occured">An error occurred</string>
+    <string name="valid_range">Please insert a valid range</string>
+    <string name="delete_success">Record was successfully deleted</string>
+    <string name="update_success">Record was successfully updated!</string>
+    <string name="update_error">An error occurred during updating!</string>
+    <string name="error">Error</string>
+    <string name="add_error">An error occurred during adding!</string>
+    <string name="add_success">New record was successfully added!</string>
+    <string name="records">Records</string>
 
-    <string name="age">Vârsta</string>
-    <string name="name">Name</string>
-    <string name="id">Id</string>
-    <string name="addBtn">Adaugă</string>
-    <string name="displayBtn">Afișează datele</string>
-    <string name="updateBtn">Actualizează datele</string>
-    <string name="deleteBtn">Șterge</string>
-    <string name="db_name">test</string>
-    <string name="table_name">people</string>
-    <string name="add_record_success">Persoana a fost adaugata cu succes!</string>
-    <string name="add_record_error">Eroare la adaugare!</string>
 </resources>
