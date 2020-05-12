@@ -1,0 +1,6 @@
+MacBookAir:Lab9 alexandru$ sudo chown root main
+Password:
+MacBookAir:Lab9 alexandru$ sudo chmod 4755 main
+MacBookAir:Lab9 alexandru$ ./main
+SEED_task4.c    SEED_task5.c    SEED_task6.c    main            output
+MacBookAir:Lab9 alexandru$ 

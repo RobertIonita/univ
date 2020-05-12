@@ -1,0 +1,6 @@
+attack: 
+sudo chmod 4755 main
+sudo ./main "SEED_task8_file.txt | echo 'This line is written by malicious Bob' >> SEED_task8_file.txt"
+
+step 1 result: success
+step 2 result: failed (No such file or directory)

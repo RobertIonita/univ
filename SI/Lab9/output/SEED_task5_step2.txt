@@ -1,0 +1,8 @@
+MacBookAir:Lab9 alexandru$  sudo chown root main
+Password:
+MacBookAir:Lab9 alexandru$  sudo chmod 4755 main
+MacBookAir:Lab9 alexandru$ export PATH
+MacBookAir:Lab9 alexandru$ export LD_LIBRARY_PATH
+MacBookAir:Lab9 alexandru$ export EXAMPLE_VAR="SEED task5 step 2"
+MacBookAir:Lab9 alexandru$ echo $EXAMPLE_VAR
+SEED task5 step 2

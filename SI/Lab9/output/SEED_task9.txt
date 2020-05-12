@@ -1,0 +1,2 @@
+result: Malicious data was written in the /etc/zzz file, even though its owner is root
+and program was executed via Set-UID by a non-privileged user
