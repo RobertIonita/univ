@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Lab10</string>
+    <string name="previous">Previous</string>
+
+    <string name="age">Vârsta</string>
+    <string name="name">Name</string>
+    <string name="id">Id</string>
+    <string name="addBtn">Adaugă</string>
+    <string name="displayBtn">Afișează datele</string>
+    <string name="updateBtn">Actualizează datele</string>
+    <string name="deleteBtn">Șterge</string>
+    <string name="db_name">test</string>
+    <string name="table_name">people</string>
+    <string name="add_record_success">Persoana a fost adaugata cu succes!</string>
+    <string name="add_record_error">Eroare la adaugare!</string>
+</resources>
