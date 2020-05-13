@@ -44,7 +44,7 @@ public class graphController {
 
     public StringBuffer jsonStr = new StringBuffer();
     public graphController() throws IOException {
-        URL url = new URL("https://tonu.rocks/AWSMApp/api/systems.php");
+        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components.php");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
         while ((line = reader.readLine()) != null) {
