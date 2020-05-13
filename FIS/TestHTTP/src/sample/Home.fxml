@@ -1,42 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <Pane fx:id="wrapper" layoutX="0" layoutY="0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Pane layoutX="14.0" layoutY="14.0" visible="false">
+      <Button layoutX="20.0" mnemonicParsing="false" onAction="#gotoAddComponent" text="Add new component" />
+
+      <ScrollPane hbarPolicy="NEVER" layoutY="50" prefViewportHeight="768.0" style="-fx-padding: 0 0 40px 0;">
+         <content>
+            <Pane fx:id="wrapper" layoutY="30" prefWidth="1024.0">
                <children>
-                  <Pane fx:id="elements" layoutX="2.0" layoutY="-4.0" prefWidth="174.0" style="-fx-background-color: #0083FD; -fx-background-radius: 15;">
-                     <children>
-                        <Pane fx:id="textBox" layoutY="174.0" prefHeight="55.0" prefWidth="174.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 0 0 15 15;">
-                           <children>
-                              <Text fx:id="numeProd" fill="#636363" layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nume">
-                                 <font>
-                                    <Font name="Arial Black" size="14.0" />
-                                 </font>
-                              </Text>
-                              <Text fx:id="cantitateProd" fill="#bebebe" layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="cant">
-                                 <font>
-                                    <Font name="Arial Black" size="11.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </Pane>
-                        <ImageView fitWidth="174.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="https://tonu.rocks/AWSMApp/assets/placaASRock.jpg" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
                </children>
             </Pane>
-         </children>
-      </Pane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>
