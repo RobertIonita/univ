@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
@@ -76,6 +77,7 @@ public class systemsController {
     private Button showAll;
 
 
+
     Set categorii =new HashSet();
     public StringBuffer jsonStr = new StringBuffer();
     public systemsController() throws IOException {
@@ -125,6 +127,19 @@ public class systemsController {
             modificaBtn.setPrefHeight(30);
             modificaBtn.setText("Modifica datele");
 
+          ///salveaza modificarile btn
+        Button salveazaBtn = new Button();
+        salveazaBtn.setStyle("-fx-background-color: #2ED3C6 ;\n" +
+                "    -fx-background-radius: 10;\n" +
+                "    -fx-font-family: 'Open Sans',11pt;\n" +
+                "    -fx-font-size: 12;\n" +
+                "-fx-text-fill: #FFFFFF;\n" +
+                "    -fx-cursor: hand;");
+        salveazaBtn.setPrefWidth(100);
+        salveazaBtn.setPrefHeight(30);
+        salveazaBtn.setText("Salveaza");
+        salveazaBtn.setVisible(false);
+
         //report warranty
 
         HBox reportArea = new HBox();
@@ -136,7 +151,8 @@ public class systemsController {
                 "    -fx-font-size: 11;\n" +
                 "    -fx-cursor: hand;");
 
-        ComboBox reportTypes = new ComboBox<>();
+        //report combo box
+        ComboBox reportTypes= new ComboBox<>();
         reportTypes.setItems(FXCollections.observableArrayList(categorii));
         reportTypes.setVisible(false);
         reportTypes.getSelectionModel().selectFirst();
@@ -248,6 +264,7 @@ public class systemsController {
 
         paneContainer.getStyleClass().add("card");
 
+        ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //click pe produs
         paneContainer.setOnMouseClicked((e)->{
             BoxBlur blur=new BoxBlur(3,3,3);
@@ -268,18 +285,48 @@ public class systemsController {
 
             VBox garantie=new VBox();
             garantie.setAlignment(Pos.CENTER);
-            garantie.setLayoutY(100);
-            garantie.setLayoutX(40);
+            garantie.setLayoutY(135);
+            garantie.setLayoutX(50);
 
-            Text numePopup = new Text("Denumire produs: "+name);
-            numePopup.setWrappingWidth(200);
+            //denumirea produsului
+            HBox numeHXbox = new HBox();
+            numeHXbox.setSpacing(5);
+            Text numePopup = new Text("Denumire produs:");
             numePopup.setFont(Font.font("Open Sans",14));
+            TextArea numePopupField=new TextArea(name);
+            numePopupField.setWrapText(true);
+            numePopupField.setStyle("-fx-background-color: transparent;-fx-border-color: transparent");
+            numePopupField.setMaxWidth(150);
+           numePopupField.setPrefHeight(50);
+            numePopupField.setEditable(false);
+            numeHXbox.getChildren().add(numePopup);
+            numeHXbox.getChildren().add(numePopupField);
 
-            Text cantPopup = new Text("Stoc produs: "+count);
+            //cantitatea produsului
+            HBox cantHXBox=new HBox();
+            cantHXBox.setSpacing(5);
+            Text cantPopup = new Text("Stoc produs: ");
             cantPopup.setFont(Font.font("Open Sans",14));
+            TextField cantText = new TextField(count);
+            cantText.setMaxWidth(150);
+            cantText.setStyle("-fx-background-color: transparent;-fx-border-color: transparent");
+            //disable editing
+            cantText.setEditable(false);
+            cantHXBox.getChildren().add(cantPopup);
+            cantHXBox.getChildren().add(cantText);
 
-            Text idPopup = new Text("Cod produs: "+id);
+            //id produs
+            HBox idHBox=new HBox();
+            idHBox.setSpacing(5);
+            Text idPopup = new Text("Cod produs: ");
             idPopup.setFont(Font.font("Open Sans",14));
+            TextField idText=new TextField(id);
+            idText.setMaxWidth(150);
+            idText.setStyle("-fx-background-color: transparent;-fx-border-color: transparent");
+            //editable
+            idText.setEditable(false);
+            idHBox.getChildren().add(idPopup);
+            idHBox.getChildren().add(idText);
 
             Text Beneficii = new Text("Beneficii:");
             Beneficii.setFill(Color.valueOf("#999999"));
@@ -320,6 +367,32 @@ public class systemsController {
 
             });
 
+            //daca se apasa pe butonul de modificare a datelor ,se deblocheaza textfieldurile
+            modificaBtn.setOnAction(event -> {
+                numePopupField.setEditable(true);
+                cantText.setEditable(true);
+                idText.setEditable(true);
+                salveazaBtn.setVisible(true);
+                deleteBtn.setDisable(true);
+            });
+
+            //daca se apasa pe salveaza ,se preiau datele din casete ,se blocheaza casetele si se trimit datele catre baza de date
+            salveazaBtn.setOnAction(event -> {
+                numePopupField.getText();
+                numePopupField.setEditable(false);
+                cantText.getText();
+                cantText.setEditable(false);
+                idText.getText();
+                idText.setEditable(false);
+                //trebuie de trimis datele catre baza de date
+                /*
+                Code here
+                 */
+                salveazaBtn.setVisible(false);
+                deleteBtn.setDisable(false);
+
+            });
+
             if(hasWarranty){
                 garantie.getChildren().add(WarrantyInfo);
 
@@ -329,9 +402,9 @@ public class systemsController {
             }
 
 
-            continut.getChildren().add(numePopup);
-            continut.getChildren().add(cantPopup);
-            continut.getChildren().add(idPopup);
+            continut.getChildren().add(numeHXbox);
+            continut.getChildren().add(cantHXBox);
+            continut.getChildren().add(idHBox);
            continut.setStyle("-fx-border-style: solid none solid none;-fx-border-width:1; -fx-border-color: #999999");
 
             continut.setSpacing(3);
@@ -345,8 +418,9 @@ public class systemsController {
             buttons.setSpacing(10);
             buttons.getChildren().add(deleteBtn);
             buttons.getChildren().add(modificaBtn);
+            buttons.getChildren().add(salveazaBtn);
             buttons.setLayoutX(40);
-            buttons.setLayoutY(200);
+            buttons.setLayoutY(210);
 
             continutPane.getChildren().add(buttons);
 
@@ -364,10 +438,12 @@ public class systemsController {
             a.setGraphic(null);
             a.setTitle(null);
 
+
            DialogPane dialog=a.getDialogPane();
            dialog.setStyle("-fx-background-color: #FFFFFF" );
            a.initStyle(StageStyle.TRANSPARENT);
-
+            a.getDialogPane().setMinWidth(350);
+            a.getDialogPane().setPrefWidth(Control.USE_COMPUTED_SIZE);
 
             a.getDialogPane().setContent(centrum);
 
@@ -418,7 +494,7 @@ public class systemsController {
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
                 appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
-                layoutY += i % 2 == 0 ? 0 : 230;
+                layoutY += i % 2 == 0 ? 0 : 270;
             }
 
         }
@@ -450,7 +526,7 @@ public class systemsController {
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
                 appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
-                layoutY += i % 2 == 0 ? 0 : 230;
+                layoutY += i % 2 == 0 ? 0 : 270;
             }else if(categorieBox.getValue().toString().equalsIgnoreCase("All")){
                 Integer id=objectInArray.getInt("id");
                 String category=objectInArray.getString("category");
@@ -463,7 +539,7 @@ public class systemsController {
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
                 appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
-                layoutY += i % 2 == 0 ? 0 : 230;
+                layoutY += i % 2 == 0 ? 0 : 270;
             }
 
         }
@@ -491,34 +567,12 @@ public class systemsController {
 
             int layoutX = i % 2 == 0 ? 100 : 330;
             appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
-            layoutY += i % 2 == 0 ? 0 : 230;
+            layoutY += i % 2 == 0 ? 0 : 270;
 
 
         }
     }
 
-   /* @FXML
-    public void initialize() throws JSONException, IOException {
-        categorieBox.setItems(FXCollections.observableArrayList("All","laptop","laptop mini","desktop office","desktop gaming","desktop replacement"));
-        categorieBox.getSelectionModel().selectFirst();
-
-        int layoutY = 0;
-        JSONArray jsonArray = new JSONArray(jsonStr.toString());
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject objectInArray = jsonArray.getJSONObject(i);
-            String[] elementNames = JSONObject.getNames(objectInArray);
-
-            String name = objectInArray.getString("name");
-            Integer count = objectInArray.getInt("count");
-            Integer id=objectInArray.getInt("id");
-            int layoutX = i % 2 == 0 ? 100 : 330;
-            appendTemplate(objectInArray.getString("name"), count.toString(),id.toString(),true,layoutX,layoutY);
-            layoutY += i % 2 == 0 ? 0 : 230;
-
-
-        }
-    }
-*/
     @FXML
     public void initialize() throws JSONException, IOException {
 
@@ -541,12 +595,16 @@ public class systemsController {
 
             categorii.add(category);
 
+
+
             int layoutX = i % 2 == 0 ? 100 : 330;
             appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 270;
 
-
+            categorii.add(category);
         }
+
+
         categorieBox.setItems(FXCollections.observableArrayList(categorii));
         categorieBox.getSelectionModel().selectFirst();
     }
