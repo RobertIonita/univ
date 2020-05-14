@@ -38,11 +38,13 @@ import org.json.JSONObject;
 
 
 import javax.imageio.ImageIO;
+import javax.net.ssl.HttpsURLConnection;
 import javax.swing.*;
 import javax.swing.text.Element;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.*;
 import java.util.*;
@@ -80,9 +82,10 @@ public class systemsController {
 
 
     Set categorii =new HashSet();
+    private  final String API_Components="https://tonu.rocks/school/AWSMApp/api/components/";
     public StringBuffer jsonStr = new StringBuffer();
     public systemsController() throws IOException {
-        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components.php");
+        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components/");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -91,10 +94,43 @@ public class systemsController {
         reader.close();
     }
 
+    public static void makeRequest(String METHOD, String BODY) throws IOException {
+
+        System.out.println(BODY);
+        String API = "https://tonu.rocks/school/AWSMApp/api/components/";
+        URL url = new URL(API);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod(METHOD);
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setDoOutput(true);
+        OutputStream os = conn.getOutputStream();
+        os.write(BODY.getBytes());
+        os.flush();
+        os.close();
+        int responseCode = conn.getResponseCode();
+        System.out.println(" Response Code :  " + responseCode);
+        System.out.println(" Response Message : " + conn.getResponseMessage());
+        if (responseCode == HttpURLConnection.HTTP_OK) { //success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response);
+        } else {
+            System.out.println("POST FAILED");
+        }
+    }
     @FXML
 
-    public void appendTemplate(String name, String count,String id,boolean hasWarranty,String image,int layoutX, int layoutY) throws IOException {
-
+    public void appendTemplate(String name, String count,String id,
+                               String category,String provider,Boolean paid,
+                               String comment,boolean hasWarranty,String image,
+                               int layoutX, int layoutY) throws IOException {
 
             Pane paneContainer = new Pane();
              paneContainer.setPrefSize(174,250);
@@ -114,6 +150,20 @@ public class systemsController {
             deleteBtn.setPrefWidth(100);
             deleteBtn.setPrefHeight(30);
             deleteBtn.setText("Sterge");
+
+        //////////confirm delete
+        Text yes=new Text("yes");
+        yes.setFill(Color.BLUE);
+        yes.setStyle("-fx-cursor: hand");
+        yes.setVisible(false);
+        ////////
+        Text no=new Text("No");
+        no.setFill(Color.RED);
+        no.setStyle(" -fx-cursor: hand");
+        no.setVisible(false);
+        ////////
+        Text confirm = new Text("are you sure? ");
+        confirm.setVisible(false);
 
         //modifica btn
 
@@ -386,13 +436,27 @@ public class systemsController {
                 idText.getText();
                 idText.setEditable(false);
                 //trebuie de trimis datele catre baza de date
-                /*
-                Code here
-                 */
+                ////////////////////////////////////////////////////////////////
+               /* final String POST_PARAMS = "{\n" +
+                        "    \"category\": \"" + category + "\",\r\n" +
+                        "    \"name\": \"" + numePopupField.getText() + "\",\r\n" +
+                        "    \"provider\": \"" + provider + "\",\r\n" +
+                        "    \"amount\": " + cantText.getText() + ",\r\n" +
+                        "    \"paid\": " + paid + ",\r\n" +
+                        "    \"comments\": \"" + comment + "\"" + "\n}";
+                /////////////////////////////////////////////////////////////////////////////
+                try {
+                    makeRequest("UPDATE",POST_PARAMS);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                */
                 salveazaBtn.setVisible(false);
                 deleteBtn.setDisable(false);
 
-            });
+            }) ;
+
+
 
             if(hasWarranty){
                 garantie.getChildren().add(WarrantyInfo);
@@ -415,9 +479,19 @@ public class systemsController {
             continutPane.getChildren().add(continut);
             continutPane.getChildren().add(garantie);
 
+            ///////sectiunea delete/////
+
+            HBox deleteArea = new HBox();
+            deleteArea.setSpacing(10);
+            deleteArea.getChildren().add(deleteBtn);
+            deleteArea.getChildren().add(confirm);
+            deleteArea.getChildren().add(yes);
+            deleteArea.getChildren().add(no);
+            //////////////
+            
             VBox buttons = new VBox();
             buttons.setSpacing(10);
-            buttons.getChildren().add(deleteBtn);
+            buttons.getChildren().add(deleteArea);
             buttons.getChildren().add(modificaBtn);
             buttons.getChildren().add(salveazaBtn);
             buttons.setLayoutX(40);
@@ -450,11 +524,39 @@ public class systemsController {
 
             // show the dialog
 
-
+            //////delete button action///////
+            deleteBtn.setOnMouseClicked(mouseEvent -> {
+               confirm.setVisible(true);
+               yes.setVisible(true);
+               no.setVisible(true);
+               modificaBtn.setDisable(true);
+            });
+            yes.setOnMouseClicked(mouseEvent -> {
+                final String DELETE_PARAMS = "{\n" +
+                        "    \"id\": \"" + idText.getText() + "\",\r\n" +
+                        "    \"name\": " + numePopupField.getText() + ",\r\n" +
+                        "\n}";
+                try {
+                    System.out.println("checkpoin");
+                    makeRequest("DELETE",DELETE_PARAMS);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                modificaBtn.setDisable(false);
+                yes.setVisible(false);
+                a.close();
+            });
+            no.setOnMouseClicked(mouseEvent -> {
+                modificaBtn.setDisable(false);
+                confirm.setVisible(false);
+                yes.setVisible(false);
+                no.setVisible(false);
+            });
+            ////////////////////////////////////
             stage.setEffect(blur);
             Optional<ButtonType> result = a.showAndWait();
             ButtonType button = result.orElse(ButtonType.OK);
-            
+
 
             if(button==ButtonType.OK){
                 stage.setEffect(null);
@@ -497,7 +599,7 @@ public class systemsController {
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
-                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+                appendTemplate(name, amount.toString(),id.toString(),category,provider,paid,comments,true,image,layoutX,layoutY);
                 layoutY += i % 2 == 0 ? 0 : 270;
             }
 
@@ -529,7 +631,7 @@ public class systemsController {
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
-                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+                appendTemplate(name, amount.toString(),id.toString(),category,provider,paid,comments,true,image,layoutX,layoutY);
                 layoutY += i % 2 == 0 ? 0 : 270;
             }else if(categorieBox.getValue().toString().equalsIgnoreCase("All")){
                 Integer id=objectInArray.getInt("id");
@@ -542,7 +644,7 @@ public class systemsController {
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
                 int layoutX = i % 2 == 0 ? 100 : 330;
-                appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+                appendTemplate(name, amount.toString(),id.toString(),category,provider,paid,comments,true,image,layoutX,layoutY);
                 layoutY += i % 2 == 0 ? 0 : 270;
             }
 
@@ -570,7 +672,7 @@ public class systemsController {
             String image=objectInArray.getString("image");
 
             int layoutX = i % 2 == 0 ? 100 : 330;
-            appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+            appendTemplate(name, amount.toString(),id.toString(),category,provider,paid,comments,true,image,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 270;
 
 
@@ -603,7 +705,7 @@ public class systemsController {
 
 
             int layoutX = i % 2 == 0 ? 100 : 330;
-            appendTemplate(name, amount.toString(),id.toString(),true,image,layoutX,layoutY);
+            appendTemplate(name, amount.toString(),id.toString(),category,provider,paid,comments,true,image,layoutX,layoutY);
             layoutY += i % 2 == 0 ? 0 : 270;
 
             categorii.add(category);
