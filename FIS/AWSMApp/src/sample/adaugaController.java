@@ -86,7 +86,7 @@ public class adaugaController {
     private Label observatiiText;
 
     public StringBuffer jsonStr=new StringBuffer();
-    private  final String API_Components="https://tonu.rocks/school/AWSMApp/api/components.php";
+    private  final String API_Components="https://tonu.rocks/school/AWSMApp/api/components";
     private  final String API_Systems="https://tonu.rocks/school/AWSMApp/api/systems.php";
 
 

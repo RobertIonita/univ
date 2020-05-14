@@ -201,3 +201,15 @@
 .report:hover{
     -fx-cursor: hand;
 }
+.updateBtn:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.deleteBtn:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.saveBtn:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
