@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddComponent">
     <children>
-        <Button layoutX="20.0" layoutY="0.0" mnemonicParsing="false" onAction="#gotoHomeComponent" text="Go home" />
+        <Button layoutX="20.0" mnemonicParsing="false" onAction="#gotoHomeComponent" text="Go home" />
 
         <TextField fx:id="category" layoutX="20.0" layoutY="40.0" promptText="Category" />
         <TextField fx:id="name" layoutX="20.0" layoutY="70.0" promptText="Name" />
@@ -13,6 +13,6 @@
         <TextField fx:id="amount" layoutX="20.0" layoutY="130.0" promptText="Amount" />
         <TextArea fx:id="comments" layoutX="20.0" layoutY="170.0" prefHeight="100.0" promptText="Comments" />
         <CheckBox fx:id="paid" layoutX="20.0" layoutY="270.0" mnemonicParsing="false" text="Paid" />
-        <Button fx:id="postBtn" layoutX="20.0" layoutY="290.0" mnemonicParsing="false" text="Submit" ></Button>
+        <Button fx:id="postBtn" layoutX="20.0" layoutY="290.0" mnemonicParsing="false" text="Submit"/>
     </children>
 </AnchorPane>

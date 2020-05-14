@@ -41,8 +41,7 @@ public class AddComponent {
                     "    \"provider\": \"" + provider.getText() + "\",\r\n" +
                     "    \"amount\": " + amount.getText() + ",\r\n" +
                     "    \"paid\": " + paid.isSelected() + ",\r\n" +
-                    "    \"comments\": \"" + comments.getText() + "\",\r\n" +
-                    "    \"image\": \"" + "no_image.jpg" + "\"" + "\n}";
+                    "    \"comments\": \"" + comments.getText() + "\"" + "\n}";
             try {
                 APIHandler.makeRequest("PUT", POST_PARAMS);
             } catch (IOException ioException) {

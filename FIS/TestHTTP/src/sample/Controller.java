@@ -64,6 +64,7 @@ public class Controller {
                     "    \"name\": \"" + name + "\"" + "\n}";
             try {
                 APIHandler.makeRequest("DELETE", DELETE_PARAMS);
+                pane.setVisible(false);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
