@@ -43,7 +43,7 @@ public class AddComponent {
                     "    \"paid\": " + paid.isSelected() + ",\r\n" +
                     "    \"comments\": \"" + comments.getText() + "\"" + "\n}";
             try {
-                APIHandler.makeRequest("PUT", POST_PARAMS);
+                APIHandler.makeRequest("PUT","components", POST_PARAMS);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }

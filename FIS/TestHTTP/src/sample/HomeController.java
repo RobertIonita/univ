@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,12 +20,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class Controller {
+public class HomeController {
 
     public StringBuffer jsonStr = new StringBuffer();
 
-    public Controller() throws IOException {
-        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components.php");
+    public HomeController() throws IOException {
+        URL url = new URL("https://tonu.rocks/school/AWSMApp/api/components");
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -34,11 +35,19 @@ public class Controller {
     }
 
     @FXML
-    private Text name;
-    @FXML
     private Pane wrapper;
 
-    public void appendTemplate(int id, String name, String category, String imgSource, int layoutX, int layoutY) {
+    public void appendTemplate(
+            int id,
+            String category,
+            String name,
+            String provider,
+            int amount,
+            String paid,
+            String comments,
+            String imgSource,
+            int layoutX, int layoutY) {
+
         Pane pane = new Pane();
         pane.setPrefSize(120, 120);
         pane.setLayoutX(layoutX);
@@ -60,16 +69,41 @@ public class Controller {
         deleteBtn.setOnAction(e -> {
             System.out.println("Delete triggered for: "+id);
             final String DELETE_PARAMS = "{\n" +
-                    "    \"id\": \"" + id + "\",\r\n" +
+                    "    \"id\": " + id + ",\r\n" +
                     "    \"name\": \"" + name + "\"" + "\n}";
             try {
-                APIHandler.makeRequest("DELETE", DELETE_PARAMS);
                 pane.setVisible(false);
+                APIHandler.makeRequest("DELETE", "components", DELETE_PARAMS);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
+                pane.setVisible(true);
             }
         });
         pane.getChildren().add(deleteBtn);
+        Button updateBtn = new Button("Update");
+        updateBtn.setLayoutX(100);
+        updateBtn.setOnAction(e -> {
+            UpdateComponent updateComponent =
+                    new UpdateComponent(id, category, name, provider, amount, paid, comments);
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("UpdateComponent.fxml")
+            );
+            loader.setController(updateComponent);
+            Stage stage = new Stage();
+            Parent dialog = null;
+            try {
+                dialog = loader.load();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            stage.setScene(new Scene(dialog));
+            stage.setTitle("My modal window");
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner( ((Node)e.getSource()).getScene().getWindow() );
+            stage.show();
+
+        });
+        pane.getChildren().add(updateBtn);
         wrapper.getChildren().add(pane);
     }
 
@@ -90,8 +124,12 @@ public class Controller {
                 }
             }
             int id = objectInArray.getInt("id");
-            String name = objectInArray.getString("name");
             String category = objectInArray.getString("category");
+            String name = objectInArray.getString("name");
+            String provider = objectInArray.getString("provider");
+            int amount = objectInArray.getInt("amount");
+            String paid = objectInArray.getString("paid");
+            String comments = objectInArray.getString("comments");
             String imgSource = objectInArray.getString("image");
             int layoutX = 0;
 
@@ -101,7 +139,7 @@ public class Controller {
                 layoutX = 680;
             }
 
-            appendTemplate(id, name, category, imgSource, layoutX, layoutY);
+            appendTemplate(id, category, name, provider, amount, paid, comments ,imgSource, layoutX, layoutY);
             layoutY += (i+1) % 3 != 0 ? 0 : 200;
             System.out.println(layoutX + "Y: " + layoutY + "i: " + i);
         }

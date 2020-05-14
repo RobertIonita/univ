@@ -9,10 +9,15 @@ import java.net.URL;
 
 public class APIHandler {
 
-    public static void makeRequest(String METHOD, String BODY) throws IOException {
-
+    public static void makeRequest(String METHOD, String endpoint, String BODY) throws IOException {
         System.out.println(BODY);
-        String API = "https://tonu.rocks/school/AWSMApp/api/components.php";
+        String API = "https://tonu.rocks/school/AWSMApp/api/" + endpoint;
+        if (METHOD.equals("UPDATE")) {
+            API = API + "/update";
+            METHOD = "PUT";
+        }
+        System.out.println(API);
+
         URL url = new URL(API);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod(METHOD);
@@ -37,7 +42,7 @@ public class APIHandler {
             // print result
             System.out.println(response.toString());
         } else {
-            System.out.println("POST FAILED");
+            System.out.println(METHOD + " FAILED");
         }
     }
 }
