@@ -78,7 +78,7 @@ public class componenteController {
 
 
         Pane paneContainer = new Pane();
-        // paneContainer.setPrefSize(810,710);
+         paneContainer.setPrefSize(174,250);
         paneContainer.setLayoutX(layoutX);
         paneContainer.setLayoutY(layoutY);
         paneContainer.setVisible(true);

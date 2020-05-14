@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -96,7 +97,7 @@ public class systemsController {
 
 
             Pane paneContainer = new Pane();
-            // paneContainer.setPrefSize(810,710);
+             paneContainer.setPrefSize(174,250);
             paneContainer.setLayoutX(layoutX);
             paneContainer.setLayoutY(layoutY);
             paneContainer.setVisible(true);
@@ -470,7 +471,10 @@ public class systemsController {
         }
 
         wrapper.getChildren().add(paneContainer);
+
         scroll.setContent(wrapper);
+
+
     }
     @FXML
     private void search(ActionEvent event) throws JSONException, IOException {
@@ -577,9 +581,11 @@ public class systemsController {
     public void initialize() throws JSONException, IOException {
 
 
-        int layoutY = 0;
+        int layoutY = 20;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
+
         for (int i = 0; i < jsonArray.length(); i++) {
+
             JSONObject objectInArray = jsonArray.getJSONObject(i);
 
             Integer id=objectInArray.getInt("id");
@@ -594,7 +600,6 @@ public class systemsController {
             System.out.println("\n nume:"+image);
 
             categorii.add(category);
-
 
 
             int layoutX = i % 2 == 0 ? 100 : 330;

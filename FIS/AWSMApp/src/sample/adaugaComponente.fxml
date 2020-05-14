@@ -58,10 +58,10 @@
                               <Font name="Arial" size="15.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="group" />
+                              <ToggleGroup fx:id="groupTipProdus" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="comp" mnemonicParsing="false" onAction="#logic" text="Componente" textFill="#bebebe" toggleGroup="$group">
+                        <RadioButton fx:id="comp" mnemonicParsing="false" onAction="#logic" text="Componente" textFill="#bebebe" toggleGroup="$groupTipProdus">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
@@ -131,10 +131,10 @@
                               <Font name="Arial" size="15.0" />
                            </font>
                            <toggleGroup>
-                              <ToggleGroup fx:id="group2" />
+                              <ToggleGroup fx:id="groupStatus" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="waiting" mnemonicParsing="false" text="In Asteptare" textFill="#bebebe" toggleGroup="$group2">
+                        <RadioButton fx:id="waiting" mnemonicParsing="false" text="In Asteptare" textFill="#bebebe" toggleGroup="$groupStatus">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
@@ -155,7 +155,7 @@
             </VBox>
             <HBox fx:id="adaugaHBOX" alignment="CENTER">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#adauga" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
                      <font>
                         <Font name="Arial Black" size="15.0" />
                      </font>
