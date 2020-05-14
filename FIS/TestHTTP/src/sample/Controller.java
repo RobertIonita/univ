@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -37,7 +38,7 @@ public class Controller {
     @FXML
     private Pane wrapper;
 
-    public void appendTemplate(String name, String count, String imgSource, int layoutX, int layoutY) {
+    public void appendTemplate(int id, String name, String category, String imgSource, int layoutX, int layoutY) {
         Pane pane = new Pane();
         pane.setPrefSize(120, 120);
         pane.setLayoutX(layoutX);
@@ -45,16 +46,30 @@ public class Controller {
         pane.setVisible(true);
         Text name_label = new Text(name);
         name_label.setY(100);
-        Text count_label = new Text(count);
-        count_label.setY(110);
+        Text category_label = new Text(category);
+        category_label.setY(110);
         pane.getChildren().add(name_label);
-        pane.getChildren().add(count_label);
+        pane.getChildren().add(category_label);
         Pane image = new Pane();
         image.setStyle("-fx-background-image: url(" + imgSource + "); -fx-background-size: cover; -fx-background-position: center center;");
         image.setPrefSize(100, 90);
         image.setLayoutX(0);
         image.setLayoutY(0);
         pane.getChildren().add(image);
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.setOnAction(e -> {
+            System.out.println("Delete triggered for: "+id);
+            final String DELETE_PARAMS = "{\n" +
+                    "    \"id\": \"" + id + "\",\r\n" +
+                    "    \"name\": \"" + name + "\"" + "\n}";
+            try {
+                APIHandler.makeRequest("DELETE", DELETE_PARAMS);
+                pane.setVisible(false);
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+        pane.getChildren().add(deleteBtn);
         wrapper.getChildren().add(pane);
     }
 
@@ -74,6 +89,7 @@ public class Controller {
                     System.out.println(objectInArray.getString(elementName));
                 }
             }
+            int id = objectInArray.getInt("id");
             String name = objectInArray.getString("name");
             String category = objectInArray.getString("category");
             String imgSource = objectInArray.getString("image");
@@ -85,7 +101,7 @@ public class Controller {
                 layoutX = 680;
             }
 
-            appendTemplate(name, category, imgSource, layoutX, layoutY);
+            appendTemplate(id, name, category, imgSource, layoutX, layoutY);
             layoutY += (i+1) % 3 != 0 ? 0 : 200;
             System.out.println(layoutX + "Y: " + layoutY + "i: " + i);
         }
