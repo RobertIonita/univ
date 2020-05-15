@@ -183,7 +183,7 @@ public class systemsController {
        textBg.setLayoutY(174);
 
         numeProd = new Text(name);
-        numeProd.setStyle("-fx-padding:10 10 10 0;-fx-font-family: 'Arial Black';-fx-font-size: 12;-fx-background-color:#636363 ");
+        numeProd.setStyle("-fx-padding:10 10 10 0;-fx-font-family: 'Gotham Pro Black';-fx-font-size: 14;-fx-background-color:#636363 ");
         numeProd.setWrappingWidth(130);
         numeProd.setLayoutX(15);
         numeProd.setLayoutY(24);
@@ -206,10 +206,13 @@ public class systemsController {
             FXMLLoader loader=new FXMLLoader(getClass().getResource("popup.fxml"));
             loader.setController(popup);
             Stage stage=new Stage();
+
             Parent dialog=null;
             try {
+
                 dialog=loader.load();
             } catch (IOException e) {
+                System.out.println("whyy");
                 e.printStackTrace();
             }
             stage.setScene(new Scene(dialog));
@@ -233,7 +236,7 @@ public class systemsController {
     private void search(ActionEvent event) throws JSONException, IOException {
         wrapper.getChildren().clear();
 
-        int layoutY = 0;
+        int layoutY = 30;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
@@ -249,9 +252,9 @@ public class systemsController {
                 String date=objectInArray.getString("date");
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
-                int layoutX=0;
+                int layoutX=50;
                 if(i%3==1){
-                    layoutX=240;
+                    layoutX=270;
                 }else if(i%3==2){
                     layoutX=480;
                 }
@@ -270,7 +273,7 @@ public class systemsController {
     public void filter(ActionEvent event) throws JSONException, IOException {
         wrapper.getChildren().clear();
 
-        int layoutY = 0;
+        int layoutY = 30;
         JSONArray jsonArray = new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
@@ -287,9 +290,9 @@ public class systemsController {
                 String date=objectInArray.getString("date");
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
-                int layoutX=0;
+                int layoutX=50;
                 if(i%3==1){
-                    layoutX=240;
+                    layoutX=270;
                 }else if(i%3==2){
                     layoutX=480;
                 }
@@ -305,9 +308,9 @@ public class systemsController {
                 String date=objectInArray.getString("date");
                 String comments=objectInArray.getString("comments");
                 String image=objectInArray.getString("image");
-                int layoutX=0;
+                int layoutX=50;
                 if(i%3==1){
-                    layoutX=240;
+                    layoutX=270;
                 }else if(i%3==2){
                     layoutX=480;
                 }
@@ -325,7 +328,7 @@ public class systemsController {
     @FXML
     void showAll(ActionEvent event) throws JSONException, IOException {
         wrapper.getChildren().clear();
-        int layoutY = 0;
+        int layoutY = 30;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject objectInArray = jsonArray.getJSONObject(i);
@@ -339,9 +342,9 @@ public class systemsController {
             String comments=objectInArray.getString("comments");
             String image=objectInArray.getString("image");
 
-            int layoutX=0;
+            int layoutX=50;
             if(i%3==1){
-                layoutX=240;
+                layoutX=270;
             }else if(i%3==2){
                 layoutX=480;
             }
@@ -356,7 +359,7 @@ public class systemsController {
     public void initialize() throws JSONException, IOException {
 
 
-        int layoutY = 20;
+        int layoutY = 30;
         JSONArray jsonArray=new JSONArray(jsonStr.toString());
 
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -375,9 +378,9 @@ public class systemsController {
             System.out.println("\n nume:"+image);
 
             categorii.add(category);
-            int layoutX=20;
+            int layoutX=50;
             if(i%3==1){
-                layoutX=240;
+                layoutX=270;
             }else if(i%3==2){
                 layoutX=480;
             }

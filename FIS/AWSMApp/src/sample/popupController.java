@@ -16,14 +16,6 @@ public class popupController {
     @FXML
     private Pane imageHolder;
 
-    @FXML
-    private TextArea denumireProd;
-
-    @FXML
-    private TextField categorieProd;
-
-    @FXML
-    private ListView<?> listaComponente;
 
     @FXML
     private Button updateBtn;
@@ -35,6 +27,24 @@ public class popupController {
     private Button saveBtn;
     @FXML
     private Pane warrantyArea;
+
+
+    @FXML
+    private TextField numeProd;
+
+
+    @FXML
+    private Pane cancelBtn;
+
+    @FXML
+    private TextField category;
+
+    @FXML
+    private TextField provider;
+
+    @FXML
+    private TextField stock;
+
 
     public int recordId,
             recordAmount;
@@ -64,13 +74,17 @@ public class popupController {
     }
     @FXML
     public  void initialize(){
-        denumireProd.setText(recordName);
-        denumireProd.setDisable(true);
+        numeProd.setText(recordName);
+        numeProd.setDisable(true);
 
-        categorieProd.setText(recordCategory);
-        categorieProd.setDisable(true);
+        category.setText(recordCategory);
+        category.setDisable(true);
+
+        stock.setText(String.valueOf(recordAmount));
+        stock.setDisable(true);
 
         saveBtn.setVisible(false);
+        cancelBtn.setVisible(false);
 
         imageHolder.setStyle("-fx-background-image: url("+recordImage+");" +
                 "-fx-background-position: center center;" +
@@ -78,21 +92,24 @@ public class popupController {
                 "-fx-background-size: auto");
 
         updateBtn.setOnMouseClicked(mouseEvent -> {
-            denumireProd.setDisable(false);
-            categorieProd.setDisable(false);
+            numeProd.setDisable(false);
+            category.setDisable(false);
+            stock.setDisable(false);
            saveBtn.setVisible(true);
+           cancelBtn.setVisible(true);
         });
         saveBtn.setOnMouseClicked(mouseEvent -> {
-            denumireProd.setDisable(true);
-            categorieProd.setDisable(true);
+            numeProd.setDisable(true);
+            category.setDisable(true);
+            stock.setDisable(true);
             saveBtn.setVisible(false);
             System.out.println("update elemente: "+recordId);
             final String UPDATE_PARAMS = "{\n" +
                     "    \"id\": " + recordId + ",\r\n" +
-                    "    \"category\": \"" + categorieProd.getText() + "\",\r\n" +
-                    "    \"name\": \"" + denumireProd.getText() + "\",\r\n" +
+                    "    \"category\": \"" + category.getText() + "\",\r\n" +
+                    "    \"name\": \"" + numeProd.getText() + "\",\r\n" +
                     "    \"provider\": \"" + recordProvider + "\",\r\n" +
-                    "    \"amount\": " + recordAmount + ",\r\n" +
+                    "    \"amount\": " + Integer.valueOf(stock.getText()) + ",\r\n" +
                     "    \"paid\": " + recordPaid + ",\r\n" +
                     "    \"comments\": \"" + recordComments + "\"\n}";
             try {
@@ -100,6 +117,13 @@ public class popupController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        });
+        cancelBtn.setOnMouseClicked(mouseEvent -> {
+            numeProd.setDisable(true);
+            category.setDisable(true);
+            stock.setDisable(true);
+            saveBtn.setVisible(false);
+            cancelBtn.setVisible(false);
         });
     }
 
