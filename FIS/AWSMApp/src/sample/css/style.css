@@ -9,6 +9,9 @@
     -fx-background-color: #474646;
 }
 
+.sidebar{
+    -fx-background-color: #121432;
+}
 
 .accent{
     -fx-background-color: #FFA000;
@@ -28,21 +31,12 @@
     -fx-cursor: hand;
 
 }
-.homeBtn:focused{
-    -fx-background-color:transparent;
-    -fx-background-image: url("../assets/home-active.png");
-    -fx-background-position: center center;
-    -fx-background-repeat: no-repeat;
-
-    -fx-cursor: hand;
-
-}
 .homeBtn:hover {
     -fx-background-color:transparent;
     -fx-background-image: url("../assets/home-active.png");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-
+    -fx-background-size: auto;
     -fx-cursor: hand;
 
 }
@@ -51,26 +45,16 @@
     -fx-background-image: url("../assets/tower-pc-1.png");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-
     -fx-cursor: hand;
 
 }
 
-.systemsBtn:focused {
-    -fx-background-color: transparent;
-    -fx-background-image: url("../assets/pc-active.png");
-    -fx-background-position: center center;
-    -fx-background-repeat: no-repeat;
-
-    -fx-cursor: hand;
-
-}
 .systemsBtn:hover {
     -fx-background-color: transparent;
     -fx-background-image: url("../assets/pc-active.png");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
-
+    -fx-background-size: auto;
     -fx-cursor: hand;
 
 }
@@ -87,6 +71,7 @@
     -fx-background-image: url("../assets/componente-active.png");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: auto;
     -fx-cursor: hand;
 }
 .componentsBtn:hover{
@@ -94,6 +79,7 @@
     -fx-background-image: url("../assets/componente-active.png");
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: auto;
     -fx-cursor: hand;
 }
 
@@ -103,6 +89,7 @@
     -fx-background-image: url("../assets/graf.png");
     -fx-background-repeat: no-repeat;
    -fx-background-position: center center;
+
     -fx-cursor: hand;
 }
 
@@ -111,6 +98,7 @@
     -fx-background-image: url("../assets/graf-active.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
+    -fx-background-size: auto;
     -fx-cursor: hand;
 
 }
@@ -119,6 +107,7 @@
     -fx-background-image: url("../assets/graf-active.png");
     -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
+    -fx-background-size:auto;
     -fx-cursor: hand;
 
 }
@@ -128,6 +117,7 @@
     -fx-background-image: url("../assets/plusalb.png");
    -fx-background-repeat: no-repeat;
     -fx-background-position: center center;
+
     -fx-cursor: hand;
 
 }
@@ -136,6 +126,7 @@
     -fx-background-image: url("../assets/plus.png");
     -fx-background-position: center-left;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: auto;
     -fx-cursor: hand;
 }
 .plusBtn:hover{
@@ -143,6 +134,7 @@
     -fx-background-image: url("../assets/plus.png");
     -fx-background-position: center-left;
     -fx-background-repeat: no-repeat;
+    -fx-background-size: auto;
     -fx-cursor: hand;
 }
 .searchBar{
@@ -210,6 +202,62 @@
     -fx-scale-y: 1.03;
 }
 .saveBtn:hover{
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+.dashboardCardBlue{
+    -fx-background-color: #6672FB;
+    -fx-background-radius: 25;
+
+
+}
+.dashboardCardBlue:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian,#C7C9EB, 50, 0, 0, 1);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+
+}
+.dashboardCardRed{
+    -fx-background-color: #E8523F;
+    -fx-background-radius: 25;
+
+
+}
+.dashboardCardRed:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian,#F2D0CA, 50, 0, 0, 1);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+
+}
+
+.desciptionText{
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 14;
+}
+
+.titleText{
+    -fx-font-family:"Muli";
+    -fx-font-size: 30;
+    -fx-font-style: Extra Bold;
+}
+.timeIcon{
+    -fx-background-image: url("../assets/wall-clock.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover,auto;
+
+}
+.folderIcon{
+    -fx-background-image: url("../assets/Interface.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover,auto;
+
+}
+
+.recentFiles:hover{
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian,#F7F7F7, 20, 0, 0, 1);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }

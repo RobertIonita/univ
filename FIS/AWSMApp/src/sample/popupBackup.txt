@@ -1,4 +1,4 @@
-
+fx:controller="sample.HomeController"
         //delete btn
 
             Button deleteBtn = new Button();

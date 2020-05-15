@@ -375,7 +375,7 @@ public class systemsController {
             System.out.println("\n nume:"+image);
 
             categorii.add(category);
-            int layoutX=0;
+            int layoutX=20;
             if(i%3==1){
                 layoutX=240;
             }else if(i%3==2){
