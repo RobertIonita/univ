@@ -4,9 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.HomeController">
+            fx:controller="app.home.HomeController">
    <Button layoutX="20.0" mnemonicParsing="false" onAction="#gotoAddComponent" text="Add new component"/>
-
    <ScrollPane hbarPolicy="NEVER" layoutY="50" prefViewportHeight="700.0" style="-fx-padding: 0 0 40px 0;">
       <Pane fx:id="wrapper" layoutY="30" prefWidth="1024.0">
       </Pane>

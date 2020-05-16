@@ -1,5 +1,6 @@
-package sample;
+package app.home;
 
+import app.components.UpdateComponent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import app.handlers.APIHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,7 +88,7 @@ public class HomeController {
             UpdateComponent updateComponent =
                     new UpdateComponent(id, category, name, provider, amount, paid, comments);
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("UpdateComponent.fxml")
+                    getClass().getResource("/app/components/UpdateComponent.fxml")
             );
             loader.setController(updateComponent);
             Stage stage = new Stage();
@@ -146,7 +148,7 @@ public class HomeController {
     }
 
     public void gotoAddComponent(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("AddComponent.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/app/components/AddComponent.fxml"));
         Scene addComponentScene = new Scene(root);
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(addComponentScene);
