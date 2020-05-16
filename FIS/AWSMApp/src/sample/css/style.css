@@ -178,14 +178,6 @@
     -fx-mark-color:#9599A1;
     -fx-border-radius: 10;
 }
-.warranty{
-    -fx-background-color: transparent;
-    -fx-background-image: url("../assets/plus.png");
-    -fx-max-width: 80%;
-    -fx-min-width: 80%;
-    -fx-background-position: center-left;
-    -fx-background-repeat: no-repeat;
-}
 
 .report{
 
@@ -278,4 +270,15 @@
     -fx-effect: dropshadow(gaussian,#F7F7F7, 20, 0, 0, 1);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
+}
+.closeBtn{
+    -fx-background-image: url("../assets/close.png");
+    -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
+    
+}
+.warranty{
+    -fx-background-image: url("../assets/warranty.png");
+    -fx-background-repeat: no-repeat;
+
 }

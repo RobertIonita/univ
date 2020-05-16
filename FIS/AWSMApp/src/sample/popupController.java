@@ -1,37 +1,30 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class popupController {
-
-    @FXML
-    private Pane imageHolder;
-
 
     @FXML
     private Button updateBtn;
 
     @FXML
-    private Button deleteBtn;
+    private Pane deleteBtn;
 
     @FXML
-    private Button saveBtn;
-    @FXML
-    private Pane warrantyArea;
-
-
-    @FXML
-    private TextField numeProd;
-
+    private Pane saveBtn;
 
     @FXML
     private Pane cancelBtn;
@@ -45,6 +38,41 @@ public class popupController {
     @FXML
     private TextField stock;
 
+    @FXML
+    private TextField numeProd;
+
+    @FXML
+    private Pane imageHolder;
+
+    @FXML
+    private Text reportBtn;
+
+    @FXML
+    private Pane reportArea;
+
+    @FXML
+    private Text alegeComponenta;
+
+    @FXML
+    private ComboBox<?> componentsCombo;
+
+    @FXML
+    private Pane sendBtn;
+
+    @FXML
+    private Pane renuntaBtn;
+
+    @FXML
+    private Text trimiteTxt;
+
+    @FXML
+    private Text renuntaTxt;
+
+    @FXML
+    private Pane closeBtn;
+    @FXML
+    private Pane feedbackHolder;
+
 
     public int recordId,
             recordAmount;
@@ -54,6 +82,7 @@ public class popupController {
             recordPaid,
             recordComments,
             recordImage;
+    Set recorCategorii ;
     public popupController(int id,
                            String category,
                            String name,
@@ -61,7 +90,8 @@ public class popupController {
                            int amount,
                            String paid,
                            String comments,
-                           String image
+                           String image,
+                           Set categorii
     ){
         recordId=id;
         recordCategory=category;
@@ -71,9 +101,19 @@ public class popupController {
         recordPaid = paid;
         recordComments = comments;
         recordImage=image;
+        recorCategorii=categorii;
     }
     @FXML
     public  void initialize(){
+
+        //componente pentru garantie
+        componentsCombo.setItems(FXCollections.observableArrayList(recorCategorii));
+        componentsCombo.getSelectionModel().selectFirst();
+
+
+
+        reportArea.getChildren().clear();
+
         numeProd.setText(recordName);
         numeProd.setDisable(true);
 
@@ -83,24 +123,32 @@ public class popupController {
         stock.setText(String.valueOf(recordAmount));
         stock.setDisable(true);
 
+        provider.setText(recordProvider);
+        provider.setDisable(true);
+
         saveBtn.setVisible(false);
         cancelBtn.setVisible(false);
 
-        imageHolder.setStyle("-fx-background-image: url("+recordImage+");" +
+        imageHolder.setStyle("-fx-background-radius: 15" +
+                ";-fx-background-image: url("+recordImage+");" +
                 "-fx-background-position: center center;" +
                 " -fx-background-repeat: no-repeat;" +
-                "-fx-background-size: auto");
+                "-fx-background-size: cover; ");
 
+        //modifica
         updateBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(false);
             category.setDisable(false);
             stock.setDisable(false);
-           saveBtn.setVisible(true);
-           cancelBtn.setVisible(true);
+            saveBtn.setVisible(true);
+            cancelBtn.setVisible(true);
+            provider.setDisable(false);
         });
+        //save changes
         saveBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(true);
             category.setDisable(true);
+            provider.setDisable(true);
             stock.setDisable(true);
             saveBtn.setVisible(false);
             System.out.println("update elemente: "+recordId);
@@ -108,7 +156,7 @@ public class popupController {
                     "    \"id\": " + recordId + ",\r\n" +
                     "    \"category\": \"" + category.getText() + "\",\r\n" +
                     "    \"name\": \"" + numeProd.getText() + "\",\r\n" +
-                    "    \"provider\": \"" + recordProvider + "\",\r\n" +
+                    "    \"provider\": \"" + provider.getText() + "\",\r\n" +
                     "    \"amount\": " + Integer.valueOf(stock.getText()) + ",\r\n" +
                     "    \"paid\": " + recordPaid + ",\r\n" +
                     "    \"comments\": \"" + recordComments + "\"\n}";
@@ -118,14 +166,46 @@ public class popupController {
                 e.printStackTrace();
             }
         });
+        //cancel btn
         cancelBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(true);
             category.setDisable(true);
+            provider.setDisable(true);
             stock.setDisable(true);
             saveBtn.setVisible(false);
             cancelBtn.setVisible(false);
         });
+        //delete btn
+        deleteBtn.setOnMouseClicked(mouseEvent -> {
+            final String DELETE_PARAMS="{\n" +
+                    "    \"id\": " + recordId + ",\r\n" +
+                    "    \"name\": \"" + numeProd.getText() + "\""+"\n}" ;
+            try{
+                APIHandler.makeRequest("DELETE","components",DELETE_PARAMS);
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+            Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        });
+        closeBtn.setOnMouseClicked(mouseEvent -> {
+            Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        });
+
+        reportBtn.setOnMouseClicked(mouseEvent -> {
+            reportArea.getChildren().addAll(alegeComponenta,componentsCombo,feedbackHolder);
+        });
+
+        renuntaBtn.setOnMouseClicked(mouseEvent -> {
+            reportArea.getChildren().clear();
+        });
+        
+
     }
+
 
 }
 

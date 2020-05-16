@@ -91,14 +91,6 @@ public class workspaceController {
         }
 
 
-
-        @FXML
-        void graphBtn(MouseEvent event) throws IOException {
-            loadPage("graphScene");
-        }
-
-
-
         @FXML
         void systBtn(MouseEvent event) throws IOException {
             loadPage("systemsScene");

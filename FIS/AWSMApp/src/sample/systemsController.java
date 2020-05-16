@@ -32,6 +32,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +55,7 @@ public class systemsController {
     private Text name;
 
     @FXML
-    private Pane stage;
+    private Pane Backstage;
 
     @FXML
     private AnchorPane wrapper;
@@ -164,10 +165,10 @@ public class systemsController {
        //designul la carduri
        Pane pane=new Pane();
        pane.setStyle("-fx-background-image: url("+image+");" +
+               "    -fx-background-size:cover;"+
                "    -fx-background-color: transparent;" +
                "    -fx-background-repeat: no-repeat;"+
                "-fx-background-position: center center;"+
-               "    -fx-background-size:cover,auto;"+
                "    -fx-background-radius:  15;" +
                "     -fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );" +
                "    -fx-background-position: top ");
@@ -200,26 +201,39 @@ public class systemsController {
         ///!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //click pe produs
         paneContainer.setOnMouseClicked(mouseEvent -> {
+            BoxBlur blur=new BoxBlur(3,3,3);
+            Backstage.setEffect(blur);
             popupController popup=new popupController(
                     id,category,name,provider,count,
-                    paid,comment,image);
+                    paid,comment,image,categorii);
+
             FXMLLoader loader=new FXMLLoader(getClass().getResource("popup.fxml"));
             loader.setController(popup);
             Stage stage=new Stage();
-
             Parent dialog=null;
-            try {
-
+            try{
                 dialog=loader.load();
-            } catch (IOException e) {
-                System.out.println("whyy");
-                e.printStackTrace();
+            }catch (IOException ex){
+                ex.printStackTrace();
             }
-            stage.setScene(new Scene(dialog));
-            stage.setTitle("Pop-up");
+            Scene scene=new Scene(dialog);
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
             stage.initModality(Modality.WINDOW_MODAL);
+            stage.initStyle(StageStyle.TRANSPARENT);
+
+
             stage.initOwner( ((Node)mouseEvent.getSource()).getScene().getWindow());
-            stage.show();
+            stage.showAndWait();
+
+            //remove blur effect
+            if(!stage.getScene().getWindow().isShowing()){
+                Backstage.setEffect(null);
+            }
+
+
+
+
         });
         if(id==2){
 
@@ -387,7 +401,6 @@ public class systemsController {
             appendTemplate(name, amount,id,category,provider,paid.toString(),comments,true,image,layoutX,layoutY);
             layoutY += (i+1) % 3 != 0 ? 0 : 270;
 
-            categorii.add(category);
         }
 
 
