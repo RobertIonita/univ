@@ -1,31 +1,23 @@
-package sample;
+package app.sidebar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.file.Path;
-import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class workspaceController {
     @FXML
@@ -74,18 +66,16 @@ public class workspaceController {
         reader.close();
     }
 
-
-
-    @FXML
+         @FXML
         void addBtn(MouseEvent event) throws IOException {
-            loadPage("adaugaComponente");
+            loadPage("/app/addProduct/adaugaComponente");
 
 
         }
 
         @FXML
         void compBtn(MouseEvent event) throws IOException {
-           loadPage("componenteScene");
+           loadPage("/app/components/componenteScene");
 
 
         }
@@ -93,38 +83,36 @@ public class workspaceController {
 
         @FXML
         void systBtn(MouseEvent event) throws IOException {
-            loadPage("systemsScene");
+            loadPage("/app/systems/systemsScene");
 
         }
+        
+        @FXML
+        void initialize() throws IOException, JSONException {
+            Parent rootNode=null;
+            try{
+                rootNode=FXMLLoader.load(getClass().getResource("/app/homePage/homeScene.fxml"));
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+            bp.setCenter(rootNode);
 
 
-
-    @FXML
-    void initialize() throws IOException, JSONException {
-        Parent rootNode=null;
-        try{
-            rootNode=FXMLLoader.load(getClass().getResource("homeScene.fxml"));
-        }catch (IOException ex){
-            ex.printStackTrace();
         }
-        bp.setCenter(rootNode);
+        @FXML
+        void homeBtn(MouseEvent event) throws IOException, JSONException {
+            loadPage("/app/homePage/homeScene");
 
-
-    }
-    @FXML
-    void homeBtn(MouseEvent event) throws IOException, JSONException {
-        loadPage("homeScene");
-
-    }
-    void loadPage(String page) throws IOException {
-   Parent root=null;
-        try{
-           root= FXMLLoader.load(getClass().getResource(page+".fxml"));
-
-        }catch(IOException ex){
-            Logger.getLogger(workspaceController.class.getName()).log(Level.SEVERE,null,ex);
         }
-        bp.setCenter(root);
+        void loadPage(String page) throws IOException {
+       Parent root=null;
+            try{
+               root= FXMLLoader.load(getClass().getResource(page+".fxml"));
 
-    }
+            }catch(IOException ex){
+                Logger.getLogger(workspaceController.class.getName()).log(Level.SEVERE,null,ex);
+            }
+            bp.setCenter(root);
+
+        }
 }

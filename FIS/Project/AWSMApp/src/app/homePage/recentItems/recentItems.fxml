@@ -6,14 +6,14 @@
 
 <AnchorPane prefHeight="58.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="wrapper" prefHeight="58.0" prefWidth="726.0" styleClass="recentFiles" stylesheets="@css/style.css">
+      <Pane fx:id="wrapper" prefHeight="58.0" prefWidth="726.0" styleClass="recentFiles" stylesheets="@../../css/style.css">
          <children>
             <Pane prefHeight="58.0" prefWidth="726.0" style="-fx-background-color: #F7F7F7; -fx-background-radius: 10;">
                <children>
                   <Pane layoutX="27.0" layoutY="13.0" prefHeight="33.0" prefWidth="33.0" style="-fx-background-color: #E85441; -fx-background-radius: 4;" />
-                  <Label fx:id="productName" layoutX="105.0" layoutY="20.0" styleClass="desciptionText" stylesheets="@css/style.css" text="Name" />
-                  <Label fx:id="cantitate" layoutX="345.0" layoutY="19.0" styleClass="desciptionText" stylesheets="@css/style.css" text="Label" />
-                  <Label fx:id="dataAdd" layoutX="560.0" layoutY="19.0" styleClass="desciptionText" stylesheets="@css/style.css" text="Label" />
+                  <Label fx:id="productName" layoutX="105.0" layoutY="20.0" styleClass="desciptionText" stylesheets="@../../css/style.css" text="Name" />
+                  <Label fx:id="cantitate" layoutX="345.0" layoutY="19.0" styleClass="desciptionText" stylesheets="@../../css/style.css" text="Label" />
+                  <Label fx:id="dataAdd" layoutX="560.0" layoutY="19.0" styleClass="desciptionText" stylesheets="@../../css/style.css" text="Label" />
                </children>
             </Pane>
          </children>

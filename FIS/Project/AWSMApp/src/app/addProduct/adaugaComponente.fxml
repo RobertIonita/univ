@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.adaugaController">
+<Pane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.addProduct.adaugaController">
    <children>
       <Pane prefHeight="700.0" prefWidth="957.0" visible="false">
          <children>
@@ -155,7 +155,7 @@
             </VBox>
             <HBox fx:id="adaugaHBOX" alignment="CENTER">
                <children>
-                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#adauga" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@css/style.css" text="adauga" textFill="WHITE">
+                  <Button fx:id="addBtn" mnemonicParsing="false" onAction="#adauga" prefHeight="42.0" prefWidth="160.0" style="-fx-background-radius: 13; -fx-background-color: #0083FD;" styleClass="adauga" stylesheets="@../css/style.css" text="adauga" textFill="WHITE">
                      <font>
                         <Font name="Arial Black" size="15.0" />
                      </font>

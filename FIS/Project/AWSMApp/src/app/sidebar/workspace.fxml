@@ -7,28 +7,28 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="bp" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.workspaceController">
+<BorderPane fx:id="bp" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.sidebar.workspaceController">
    <left>
-      <VBox prefHeight="714.0" prefWidth="67.0" styleClass="sidebar" stylesheets="@css/style.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="714.0" prefWidth="67.0" styleClass="sidebar" stylesheets="@../css/style.css" BorderPane.alignment="CENTER">
            <children>
                <Pane prefHeight="700.0" prefWidth="67.0">
                    <children>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#systBtn" prefHeight="34.0" prefWidth="67.0" styleClass="systemsBtn" stylesheets="@css/style.css">
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutY="106.0" mnemonicParsing="false" onMouseClicked="#systBtn" prefHeight="34.0" prefWidth="67.0" styleClass="systemsBtn" stylesheets="@../css/style.css">
                            <cursor>
                                <Cursor fx:constant="HAND" />
                            </cursor>
                   </Button>
-                       <Button alignment="CENTER" contentDisplay="CENTER" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#compBtn" prefHeight="35.0" prefWidth="67.0" styleClass="componentsBtn" stylesheets="@css/style.css">
+                       <Button alignment="CENTER" contentDisplay="CENTER" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#compBtn" prefHeight="35.0" prefWidth="67.0" styleClass="componentsBtn" stylesheets="@../css/style.css">
                            <cursor>
                                <Cursor fx:constant="HAND" />
                            </cursor>
                   </Button>
-                         <Button alignment="CENTER" cache="true" contentDisplay="CENTER" layoutY="636.0" mnemonicParsing="false" onMouseClicked="#addBtn" prefHeight="35.0" prefWidth="67.0" styleClass="plusBtn" stylesheets="@css/style.css">
+                         <Button alignment="CENTER" cache="true" contentDisplay="CENTER" layoutY="636.0" mnemonicParsing="false" onMouseClicked="#addBtn" prefHeight="35.0" prefWidth="67.0" styleClass="plusBtn" stylesheets="@../css/style.css">
                              <cursor>
                                  <Cursor fx:constant="HAND" />
                              </cursor>
                          </Button>
-                       <Button layoutY="42.0" mnemonicParsing="false" onMouseClicked="#homeBtn" prefHeight="34.0" prefWidth="67.0" styleClass="homeBtn" stylesheets="@css/style.css">
+                       <Button layoutY="42.0" mnemonicParsing="false" onMouseClicked="#homeBtn" prefHeight="34.0" prefWidth="67.0" styleClass="homeBtn" stylesheets="@../css/style.css">
                            <cursor>
                                <Cursor fx:constant="HAND" />
                            </cursor>

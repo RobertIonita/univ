@@ -148,7 +148,13 @@
     -fx-background-position: 13px 15px;
 
 }
-.card:hover{
+
+.cardTemplate{
+    -fx-background-color: white;
+    -fx-effect:dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 );
+    -fx-background-radius:  15;
+}
+.cardTemplate:hover{
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 

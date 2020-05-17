@@ -1,21 +1,16 @@
-package sample;
+package app.homePage;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import app.homePage.recentItems.recentItemsController;
+import app.sidebar.workspaceController;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -87,13 +82,11 @@ public class HomeController extends workspaceController {
 
 
             recentItems=new recentItemsController(name,amount,date);
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("recentItems.fxml"));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/app/homePage/recentItems/recentItems.fxml"));
             loader.setController(recentItems);
 
             Pane homepage=loader.load();
             recentFilesVbox.getChildren().addAll(homepage);
-
-
 
         }
         totalComponents.setText(String.valueOf(jsonArray.length()));

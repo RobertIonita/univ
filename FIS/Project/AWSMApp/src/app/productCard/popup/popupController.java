@@ -1,21 +1,19 @@
-package sample;
+package app.productCard.popup;
 
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import app.Prototype.Product;
+import app.requestHandler.APIHandler;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 
-public class popupController {
+public class popupController extends Product {
 
     @FXML
     private Button updateBtn;
@@ -30,7 +28,7 @@ public class popupController {
     private Pane cancelBtn;
 
     @FXML
-    private TextField category;
+    private TextField categoryField;
 
     @FXML
     private TextField provider;
@@ -57,6 +55,9 @@ public class popupController {
     private ComboBox<?> componentsCombo;
 
     @FXML
+    private Pane feedbackHolder;
+
+    @FXML
     private Pane sendBtn;
 
     @FXML
@@ -70,8 +71,6 @@ public class popupController {
 
     @FXML
     private Pane closeBtn;
-    @FXML
-    private Pane feedbackHolder;
 
 
     public int recordId,
@@ -79,29 +78,23 @@ public class popupController {
     public String recordCategory,
             recordName,
             recordProvider,
-            recordPaid,
             recordComments,
             recordImage;
-    Set recorCategorii ;
-    public popupController(int id,
-                           String category,
-                           String name,
-                           String provider,
-                           int amount,
-                           String paid,
-                           String comments,
-                           String image,
-                           Set categorii
+    public Set recorCategorii ;
+    boolean  recordPaid;
+    public popupController(int id, String category, String name, int amount, int price, String image,
+                           String provider, Boolean paid, String comments, Set categorii
     ){
-        recordId=id;
-        recordCategory=category;
-        recordName=name;
-        recordProvider=provider;
-        recordAmount = amount;
-        recordPaid = paid;
-        recordComments = comments;
-        recordImage=image;
-        recorCategorii=categorii;
+        super(id,category,name,amount,price,image);
+        this.recordId=id;
+        this.recordCategory=category;
+        this.recordName=name;
+        this.recordProvider=provider;
+        this.recordAmount = amount;
+        this.recordPaid = paid;
+        this.recordComments = comments;
+        this.recordImage=image;
+        this.recorCategorii=categorii;
     }
     @FXML
     public  void initialize(){
@@ -117,8 +110,8 @@ public class popupController {
         numeProd.setText(recordName);
         numeProd.setDisable(true);
 
-        category.setText(recordCategory);
-        category.setDisable(true);
+        categoryField.setText(recordCategory);
+        categoryField.setDisable(true);
 
         stock.setText(String.valueOf(recordAmount));
         stock.setDisable(true);
@@ -138,7 +131,7 @@ public class popupController {
         //modifica
         updateBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(false);
-            category.setDisable(false);
+            categoryField.setDisable(false);
             stock.setDisable(false);
             saveBtn.setVisible(true);
             cancelBtn.setVisible(true);
@@ -147,14 +140,14 @@ public class popupController {
         //save changes
         saveBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(true);
-            category.setDisable(true);
+            categoryField.setDisable(true);
             provider.setDisable(true);
             stock.setDisable(true);
             saveBtn.setVisible(false);
             System.out.println("update elemente: "+recordId);
             final String UPDATE_PARAMS = "{\n" +
                     "    \"id\": " + recordId + ",\r\n" +
-                    "    \"category\": \"" + category.getText() + "\",\r\n" +
+                    "    \"category\": \"" + categoryField.getText() + "\",\r\n" +
                     "    \"name\": \"" + numeProd.getText() + "\",\r\n" +
                     "    \"provider\": \"" + provider.getText() + "\",\r\n" +
                     "    \"amount\": " + Integer.valueOf(stock.getText()) + ",\r\n" +
@@ -169,7 +162,7 @@ public class popupController {
         //cancel btn
         cancelBtn.setOnMouseClicked(mouseEvent -> {
             numeProd.setDisable(true);
-            category.setDisable(true);
+            categoryField.setDisable(true);
             provider.setDisable(true);
             stock.setDisable(true);
             saveBtn.setVisible(false);

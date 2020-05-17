@@ -1,4 +1,4 @@
-package sample;
+package app.homePage.recentItems;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

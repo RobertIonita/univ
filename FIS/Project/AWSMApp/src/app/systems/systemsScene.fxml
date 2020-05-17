@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.systemsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.systems.systemsController">
     <children>
         <Pane fx:id="Backstage" prefHeight="700.0" prefWidth="950.0">
             <children>
-            <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@css/style.css" />
+            <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@../css/style.css" />
             <Pane layoutX="42.0" layoutY="181.0" prefHeight="498.0" prefWidth="867.0">
                <children>
                 <AnchorPane fx:id="frame" layoutX="3.0" layoutY="8.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="867.0">
@@ -50,6 +50,6 @@
         </Pane>
     </children>
     <stylesheets>
-        <URL value="@css/style.css" />
+        <URL value="@../css/style.css" />
     </stylesheets>
 </VBox>
