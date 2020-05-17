@@ -1,4 +1,4 @@
-package app.components;
+package app.components.add;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +15,7 @@ import app.handlers.APIHandler;
 
 import java.io.IOException;
 
-public class AddComponent {
+public class AddController {
     public TextField category;
     public TextField name;
     public TextField provider;
@@ -25,7 +25,7 @@ public class AddComponent {
     public Button postBtn;
 
     public void gotoHomeComponent(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../home/Home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../../home/Home.fxml"));
         Scene homeScene = new Scene(root);
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(homeScene);

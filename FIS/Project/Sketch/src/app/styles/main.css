@@ -1,0 +1,45 @@
+.main_container {
+    -fx-background-color: whitesmoke;
+}
+
+.center {
+    -fx-alignment: center;
+}
+
+.card {
+    -fx-background-color: white;
+}
+
+.card Label {
+    -fx-padding: 3px 10px;
+}
+
+.card #priceLabel{
+    -fx-alignment: top-right;
+    -fx-background-color: #ff985b;
+}
+
+.card .card_img {
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    -fx-background-image: url("https://tonu.rocks/scool/AWSMApp/assets/no_image.jpg");
+}
+
+.card .actions {
+    -fx-border-style: solid hidden hidden hidden;
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1;
+    -fx-padding: 5px 0 0;
+}
+
+.card .actions Button {
+    -fx-background-color: transparent;
+    -fx-border-style: hidden;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ff985b;
+    -fx-cursor: hand;
+}
+
+.card .actions Button#deleteBtn {
+    -fx-text-fill: #8b0000;
+}
