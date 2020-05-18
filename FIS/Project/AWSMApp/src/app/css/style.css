@@ -197,3 +197,7 @@
     -fx-background-size: cover,auto;
     -fx-effect: dropshadow(gaussian, #F2D0CA, 15, 0, 0, 1);
 }
+
+#giftPane {
+    -fx-padding: 30px 10px;
+}

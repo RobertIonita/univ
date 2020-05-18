@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import app.services.prototype.Product;
 import app.productCard.popup.PopupController;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Set;
@@ -62,7 +63,14 @@ public class ComponentCardController extends Component {
                 "-fx-background-size: cover");
         paneContainer.setOnMouseClicked(mouseEvent -> {
             PopupController popup =
-                    new PopupController(id, category, name, amount, price, date, image, provider, paid, delivered, comments, recordCategories);
+                    null;
+            try {
+                popup = new PopupController(id, category, name, amount, price, date, image, provider, paid, delivered, comments, recordCategories);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/productCard/popup/Popup.fxml"));
             loader.setController(popup);
