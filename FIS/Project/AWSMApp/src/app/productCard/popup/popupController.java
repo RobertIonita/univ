@@ -1,6 +1,7 @@
 package app.productCard.popup;
 
 import app.components.Component;
+import app.promotions.Promotion;
 import app.services.ProductsLists;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.services.APIHandler;
 import javafx.util.Duration;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.Set;
@@ -80,12 +82,21 @@ public class PopupController extends Component {
 
     public Set recordCategories;
 
+    @FXML
+    private Label promotionName;
+    @FXML
+    private Button addPromotionBtn;
+    Promotion promotion = null;
+
     public PopupController(int id, String category, String name, int amount, int price, String date, String image,
-                           String provider, Boolean paid, Boolean delivered, String comments, Set categories) {
+                           String provider, Boolean paid, Boolean delivered, String comments, Set categories) throws IOException, JSONException {
 
         super(id, category, name, amount, price, date, image, provider, paid, delivered, comments);
         this.recordCategories = categories;
+
+        promotion = APIHandler.getPromotion(id);
     }
+
     @FXML
     public void initialize() {
 
@@ -117,6 +128,13 @@ public class PopupController extends Component {
         deliveredCheckbox.setSelected(delivered);
         deliveredCheckbox.setDisable(true);
         priceInput.setText(String.valueOf(price));
+
+        if(promotion != null) {
+            promotionName.setText(promotion.name);
+            promotionName.setVisible(true);
+        } else {
+            promotionName.setVisible(false);
+        }
 
         ///gift trasition effect
         TranslateTransition translate = new TranslateTransition();
@@ -158,12 +176,12 @@ public class PopupController extends Component {
                     "    \"provider\": \"" + providerInput.getText() + "\",\r\n" +
                     "    \"paid\": " + paidCheckbox.isSelected() + ",\r\n" +
                     "    \"delivered\": " + deliveredCheckbox.isSelected() + ",\r\n" +
-                    "    \"comments\": \"" + comments+ "\"\n}";
+                    "    \"comments\": \"" + comments + "\"\n}";
             try {
                 APIHandler.makeRequest("UPDATE", "components", UPDATE_PARAMS);
-                ProductsLists.push(new Component(id,categoryInput.getText(), nameInput.getText(),Integer.parseInt(amountInput.getText()),
-                        Integer.parseInt(priceInput.getText()),date,image,providerInput.getText(),paidCheckbox.isSelected(),
-                        deliveredCheckbox.isSelected(),comments));
+                ProductsLists.push(new Component(id, categoryInput.getText(), nameInput.getText(), Integer.parseInt(amountInput.getText()),
+                        Integer.parseInt(priceInput.getText()), date, image, providerInput.getText(), paidCheckbox.isSelected(),
+                        deliveredCheckbox.isSelected(), comments));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -203,7 +221,6 @@ public class PopupController extends Component {
             translate.setDuration(Duration.millis(1000));
             translate.setNode(giftPane);
             translate.play();
-
         });
 
         renuntaBtn.setOnMouseClicked(mouseEvent -> {
