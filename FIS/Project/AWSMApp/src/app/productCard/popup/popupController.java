@@ -89,16 +89,14 @@ public class PopupController extends Component {
     Promotion promotion = null;
 
     public PopupController(int id, String category, String name, int amount, int price, String date, String image,
-                           String provider, Boolean paid, Boolean delivered, String comments, Set categories) throws IOException, JSONException {
+                           String provider, Boolean paid, Boolean delivered, String comments, Set categories) {
 
         super(id, category, name, amount, price, date, image, provider, paid, delivered, comments);
         this.recordCategories = categories;
-
-        promotion = APIHandler.getPromotion(id);
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException, JSONException {
 
 
         //componente pentru garantie
@@ -128,13 +126,6 @@ public class PopupController extends Component {
         deliveredCheckbox.setSelected(delivered);
         deliveredCheckbox.setDisable(true);
         priceInput.setText(String.valueOf(price));
-
-        if(promotion != null) {
-            promotionName.setText(promotion.name);
-            promotionName.setVisible(true);
-        } else {
-            promotionName.setVisible(false);
-        }
 
         ///gift trasition effect
         TranslateTransition translate = new TranslateTransition();
@@ -232,8 +223,13 @@ public class PopupController extends Component {
         });
 
 
+        promotion = APIHandler.getPromotion(id);
+        if(promotion != null) {
+            promotionName.setText(promotion.name);
+            promotionName.setVisible(true);
+        } else {
+            promotionName.setVisible(false);
+        }
     }
-
-
 }
 

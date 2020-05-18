@@ -63,14 +63,7 @@ public class ComponentCardController extends Component {
                 "-fx-background-size: cover");
         paneContainer.setOnMouseClicked(mouseEvent -> {
             PopupController popup =
-                    null;
-            try {
-                popup = new PopupController(id, category, name, amount, price, date, image, provider, paid, delivered, comments, recordCategories);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                    new PopupController(id, category, name, amount, price, date, image, provider, paid, delivered, comments, recordCategories);
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/productCard/popup/Popup.fxml"));
             loader.setController(popup);
