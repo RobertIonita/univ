@@ -16,9 +16,18 @@
    <children>
       <BorderPane layoutX="-24.0" layoutY="-9.0" prefHeight="772.0" prefWidth="930.0" style="-fx-background-color: transparent;">
          <center>
-            <AnchorPane prefHeight="720.0" prefWidth="930.0" style="-fx-background-color: transparent;" stylesheets="@../../css/style.css" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="930.0" style="-fx-background-color: transparent;" stylesheets="@../../css/style.css" BorderPane.alignment="CENTER">
                <children>
-                  <Pane fx:id="giftPane" layoutX="72.0" layoutY="194.0" prefHeight="200.0" prefWidth="614.0" style="-fx-effect: dropshadow(gaussian,#C7C9EB, 50, 0, 0, 1); -fx-background-radius: 15; -fx-background-color: white;" />
+                  <Pane fx:id="giftHolder" layoutX="24.0" layoutY="174.0" prefWidth="672.0">
+                     <children>
+                        <Pane fx:id="giftPane" layoutX="50.0" layoutY="49.0" prefHeight="200.0" prefWidth="614.0" style="-fx-effect: dropshadow(gaussian,#C7C9EB, 50, 0, 0, 1); -fx-background-radius: 15; -fx-background-color: white;" />
+                        <Pane fx:id="closeGift" layoutX="677.0" layoutY="36.0" prefHeight="22.0" prefWidth="22.0" styleClass="cancel" stylesheets="@../../css/style.css">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Pane>
+                     </children>
+                  </Pane>
                   <Pane layoutX="56.0" layoutY="60.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(gaussian,#C7C9EB, 50, 0, 0, 1);">
                      <children>
                         <Pane layoutX="50.0" layoutY="14.0" prefHeight="266.0" prefWidth="823.0">

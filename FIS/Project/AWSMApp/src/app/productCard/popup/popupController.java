@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -77,6 +78,11 @@ public class PopupController extends Component {
 
     @FXML
     private Pane ofertaHolder;
+    @FXML
+
+    private Pane closeGift;
+    @FXML
+    private Pane giftHolder;
 
     public Set recordCategories;
 
@@ -198,20 +204,56 @@ public class PopupController extends Component {
 
         reportBtn.setOnMouseClicked(mouseEvent -> {
             reportArea.getChildren().addAll(alegeComponenta, componentsCombo, feedbackHolder);
+
             //translate gift card to the bottom of current card
-            translate.setByY(200);
-            translate.setDuration(Duration.millis(1000));
-            translate.setNode(giftPane);
+            translate.setToX(0);
+            translate.setToY(170);
+            translate.setDuration(Duration.millis(500));
+            translate.setNode(giftHolder);
             translate.play();
 
         });
 
         renuntaBtn.setOnMouseClicked(mouseEvent -> {
             reportArea.getChildren().clear();
-            translate.setByY(-200);
-            translate.setDuration(Duration.millis(1000));
-            translate.setNode(giftPane);
+            //translate gift card
+            translate.setToX(0);
+            translate.setToY(0);
+            translate.setDuration(Duration.millis(500));
+            translate.setNode(giftHolder);
             translate.play();
+        });
+
+        //cand se apasa pe produsul cadou, animatie de popup
+        giftPane.setOnMouseClicked(mouseEvent -> {
+           giftHolder.toFront();
+           translate.setToX(90);
+           translate.setToY(50);
+            translate.setDuration(Duration.millis(500));
+            translate.setNode(giftHolder);
+            translate.play();
+          //  ;
+        });
+       closeGift.setOnMouseClicked(mouseEvent -> {
+
+           if(reportArea.getChildren().isEmpty()){
+
+               translate.setToX(0);
+               translate.setToY(0);
+               translate.setDuration(Duration.millis(500));
+               translate.setNode(giftHolder);
+               translate.play();
+               giftHolder.toBack();
+
+           }else{
+               translate.setToX(0);
+               translate.setToY(170);
+               translate.setDuration(Duration.millis(500));
+               translate.setNode(giftHolder);
+               translate.play();
+               giftHolder.toBack();
+           }
+
         });
 
 
