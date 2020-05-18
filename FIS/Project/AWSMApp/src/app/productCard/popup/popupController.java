@@ -1,6 +1,7 @@
 package app.productCard.popup;
 
 import app.components.Component;
+import app.services.ProductsLists;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -70,6 +71,9 @@ public class PopupController extends Component {
     @FXML
     private TextField priceInput;
 
+    @FXML
+    private Pane ofertaHolder;
+
     public Set recordCategories;
 
     public PopupController(int id, String category, String name, int amount, int price, String date, String image,
@@ -103,7 +107,10 @@ public class PopupController extends Component {
         cancelBtn.setVisible(false);
 
         paidCheckbox.setSelected(paid);
+        paidCheckbox.setDisable(true);
+
         deliveredCheckbox.setSelected(delivered);
+        deliveredCheckbox.setDisable(true);
         priceInput.setText(String.valueOf(price));
 
         imageHolder.setStyle("-fx-background-radius: 15" +
@@ -120,6 +127,8 @@ public class PopupController extends Component {
             saveBtn.setVisible(true);
             cancelBtn.setVisible(true);
             providerInput.setDisable(false);
+            paidCheckbox.setDisable(false);
+            deliveredCheckbox.setDisable(false);
         });
         //save changes
         saveBtn.setOnMouseClicked(mouseEvent -> {
@@ -128,19 +137,25 @@ public class PopupController extends Component {
             providerInput.setDisable(true);
             amountInput.setDisable(true);
             saveBtn.setVisible(false);
+            paidCheckbox.setDisable(true);
+            deliveredCheckbox.setDisable(true);
+            cancelBtn.setVisible(false);
             System.out.println("update elemente: " + id);
             final String UPDATE_PARAMS = "{\n" +
                     "    \"id\": " + id + ",\r\n" +
                     "    \"category\": \"" + categoryInput.getText() + "\",\r\n" +
                     "    \"name\": \"" + nameInput.getText() + "\",\r\n" +
-                    "    \"provider\": \"" + providerInput.getText() + "\",\r\n" +
                     "    \"amount\": " + Integer.valueOf(amountInput.getText()) + ",\r\n" +
                     "    \"price\": " + Integer.valueOf(priceInput.getText()) + ",\r\n" +
+                    "    \"provider\": \"" + providerInput.getText() + "\",\r\n" +
                     "    \"paid\": " + paidCheckbox.isSelected() + ",\r\n" +
                     "    \"delivered\": " + deliveredCheckbox.isSelected() + ",\r\n" +
                     "    \"comments\": \"" + comments+ "\"\n}";
             try {
                 APIHandler.makeRequest("UPDATE", "components", UPDATE_PARAMS);
+                ProductsLists.push(new Component(id,categoryInput.getText(), nameInput.getText(),Integer.parseInt(amountInput.getText()),
+                        Integer.parseInt(priceInput.getText()),date,image,providerInput.getText(),paidCheckbox.isSelected(),
+                        deliveredCheckbox.isSelected(),comments));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -153,6 +168,8 @@ public class PopupController extends Component {
             amountInput.setDisable(true);
             saveBtn.setVisible(false);
             cancelBtn.setVisible(false);
+            paidCheckbox.setDisable(false);
+            deliveredCheckbox.setDisable(false);
         });
         //delete btn
         deleteBtn.setOnMouseClicked(mouseEvent -> {

@@ -9,11 +9,11 @@
     -fx-cursor: hand;
 }
 
-.sideNav Button:hover,
+
 .sideNav Button.active {
-    -fx-background-color: #474646;
+    -fx-background-color: transparent;
     -fx-border-style: hidden hidden hidden solid;
-    -fx-border-color: #FFA000;
+    -fx-border-color: white;
     -fx-border-width: 2px;
 }
 
@@ -190,4 +190,10 @@
 .warranty {
     -fx-background-image: url("../assets/warranty.png");
     -fx-background-repeat: no-repeat;
+}
+.oferta{
+    -fx-background-image: url("../assets/discount-label.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover,auto;
+    -fx-effect: dropshadow(gaussian, #F2D0CA, 15, 0, 0, 1);
 }

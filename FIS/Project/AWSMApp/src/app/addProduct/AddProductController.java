@@ -1,6 +1,8 @@
 package app.addProduct;
 
+import app.components.Component;
 import app.services.APIHandler;
+import app.services.ProductsLists;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -61,6 +63,7 @@ public class AddProductController {
                     "    \"comments\": \"" + deliveryComments.getText() + "\n}";
 
             APIHandler.makeRequest("PUT", "components", POST_PARAMS);
+
 
         } else if (isSystem.isSelected()) {
             final String POST_PARAMS = "{\n" +
