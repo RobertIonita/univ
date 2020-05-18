@@ -104,7 +104,7 @@ public class PopupController extends Component {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException, JSONException {
 
 
         //componente pentru garantie
@@ -274,8 +274,13 @@ public class PopupController extends Component {
         });
 
 
+        promotion = APIHandler.getPromotion(id);
+        if(promotion != null) {
+            promotionName.setText(promotion.name);
+            promotionName.setVisible(true);
+        } else {
+            promotionName.setVisible(false);
+        }
     }
-
-
 }
 
