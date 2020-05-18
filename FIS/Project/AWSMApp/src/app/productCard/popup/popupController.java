@@ -1,5 +1,6 @@
 package app.productCard.popup;
 
+import app.components.Component;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -7,13 +8,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import app.Prototype.Product;
-import app.requestHandler.APIHandler;
+import app.services.APIHandler;
 
 import java.io.IOException;
 import java.util.Set;
 
-public class popupController extends Product {
+public class PopupController extends Component {
 
     @FXML
     private Button updateBtn;
@@ -28,16 +28,16 @@ public class popupController extends Product {
     private Pane cancelBtn;
 
     @FXML
-    private TextField categoryField;
+    private TextField categoryInput;
 
     @FXML
-    private TextField provider;
+    private TextField providerInput;
 
     @FXML
-    private TextField stock;
+    private TextField amountInput;
 
     @FXML
-    private TextField numeProd;
+    private TextField nameInput;
 
     @FXML
     private Pane imageHolder;
@@ -58,144 +58,127 @@ public class popupController extends Product {
     private Pane feedbackHolder;
 
     @FXML
-    private Pane sendBtn;
-
-    @FXML
     private Pane renuntaBtn;
-
-    @FXML
-    private Text trimiteTxt;
-
-    @FXML
-    private Text renuntaTxt;
 
     @FXML
     private Pane closeBtn;
 
+    @FXML
+    private CheckBox deliveredCheckbox;
+    @FXML
+    private CheckBox paidCheckbox;
+    @FXML
+    private TextField priceInput;
 
-    public int recordId,
-            recordAmount;
-    public String recordCategory,
-            recordName,
-            recordProvider,
-            recordComments,
-            recordImage;
-    public Set recorCategorii ;
-    boolean  recordPaid;
-    public popupController(int id, String category, String name, int amount, int price, String image,
-                           String provider, Boolean paid, String comments, Set categorii
-    ){
-        super(id,category,name,amount,price,image);
-        this.recordId=id;
-        this.recordCategory=category;
-        this.recordName=name;
-        this.recordProvider=provider;
-        this.recordAmount = amount;
-        this.recordPaid = paid;
-        this.recordComments = comments;
-        this.recordImage=image;
-        this.recorCategorii=categorii;
+    public Set recordCategories;
+
+    public PopupController(int id, String category, String name, int amount, int price, String date, String image,
+                           String provider, Boolean paid, Boolean delivered, String comments, Set categories) {
+
+        super(id, category, name, amount, price, date, image, provider, paid, delivered, comments);
+        this.recordCategories = categories;
     }
     @FXML
-    public  void initialize(){
+    public void initialize() {
 
         //componente pentru garantie
-        componentsCombo.setItems(FXCollections.observableArrayList(recorCategorii));
+        componentsCombo.setItems(FXCollections.observableArrayList(recordCategories));
         componentsCombo.getSelectionModel().selectFirst();
-
-
 
         reportArea.getChildren().clear();
 
-        numeProd.setText(recordName);
-        numeProd.setDisable(true);
+        nameInput.setText(name);
+        nameInput.setDisable(true);
 
-        categoryField.setText(recordCategory);
-        categoryField.setDisable(true);
+        categoryInput.setText(category);
+        categoryInput.setDisable(true);
 
-        stock.setText(String.valueOf(recordAmount));
-        stock.setDisable(true);
+        amountInput.setText(String.valueOf(amount));
+        amountInput.setDisable(true);
 
-        provider.setText(recordProvider);
-        provider.setDisable(true);
+        providerInput.setText(provider);
+        providerInput.setDisable(true);
 
         saveBtn.setVisible(false);
         cancelBtn.setVisible(false);
 
+        paidCheckbox.setSelected(paid);
+        deliveredCheckbox.setSelected(delivered);
+        priceInput.setText(String.valueOf(price));
+
         imageHolder.setStyle("-fx-background-radius: 15" +
-                ";-fx-background-image: url("+recordImage+");" +
+                ";-fx-background-image: url(" + image + ");" +
                 "-fx-background-position: center center;" +
                 " -fx-background-repeat: no-repeat;" +
                 "-fx-background-size: cover; ");
 
         //modifica
         updateBtn.setOnMouseClicked(mouseEvent -> {
-            numeProd.setDisable(false);
-            categoryField.setDisable(false);
-            stock.setDisable(false);
+            nameInput.setDisable(false);
+            categoryInput.setDisable(false);
+            amountInput.setDisable(false);
             saveBtn.setVisible(true);
             cancelBtn.setVisible(true);
-            provider.setDisable(false);
+            providerInput.setDisable(false);
         });
         //save changes
         saveBtn.setOnMouseClicked(mouseEvent -> {
-            numeProd.setDisable(true);
-            categoryField.setDisable(true);
-            provider.setDisable(true);
-            stock.setDisable(true);
+            nameInput.setDisable(true);
+            categoryInput.setDisable(true);
+            providerInput.setDisable(true);
+            amountInput.setDisable(true);
             saveBtn.setVisible(false);
-            System.out.println("update elemente: "+recordId);
+            System.out.println("update elemente: " + id);
             final String UPDATE_PARAMS = "{\n" +
-                    "    \"id\": " + recordId + ",\r\n" +
-                    "    \"category\": \"" + categoryField.getText() + "\",\r\n" +
-                    "    \"name\": \"" + numeProd.getText() + "\",\r\n" +
-                    "    \"provider\": \"" + provider.getText() + "\",\r\n" +
-                    "    \"amount\": " + Integer.valueOf(stock.getText()) + ",\r\n" +
-                    "    \"paid\": " + recordPaid + ",\r\n" +
-                    "    \"comments\": \"" + recordComments + "\"\n}";
+                    "    \"id\": " + id + ",\r\n" +
+                    "    \"category\": \"" + categoryInput.getText() + "\",\r\n" +
+                    "    \"name\": \"" + nameInput.getText() + "\",\r\n" +
+                    "    \"provider\": \"" + providerInput.getText() + "\",\r\n" +
+                    "    \"amount\": " + Integer.valueOf(amountInput.getText()) + ",\r\n" +
+                    "    \"price\": " + Integer.valueOf(priceInput.getText()) + ",\r\n" +
+                    "    \"paid\": " + paidCheckbox.isSelected() + ",\r\n" +
+                    "    \"delivered\": " + deliveredCheckbox.isSelected() + ",\r\n" +
+                    "    \"comments\": \"" + comments+ "\"\n}";
             try {
-                APIHandler.makeRequest("UPDATE","components",UPDATE_PARAMS);
+                APIHandler.makeRequest("UPDATE", "components", UPDATE_PARAMS);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
         //cancel btn
         cancelBtn.setOnMouseClicked(mouseEvent -> {
-            numeProd.setDisable(true);
-            categoryField.setDisable(true);
-            provider.setDisable(true);
-            stock.setDisable(true);
+            nameInput.setDisable(true);
+            categoryInput.setDisable(true);
+            providerInput.setDisable(true);
+            amountInput.setDisable(true);
             saveBtn.setVisible(false);
             cancelBtn.setVisible(false);
         });
         //delete btn
         deleteBtn.setOnMouseClicked(mouseEvent -> {
-            final String DELETE_PARAMS="{\n" +
-                    "    \"id\": " + recordId + ",\r\n" +
-                    "    \"name\": \"" + numeProd.getText() + "\""+"\n}" ;
-            try{
-                APIHandler.makeRequest("DELETE","components",DELETE_PARAMS);
-            }catch (IOException ex){
+            try {
+                APIHandler.makeRequest("DELETE", "components", super.getDeleteJSON());
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
-            Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             // do what you have to do
             stage.close();
         });
         closeBtn.setOnMouseClicked(mouseEvent -> {
-            Stage stage = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+            Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             // do what you have to do
             stage.close();
         });
 
         reportBtn.setOnMouseClicked(mouseEvent -> {
-            reportArea.getChildren().addAll(alegeComponenta,componentsCombo,feedbackHolder);
+            reportArea.getChildren().addAll(alegeComponenta, componentsCombo, feedbackHolder);
         });
 
         renuntaBtn.setOnMouseClicked(mouseEvent -> {
             reportArea.getChildren().clear();
         });
-        
+
 
     }
 

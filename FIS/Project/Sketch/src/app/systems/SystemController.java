@@ -1,8 +1,8 @@
-package app.components;
+package app.systems;
 
-import app.components.update.UpdateController;
 import app.handlers.APIHandler;
 import app.prototype.Product;
+import app.systems.update.UpdateController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ComponentController extends Product {
+public class SystemController extends Product {
 
     public Pane component_wrapper;
     @FXML
@@ -40,14 +40,12 @@ public class ComponentController extends Product {
     private final String comments;
     private final String image;
     private final Boolean paid;
-    private final Boolean delivered;
 
-    public ComponentController(int id, String category, String name, int amount, int price, String image,
-                               String provider, Boolean paid, Boolean delivered, String comments) {
+    public SystemController(int id, String category, String name, int amount, int price, String image,
+                            String provider, Boolean paid, String comments) {
         super(id, category, name, amount, price, image);
         this.provider = provider;
         this.paid = paid;
-        this.delivered = delivered;
         this.comments = comments;
         this.image = image;
     }

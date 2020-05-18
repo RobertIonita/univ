@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.systems.systemsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.systems.SystemsController">
     <children>
-        <Pane fx:id="Backstage" prefHeight="700.0" prefWidth="950.0">
+        <Pane prefHeight="700.0" prefWidth="950.0">
             <children>
-            <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" stylesheets="@../css/style.css" />
+            <TextField fx:id="searchBar" layoutX="567.0" layoutY="23.0" onAction="#search" prefHeight="46.0" prefWidth="269.0" styleClass="searchBar" />
             <Pane layoutX="42.0" layoutY="181.0" prefHeight="498.0" prefWidth="867.0">
                <children>
-                <AnchorPane fx:id="frame" layoutX="3.0" layoutY="8.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="867.0">
+                <AnchorPane layoutX="3.0" layoutY="8.0" minHeight="0.0" minWidth="0.0" prefHeight="485.0" prefWidth="867.0">
                      <children>
                         <ScrollPane fx:id="scroll" fitToWidth="true" layoutX="16.0" layoutY="26.0" prefHeight="458.0" prefWidth="856.0" style="-fx-border-style: none; -fx-background-color: transparent;">
                           <content>
@@ -37,7 +37,7 @@
                   <Font name="Arial Black" size="12.0" />
                </font>
             </Text>
-            <ComboBox fx:id="categorieBox" layoutX="137.0" layoutY="151.0" onAction="#filter" prefWidth="150.0" />
+            <ComboBox fx:id="categoryBox" layoutX="137.0" layoutY="151.0" onAction="#filter" prefWidth="150.0" />
             <Button fx:id="showAll" layoutX="764.0" layoutY="141.0" minWidth="32.0" mnemonicParsing="false" onAction="#showAll" prefHeight="40.0" prefWidth="143.0" style="-fx-background-color: transparent; -fx-text-fill: #636363;" styleClass="desciptionText" text="show all" textFill="#636363">
                <font>
                   <Font name="Arial" size="12.0" />

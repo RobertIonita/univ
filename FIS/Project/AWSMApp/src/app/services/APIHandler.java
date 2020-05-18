@@ -1,4 +1,4 @@
-package app.requestHandler;
+package app.services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,16 +9,29 @@ import java.net.URL;
 
 public class APIHandler {
 
+    private static final String API = "https://tonu.rocks/school/AWSMApp/api/";
+
+    public static StringBuffer getRecords(String endpoint, String query) throws IOException {
+        StringBuffer getResponse = new StringBuffer();
+        URL url = new URL(API + endpoint + query);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            getResponse.append(line);
+        }
+        reader.close();
+        System.out.println(getResponse);
+        return getResponse;
+    }
+
     public static void makeRequest(String METHOD, String endpoint, String BODY) throws IOException {
         System.out.println(BODY);
-        String API = "https://tonu.rocks/school/AWSMApp/api/" + endpoint;
+        String requestAPI = API + endpoint;
         if (METHOD.equals("UPDATE")) {
-            API = API + "/update";
+            requestAPI = requestAPI + "/update";
             METHOD = "PUT";
         }
-        System.out.println(API);
-
-        URL url = new URL(API);
+        URL url = new URL(requestAPI);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod(METHOD);
         conn.setRequestProperty("Content-Type", "application/json");
@@ -44,5 +57,17 @@ public class APIHandler {
         } else {
             System.out.println(METHOD + " FAILED");
         }
+    }
+
+    public static String getDashboard() throws IOException {
+        StringBuffer getResponse = new StringBuffer();
+        URL url = new URL(API);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            getResponse.append(line);
+        }
+        reader.close();
+        return getResponse.toString();
     }
 }

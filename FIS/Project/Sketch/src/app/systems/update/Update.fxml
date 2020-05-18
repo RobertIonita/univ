@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="400.0">
+    <children>
+        <TextField fx:id="categoryInput" layoutX="20.0" layoutY="40.0" promptText="Category" />
+        <TextField fx:id="nameInput" layoutX="20.0" layoutY="70.0" promptText="Name" />
+        <TextField fx:id="amountInput" layoutX="20.0" layoutY="130.0" promptText="Amount" />
+        <TextField fx:id="priceInput" layoutX="20.0" layoutY="160.0" promptText="Price" />
+        <TextArea fx:id="commentsTextArea" layoutX="20.0" layoutY="190.0" prefHeight="100.0" promptText="Comments" />
+        <CheckBox fx:id="paidCheckBox" layoutX="20.0" layoutY="295.0" mnemonicParsing="false" text="Paid" />
+        <Button fx:id="postBtn" layoutX="20.0" layoutY="320.0" mnemonicParsing="false" text="Submit"/>
+    </children>
+</AnchorPane>

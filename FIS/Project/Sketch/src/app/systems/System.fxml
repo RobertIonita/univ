@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main_container"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Pane fx:id="component_wrapper" layoutX="14.0" layoutY="14.0" prefWidth="200.0" styleClass="card"
+              stylesheets="@../styles/main.css">
+            <children>
+                <VBox>
+                    <Pane fx:id="imagePane" prefHeight="200" prefWidth="200" styleClass="card_img">
+                        <children>
+                            <Label fx:id="priceLabel" prefWidth="70" layoutX="130"
+                                   layoutY="6.0" text="Price"/>
+                        </children>
+                    </Pane>
+                    <Label fx:id="nameLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="200" layoutY="210"
+                           styleClass="center" text="Name" textAlignment="CENTER" wrapText="true"/>
+                    <Label fx:id="providerLabel" text="Provider"/>
+                    <Label fx:id="commentsLabel" text="Comments"/>
+                    <Pane prefWidth="200" styleClass="actions">
+                        <Button fx:id="updateBtn" text="UPDATE"/>
+                        <Button fx:id="deleteBtn" layoutX="70" text="DELETE"/>
+                    </Pane>
+                </VBox>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

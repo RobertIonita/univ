@@ -1,23 +1,17 @@
 package app.home;
 
 import app.components.ComponentController;
-import app.components.update.UpdateController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import app.handlers.APIHandler;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
