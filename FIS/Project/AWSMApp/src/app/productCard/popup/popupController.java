@@ -2,6 +2,7 @@ package app.productCard.popup;
 
 import app.components.Component;
 import app.services.ProductsLists;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import app.services.APIHandler;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Set;
@@ -70,6 +72,8 @@ public class PopupController extends Component {
     private CheckBox paidCheckbox;
     @FXML
     private TextField priceInput;
+    @FXML
+    private Pane giftPane;
 
     @FXML
     private Pane ofertaHolder;
@@ -84,6 +88,7 @@ public class PopupController extends Component {
     }
     @FXML
     public void initialize() {
+
 
         //componente pentru garantie
         componentsCombo.setItems(FXCollections.observableArrayList(recordCategories));
@@ -112,6 +117,9 @@ public class PopupController extends Component {
         deliveredCheckbox.setSelected(delivered);
         deliveredCheckbox.setDisable(true);
         priceInput.setText(String.valueOf(price));
+
+        ///gift trasition effect
+        TranslateTransition translate = new TranslateTransition();
 
         imageHolder.setStyle("-fx-background-radius: 15" +
                 ";-fx-background-image: url(" + image + ");" +
@@ -190,10 +198,20 @@ public class PopupController extends Component {
 
         reportBtn.setOnMouseClicked(mouseEvent -> {
             reportArea.getChildren().addAll(alegeComponenta, componentsCombo, feedbackHolder);
+            //translate gift card to the bottom of current card
+            translate.setByY(200);
+            translate.setDuration(Duration.millis(1000));
+            translate.setNode(giftPane);
+            translate.play();
+
         });
 
         renuntaBtn.setOnMouseClicked(mouseEvent -> {
             reportArea.getChildren().clear();
+            translate.setByY(-200);
+            translate.setDuration(Duration.millis(1000));
+            translate.setNode(giftPane);
+            translate.play();
         });
 
 
