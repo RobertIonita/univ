@@ -1,0 +1,5 @@
+Ana, director economic, 10.4.2020, 4000
+Maria, director general, 4.12.2014, 4500
+Ionel, brigadier, 23.6.2013, 2000
+Dorel, buldozerist, 30.8.2018, 2300
+Fanica, uberist, 21.04.2019, 3100
