@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import app.productCard.ComponentCardController;
+import org.json.JSONException;
 
 import java.io.*;
 import java.util.*;
@@ -47,18 +48,18 @@ public class ComponentsController {
     }
 
     @FXML
-    private void search(ActionEvent event) throws IOException {
+    private void search(ActionEvent event) throws IOException, JSONException {
         renderView(((TextField) event.getSource()).getText());
         System.out.println(((TextField) event.getSource()).getText());
     }
 
     @FXML
-    public void filter(ActionEvent event) throws IOException {
+    public void filter(ActionEvent event) throws IOException, JSONException {
         renderView(categoryBox.getValue().toString());
     }
 
     @FXML
-    void renderView(String filter) throws IOException {
+    void renderView(String filter) throws IOException, JSONException {
         wrapper.getChildren().clear();
         int layoutY = 30;
 
@@ -87,12 +88,12 @@ public class ComponentsController {
     }
 
     @FXML
-    void renderAll() throws IOException {
+    void renderAll() throws IOException, JSONException {
         renderView("none");
     }
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() throws IOException, JSONException {
         renderView("none");
 
         categoryBox.setItems(FXCollections.observableArrayList(categories));

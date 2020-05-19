@@ -1,6 +1,8 @@
 package app.productCard;
 
 import app.components.Component;
+import app.promotions.Promotion;
+import app.services.APIHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -34,13 +36,15 @@ public class ComponentCardController extends Component {
     private Text productName;
 
     Set recordCategories;
-
+    @FXML
+    private Pane ofertaHolder;
+    Promotion promotion = null;
     public ComponentCardController(int id, String category, String name, int amount, int price, String date, String image,
                                    String provider, Boolean paid, Boolean delivered, String comments, Set categories) {
         super(id, category, name, amount, price, date, image, provider, paid, delivered, comments);
         this.recordCategories = categories;
     }
-    public ComponentCardController (Component component, Set categories) {
+    public ComponentCardController (Component component, Set categories) throws IOException, JSONException {
         super(component.id, component.category,
                 component.name,
                 component.amount,
@@ -52,11 +56,16 @@ public class ComponentCardController extends Component {
                 component.delivered,
                 component.comments);
         this.recordCategories = categories;
+        promotion = APIHandler.getPromotion(id);
     }
 
     @FXML
     public Pane initialize() {
-
+        if(promotion != null) {
+            ofertaHolder.setVisible(true);
+        } else {
+            ofertaHolder.setVisible(false);
+        }
         productName.setText(name);
         imagePane.setStyle("-fx-background-image: url(" + image + ");" +
                 "-fx-background-repeat: no-repeat;" +

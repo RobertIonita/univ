@@ -138,7 +138,11 @@ public class PopupController extends Component {
         if(promotion != null) {
             promotionName.setText(promotion.name);
             promotionName.setVisible(true);
+            giftHolder.setVisible(true);
+            ofertaHolder.setVisible(true);
         } else {
+            giftHolder.setVisible(false);
+            ofertaHolder.setVisible(false);
             promotionName.setVisible(false);
         }
 
