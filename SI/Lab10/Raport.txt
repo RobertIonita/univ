@@ -1,29 +1,25 @@
 Explicatii:
-
-Domnul indian de pe YT mi-a sugerat să scad din ebp adresa tamponului ($ebp-&buffer)
-Absurditate totală, căci $ebp este (în cazul meu) -8824, iar &buffer este 0x7fffffffdd60.
-Această scădere nu poate fi realizată (int și poitner). Dar nici nu imi dă ceva informație utilă.
-
-Scazând, însă, din pointerul la adresa de return pointerul la adresa tamponului
-obținem date utile, și anume: spațiul dintre rpb si buffer cu tot cu gap înclus.
-Cunoscând aceste date, putem spune unde trebuie înscrisă adresa de return în tampon.
-Calculul aferent este: 0x7fffffffdd80 - 0x7fffffffdd60 = 0x20 = 32 în zecimal.
-
-Din aceasta reese, că prima adresă disponibilă pentru utilizare este:
-	rbp + 4(Prevoius Frame Pointer) + 4(Return Pointer) = 0x7fffffffdd88
-Și ar trebui sa ne fie disponibilă, căci spațiul alocat pentru *str a fost suprascris.
-Însă putem observa din screenshot-ul 4_first_available.png că a avut loc o eroare.
-Dacă să încercam adresa 0x7fffffffe020, care depaseste zona în care am inserat codul,
-constatăm ca nu mai exista instructiuni valide.
-
-Totodată, am încercat și o adresă ce ar fi disponibilă după pointer-ul de return, și anume:
-	0x7fffffffddf0 (dacă scriem în GDB instruncțiunea "info frame", o să ne asiguram
-că rip este întradevăr 0x7fffffffdd88).
-Putem vedea în screenshot-ul 2_last_used_address.png că adresa 0x7fffffffddf0 există în tampon,
-și are instrucțiunea x90 (NOP) inscrisă, deci ar fi trebuit să ajungă la codul shell.
-Însa am obtinut același lucru: 
-	Returned Properly
-	Segmentation fault (core dumped)
+Task1: 
+ Poate fi obervat în imaginea 0_config.png
 
 Tind să mentionez că flagurile "-z execstack" și -fno-stack-protector au fost setate.
-Mai mult de atât, însuși programul exemplu "call_shellcode" rezultă în "segmentation fault"
+Însă programul exemplu "call_shellcode" rezultă în "segmentation fault"
+
+Task2:
+Domnul indian de pe YT mi-a sugerat să scad din ebp adresa tamponului ($ebp-&buffer)
+Absurditate totală, căci $ebp este (în cazul meu) -8816, iar &buffer este 0x7fffffffdd60.
+Această scădere nu poate fi realizată (int și poitner). Dar nici nu imi dă ceva informație relevantă.
+
+Scăzând, însă, din pointerul la adresa de return pointerul la adresa tamponului
+obținem date utile, și anume: spațiul dintre rpb si buffer cu tot cu gap înclus.
+Cunoscând aceste date, putem spune unde trebuie înscrisă adresa de return în tampon.
+Calculul aferent este: 0x7fffffffdd90 - 0x7fffffffdd70 = 0x20 = 32 în zecimal. 
+
+Din aceasta reese, că prima adresă disponibilă pentru utilizare este:
+	rbp + 4(Prevoius Frame Pointer) + 4(Return Pointer) = 0x7fffffffdd98
+Mai usor insa e sa verificam campul "rip", utilizand în GDB instruncțiunea "info frame", cum se poate veadea in screenshot-ul 3_buffer_and_rip.png.
+Și ar trebui sa ne fie disponibilă, căci spațiul alocat pentru *str a fost suprascris.
+
+Dacă să încercam adresa 0x7fffffffe090, care depaseste zona în care am inserat codul,
+constatăm ca nu mai exista instructiuni valide.
+
