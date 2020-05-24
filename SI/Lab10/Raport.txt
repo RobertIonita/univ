@@ -1,0 +1,27 @@
+Explicatii:
+
+Domnul indian de pe YT mi-a sugerat sa scad din ebp adresa tamponului ($ebp-&buffer)
+Absurditate totala, caci $ebp este (in cazul meu) -8824, iar &buffer este 0x7fffffffdd60.
+Aceasta scadere nu poate fi realizata (int si poitner). Dar nici nu imi da ceva informatie utila.
+
+Scazand, insa, adresele la pointerul la adresa return si pointerul la adresa tamponului
+obtinem date utile, si anume spatiul dintre rpb si buffer cu tot cu gap inclus.
+Cunoscand aceste date, putem spune unde trebuie inscrisa adresa de return in tampon.
+Calculul aferent este: 0x7fffffffdd80 - 0x7fffffffdd60 = 0x20 = 32 in zecimal.
+
+Din aceasta reese, ca prima adresa disponibila pentru utilizare este:
+	rbp + 4(Prevoius Frame Pointer) + 4(Return Pointer) = 0x7fffffffdd88
+Si ar trebui sa ne fie disponibila, caci spatiul alocat pentru *str a fost suprascris.
+Insa putem observa din screenshot-ul 4_first_available.png ca a avut loc o eroare.
+Daca sa incercam adresa 0x7fffffffe020, care depaseste zona in care am inserat codul,
+observam ca nu mai exista instructiuni valide.
+
+Totodata, am incercat si o adresa ce ar fi disponibila dupa pointer-ul de return, si anume, 0x7fffffffddf0 (daca scriem in GDB instrunctiunea "info frame" o sa ne asiguram,
+ca rip este 0x7fffffffdd88). Putem vedea in screenshot-ul 2_last_used_address.png
+ca adresa 0x7fffffffddf0 exista in tampon, si are instructiunea x90 (NOP) inscrisa.
+Insa am obtinut acelasi lucru: 
+	Returned Properly
+	Segmentation fault (core dumped)
+
+Tin sa mentionez ca flagurile "-z execstack" si -fno-stack-protector au fost setate.
+Mai mult de atat, insusi programul exemplu "call_shellcode" rezulta in "segmentation fault"
