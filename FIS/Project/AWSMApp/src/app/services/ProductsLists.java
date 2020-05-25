@@ -46,4 +46,28 @@ public class ProductsLists {
         }
         return null;
     }
+
+    public static int getSystemCategoryId(String category) {
+        for (Systems systems : systemsList) {
+            if (systems.categoryName == category)
+                return systems.categoryId;
+        }
+        return 0;
+    }
+
+    public static int getComponentCategoryId(String category) {
+        for (Component component : componentsList) {
+            if (component.categoryName == category)
+                return component.categoryId;
+        }
+        return 0;
+    }
+
+    public static Component getComponentById(int id) {
+        for (Component component : componentsList) {
+            if (component.categoryId == id)
+                return component;
+        }
+        return null;
+    }
 }

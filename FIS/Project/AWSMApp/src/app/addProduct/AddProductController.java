@@ -77,37 +77,47 @@ public class AddProductController {
     @FXML
     void addNewProduct(ActionEvent event) throws IOException {
         if (isComponent.isSelected()) {
+            int categoryId = ProductsLists.getComponentCategoryId(categorySelect.getValue());
             final String POST_PARAMS = "{\n" +
-                    "    \"category\": \"" + categorySelect.getValue() + "\",\r\n" +
+                    "    \"category\": " + categoryId + ",\r\n" +
                     "    \"name\": \"" + nameInput.getText() + "\",\r\n" +
                     "    \"provider\": \"" + providerInput.getText() + "\",\r\n" +
-                    "    \"amount\": " + amountInput.getValue() + ",\r\n" +
-                    "    \"price\": " + priceInput.getValue() + ",\r\n" +
+                    "    \"amount\": " + (int) (Math.round(amountInput.getValue())) + ",\r\n" +
+                    "    \"price\": " + (int) (Math.round(priceInput.getValue())) + ",\r\n" +
                     "    \"paid\": " + isPaid.isSelected() + ",\r\n" +
                     "    \"delivered\": " + isDelivered.isSelected() + ",\r\n" +
-                    "    \"comments\": \"" + deliveryComments.getText() + "\n}";
+                    "    \"comments\": \"" + deliveryComments.getText() + "\"\n}";
 
             APIHandler.makeRequest("PUT", "components", POST_PARAMS);
 
 
         } else if (isSystem.isSelected()) {
+            int categoryId = ProductsLists.getSystemCategoryId(categorySelect.getValue());
             final String POST_PARAMS = "{\n" +
-                    "    \"category\": \"" + categorySelect.getValue() + "\",\r\n" +
+                    "    \"category\": " + categoryId + ",\r\n" +
                     "    \"name\": \"" + nameInput.getText() + "\",\r\n" +
-                    "    \"amount\": " + 200 + ",\r\n" +
-                    "    \"price\": " + 199 + ",\r\n" +
-                    "    \"warranty\": " + 12 + "\n}";
+                    "    \"amount\": " + (int) (Math.round(amountInput.getValue())) + ",\r\n" +
+                    "    \"price\": " + (int) (Math.round(priceInput.getValue())) + ",\r\n" +
+                    "    \"warranty\": " + (int) (Math.round(warrantyInput.getValue())) + "\n}";
 
             APIHandler.makeRequest("PUT", "systems", POST_PARAMS);
         }
     }
 
+    @FXML
+    public void initialize() {
+
+        amountInput.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 100, 0, 1));
+        amountInput.setEditable(true);
+        priceInput.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 10000, 0, 1));
+        priceInput.setEditable(true);
+        warrantyInput.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 48, 0, 1));
+        warrantyInput.setEditable(true);
+    }
 
 
     @FXML
     private void switchProductCategory() {
-        amountInput.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(0, 100, 0, 1));
-        amountInput.setEditable(true);
         if (isComponent.isSelected()) {
             categorySelect.setItems(FXCollections.observableArrayList(componentsCategories));
             categorySelect.setStyle("-fx-background-color: FFFFFF;-fx-effect: dropshadow(gaussian,rgba(8,88,207,0.08),7,0,0,5 ); -fx-font-family: 'Arial';-fx-font-size: 13;-fx-text-fill: #bebebe");
